@@ -72,6 +72,7 @@ public class IOTerminal : MonoBehaviour
             return;
         }
         commandField.text = commandHistory[commandHistoryCurrentIndex].GetCommandString();
+        commandField.caretPosition = commandField.text.Length;
     }
     private void RenderUserAndDir()
     {
@@ -80,6 +81,8 @@ public class IOTerminal : MonoBehaviour
 
     private void onCommandSubmit(string commandName)
     {
+        if (commandName == "")
+            return;
         HandleStringInput(commandName);
         ResetCommandField();
     }

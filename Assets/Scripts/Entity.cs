@@ -10,15 +10,20 @@ public class Entity : MonoBehaviour
     public int maxIP;
     protected int currentIP;
 
-    [Header("EVents")]
+    [TextArea(2,10)]
+    public string description;
+
+    [Header("Events")]
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
     public DeathEvent onDeath = new DeathEvent();
+    public CatEvent onCat = new CatEvent();
 
     private void Awake()
     {
         currentDirectory = GetComponentInParent<Directory>();
         currentIP = maxIP;
     }
+
     private void Start()
     {
         IOTerminal.I.onCommand.AddListener(OnCommand);
@@ -26,11 +31,11 @@ public class Entity : MonoBehaviour
     }
     protected virtual void OnCommand(Command command, ParsedCommand parsedCommand)
     {
-        Debug.Log("OnCommand " + command.name + ")");
+        
     }
     protected virtual void OnTerminalTimePast(int terminalTimePast)
     {
-        Debug.Log("OnTerminalTimePast " + terminalTimePast + ")");
+        
     }
     public bool TakeDamage(int amount) {
         currentIP -= amount;
@@ -50,6 +55,27 @@ public class Entity : MonoBehaviour
     public int GetCurrentIP() {
         return currentIP;
     }
+    public virtual string GetCatDescription()
+    {
+        List<string> result = new List<string> { 
+            GetBinaryStatic(),
+            string.Format("IP: {0}", currentIP),
+            description
+        };
+        onCat.Invoke();
+        return string.Join("\n", result);
+    }
+    protected string GetBinaryStatic()
+    {
+        List<string> result = new List<string>();
+        var rand = new System.Random();
+        for (int i = 0; i < 10; i++)
+        {
+            result.Add(Convert.ToString(rand.Next(1024), 2).PadLeft(10, '0'));
+        }
+        return string.Join("\n", result);
+    }
 }
 public class TakeDamageEvent : UnityEvent<int> { }
 public class DeathEvent : UnityEvent { }
+public class CatEvent : UnityEvent { }
