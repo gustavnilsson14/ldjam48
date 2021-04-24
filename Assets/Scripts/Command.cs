@@ -48,6 +48,10 @@ public class Command : MonoBehaviour
             return false;
         return true;
     }
+    protected bool ArgumentIsUserHostPair(string argument) 
+    {
+        return false;
+    }
 }
 public class ParsedCommand
 {

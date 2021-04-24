@@ -9,7 +9,7 @@ public class LookCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        List<Entity> entities = Player.I.currentDirectory.GetEntities();
+        List<Entity> entities = GetLookDirectory(parsedCommand).GetEntities();
         if (entities.Count == 0)
         {
             result = "No files in this directory";
@@ -18,6 +18,11 @@ public class LookCommand : Command
         currentEntity = GetCurrentEntity(entities);
         result = currentEntity.name;
         return true;
+    }
+    private Directory GetLookDirectory(ParsedCommand parsedCommand) {
+        if (!parsedCommand.HasArguments())
+            return Player.I.currentDirectory;
+        return Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]);
     }
 
     private Entity GetCurrentEntity(List<Entity> entities) 
@@ -37,5 +42,15 @@ public class LookCommand : Command
             return entities[entityIndex];
         }
         return entities[0];
+    }
+    protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
+    {
+        result = "";
+        if (!parsedCommand.HasArguments())
+            return true;
+        result = parsedCommand.arguments[0] + " is not an adjacent directory";
+        if (!ArgumentIsAdjacentDirectory(parsedCommand.arguments[0]))
+            return false;
+        return true;
     }
 }

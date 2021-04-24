@@ -45,7 +45,6 @@ public class IOTerminal : MonoBehaviour
 
     private void OnMove(Directory directory)
     {
-        Debug.Log("private void OnMove(Directory directory)" + directory.name);
         RenderUserAndDir();
     }
 
