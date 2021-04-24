@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 546a204c6400b8a4ea093b2a48127e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityParticlePrefab: {fileID: 4110619111931693869, guid: a0e3a715ddb81664490d17fcc5377418,
+  entityParticlePrefab: {fileID: 4110619111931693869, guid: a0e3a715ddb81664490d17fcc5377418,
     type: 3}
 --- !u!1 &811157571
 GameObject:

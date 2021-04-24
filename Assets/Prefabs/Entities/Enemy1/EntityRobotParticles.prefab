@@ -4774,7 +4774,7 @@ GameObject:
   - component: {fileID: 4110619111931693868}
   - component: {fileID: 6721642310725945653}
   m_Layer: 0
-  m_Name: Robot
+  m_Name: EntityRobotParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
