@@ -89,7 +89,12 @@ public class IOTerminal : MonoBehaviour
     private void HandleCommand(Command command, ParsedCommand parsedCommand)
     {
         AppendDefaultCommandText();
-        command.Run(parsedCommand);
+        if (!command.Run(out string result, parsedCommand))
+        {
+            AppendTextLine("<color>ERROR:</color> " + result);
+            return;
+        }
+        AppendTextLine(result);
     }
 
     private void HandleNoSuchCommand(string commandName)
