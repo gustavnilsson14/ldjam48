@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,22 @@ public class Command : MonoBehaviour
     public int GetTerminalTimePast(ParsedCommand parsedCommand)
     {
         return speed;
+    }
+    protected bool ArgumentIsAdjacentDirectory(string argument)
+    {
+        List<Directory> adjacentDirectories = Player.I.currentDirectory.GetAdjacentDirectories();
+        Directory adjacentDirectory = adjacentDirectories.Find(dir => dir.name == argument);
+        if (adjacentDirectory == null)
+            return false;
+        return true;
+    }
+    protected bool ArgumentIsEntity(string argument)
+    {
+        List<Entity> entities = Player.I.currentDirectory.GetEntities();
+        Entity target = entities.Find(entity => entity.name == argument);
+        if (target == null)
+            return false;
+        return true;
     }
 }
 public class ParsedCommand

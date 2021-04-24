@@ -411,13 +411,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 608786637, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: isAvailable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1307508383, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: isAvailable
-      value: 1
+    - target: {fileID: 2007957291, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+      propertyPath: description
+      value: A mean bean magenta killing machine
       objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}

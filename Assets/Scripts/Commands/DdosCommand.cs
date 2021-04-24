@@ -41,9 +41,7 @@ public class DdosCommand : Command
         if (!parsedCommand.HasArguments())
             return false;
         result = parsedCommand.arguments[0] + " is not a file or process id (pid)";
-        List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        Entity target = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
-        if (target == null)
+        if (!ArgumentIsEntity(parsedCommand.arguments[0]))
             return false;
         result = string.Format("ddos cannot be used with more than {0} flags", maxFlags);
         if (parsedCommand.flags.Count > maxFlags)
