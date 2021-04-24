@@ -1,18 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Player I;
+    private List<Command> commands = new List<Command>();
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    private void Awake()
     {
-        
+        Player.I = this;
+        commands.AddRange(GetComponentsInChildren<Command>());
+    }
+    public static bool GetCommand(out Command command, string commandName, bool onlyAvailable = true)
+    {
+        command = Player.I.commands.Find(c => c.name == commandName && (!onlyAvailable || c.isAvailable));
+        if (command == null)
+            return false;
+        return true;
     }
 }
