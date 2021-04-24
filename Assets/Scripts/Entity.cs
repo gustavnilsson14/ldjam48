@@ -16,6 +16,7 @@ public class Entity : MonoBehaviour
     [Header("Events")]
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
     public DeathEvent onDeath = new DeathEvent();
+    public CatEvent onCat = new CatEvent();
 
     private void Awake()
     {
@@ -54,17 +55,17 @@ public class Entity : MonoBehaviour
     public int GetCurrentIP() {
         return currentIP;
     }
-    public string GetCatDescription()
+    public virtual string GetCatDescription()
     {
         List<string> result = new List<string> { 
             GetBinaryStatic(),
             string.Format("IP: {0}", currentIP),
             description
         };
+        onCat.Invoke();
         return string.Join("\n", result);
     }
-
-    private string GetBinaryStatic()
+    protected string GetBinaryStatic()
     {
         List<string> result = new List<string>();
         var rand = new System.Random();
@@ -77,3 +78,4 @@ public class Entity : MonoBehaviour
 }
 public class TakeDamageEvent : UnityEvent<int> { }
 public class DeathEvent : UnityEvent { }
+public class CatEvent : UnityEvent { }
