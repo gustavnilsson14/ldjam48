@@ -5,4 +5,18 @@ using UnityEngine;
 public class Command : MonoBehaviour
 {
     public bool isAvailable = false;
+    [TextArea(2, 10)]
+    public string helpText;
+
+    public virtual void Run() { 
+        
+    }
+
+    public bool GetHelpText(out string helpText) {
+        helpText = "";
+        if (this.helpText == "")
+            return false;
+        helpText = this.helpText;
+        return true;
+    }
 }

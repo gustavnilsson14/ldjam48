@@ -21,4 +21,10 @@ public class Player : MonoBehaviour
             return false;
         return true;
     }
+    public static List<Command> GetCommands(bool onlyAvailable = true)
+    {
+        List<Command> commands = new List<Command>();
+        commands.AddRange(Player.I.commands.FindAll(c => (!onlyAvailable || c.isAvailable)));
+        return commands;
+    }
 }
