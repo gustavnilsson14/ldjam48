@@ -146,6 +146,16 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.69803923
       objectReference: {fileID: 0}
+    - target: {fileID: 747363504671236198, guid: d793aed2f204c9948b7b20014d8ca3ae,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 747363504671236199, guid: d793aed2f204c9948b7b20014d8ca3ae,
+        type: 3}
+      propertyPath: isGlobal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 747363505356789410, guid: d793aed2f204c9948b7b20014d8ca3ae,
         type: 3}
       propertyPath: m_IsActive
@@ -337,7 +347,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -356,7 +366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798452271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -401,21 +411,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1625292575748829524, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: maxIP
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776960900132792645, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5393040682627546024, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: maxIP
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -470,11 +465,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6677622390734600357, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: maxIP
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8100233181660612992, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}

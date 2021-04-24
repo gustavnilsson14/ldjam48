@@ -18,8 +18,9 @@ public class DdosCommand : Command
     }
     private string ApplyTo(Entity target, ParsedCommand parsedCommand)
     {
-        string result = string.Format("{0} took {1} IP damage", target.name, damageBase);
-        bool stillAlive = target.TakeDamage(damageBase);
+        int damage = GetCurrentDamage(parsedCommand);
+        bool stillAlive = target.TakeDamage(damage);
+        string result = string.Format("{0} took {1} IP damage", target.name, damage);
         string verboseFlag = parsedCommand.flags.Find(flag => flag == "--verbose");
 
         if (verboseFlag != null) {
