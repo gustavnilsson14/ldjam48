@@ -922,6 +922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8708997899416272365}
   - component: {fileID: 8708997899416272364}
+  - component: {fileID: 1994194853}
   m_Layer: 5
   m_Name: IOTerminal
   m_TagString: Untagged
@@ -968,6 +969,18 @@ MonoBehaviour:
   outputField: {fileID: 8708997900401959469}
   userDirField: {fileID: 8708997901184846205}
   commandField: {fileID: 8708997901294330176}
+--- !u!114 &1994194853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708997899416272274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8708997899655347859
 GameObject:
   m_ObjectHideFlags: 0
