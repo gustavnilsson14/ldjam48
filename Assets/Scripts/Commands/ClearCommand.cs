@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelpCommand : Command
+public class ClearCommand : Command
 {
-    [TextArea(1,20)]
-    public string help;
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        result = help;
+        IOTerminal.I.ClearOutput();
         return true;
     }
 }
