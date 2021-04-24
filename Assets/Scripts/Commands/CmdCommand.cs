@@ -7,7 +7,6 @@ public class CmdCommand : Command
     public override void Run()
     {
         base.Run();
-        Debug.Log("CmdCommand ");
         foreach (Command command in Player.GetCommands())
         {
             if (!command.GetHelpText(out string helpText))

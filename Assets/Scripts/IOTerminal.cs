@@ -59,7 +59,6 @@ public class IOTerminal : MonoBehaviour
     {
         AppendDefaultCommandText();
         command.Run();
-        //AppendTextLine("HELLZ YAH " + command.name);
     }
 
     private void HandleNoSuchCommand(string commandName)
@@ -76,6 +75,7 @@ public class IOTerminal : MonoBehaviour
 
     public void AppendTextLine(string newText)
     {
+        Debug.Log(newText);
         outputField.text += "\n" + newText;
     }
 }

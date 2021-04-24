@@ -8,7 +8,7 @@ public class Command : MonoBehaviour
     [TextArea(2, 10)]
     public string helpText;
 
-    public virtual void Run() { 
+    public virtual void Run() {
         
     }
 
@@ -16,7 +16,7 @@ public class Command : MonoBehaviour
         helpText = "";
         if (this.helpText == "")
             return false;
-        helpText = this.helpText;
+        helpText = name + " - " + this.helpText;
         return true;
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player I;
+    public Directory currentDirectory;
     private List<Command> commands = new List<Command>();
 
     // Start is called before the first frame update
