@@ -14,6 +14,8 @@ public class IOTerminal : MonoBehaviour
     public TMP_InputField commandField;
 
     private string baseUserDirString;
+    private List<ParsedCommand> commandHistory = new List<ParsedCommand>();
+    private int commandHistoryCurrentIndex;
 
     private void Awake()
     {
@@ -25,6 +27,32 @@ public class IOTerminal : MonoBehaviour
     {
         RenderUserAndDir();
         ResetCommandField();
+    }
+
+    private void Update()
+    {
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            HistoryMove(-1);
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            HistoryMove(1);
+    }
+
+    private void HistoryMove(int direction)
+    {
+        commandHistoryCurrentIndex += direction;
+        if (commandHistoryCurrentIndex < 0)
+            commandHistoryCurrentIndex = 0;
+        if (commandHistoryCurrentIndex >= commandHistory.Count) {
+            commandHistoryCurrentIndex = commandHistory.Count;
+            commandField.text = "";
+            return;
+        }
+        commandField.text = commandHistory[commandHistoryCurrentIndex].GetCommandString();
     }
 
     private void RenderUserAndDir()
@@ -42,23 +70,26 @@ public class IOTerminal : MonoBehaviour
     private void ResetCommandField()
     {
         commandField.text = "";
+        commandHistoryCurrentIndex = commandHistory.Count;
         commandField.ActivateInputField();
     }
 
     private void HandleStringInput(string commandName)
     {
-        if (!Player.GetCommand(out Command command, commandName))
+        ParsedCommand parsedCommand = new ParsedCommand(commandName);
+        commandHistory.Add(parsedCommand);
+        if (!Player.GetCommand(out Command command, parsedCommand.name))
         {
-            HandleNoSuchCommand(commandName);
+            HandleNoSuchCommand(parsedCommand.name);
             return;
         }
-        HandleCommand(command);
+        HandleCommand(command, parsedCommand);
     }
 
-    private void HandleCommand(Command command)
+    private void HandleCommand(Command command, ParsedCommand parsedCommand)
     {
         AppendDefaultCommandText();
-        command.Run();
+        command.Run(parsedCommand);
     }
 
     private void HandleNoSuchCommand(string commandName)
@@ -75,7 +106,6 @@ public class IOTerminal : MonoBehaviour
 
     public void AppendTextLine(string newText)
     {
-        Debug.Log(newText);
         outputField.text += "\n" + newText;
     }
 }

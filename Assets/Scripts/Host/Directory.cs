@@ -13,7 +13,10 @@ public class Directory : MonoBehaviour
                 continue;
             result.Add(neighbor);
         }
-        result.Add(GetComponentInParent<Directory>());
+        Directory parent = transform.parent.GetComponent<Directory>();
+        if (parent == null)
+            return result;
+        result.Add(parent);
         return result;
     }
 }
