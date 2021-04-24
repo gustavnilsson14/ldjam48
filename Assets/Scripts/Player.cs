@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public int maxIP = 10;
     private List<Command> commands = new List<Command>();
     public Directory currentDirectory;
+    public int currentCharacters = 10000;
+    private int currentSeconds = 60 * 60;
 
     // Start is called before the first frame update
     private void Awake()
@@ -30,5 +32,10 @@ public class Player : MonoBehaviour
         List<Command> commands = new List<Command>();
         commands.AddRange(Player.I.commands.FindAll(c => (!onlyAvailable || c.isAvailable)));
         return commands;
+    }
+    public string GetTimeLeft()
+    {
+        TimeSpan t = TimeSpan.FromSeconds(currentSeconds);
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours,t.Minutes,t.Seconds);
     }
 }

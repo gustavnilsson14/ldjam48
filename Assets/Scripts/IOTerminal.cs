@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class IOTerminal : MonoBehaviour
 {
@@ -13,9 +14,15 @@ public class IOTerminal : MonoBehaviour
     public TextMeshProUGUI userDirField;
     public TMP_InputField commandField;
 
+    [Header("Events")]
+    public TimeEvent onTerminalTimePast = new TimeEvent();
+    public TimeEvent onTimePast = new TimeEvent();
+
     private string baseUserDirString;
     private List<ParsedCommand> commandHistory = new List<ParsedCommand>();
     private int commandHistoryCurrentIndex;
+    private int currentTerminalTime;
+    private int totalTerminalTime;
 
     private void Awake()
     {
@@ -32,6 +39,12 @@ public class IOTerminal : MonoBehaviour
     private void Update()
     {
         HandleInput();
+        HandleTimePast();
+    }
+
+    private void HandleTimePast()
+    {
+        
     }
 
     private void HandleInput()
@@ -54,7 +67,12 @@ public class IOTerminal : MonoBehaviour
         }
         commandField.text = commandHistory[commandHistoryCurrentIndex].GetCommandString();
     }
-
+    private void TerminalTimePast(int time)
+    {
+        currentTerminalTime += time;
+        totalTerminalTime += time;
+        onTerminalTimePast.Invoke(time);
+    }
     private void RenderUserAndDir()
     {
         baseUserDirString = userDirField.text;
@@ -91,15 +109,17 @@ public class IOTerminal : MonoBehaviour
         AppendDefaultCommandText();
         if (!command.Run(out string result, parsedCommand))
         {
-            AppendTextLine("<color>ERROR:</color> " + result);
+            TerminalTimePast(parsedCommand.GetCommandString().Length*2);
+            AppendTextLine("<color=red>ERROR:</color> " + result);
             return;
         }
+        TerminalTimePast(command.GetTerminalTimePast(parsedCommand));
         AppendTextLine(result);
     }
-
     private void HandleNoSuchCommand(string commandName)
     {
         AppendDefaultCommandText();
+        TerminalTimePast(commandName.Length);
         AppendTextLine("No such command");
     }
 
@@ -113,4 +133,9 @@ public class IOTerminal : MonoBehaviour
     {
         outputField.text += "\n" + newText;
     }
+
+    public void ClearOutput() {
+        outputField.text = "";
+    }
 }
+public class TimeEvent : UnityEvent<int> { }

@@ -8,7 +8,7 @@ public class Command : MonoBehaviour
     public bool isAvailable = false;
     [TextArea(2, 10)]
     public string helpText;
-
+    public int speed = 2;
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         return ValidateParsedCommand(out result, parsedCommand);
@@ -16,7 +16,7 @@ public class Command : MonoBehaviour
 
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
-        return false;
+        return true;
     }
 
     public bool GetHelpText(out string helpText) {
@@ -27,6 +27,10 @@ public class Command : MonoBehaviour
         return true;
     }
 
+    public int GetTerminalTimePast(ParsedCommand parsedCommand)
+    {
+        return speed;
+    }
 }
 public class ParsedCommand
 {
@@ -55,6 +59,14 @@ public class ParsedCommand
     private void ParseFlags(List<string> commandSegments)
     {
         flags.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) == "--"));
+    }
+    public bool HasArguments()
+    {
+        return (arguments.Count > 0);
+    }
+    public bool HasFlags()
+    {
+        return (flags.Count > 0);
     }
     public string GetCommandString()
     {
