@@ -13,7 +13,7 @@ public class StatusCommand : Command
         {
             directories.Add(directory.name);
         }
-        result += "IP: " + Player.I.currentIP + "/" + Player.I.maxIP;
+        result += "IP: " + Player.I.GetCurrentIP() + "/" + Player.I.maxIP;
         result += "\nCharacters: " + Player.I.currentCharacters;
         result += "\nTime: " + Player.I.GetTimeLeft();
         result += "\nAdjacencies: " + string.Join(", ", directories);

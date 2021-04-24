@@ -8,7 +8,7 @@ public class MoveCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        Player.I.currentDirectory = Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]);
+        Player.I.MoveTo(Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]));
         result = "Now in " + Player.I.currentDirectory.name;
         return true;
     }

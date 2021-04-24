@@ -2,17 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     public static Player I;
-    
-    public int currentIP = 10;
-    public int maxIP = 10;
+
     private List<Command> commands = new List<Command>();
-    public Directory currentDirectory;
+
     public int currentCharacters = 10000;
     private float currentSeconds = 60 * 60;
+
+    [Header("Events")]
+    public MoveEvent onMove = new MoveEvent();
 
     // Start is called before the first frame update
     private void Awake()
@@ -20,20 +22,21 @@ public class Player : MonoBehaviour
         Player.I = this;
         commands.AddRange(GetComponentsInChildren<Command>());
     }
-    private void Start()
+    protected override void OnCommand(Command command, ParsedCommand parsedCommand)
     {
-        IOTerminal.I.onCommand.AddListener(OnCommand);
-    }
-
-    private void OnCommand(Command command, ParsedCommand parsedCommand)
-    {
+        base.OnCommand(command, parsedCommand);
         currentCharacters -= parsedCommand.GetCommandString().Length;
     }
-
     private void Update()
     {
         currentSeconds -= Time.deltaTime;
     }
+    public void MoveTo(Directory directory)
+    {
+        Player.I.currentDirectory = directory;
+        onMove.Invoke(directory);
+    }
+
     public static bool GetCommand(out Command command, string commandName, bool onlyAvailable = true)
     {
         command = Player.I.commands.Find(c => c.name == commandName && (!onlyAvailable || c.isAvailable));
@@ -53,3 +56,4 @@ public class Player : MonoBehaviour
         return string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours,t.Minutes,t.Seconds);
     }
 }
+public class MoveEvent : UnityEvent<Directory> { }

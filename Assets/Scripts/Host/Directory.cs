@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,5 +20,29 @@ public class Directory : MonoBehaviour
             return result;
         result.Add(parent);
         return result;
+    }
+    public List<Entity> GetEntities() {
+        List<Entity> result = new List<Entity>();
+        foreach (Transform child in transform)
+        {
+            Entity childEntity = child.GetComponent<Entity>();
+            if (childEntity == null)
+                continue;
+            result.Add(childEntity);
+        }
+        return result;
+    }
+    public List<Directory> GetAllParents()
+    {
+        List<Directory> directories = new List<Directory>();
+        Directory parentDirectory = transform.parent.GetComponent<Directory>();
+        if (parentDirectory != null)
+            directories.AddRange(parentDirectory.GetAllParents());
+        directories.Add(this);
+        return directories;
+    }
+    public string GetFullPath()
+    {
+        return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
 }

@@ -27,6 +27,7 @@ public class IOTerminal : MonoBehaviour
     private void Awake()
     {
         IOTerminal.I = this;
+        baseUserDirString = userDirField.text;
         commandField.onSubmit.AddListener(onCommandSubmit);
     }
 
@@ -34,6 +35,18 @@ public class IOTerminal : MonoBehaviour
     {
         RenderUserAndDir();
         ResetCommandField();
+        RegisterListeners();
+    }
+
+    private void RegisterListeners()
+    {
+        Player.I.onMove.AddListener(OnMove);
+    }
+
+    private void OnMove(Directory directory)
+    {
+        Debug.Log("private void OnMove(Directory directory)" + directory.name);
+        RenderUserAndDir();
     }
 
     private void Update()
@@ -62,8 +75,7 @@ public class IOTerminal : MonoBehaviour
     }
     private void RenderUserAndDir()
     {
-        baseUserDirString = userDirField.text;
-        userDirField.text = String.Format(baseUserDirString, "haxxor", "LDTerminal", "CSOS128", "");
+        userDirField.text = String.Format(baseUserDirString, "haxxor", "LDTerminal", "CSOS128", Player.I.currentDirectory.GetFullPath());
     }
 
     private void onCommandSubmit(string commandName)
