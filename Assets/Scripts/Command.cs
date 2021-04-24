@@ -9,9 +9,14 @@ public class Command : MonoBehaviour
     [TextArea(2, 10)]
     public string helpText;
 
-    public virtual void Run(ParsedCommand parsedCommand)
+    public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
+        return ValidateParsedCommand(out result, parsedCommand);
+    }
 
+    protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
+        result = "";
+        return false;
     }
 
     public bool GetHelpText(out string helpText) {

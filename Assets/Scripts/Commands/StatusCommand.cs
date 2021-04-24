@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class StatusCommand : Command
 {
-    public override void Run(ParsedCommand parsedCommand)
+    public override bool Run(out string result, ParsedCommand parsedCommand)
     {
-        base.Run(parsedCommand);
+        if (!base.Run(out result, parsedCommand))
+            return false;
         List<string> directories = new List<string>();
         foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
         {
             directories.Add(directory.name);
         }
-        IOTerminal.I.AppendTextLine(string.Join(", ", directories));
+        result = string.Join(", ", directories);
+        return true;
     }
 }

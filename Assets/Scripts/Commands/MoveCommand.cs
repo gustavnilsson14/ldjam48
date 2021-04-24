@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MoveCommand : Command
 {
-    public override void Run(ParsedCommand parsedCommand)
+    public override bool Run(out string result, ParsedCommand parsedCommand)
     {
-        base.Run(parsedCommand);
+        if (!base.Run(out result, parsedCommand))
+            return false;
+        return true;
     }
 }
