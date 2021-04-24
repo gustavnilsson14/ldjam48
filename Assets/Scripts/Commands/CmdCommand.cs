@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CmdCommand : Command
 {
-    public override void Run()
+    public override void Run(ParsedCommand parsedCommand)
     {
-        base.Run();
+        base.Run(parsedCommand);
         foreach (Command command in Player.GetCommands())
         {
             if (!command.GetHelpText(out string helpText))

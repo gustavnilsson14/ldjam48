@@ -6,8 +6,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player I;
-    public Directory currentDirectory;
+    
+    public int currentIP = 10;
+    public int maxIP = 10;
     private List<Command> commands = new List<Command>();
+    public Directory currentDirectory;
 
     // Start is called before the first frame update
     private void Awake()

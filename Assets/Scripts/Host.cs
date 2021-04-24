@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Host : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Directory GetRootDirectory() {
+        return GetComponentInChildren<Directory>();
     }
 }

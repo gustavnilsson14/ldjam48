@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HelpCommand : Command
+public class MoveCommand : Command
 {
     public override void Run(ParsedCommand parsedCommand)
     {
         base.Run(parsedCommand);
-
     }
 }
