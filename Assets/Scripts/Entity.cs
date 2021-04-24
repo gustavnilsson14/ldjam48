@@ -12,10 +12,15 @@ public class Entity : MonoBehaviour
     }
     private void Start()
     {
+        IOTerminal.I.onCommand.AddListener(OnCommand);
         IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
     }
-    protected virtual void OnTerminalTimePast(int amount)
+    protected virtual void OnCommand(Command command, ParsedCommand parsedCommand)
     {
-        Debug.Log("protected virtual void OnTerminalTimePast(int "+ amount+")");
+        Debug.Log("OnCommand " + command.name + ")");
+    }
+    protected virtual void OnTerminalTimePast(int terminalTimePast)
+    {
+        Debug.Log("OnTerminalTimePast " + terminalTimePast + ")");
     }
 }

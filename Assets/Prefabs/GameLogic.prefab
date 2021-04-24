@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Clears the console
+  speed: 2
 --- !u!1 &625909250
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,50 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef728f169d0e9024eaca288a7970b05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5598470582980602836
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6622463039763607033}
-  - component: {fileID: 6677622390734600357}
-  m_Layer: 0
-  m_Name: Entity
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6622463039763607033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5598470582980602836}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1686601718695636776}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6677622390734600357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5598470582980602836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6daf102af90834b89b323164994f86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
 --- !u!1 &5743533220136105958
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Move to any adjacent directory
+  speed: 2
 --- !u!1 &8708997899792654079
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +849,7 @@ MonoBehaviour:
   currentIP: 10
   maxIP: 10
   currentDirectory: {fileID: 1295044136196344403}
+  currentCharacters: 10000
 --- !u!1 &8708997899838730441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Displays all files or directories in the current directory
+  speed: 2
 --- !u!1 &8708997899999476256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Displays users current ip and adjacent directories
+  speed: 2
 --- !u!1 &8708997900401959635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Move to any path
+  speed: 2
 --- !u!1 &8708997900723148274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,6 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Shows current directory
+  speed: 2
 --- !u!1 &8708997900915647774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,6 +1727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Shows the contents of any file
+  speed: 2
 --- !u!1 &8708997901071781108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Shows game help
+  speed: 2
   help: 'Welcome to ldhaxxor 1.0
 
     You have an IP of {0}, when it runs out, you
@@ -2226,6 +2191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Displays the next file or directory in the current directory
+  speed: 2
 --- !u!1 &8708997901408815606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,6 +2237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Deals ip damage to the specified file or process
+  speed: 2
 --- !u!1 &8708997901433617690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2316,6 +2283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Displays all available commands
+  speed: 2
 --- !u!1 &8979132827458944925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2327,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef728f169d0e9024eaca288a7970b05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &5692824326423238953
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1686601718695636776}
+    m_Modifications:
+    - target: {fileID: 194000878634578685, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_Name
+      value: Entity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c430a8bb6fbe8a4e90b487a50c655c4, type: 3}
+--- !u!4 &6622463039763607033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5692824326423238953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6414119747389309916
 PrefabInstance:
   m_ObjectHideFlags: 0

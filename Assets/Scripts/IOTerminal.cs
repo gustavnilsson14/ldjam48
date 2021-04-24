@@ -15,8 +15,8 @@ public class IOTerminal : MonoBehaviour
     public TMP_InputField commandField;
 
     [Header("Events")]
-    public TimeEvent onTerminalTimePast = new TimeEvent();
-    public TimeEvent onTimePast = new TimeEvent();
+    public CommandEvent onCommand = new CommandEvent();
+    public TerminalTimeEvent onTerminalTimePast = new TerminalTimeEvent();
 
     private string baseUserDirString;
     private List<ParsedCommand> commandHistory = new List<ParsedCommand>();
@@ -39,14 +39,7 @@ public class IOTerminal : MonoBehaviour
     private void Update()
     {
         HandleInput();
-        HandleTimePast();
     }
-
-    private void HandleTimePast()
-    {
-        
-    }
-
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -66,12 +59,6 @@ public class IOTerminal : MonoBehaviour
             return;
         }
         commandField.text = commandHistory[commandHistoryCurrentIndex].GetCommandString();
-    }
-    private void TerminalTimePast(int time)
-    {
-        currentTerminalTime += time;
-        totalTerminalTime += time;
-        onTerminalTimePast.Invoke(time);
     }
     private void RenderUserAndDir()
     {
@@ -113,8 +100,19 @@ public class IOTerminal : MonoBehaviour
             AppendTextLine("<color=red>ERROR:</color> " + result);
             return;
         }
-        TerminalTimePast(command.GetTerminalTimePast(parsedCommand));
+        CommandPassed(command, parsedCommand);
         AppendTextLine(result);
+    }
+    private void CommandPassed(Command command, ParsedCommand parsedCommand)
+    {
+        TerminalTimePast(command.GetTerminalTimePast(parsedCommand));
+        onCommand.Invoke(command, parsedCommand);
+    }
+    private void TerminalTimePast(int terminalTimePassed)
+    {
+        currentTerminalTime += terminalTimePassed;
+        totalTerminalTime += terminalTimePassed;
+        onTerminalTimePast.Invoke(terminalTimePassed);
     }
     private void HandleNoSuchCommand(string commandName)
     {
@@ -138,4 +136,5 @@ public class IOTerminal : MonoBehaviour
         outputField.text = "";
     }
 }
-public class TimeEvent : UnityEvent<int> { }
+public class CommandEvent : UnityEvent<Command, ParsedCommand> { }
+public class TerminalTimeEvent : UnityEvent<int> { }
