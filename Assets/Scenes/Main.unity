@@ -439,6 +439,16 @@ PrefabInstance:
       propertyPath: currentHost
       value: 
       objectReference: {fileID: 1701671443}
+    - target: {fileID: 4892798034699343850, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: faction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: bannedFactions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: privilege
@@ -504,6 +514,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LDTerminal
       objectReference: {fileID: 0}
+    - target: {fileID: 7812290123712929257, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: faction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8100233181660612992, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_Name
@@ -512,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 8293693366650502347, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: speed
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8293693366650502347, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}

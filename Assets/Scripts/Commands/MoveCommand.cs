@@ -18,7 +18,10 @@ public class MoveCommand : Command
         if (!parsedCommand.HasArguments())
             return false;
         result = parsedCommand.arguments[0] + " is not an adjacent directory";
-        if (!ArgumentIsAdjacentDirectory(parsedCommand.arguments[0]))
+        if (!GetAdjacentDirectory(parsedCommand.arguments[0], out Directory adjacentDirectory))
+            return false;
+        result = $"You have no access to {adjacentDirectory.GetFullPath()}";
+        if (!Player.I.IsAllowedInDirectory(adjacentDirectory))
             return false;
         return true;
     }

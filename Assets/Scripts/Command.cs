@@ -32,10 +32,10 @@ public class Command : MonoBehaviour
     {
         return speed;
     }
-    protected bool ArgumentIsAdjacentDirectory(string argument)
+    protected bool GetAdjacentDirectory(string argument, out Directory adjacentDirectory)
     {
         List<Directory> adjacentDirectories = Player.I.currentDirectory.GetAdjacentDirectories();
-        Directory adjacentDirectory = adjacentDirectories.Find(dir => dir.name == argument);
+        adjacentDirectory = adjacentDirectories.Find(dir => dir.name == argument);
         if (adjacentDirectory == null)
             return false;
         return true;

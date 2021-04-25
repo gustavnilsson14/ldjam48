@@ -21,11 +21,12 @@ public class DirectoryWorldRenderer : MonoBehaviour
 
     private void PlayerMoved(Directory directory)
     {
-        
-        if (directory.privilege == Directory.DirectoryPrivilege.DANGER)
-            RunAnimation("Danger");
-        if (directory.privilege == Directory.DirectoryPrivilege.FRIENDLY)
+        if (Player.I.IsSafeInDirectory(directory))
+        {
             RunAnimation("Friendly");
+            return;
+        }
+        RunAnimation("Danger");
     }
     public void RunAnimation(string animation)
     {
