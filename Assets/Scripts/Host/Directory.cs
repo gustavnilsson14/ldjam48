@@ -6,6 +6,14 @@ using UnityEngine;
 
 public class Directory : MonoBehaviour
 {
+    public enum DirectoryPrivilege
+    {
+        DANGER,
+        FRIENDLY
+    }
+
+    public DirectoryPrivilege privilege = DirectoryPrivilege.DANGER;
+
     public List<Directory> GetAdjacentDirectories() {
         List<Directory> result = new List<Directory>();
         foreach (Transform child in transform)
