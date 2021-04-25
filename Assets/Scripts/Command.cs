@@ -84,11 +84,29 @@ public class ParsedCommand
     }
     private void ParseArguments(List<string> commandSegments)
     {
-        arguments.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) != "--"));
+        foreach(string segment in commandSegments)
+        {
+            if (segment.Length < 2)
+            {
+                arguments.Add(segment);
+                continue;
+            }
+            if(segment.Substring(0, 2) != "--")
+                arguments.Add(segment);
+        }
+        //arguments.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) != "--"));
     }
     private void ParseFlags(List<string> commandSegments)
     {
-        flags.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) == "--"));
+        foreach (string segment in commandSegments)
+        {
+            if (segment.Length < 2)
+                continue;
+
+            if (segment.Substring(0, 2) == "--")
+                arguments.Add(segment);
+        }
+        //flags.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) == "--"));
     }
     public bool HasArguments()
     {
