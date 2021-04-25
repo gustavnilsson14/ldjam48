@@ -10,6 +10,7 @@ public class EntityWorldRenderer : MonoBehaviour
     private Entity entity;
     private GameObject entityParticle;
     private Animator animator;
+    private bool isDiscovered = false;
 
     private void Start()
     {
@@ -25,12 +26,17 @@ public class EntityWorldRenderer : MonoBehaviour
 
     public void Render()
     {
-        EntityWorldHandler.I.RenderEntity(entityParticlePrefab, out entityParticle);  
+        if(!EntityWorldHandler.I.RenderEntity(entityParticlePrefab, out entityParticle))
+            return;
         animator = entityParticle.GetComponent<Animator>();
     }
 
     private void Discover()
     {
+        if (isDiscovered)
+            return;
+
+        isDiscovered = true;
         Render();
     }
 
