@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandEntity : Entity
+public class KeyEntity : Entity
 {
-    public Command command;
+    
 
     public override string GetCatDescription()
     {
         List<string> result = new List<string> {
             GetBinaryStatic(),
-            command.name + " added to lib! " + command.helpText,
-            string.Format("You can now use the {0} command!", command.name)
+            " added to lib! ",
+            string.Format("You can now use the {0} command!", "asdasd")
         };
         onCat.Invoke();
-        command.isAvailable = true;
+        //command.isAvailable = true;
         Die();
         return string.Join("\n", result);
     }

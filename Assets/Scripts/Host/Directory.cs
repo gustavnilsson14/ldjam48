@@ -60,7 +60,7 @@ public class Directory : MonoBehaviour
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
     public List<PathNode> FindPath(Directory target) {
-        Debug.Log("public List<PathNode> FindPath(Directory " + target.name + ") {" + this.name);
+        //Debug.Log("public List<PathNode> FindPath(Directory " + target.name + ") {" + this.name);
         int iterations = 99;
         List<PathNode> result = new List<PathNode>();
         List<PathNode> openNodes = new List<PathNode>();
@@ -68,7 +68,7 @@ public class Directory : MonoBehaviour
         PathNode currentNode = new PathNode(0, this, null);
         while (currentNode.directory != target && iterations > 0) {
             iterations--;
-            Debug.Log(" iterations1 " + iterations);
+            //Debug.Log(" iterations1 " + iterations);
             foreach (Directory neighbor in currentNode.directory.GetAdjacentDirectories())
             {
                 if (openNodes.Find(node => node.directory == neighbor) != null)
@@ -86,12 +86,12 @@ public class Directory : MonoBehaviour
         while (currentNode.directory != this && iterations > 0)
         {
             iterations--;
-            Debug.Log(" iterations2 " + iterations);
+            //Debug.Log(" iterations2 " + iterations);
             result.Add(currentNode);
             currentNode = currentNode.parent;
         }
         result.Reverse();
-        Debug.Log("FindPath " + string.Join("-", result.Select(s => s.directory.name)) + " iterations " + iterations);
+        //Debug.Log("FindPath " + string.Join("-", result.Select(s => s.directory.name)) + " iterations " + iterations);
         return result;
     }
 
