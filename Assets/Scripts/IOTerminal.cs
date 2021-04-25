@@ -60,12 +60,28 @@ public class IOTerminal : MonoBehaviour
             HistoryMove(1);
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            AutoCompleCommand();
             AutoCompletePath();
             AutoCompleteEntityName();
         }
             
     }
 
+    private void AutoCompleCommand()
+    {
+        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
+        if (parsedCommand.arguments.Count > 0)
+            return;
+
+        foreach(Command command in Player.GetCommands())
+        {
+            if (!command.name.StartsWith(parsedCommand.name))
+                continue;
+
+            commandField.text = $"{command.name}";
+        }
+        commandField.caretPosition = commandField.text.Length;
+    }
     private void AutoCompleteEntityName()
     {
         List<Entity> entities = new List<Entity>();
@@ -77,6 +93,9 @@ public class IOTerminal : MonoBehaviour
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
         
         if (parsedCommand.arguments.Count != 1)
+            return;
+
+        if (parsedCommand.flags.Count > 0)
             return;
 
         foreach (Entity entity in entities)
@@ -93,6 +112,9 @@ public class IOTerminal : MonoBehaviour
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
 
         if (parsedCommand.arguments.Count != 1)
+            return;
+
+        if (parsedCommand.flags.Count > 0)
             return;
 
         foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
