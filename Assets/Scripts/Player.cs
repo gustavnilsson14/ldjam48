@@ -37,6 +37,7 @@ public class Player : Entity
 
     public void FullRestore()
     {
+        directoryHistory.Clear();
         currentIP = maxIP;
         currentCharacters = maxCharacters;
         currentSeconds = maxSeconds;

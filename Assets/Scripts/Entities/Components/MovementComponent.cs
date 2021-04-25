@@ -25,7 +25,6 @@ public class MovementComponent : EntityComponent
         if (path.Count == 0)
             return;
         entityBody.MoveTo(path[0].directory);
-
     }
 
     private void HandleNoSensor()

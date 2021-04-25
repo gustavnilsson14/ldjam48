@@ -60,14 +60,14 @@ public class IOTerminal : MonoBehaviour
             HistoryMove(1);
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            AutoCompleCommand();
+            AutoCompleteCommand();
             AutoCompletePath();
             AutoCompleteEntityName();
         }
             
     }
 
-    private void AutoCompleCommand()
+    private void AutoCompleteCommand()
     {
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
         if (parsedCommand.arguments.Count > 0)
