@@ -83,6 +83,9 @@ public class Entity : ComponentWithIP
         }
         return string.Join("\n", result);
     }
+    public virtual bool IsAllowedInDirectory(Directory directory) {
+        return (!directory.bannedFactions.Contains(faction));
+    }
 }
 public class CatEvent : UnityEvent { }
 public class DiscoverEvent : UnityEvent { }

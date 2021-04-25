@@ -62,5 +62,17 @@ public class Player : Entity
         TimeSpan t = TimeSpan.FromSeconds(Mathf.FloorToInt(currentSeconds));
         return string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours,t.Minutes,t.Seconds);
     }
+    public override bool IsAllowedInDirectory(Directory directory)
+    {
+        if (base.IsAllowedInDirectory(directory))
+            return true;
+        if (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()))
+            return true;
+        return false;
+    }
+    public bool IsSafeInDirectory(Directory directory)
+    {
+        return (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()) != null);
+    }
 }
 public class MoveEvent : UnityEvent<Directory> { }

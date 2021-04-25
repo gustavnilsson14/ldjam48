@@ -15,6 +15,8 @@ public class MovementComponent : EntityComponent
         }
         if (!sensorComponent.GetCurrentTarget(out ComponentWithIP target))
             return;
+        if (target.currentDirectory == entityBody.currentDirectory)
+            return;
         Move(target);
     }
     private void Move(ComponentWithIP target)
