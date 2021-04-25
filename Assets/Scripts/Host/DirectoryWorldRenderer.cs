@@ -21,6 +21,7 @@ public class DirectoryWorldRenderer : MonoBehaviour
 
     private void PlayerMoved(Directory directory)
     {
+        
         if (directory.privilege == Directory.DirectoryPrivilege.DANGER)
             RunAnimation("Danger");
         if (directory.privilege == Directory.DirectoryPrivilege.FRIENDLY)
