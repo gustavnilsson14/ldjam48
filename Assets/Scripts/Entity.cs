@@ -22,6 +22,9 @@ public class Entity : ComponentWithIP
     public MoveEvent onMove = new MoveEvent();
     public CatEvent onCat = new CatEvent();
     public DiscoverEvent onDiscover = new DiscoverEvent();
+    public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
+
+    private bool isDiscovered = false;
 
     protected override void Awake()
     {
@@ -47,7 +50,21 @@ public class Entity : ComponentWithIP
 
     public virtual void Discover()
     {
+        Debug.Log($"discover entity {isDiscovered}");
+        if (isDiscovered)
+            return;
+
+        isDiscovered = true;
         onDiscover.Invoke();
+        Player.I.onMove.AddListener(HandlePlayerMovement);
+    }
+
+    private void HandlePlayerMovement(Directory arg0)
+    {
+        Debug.Log($"Player moved {this.name}");
+        isDiscovered = false;
+        onPlayerEscape.Invoke();
+        Player.I.onMove.RemoveListener(HandlePlayerMovement);
     }
 
     protected string GetBinaryStatic()
@@ -63,3 +80,4 @@ public class Entity : ComponentWithIP
 }
 public class CatEvent : UnityEvent { }
 public class DiscoverEvent : UnityEvent { }
+public class PlayerEscapeEvent : UnityEvent { }
