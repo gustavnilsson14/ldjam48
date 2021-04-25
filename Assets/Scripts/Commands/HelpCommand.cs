@@ -10,7 +10,7 @@ public class HelpCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        result = help;
+        result = string.Format(help, Player.I.GetCurrentIP(), Player.I.currentCharacters, Player.I.GetTimeLeft());
         return true;
     }
 }
