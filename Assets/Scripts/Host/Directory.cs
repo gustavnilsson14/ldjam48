@@ -41,6 +41,19 @@ public class Directory : MonoBehaviour
         directories.Add(this);
         return directories;
     }
+    public List<Directory> GetDirectoriesByDepth(int scanDepth = 0) {
+        List<Directory> result = new List<Directory>();
+        if (scanDepth != 0)
+        {
+            foreach (Directory directory in GetAdjacentDirectories())
+            {
+                result.AddRange(directory.GetDirectoriesByDepth(scanDepth - 1));
+            }
+        }
+        if (!result.Contains(this))
+            result.Add(this);
+        return result;
+    }
     public string GetFullPath()
     {
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));

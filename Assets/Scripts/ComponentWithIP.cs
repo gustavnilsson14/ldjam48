@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ComponentWithIP : MonoBehaviour
 {
+    public Directory currentDirectory;
+
     public int maxIP;
     protected int currentIP;
 
@@ -13,6 +16,7 @@ public class ComponentWithIP : MonoBehaviour
     public DeathEvent onDeath = new DeathEvent();
     protected virtual void Awake()
     {
+        currentDirectory = GetComponentInParent<Directory>();
         currentIP = maxIP;
     }
     public virtual bool TakeDamage(int amount)
@@ -26,6 +30,7 @@ public class ComponentWithIP : MonoBehaviour
         onTakeDamage.Invoke(amount);
         return true;
     }
+
     public virtual void Die()
     {
         onDeath.Invoke();

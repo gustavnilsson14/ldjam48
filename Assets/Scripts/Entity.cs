@@ -4,20 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum EntityFaction { 
+    HACKER,
+    SECURITY,
+    VIRUS
+}
+
 public class Entity : ComponentWithIP
 {
-    public Directory currentDirectory;
+    public EntityFaction faction;
 
     [TextArea(2,10)]
     public string description;
 
     [Header("Events")]
     public CatEvent onCat = new CatEvent();
+    public MoveEvent onMove = new MoveEvent();
 
-    protected override void Awake()
+    public void MoveTo(Directory directory)
     {
-        base.Awake();
-        currentDirectory = GetComponentInParent<Directory>();
+        currentDirectory = directory;
+        transform.parent = directory.transform;
+        onMove.Invoke(directory);
     }
     public virtual string GetCatDescription()
     {

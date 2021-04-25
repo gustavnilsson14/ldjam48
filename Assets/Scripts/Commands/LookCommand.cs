@@ -9,7 +9,9 @@ public class LookCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        List<Entity> entities = GetLookDirectory(parsedCommand).GetEntities();
+        List<Entity> entities = new List<Entity>();
+        entities.AddRange(GetLookDirectory(parsedCommand).GetEntities());
+        entities.Remove(Player.I);
         if (entities.Count == 0)
         {
             result = "No files in this directory";
@@ -28,19 +30,13 @@ public class LookCommand : Command
     private Entity GetCurrentEntity(List<Entity> entities) 
     {
         if (currentEntity == null)
-        {
             return entities[0];
-        }
         int entityIndex = entities.IndexOf(currentEntity);
         if (entityIndex == -1)
-        {
             return entities[0];
-        }
         entityIndex += 1;
         if (entityIndex < entities.Count)
-        {
             return entities[entityIndex];
-        }
         return entities[0];
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)

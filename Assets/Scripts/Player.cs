@@ -13,14 +13,11 @@ public class Player : Entity
     public int currentCharacters = 10000;
     private float currentSeconds = 60 * 60;
 
-    [Header("Events")]
-    public MoveEvent onMove = new MoveEvent();
-
     // Start is called before the first frame update
     protected override void Awake()
     {
+        base.Awake();
         Player.I = this;
-        currentIP = maxIP;
         commands.AddRange(GetComponentsInChildren<Command>());
     }
     private void Start()
@@ -34,11 +31,6 @@ public class Player : Entity
     private void Update()
     {
         currentSeconds -= Time.deltaTime;
-    }
-    public void MoveTo(Directory directory)
-    {
-        Player.I.currentDirectory = directory;
-        onMove.Invoke(directory);
     }
 
     public static bool GetCommand(out Command command, string commandName, bool onlyAvailable = true)
