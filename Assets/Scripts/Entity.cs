@@ -7,12 +7,13 @@ using UnityEngine.Events;
 public class Entity : ComponentWithIP
 {
     public Directory currentDirectory;
-
+ 
     [TextArea(2,10)]
     public string description;
 
     [Header("Events")]
     public CatEvent onCat = new CatEvent();
+    public DiscoverEvent onDiscover = new DiscoverEvent();
 
     protected override void Awake()
     {
@@ -29,6 +30,12 @@ public class Entity : ComponentWithIP
         onCat.Invoke();
         return string.Join("\n", result);
     }
+
+    public virtual void Discover()
+    {
+        onDiscover.Invoke();
+    }
+
     protected string GetBinaryStatic()
     {
         List<string> result = new List<string>();
@@ -41,3 +48,4 @@ public class Entity : ComponentWithIP
     }
 }
 public class CatEvent : UnityEvent { }
+public class DiscoverEvent : UnityEvent { }

@@ -13,21 +13,25 @@ public class EntityWorldRenderer : MonoBehaviour
 
     private void Start()
     {
-        Render();
-
         entity = GetComponent<Entity>();
         if (entity == null)
             return;
 
         entity.onTakeDamage.AddListener(TakeDamage);
         entity.onDeath.AddListener(Die);
+        entity.onDiscover.AddListener(Discover);
     }
 
-   
+
     public void Render()
     {
-        entityParticle = Instantiate(entityParticlePrefab);
+        EntityWorldHandler.I.RenderEntity(entityParticlePrefab, out entityParticle);  
         animator = entityParticle.GetComponent<Animator>();
+    }
+
+    private void Discover()
+    {
+        Render();
     }
 
     public void Attack()
