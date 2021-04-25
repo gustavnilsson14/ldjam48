@@ -286,6 +286,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8122157177264346204, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: extendedHelpText
+      value: 'Usage: ssh [username@hostname]'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510747a9aada968469407653c5f588ff, type: 3}
 --- !u!1001 &1243937587

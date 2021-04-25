@@ -17,6 +17,8 @@ public class Player : Entity
 
     public CommandEvent onCommand = new CommandEvent();
 
+    public bool test = false;
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -28,6 +30,14 @@ public class Player : Entity
     private void Start()
     {
         IOTerminal.I.onCommand.AddListener(OnCommand);
+    }
+    private void Update()
+    {
+        currentSeconds -= Time.deltaTime;
+        if (!test)
+            return;
+        test = false;
+        TakeDamage(1);
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
@@ -41,11 +51,6 @@ public class Player : Entity
         currentIP = maxIP;
         currentCharacters = maxCharacters;
         currentSeconds = maxSeconds;
-    }
-
-    private void Update()
-    {
-        currentSeconds -= Time.deltaTime;
     }
 
     public static bool GetCommand(out Command command, string commandName, bool onlyAvailable = true)

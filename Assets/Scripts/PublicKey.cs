@@ -12,7 +12,6 @@ public class PublicKey : MonoBehaviour
     }
     public virtual string GetName() { return name; }
     public virtual string GetUsageDescription() { return ""; }
-
     public virtual KeyEntity InstantiateEntityKey(Transform parent)
     {
         KeyEntity publicKeyEntity = Instantiate(publicKeyEntityPrefab, parent);
