@@ -10,8 +10,10 @@ public class Player : Entity
 
     private List<Command> commands = new List<Command>();
 
-    public int currentCharacters = 10000;
-    private float currentSeconds = 60 * 60;
+    public int currentCharacters = 0;
+    public int maxCharacters = 10000;
+    public float currentSeconds = 0;
+    public float maxSeconds = 60 * 60;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -19,6 +21,7 @@ public class Player : Entity
         base.Awake();
         Player.I = this;
         commands.AddRange(GetComponentsInChildren<Command>());
+        FullRestore();
     }
     private void Start()
     {
@@ -28,6 +31,14 @@ public class Player : Entity
     {
         currentCharacters -= parsedCommand.GetCommandString().Length;
     }
+
+    public void FullRestore()
+    {
+        currentIP = maxIP;
+        currentCharacters = maxCharacters;
+        currentSeconds = maxSeconds;
+    }
+
     private void Update()
     {
         currentSeconds -= Time.deltaTime;

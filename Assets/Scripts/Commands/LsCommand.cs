@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LsCommand : Command
 {
-    public Entity currentEntity;
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
@@ -17,28 +16,18 @@ public class LsCommand : Command
             result = "No files in this directory";
             return true;
         }
-        currentEntity = GetCurrentEntity(entities);
-        currentEntity.Discover();
-        result = $"{currentEntity.name} - {currentEntity.description}";
+        List<string> resultStrings = new List<string>();
+        foreach (Entity entity in entities)
+        {
+            resultStrings.Add($"{entity.name} - {entity.description}");
+        }
+        result = string.Join("\n", resultStrings);
         return true;
     }
     private Directory GetLookDirectory(ParsedCommand parsedCommand) {
         if (!parsedCommand.HasArguments())
             return Player.I.currentDirectory;
         return Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]);
-    }
-
-    private Entity GetCurrentEntity(List<Entity> entities) 
-    {
-        if (currentEntity == null)
-            return entities[0];
-        int entityIndex = entities.IndexOf(currentEntity);
-        if (entityIndex == -1)
-            return entities[0];
-        entityIndex += 1;
-        if (entityIndex < entities.Count)
-            return entities[entityIndex];
-        return entities[0];
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {

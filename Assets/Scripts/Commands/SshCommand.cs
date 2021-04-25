@@ -8,6 +8,9 @@ public class SshCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
+        result = $"ssh to {parsedCommand.arguments[0]}, please wait...";
+        SshKey sshKey = HostHandler.I.currentHost.keys.Find(key => key.GetName() == parsedCommand.arguments[0]) as SshKey;
+        HostHandler.I.onSsh(sshKey);
         return true;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)

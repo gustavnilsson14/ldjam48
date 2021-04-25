@@ -73,11 +73,10 @@ public class IOTerminal : MonoBehaviour
         commandField.text = commandHistory[commandHistoryCurrentIndex].GetCommandString();
         commandField.caretPosition = commandField.text.Length;
     }
-    private void RenderUserAndDir()
+    public void RenderUserAndDir()
     {
-        userDirField.text = String.Format(baseUserDirString, "haxxor", "LDTerminal", "CSOS128", Player.I.currentDirectory.GetFullPath());
+        userDirField.text = String.Format(baseUserDirString, HostHandler.I.currentHost.userName, HostHandler.I.currentHost.name, "CSOS128", Player.I.currentDirectory.GetFullPath());
     }
-
     private void onCommandSubmit(string commandName)
     {
         if (commandName == "")

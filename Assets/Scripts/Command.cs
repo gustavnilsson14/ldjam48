@@ -48,8 +48,12 @@ public class Command : MonoBehaviour
             return false;
         return true;
     }
-    protected bool ArgumentIsUserHostPair(string argument) 
+    protected bool ArgumentIsUserHostPair(string argument)
     {
+        if (HostHandler.I.currentHost.keys.Find(key => key.GetName() == argument) != null)
+        {
+            return true;
+        }
         return false;
     }
 }

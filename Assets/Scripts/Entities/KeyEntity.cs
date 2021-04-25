@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class KeyEntity : Entity
 {
-    
+    public PublicKey publicKey;
 
     public override string GetCatDescription()
     {
         List<string> result = new List<string> {
             GetBinaryStatic(),
-            " added to lib! ",
-            string.Format("You can now use the {0} command!", "asdasd")
+            $"The key to {publicKey.GetName()} was added to lib!",
+            publicKey.GetUsageDescription()
         };
         onCat.Invoke();
-        //command.isAvailable = true;
+        publicKey.isAvailable = true;
         Die();
         return string.Join("\n", result);
     }
