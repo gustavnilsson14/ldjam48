@@ -54,7 +54,13 @@ public class GenerateHost : MonoBehaviour
 
         DirectoryKey directoryKey = Instantiate(directoryKeyPrefab, host.KeysTransform);
         KeyEntity keyEntity = directoryKeyPrefab.InstantiateEntityKey(directory.transform);
-        keyEntity.publicKey = directoryKeyPrefab;
+        keyEntity.publicKey = directoryKey;
+
+        GetRandomDirectory(host.GetRootDirectory().transform, out Directory dir);
+        directoryKey.targetDirectory = dir;
+        directoryKey.targetDirectory.bannedFactions.Add(EntityFaction.HACKER);
+
+        keyEntity.name = $"{directoryKey.targetDirectory.name}.key";
     }
 
     private void Populate(Host host, int maxEntities)
@@ -80,6 +86,8 @@ public class GenerateHost : MonoBehaviour
         entity = entitiesPrefabs[Random.Range(0, entitiesPrefabs.Count)];
         return true;
     }
+
+
 
     public bool GetRandomDirectory(Transform directoryTransform, out Directory directory)
     {
