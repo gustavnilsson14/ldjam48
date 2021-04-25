@@ -19,7 +19,7 @@ public class GenerateHost : MonoBehaviour
     public Host GenerateNewHost(HostType hosttype, int maxDirRoot, int maxDirSub, int maxDepth)
     {
         Host host = Instantiate(linuxHostPrefab, transform);
-        host.name = "host" + Random.Range(0, 9999);
+        host.name = NameUtil.I.GetHostName();
         CleanUnderRoot(host, maxDirRoot, maxDirSub, maxDepth);
         return host;
     }
