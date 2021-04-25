@@ -19,7 +19,10 @@ public class MovementComponent : EntityComponent
     }
     private void Move(ComponentWithIP target)
     {
-        List<Directory> path = entityBody.currentDirectory.FindPath(target.currentDirectory);
+        List<PathNode> path = entityBody.currentDirectory.FindPath(target.currentDirectory);
+        if (path.Count == 0)
+            return;
+        entityBody.MoveTo(path[0].directory);
     }
 
     private void HandleNoSensor()

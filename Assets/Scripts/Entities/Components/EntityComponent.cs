@@ -31,6 +31,8 @@ public class EntityComponent : ComponentWithIP
     }
     protected virtual void OnTerminalTimePast(int terminalTimePast)
     {
+        if (speed == 0)
+            return;
         currentMomentum += terminalTimePast;
         int turnsToTake = Mathf.FloorToInt((float)currentMomentum / (float)speed);
         currentMomentum -= turnsToTake * speed;
