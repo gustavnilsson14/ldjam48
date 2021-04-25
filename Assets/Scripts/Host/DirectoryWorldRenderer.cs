@@ -19,8 +19,13 @@ public class DirectoryWorldRenderer : MonoBehaviour
         RunAnimation("Take_Damage");
     }
 
-    private void PlayerMoved(Directory directory)
+    private void PlayerMoved(Directory directory, Directory origin)
     {
+        if(directory.GetDepth() > origin.GetDepth())
+            RunAnimation("MoveDown");
+        if (directory.GetDepth() < origin.GetDepth())
+            RunAnimation("MoveUp");
+
         if (Player.I.IsSafeInDirectory(directory))
         {
             RunAnimation("Friendly");

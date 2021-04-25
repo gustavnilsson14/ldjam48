@@ -34,9 +34,9 @@ public class Entity : ComponentWithIP
     }
     public void MoveTo(Directory directory)
     {
+        onMove.Invoke(directory, currentDirectory);
         currentDirectory = directory;
         transform.parent = directory.transform;
-        onMove.Invoke(directory);
     }
     public virtual string GetCatDescription()
     {
@@ -65,7 +65,7 @@ public class Entity : ComponentWithIP
         Player.I.onMove.AddListener(HandlePlayerMovement);
     }
 
-    private void HandlePlayerMovement(Directory arg0)
+    private void HandlePlayerMovement(Directory target, Directory origin)
     {
         Debug.Log($"Player moved {this.name}");
         isDiscovered = false;

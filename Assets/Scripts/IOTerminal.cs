@@ -43,7 +43,7 @@ public class IOTerminal : MonoBehaviour
         Player.I.onMove.AddListener(OnMove);
     }
 
-    private void OnMove(Directory directory)
+    private void OnMove(Directory directory, Directory origin)
     {
         RenderUserAndDir();
     }

@@ -60,6 +60,11 @@ public class Directory : MonoBehaviour
     {
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
+
+    public int GetDepth()
+    {
+        return GetAllParents().Count;
+    }
     public List<PathNode> FindPath(Directory target) {
         //Debug.Log("public List<PathNode> FindPath(Directory " + target.name + ") {" + this.name);
         int iterations = 99;
