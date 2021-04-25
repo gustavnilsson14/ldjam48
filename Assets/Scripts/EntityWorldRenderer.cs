@@ -22,7 +22,13 @@ public class EntityWorldRenderer : MonoBehaviour
         entity.onDiscover.AddListener(Discover);
         entity.onAttack.AddListener(Attack);
         entity.onPlayerEscape.AddListener(PlayerEscape);
+        entity.onMove.AddListener(Move);
 
+    }
+
+    private void Move(Directory arg0)
+    {
+        EntityWorldHandler.I.RemoveChildFromSpawnPoint(entityParticle);
     }
 
     private void PlayerEscape()

@@ -20,6 +20,7 @@ public class LsCommand : Command
         foreach (Entity entity in entities)
         {
             resultStrings.Add($"{entity.name} - {entity.description}");
+            entity.Discover();
         }
         result = string.Join("\n", resultStrings);
         return true;

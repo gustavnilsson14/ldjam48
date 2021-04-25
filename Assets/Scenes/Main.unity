@@ -439,6 +439,11 @@ PrefabInstance:
       propertyPath: currentHost
       value: 
       objectReference: {fileID: 1701671443}
+    - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: privilege
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -503,6 +508,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameLogic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293693366650502347, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293693366650502347, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8293693366781683845, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
