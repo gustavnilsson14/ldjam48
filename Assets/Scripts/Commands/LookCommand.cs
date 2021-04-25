@@ -18,7 +18,8 @@ public class LookCommand : Command
             return true;
         }
         currentEntity = GetCurrentEntity(entities);
-        result = currentEntity.name;
+        currentEntity.Discover();
+        result = $"{currentEntity.name} - {currentEntity.description}";
         return true;
     }
     private Directory GetLookDirectory(ParsedCommand parsedCommand) {

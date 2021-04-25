@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum EntityFaction { 
+public enum EntityFaction
+{
     HACKER,
     SECURITY,
     VIRUS
@@ -14,13 +15,19 @@ public class Entity : ComponentWithIP
 {
     public EntityFaction faction;
 
-    [TextArea(2,10)]
+    [TextArea(2, 10)]
     public string description;
 
     [Header("Events")]
-    public CatEvent onCat = new CatEvent();
     public MoveEvent onMove = new MoveEvent();
+    public CatEvent onCat = new CatEvent();
+    public DiscoverEvent onDiscover = new DiscoverEvent();
 
+    protected override void Awake()
+    {
+        base.Awake();
+        currentDirectory = GetComponentInParent<Directory>();
+    }
     public void MoveTo(Directory directory)
     {
         currentDirectory = directory;
@@ -29,7 +36,7 @@ public class Entity : ComponentWithIP
     }
     public virtual string GetCatDescription()
     {
-        List<string> result = new List<string> { 
+        List<string> result = new List<string> {
             GetBinaryStatic(),
             string.Format("IP: {0}", currentIP),
             description
@@ -37,6 +44,12 @@ public class Entity : ComponentWithIP
         onCat.Invoke();
         return string.Join("\n", result);
     }
+
+    public virtual void Discover()
+    {
+        onDiscover.Invoke();
+    }
+
     protected string GetBinaryStatic()
     {
         List<string> result = new List<string>();
@@ -49,3 +62,4 @@ public class Entity : ComponentWithIP
     }
 }
 public class CatEvent : UnityEvent { }
+public class DiscoverEvent : UnityEvent { }
