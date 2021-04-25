@@ -68,7 +68,7 @@ public class Directory : MonoBehaviour
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
     public List<PathNode> FindPath(Directory target) {
-        Debug.Log("public List<PathNode> FindPath(Directory " + target.name + ") {" + this.name);
+
         int iterations = 99;
         List<PathNode> result = new List<PathNode>();
         List<PathNode> openNodes = new List<PathNode>();
@@ -99,7 +99,7 @@ public class Directory : MonoBehaviour
             currentNode = currentNode.parent;
         }
         result.Reverse();
-        Debug.Log("FindPath " + string.Join("-", result.Select(s => s.directory.name)) + " iterations " + iterations);
+
         return result;
     }
 

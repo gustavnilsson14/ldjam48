@@ -20,6 +20,7 @@ public class EntityWorldRenderer : MonoBehaviour
         entity.onTakeDamage.AddListener(TakeDamage);
         entity.onDeath.AddListener(Die);
         entity.onDiscover.AddListener(Discover);
+        entity.onAttack.AddListener(Attack);
         entity.onPlayerEscape.AddListener(PlayerEscape);
 
     }
@@ -43,6 +44,7 @@ public class EntityWorldRenderer : MonoBehaviour
 
     public void Attack()
     {
+
         RunAnimation("Attack");
     }
 

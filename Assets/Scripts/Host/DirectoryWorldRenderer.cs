@@ -9,8 +9,16 @@ public class DirectoryWorldRenderer : MonoBehaviour
     void Start()
     {
         Player.I.onMove.AddListener(PlayerMoved);
+        Player.I.onTakeDamage.AddListener(PlayerTookDamage);
+
         animator = GetComponent<Animator>();
     }
+
+    private void PlayerTookDamage(int amount)
+    {
+        RunAnimation("Take_Damage");
+    }
+
     private void PlayerMoved(Directory directory)
     {
         if (directory.privilege == Directory.DirectoryPrivilege.DANGER)
