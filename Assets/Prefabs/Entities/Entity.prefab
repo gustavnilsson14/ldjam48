@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6daf102af90834b89b323164994f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxIP: 5
   currentDirectory: {fileID: 0}
-  description: What a big ***
+  maxIP: 5
+  faction: 0
+  description: Big *** :O
 --- !u!114 &7336614084124270745
 MonoBehaviour:
   m_ObjectHideFlags: 0
