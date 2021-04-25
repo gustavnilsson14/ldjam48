@@ -7,7 +7,9 @@ public class PublicKey : MonoBehaviour
 {
     public KeyEntity publicKeyEntityPrefab;
     public bool isAvailable = false;
-    protected virtual void Awake() { }
+    protected virtual void Awake() {
+        GetComponentInParent<Host>().RegisterKey(this);
+    }
     public virtual string GetName() { return name; }
     public virtual string GetUsageDescription() { return ""; }
 

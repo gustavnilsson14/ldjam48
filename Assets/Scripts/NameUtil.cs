@@ -19,12 +19,20 @@ public class NameUtil : MonoBehaviour
         TITLE_ADJECTIVE
     }
 
-    public enum HostNameType 
+    public enum HostNameType
     {
         OS_USAGE_OWNER,
         OWNER_OS,
         OWNER_USAGE,
         USAGE_OS,
+    }
+    public enum EntityNameType
+    {
+        TYPE_ADJECTIVE,
+        ADJECTIVE_TYPE,
+        TYPE_MODEL,
+        MODEL_TYPE,
+        ADJECTIVE_MODEL_TYPE
     }
 
     public void Update()
@@ -32,7 +40,7 @@ public class NameUtil : MonoBehaviour
         if (!test)
             return;
         test = false;
-        Debug.Log(GetHostName());
+        Debug.Log(GetEntityName("IC"));
     }
 
     public string GetHackerName()
@@ -79,6 +87,53 @@ public class NameUtil : MonoBehaviour
                 break;
         }
         return string.Join("-", result);
+    }
+    public string GetEntityName(string typeName)
+    {
+        Array values = Enum.GetValues(typeof(EntityNameType));
+        System.Random random = new System.Random();
+        EntityNameType nameType = (EntityNameType)values.GetValue(random.Next(values.Length));
+        List<string> result = new List<string>();
+        switch (nameType)
+        {
+            case EntityNameType.TYPE_ADJECTIVE:
+                result.AddRange(new List<string>() { typeName, RandomFromList(entityAdjective) });
+                break;
+            case EntityNameType.ADJECTIVE_TYPE:
+                result.AddRange(new List<string>() { RandomFromList(entityAdjective), typeName });
+                break;
+            case EntityNameType.TYPE_MODEL:
+                result.AddRange(new List<string>() { typeName, RandomFromList(entityModel) + GetVersionNumber() });
+                break;
+            case EntityNameType.MODEL_TYPE:
+                result.AddRange(new List<string>() { RandomFromList(entityModel) + GetVersionNumber(), typeName });
+                break;
+            case EntityNameType.ADJECTIVE_MODEL_TYPE:
+                result.AddRange(new List<string>() { RandomFromList(entityAdjective), RandomFromList(entityModel) + GetVersionNumber(), typeName });
+                break;
+            default:
+                break;
+        }
+        return string.Join("-", result);
+    }
+
+    private string GetVersionNumber()
+    {
+        int type = UnityEngine.Random.Range(0,4);
+        string alphabet = "abcdefghijklmnopqrstuvxyz";
+        string letter = alphabet.Substring(UnityEngine.Random.Range(0, alphabet.Length - 1), 1);
+        switch (type)
+        {
+            case 0:
+                return $"-v{UnityEngine.Random.Range(0, 10)}.{UnityEngine.Random.Range(0, 10)}";
+            case 1:
+                return $"-0.{UnityEngine.Random.Range(0, 10)}{UnityEngine.Random.Range(0, 10)}{UnityEngine.Random.Range(0, 10)}-{letter}";
+            case 2:
+                return $"-{UnityEngine.Random.Range(0, 10)}{letter}";
+            case 3:
+                return $"-{letter}{UnityEngine.Random.Range(0, 10)}";
+        }
+        return "N/A";
     }
 
     public string RandomFromList(string[] list)
@@ -179,4 +234,36 @@ public class NameUtil : MonoBehaviour
         "R0m3r0",
         "GilB",
     };
+    protected string[] entityAdjective = new string[] {
+        "blue",
+        "red",
+        "black",
+        "white",
+        "stealth",
+        "killer",
+        "scout",
+        "arp",
+        "stat",
+        "vim",
+        "drek",
+        "monkeypatch",
+        "spaghetti",
+        "enterprise",
+        "platinum",
+        "priority",
+    };
+    protected string[] entityModel = new string[] {
+        "beta",
+        "alpha",
+        "PoC",
+        "release",
+        "master",
+        "hotfix",
+        "feature",
+        "collab",
+        "interface",
+        "jit"
+    };
+
+
 }

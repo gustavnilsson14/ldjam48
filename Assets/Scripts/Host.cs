@@ -9,7 +9,6 @@ public class Host : MonoBehaviour
     public string userName = "haxxor";
     public List<PublicKey> keys = new List<PublicKey>();
     public Transform KeysTransform;
-
     private void Awake()
     {
         keys.AddRange(GetComponentsInChildren<PublicKey>());
@@ -21,5 +20,11 @@ public class Host : MonoBehaviour
     public void SetUser(string userName)
     {
         this.userName = userName;
+    }
+    public void RegisterKey(PublicKey publicKey)
+    {
+        if (keys.Contains(publicKey))
+            return;
+        keys.Add(publicKey);
     }
 }
