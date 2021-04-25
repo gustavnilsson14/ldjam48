@@ -76,7 +76,7 @@ public class IOTerminal : MonoBehaviour
 
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
         
-        if (parsedCommand.arguments.Count == 0 || parsedCommand.arguments.Count > 1)
+        if (parsedCommand.arguments.Count != 1)
             return;
 
         foreach (Entity entity in entities)
@@ -92,7 +92,7 @@ public class IOTerminal : MonoBehaviour
     {
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
 
-        if (parsedCommand.arguments.Count == 0 || parsedCommand.arguments.Count > 1)
+        if (parsedCommand.arguments.Count != 1)
             return;
 
         foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
