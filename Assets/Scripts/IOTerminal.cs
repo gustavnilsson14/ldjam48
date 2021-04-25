@@ -58,6 +58,52 @@ public class IOTerminal : MonoBehaviour
             HistoryMove(-1);
         if (Input.GetKeyDown(KeyCode.DownArrow))
             HistoryMove(1);
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            AutoCompletePath();
+            AutoCompleteEntityName();
+        }
+            
+    }
+
+    private void AutoCompleteEntityName()
+    {
+        List<Entity> entities = new List<Entity>();
+        entities.AddRange(Player.I.currentDirectory.GetEntities());
+        entities.Remove(Player.I);
+        if (entities.Count == 0)
+            return;
+
+        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
+        
+        if (parsedCommand.arguments.Count == 0 || parsedCommand.arguments.Count > 1)
+            return;
+
+        foreach (Entity entity in entities)
+        {
+            if (!entity.name.StartsWith(parsedCommand.arguments[0]))
+                continue;
+
+            commandField.text = $"{parsedCommand.name} {entity.name}";
+        }
+        commandField.caretPosition = commandField.text.Length;
+    }
+    private void AutoCompletePath()
+    {
+        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
+
+        if (parsedCommand.arguments.Count == 0 || parsedCommand.arguments.Count > 1)
+            return;
+
+        foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
+        {
+            if (!directory.name.StartsWith(parsedCommand.arguments[0]))
+                continue;
+
+            commandField.text = $"{parsedCommand.name} {directory.name}";
+            
+        }
+        commandField.caretPosition = commandField.text.Length;
     }
 
     private void HistoryMove(int direction)

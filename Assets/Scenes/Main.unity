@@ -439,10 +439,20 @@ PrefabInstance:
       propertyPath: currentHost
       value: 
       objectReference: {fileID: 1701671443}
+    - target: {fileID: 3264535154544970054, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Entity3
+      objectReference: {fileID: 0}
     - target: {fileID: 4892798034699343850, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: faction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966905969123253512, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Entity2
       objectReference: {fileID: 0}
     - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
