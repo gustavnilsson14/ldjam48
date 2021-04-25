@@ -75,4 +75,4 @@ public class Player : Entity
         return (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()) != null);
     }
 }
-public class MoveEvent : UnityEvent<Directory> { }
+public class MoveEvent : UnityEvent<Directory, Directory> { }

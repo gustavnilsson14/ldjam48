@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: bannedFactions.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566098075365517982, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}

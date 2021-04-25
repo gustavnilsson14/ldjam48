@@ -26,7 +26,7 @@ public class EntityWorldRenderer : MonoBehaviour
 
     }
 
-    private void Move(Directory arg0)
+    private void Move(Directory target, Directory origin)
     {
         EntityWorldHandler.I.RemoveChildFromSpawnPoint(entityParticle);
     }
