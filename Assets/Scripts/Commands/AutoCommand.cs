@@ -10,6 +10,8 @@ public class AutoCommand : Command
     protected bool runOnTakeDamage = false;
     protected bool runOnMove = false;
     protected bool runOnCommand = false;
+    private float lastExecution;
+
     private void Start()
     {
         Player.I.onTakeDamage.AddListener(OnTakeDamage);
@@ -19,6 +21,7 @@ public class AutoCommand : Command
 
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
+        Reset();
         if (!base.Run(out result, parsedCommand))
             return false;
         Player.GetCommand(out currentCommand, parsedCommand.arguments[0]);
@@ -28,9 +31,19 @@ public class AutoCommand : Command
         runOnTakeDamage = parsedCommand.flags.Contains("--onTakeDamage");
         runOnMove= parsedCommand.flags.Contains("--onMove");
         runOnCommand = parsedCommand.flags.Contains("--onCommand");
-        result = $"{this.parsedCommand.name} will now run {parsedCommand.flags[0]}";
+        result = $"{this.parsedCommand.name} will now run {string.Join(", ", parsedCommand.flags)}";
         return true;
     }
+
+    private void Reset()
+    {
+        currentCommand = null;
+        parsedCommand = null;
+        runOnTakeDamage = false;
+        runOnMove = false;
+        runOnCommand = false;
+    }
+
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
         result = name + " requires the first argument to be another command";
@@ -38,6 +51,9 @@ public class AutoCommand : Command
             return false;
         result = parsedCommand.arguments[0] + " command not found";
         if (!Player.GetCommand(out Command command, parsedCommand.arguments[0]))
+            return false;
+        result = "auto requires at least 1 flag";
+        if (parsedCommand.flags.Count == 0)
             return false;
         result = string.Format("auto cannot be used with more than {0} flags", maxFlags);
         if (parsedCommand.flags.Count > maxFlags)
@@ -49,9 +65,23 @@ public class AutoCommand : Command
     }
     private void RunAutoCommand()
     {
+        if (PreventRecursion())
+            return;
         currentCommand.Run(out string result, this.parsedCommand);
-        IOTerminal.I.AppendTextLine($"AutoCommand: {result}");
+        IOTerminal.I.AppendTextLine($"AutoCommand: {currentCommand.name}");
+        IOTerminal.I.AppendTextLine($"{result}");
+        IOTerminal.I.AppendTextLine($"AutoCommand End");
     }
+
+    private bool PreventRecursion()
+    {
+        float now = Time.time;
+        if (now - 1 < lastExecution)
+            return true;
+        lastExecution = now;
+        return false;
+    }
+
     private void OnTakeDamage(int damage)
     {
         if (!runOnTakeDamage)

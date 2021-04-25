@@ -14,6 +14,7 @@ public enum EntityFaction
 public class Entity : ComponentWithIP
 {
     public EntityFaction faction;
+    public List<Directory> directoryHistory = new List<Directory>();
 
     [TextArea(2, 10)]
     public string description;
@@ -34,9 +35,11 @@ public class Entity : ComponentWithIP
     }
     public void MoveTo(Directory directory)
     {
-        onMove.Invoke(directory, currentDirectory);
+        Directory previousDirectory = currentDirectory;
         currentDirectory = directory;
-        transform.parent = directory.transform;
+        directoryHistory.Insert(0, previousDirectory);
+        transform.parent = currentDirectory.transform;
+        onMove.Invoke(currentDirectory, previousDirectory);
     }
     public virtual string GetCatDescription()
     {

@@ -104,7 +104,7 @@ public class ParsedCommand
                 continue;
 
             if (segment.Substring(0, 2) == "--")
-                arguments.Add(segment);
+                flags.Add(segment);
         }
         //flags.AddRange(commandSegments.FindAll(segment => segment.Substring(0, 2) == "--"));
     }
