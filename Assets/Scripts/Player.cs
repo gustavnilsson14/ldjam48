@@ -15,6 +15,8 @@ public class Player : Entity
     public float currentSeconds = 0;
     public float maxSeconds = 60 * 60;
 
+    public CommandEvent onCommand = new CommandEvent();
+
     // Start is called before the first frame update
     protected override void Awake()
     {
@@ -30,6 +32,7 @@ public class Player : Entity
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
         currentCharacters -= parsedCommand.GetCommandString().Length;
+        onCommand.Invoke(command, parsedCommand);
     }
 
     public void FullRestore()

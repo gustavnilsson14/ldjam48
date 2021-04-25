@@ -10,11 +10,11 @@ public class Command : MonoBehaviour
     [TextArea(2, 10)]
     public string helpText;
     public int speed = 2;
+    public int maxFlags = 1;
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         return ValidateParsedCommand(out result, parsedCommand);
     }
-
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
         return true;

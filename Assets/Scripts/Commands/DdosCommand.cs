@@ -6,7 +6,6 @@ using UnityEngine;
 public class DdosCommand : Command
 {
     public int damageBase = 1;
-    public int maxFlags = 1;
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
