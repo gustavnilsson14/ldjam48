@@ -10,7 +10,6 @@ public class EntityWorldRenderer : MonoBehaviour
     private Entity entity;
     private GameObject entityParticle;
     private Animator animator;
-    private bool isDiscovered = false;
 
     private void Start()
     {
@@ -21,8 +20,14 @@ public class EntityWorldRenderer : MonoBehaviour
         entity.onTakeDamage.AddListener(TakeDamage);
         entity.onDeath.AddListener(Die);
         entity.onDiscover.AddListener(Discover);
+        entity.onPlayerEscape.AddListener(PlayerEscape);
+
     }
 
+    private void PlayerEscape()
+    {
+        EntityWorldHandler.I.RemoveChildFromSpawnPoint(entityParticle);
+    }
 
     public void Render()
     {
@@ -33,10 +38,6 @@ public class EntityWorldRenderer : MonoBehaviour
 
     private void Discover()
     {
-        if (isDiscovered)
-            return;
-
-        isDiscovered = true;
         Render();
     }
 
@@ -52,9 +53,9 @@ public class EntityWorldRenderer : MonoBehaviour
 
     private void Die()
     {
+        EntityWorldHandler.I.RemoveChildFromSpawnPointDelay(entityParticle, 3);
         RunAnimation("Die");
     }
-
 
     public void RunAnimation(string animation)
     {
