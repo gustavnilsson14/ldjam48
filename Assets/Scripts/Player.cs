@@ -13,11 +13,12 @@ public class Player : Entity
     public int currentCharacters = 0;
     public int maxCharacters = 10000;
     public float currentSeconds = 0;
-    public float maxSeconds = 60 * 60;
+    private float maxSeconds = 60 * 60;
 
     public CommandEvent onCommand = new CommandEvent();
 
     public bool test = false;
+    private float overTime;
 
     // Start is called before the first frame update
     protected override void Awake()
@@ -33,7 +34,7 @@ public class Player : Entity
     }
     private void Update()
     {
-        currentSeconds -= Time.deltaTime;
+        ReduceRealTime();
         if (!test)
             return;
         test = false;
@@ -41,8 +42,26 @@ public class Player : Entity
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
-        currentCharacters -= parsedCommand.GetCommandString().Length;
+        ReduceCharacters(parsedCommand.GetCommandString());
         onCommand.Invoke(command, parsedCommand);
+    }
+    private void ReduceRealTime()
+    {
+        currentSeconds -= Time.deltaTime;
+        if (currentSeconds > 0)
+            return;
+        overTime += Time.deltaTime;
+        if (overTime < 10)
+            return;
+        overTime = 0;
+        TakeDamage(1);
+    }
+    private void ReduceCharacters(string command)
+    {
+        currentCharacters -= command.Length;
+        if (currentCharacters > 0)
+            return;
+        TakeDamage(1);
     }
 
     public void FullRestore()

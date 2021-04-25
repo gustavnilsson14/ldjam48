@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class IOTerminal : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class IOTerminal : MonoBehaviour
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
     public TerminalTimeEvent onTerminalTimePast = new TerminalTimeEvent();
+    public UnityEvent onEnter = new UnityEvent();
 
     private string baseUserDirString;
     private List<ParsedCommand> commandHistory = new List<ParsedCommand>();
@@ -30,7 +32,6 @@ public class IOTerminal : MonoBehaviour
         baseUserDirString = userDirField.text;
         commandField.onSubmit.AddListener(onCommandSubmit);
     }
-
     private void Start()
     {
         RenderUserAndDir();
@@ -41,8 +42,23 @@ public class IOTerminal : MonoBehaviour
     private void RegisterListeners()
     {
         Player.I.onMove.AddListener(OnMove);
+        Player.I.onDeath.AddListener(OnPlayerDeath);
     }
-
+    private void OnPlayerDeath()
+    {
+        commandField.onSubmit.RemoveListener(onCommandSubmit);
+        DisplayEpiloge();
+    }
+    private void DisplayEpiloge()
+    {
+        AppendTextLine("Oh my, you died");
+        AppendTextLine("Press R to reboot");
+        onEnter.AddListener(Restart);
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("Main");
+    }
     private void OnMove(Directory directory, Directory origin)
     {
         RenderUserAndDir();
@@ -58,13 +74,14 @@ public class IOTerminal : MonoBehaviour
             HistoryMove(-1);
         if (Input.GetKeyDown(KeyCode.DownArrow))
             HistoryMove(1);
+        if (Input.GetKeyDown(KeyCode.R))
+            onEnter.Invoke();
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             AutoCompleteCommand();
             AutoCompletePath();
             AutoCompleteEntityName();
         }
-            
     }
 
     private void AutoCompleteCommand()
@@ -73,7 +90,7 @@ public class IOTerminal : MonoBehaviour
         if (parsedCommand.arguments.Count > 0)
             return;
 
-        foreach(Command command in Player.GetCommands())
+        foreach (Command command in Player.GetCommands())
         {
             if (!command.name.StartsWith(parsedCommand.name))
                 continue;
@@ -91,7 +108,7 @@ public class IOTerminal : MonoBehaviour
             return;
 
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
-        
+
         if (parsedCommand.arguments.Count != 1)
             return;
 
@@ -123,7 +140,7 @@ public class IOTerminal : MonoBehaviour
                 continue;
 
             commandField.text = $"{parsedCommand.name} {directory.name}";
-            
+
         }
         commandField.caretPosition = commandField.text.Length;
     }
@@ -133,7 +150,8 @@ public class IOTerminal : MonoBehaviour
         commandHistoryCurrentIndex += direction;
         if (commandHistoryCurrentIndex < 0)
             commandHistoryCurrentIndex = 0;
-        if (commandHistoryCurrentIndex >= commandHistory.Count) {
+        if (commandHistoryCurrentIndex >= commandHistory.Count)
+        {
             commandHistoryCurrentIndex = commandHistory.Count;
             commandField.text = "";
             return;
@@ -177,7 +195,7 @@ public class IOTerminal : MonoBehaviour
         AppendDefaultCommandText();
         if (!command.Run(out string result, parsedCommand))
         {
-            TerminalTimePast(parsedCommand.GetCommandString().Length*2);
+            TerminalTimePast(parsedCommand.GetCommandString().Length * 2);
             AppendTextLine("<color=red>ERROR:</color> " + result);
             return;
         }
@@ -213,7 +231,8 @@ public class IOTerminal : MonoBehaviour
         outputField.text += "\n" + newText;
     }
 
-    public void ClearOutput() {
+    public void ClearOutput()
+    {
         outputField.text = "";
     }
 }
