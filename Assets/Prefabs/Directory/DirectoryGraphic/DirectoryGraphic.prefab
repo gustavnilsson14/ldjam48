@@ -9517,7 +9517,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2637903004231961194}
-  - component: {fileID: 2637903004231961173}
   m_Layer: 0
   m_Name: Background_Particles
   m_TagString: Untagged
@@ -9541,25 +9540,6 @@ Transform:
   m_Father: {fileID: 5341060304857050565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2637903004231961173
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2637903004231961195}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a7035c742f91dd44880960873997483, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4629816042245205698
 GameObject:
   m_ObjectHideFlags: 0
@@ -9689,6 +9669,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5341060304857050565}
+  - component: {fileID: 112020461}
+  - component: {fileID: 112020460}
   m_Layer: 0
   m_Name: DirectoryGraphic
   m_TagString: Untagged
@@ -9714,6 +9696,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &112020461
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5341060304857050566}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bd7a9aa523b6d494bbc75eb36957b471, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &112020460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5341060304857050566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c6b552a27510214cbd16aedbf834b53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6686993930391548918
 GameObject:
   m_ObjectHideFlags: 0
@@ -9785,7 +9798,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7aa669d4dd237ec46b535a026161bde7, type: 3}
-  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Color: {r: 0.8113208, g: 0.11480953, b: 0.6882555, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
