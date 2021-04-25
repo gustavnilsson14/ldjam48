@@ -58,7 +58,7 @@ public class AutoCommand : Command
             return;
         RunAutoCommand();
     }
-    private void OnMove(Directory directory)
+    private void OnMove(Directory directory, Directory prevDir)
     {
         if (!runOnMove)
             return;

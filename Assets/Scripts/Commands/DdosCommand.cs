@@ -28,10 +28,14 @@ public class DdosCommand : Command
         }   
         return result;
     }
-    private int GetCurrentDamage(ParsedCommand parsedCommand) {
+    private int GetCurrentDamage(ParsedCommand parsedCommand)
+    {
+        int result = damageBase;
         if (parsedCommand.flags.Find(flag => flag == "--heavy") != null)
-            return damageBase * 2;
-        return damageBase;
+            result *= 2;
+        if (parsedCommand.flags.Find(flag => flag == "--strong") != null)
+            result += 2;
+        return result;
 
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
@@ -46,5 +50,14 @@ public class DdosCommand : Command
         if (parsedCommand.flags.Count > maxFlags)
             return false;
         return true;
+    }
+
+    public override int GetTerminalTimePast(ParsedCommand parsedCommand)
+    {
+        if (parsedCommand.flags.Contains("--quick"))
+            return 1;
+        if (parsedCommand.flags.Contains("--heavy"))
+            return speed+1;
+        return speed;
     }
 }

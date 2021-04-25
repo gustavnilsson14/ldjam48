@@ -9,6 +9,8 @@ public class Command : MonoBehaviour
     public bool isAvailable = false;
     [TextArea(2, 10)]
     public string helpText;
+    [TextArea(2, 20)]
+    public string extendedHelpText;
     public int speed = 2;
     public int maxFlags = 1;
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
@@ -27,8 +29,11 @@ public class Command : MonoBehaviour
         helpText = name + " - " + this.helpText;
         return true;
     }
-
-    public int GetTerminalTimePast(ParsedCommand parsedCommand)
+    public virtual string GetExtendedHelpText()
+    {
+        return helpText + "\n" + extendedHelpText;
+    }
+    public virtual int GetTerminalTimePast(ParsedCommand parsedCommand)
     {
         return speed;
     }
