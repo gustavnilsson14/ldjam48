@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class PublicKey : MonoBehaviour
 {
+    public KeyEntity publicKeyEntityPrefab;
     public bool isAvailable = false;
     protected virtual void Awake() { }
     public virtual string GetName() { return name; }
     public virtual string GetUsageDescription() { return ""; }
+
+    public virtual KeyEntity InstantiateEntityKey(Transform parent)
+    {
+        KeyEntity publicKeyEntity = Instantiate(publicKeyEntityPrefab, parent);
+        return publicKeyEntity;
+    }
 }

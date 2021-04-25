@@ -7,7 +7,7 @@ public class HostHandler : MonoBehaviour
 {
     public static HostHandler I;
     public Host currentHost;
-    public Host hostPrefab;
+    //public Host hostPrefab;
     private List<Host> hosts = new List<Host>();
     private GenerateHost generateHost;
     private void Awake()
@@ -20,11 +20,12 @@ public class HostHandler : MonoBehaviour
     private void Start()
     {
         currentHost = generateHost.GenerateNewHost(HostType.LINUX, 4, 3, 2);
-        //generateHost.PopulateHost(currentHost, 5);
+        generateHost.PopulateHost(currentHost, 5);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         Player.I.FullRestore();
         IOTerminal.I.RenderUserAndDir();
     }
+
     public void onSsh(SshKey sshKey)
     {
         Debug.Log("public void onSsh(SshKey sshKey)" + sshKey.GetHost().name);
@@ -39,7 +40,8 @@ public class HostHandler : MonoBehaviour
         return hosts.FindAll(host => (host.isAvailable || !onlyAvailable));
     }
     public Host CreateHost() {
-        Host newHost = Instantiate(hostPrefab, transform).GetComponent<Host>();
+        Host newHost = generateHost.GenerateNewHost(HostType.LINUX, 4, 3, 2);
+        //generateHost.PopulateHost(newHost, 5);
         hosts.Add(newHost);
         return newHost;
     }

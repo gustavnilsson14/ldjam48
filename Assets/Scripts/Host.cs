@@ -8,6 +8,7 @@ public class Host : MonoBehaviour
     public bool isAvailable = false;
     public string userName = "haxxor";
     public List<PublicKey> keys = new List<PublicKey>();
+    public Transform KeysTransform;
 
     private void Awake()
     {

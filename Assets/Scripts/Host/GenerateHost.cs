@@ -11,17 +11,53 @@ public enum HostType
 public class GenerateHost : MonoBehaviour
 {
     public List<Entity> entitiesPrefabs = new List<Entity>();
+    public DirectoryKey directoryKeyPrefab;
+    public SshKey sshKeyPrefab;
+
 
     public Host linuxHostPrefab;
     public Host GenerateNewHost(HostType hosttype, int maxDirRoot, int maxDirSub, int maxDepth)
     {
         Host host = Instantiate(linuxHostPrefab, transform);
+        host.name = "host" + Random.Range(0, 9999);
         CleanUnderRoot(host, maxDirRoot, maxDirSub, maxDepth);
-        PopulateHost(host, 5);
         return host;
     }
+    public IEnumerator WaitBeforePopulate(Host host, int maxEntities)
+    {
+        yield return null;
+        Populate(host, maxEntities);
+        GenerateSshKey(host);
+        GenerateDirectoryKey(host);
 
+    }
     public void PopulateHost(Host host, int maxEntities)
+    {
+        StartCoroutine(WaitBeforePopulate(host, maxEntities));
+    }
+
+    private void GenerateSshKey(Host host)
+    {
+        if(!GetRandomDirectory(host.transform, out Directory directory))
+            return;
+
+        SshKey sshKey = Instantiate(sshKeyPrefab, host.KeysTransform);
+        KeyEntity keyEntity = sshKey.InstantiateEntityKey(directory.transform);
+        keyEntity.publicKey = sshKey;
+        keyEntity.name = $"{sshKey.GetHost().name}.ssh";
+    }
+
+    private void GenerateDirectoryKey(Host host)
+    {
+        if (!GetRandomDirectory(host.transform, out Directory directory))
+            return;
+
+        DirectoryKey directoryKey = Instantiate(directoryKeyPrefab, host.KeysTransform);
+        KeyEntity keyEntity = directoryKeyPrefab.InstantiateEntityKey(directory.transform);
+        keyEntity.publicKey = directoryKeyPrefab;
+    }
+
+    private void Populate(Host host, int maxEntities)
     {
         for(int i = 0; i < maxEntities; i++)
         {
@@ -31,7 +67,6 @@ public class GenerateHost : MonoBehaviour
             if (!GetRandomEntity(out Entity entity))
                 return;
 
-            Debug.Log($"Add entity to map {entity.name} {directory.name}");
             Instantiate(entity, directory.transform);
         }
     }
@@ -48,7 +83,6 @@ public class GenerateHost : MonoBehaviour
 
     public bool GetRandomDirectory(Transform directoryTransform, out Directory directory)
     {
-        
         directory = null;
         List<Directory> children = new List<Directory>();
         children.AddRange(directoryTransform.GetComponentsInChildren<Directory>());
