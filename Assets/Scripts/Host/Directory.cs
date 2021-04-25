@@ -21,6 +21,7 @@ public class Directory : MonoBehaviour
         result.Add(parent);
         return result;
     }
+
     public List<Entity> GetEntities() {
         List<Entity> result = new List<Entity>();
         foreach (Transform child in transform)
@@ -58,4 +59,10 @@ public class Directory : MonoBehaviour
     {
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
+    public List<Directory> FindPath(Directory target)
+    {
+        List<Directory> result = new List<Directory>();
+        return result;
+    }
+
 }
