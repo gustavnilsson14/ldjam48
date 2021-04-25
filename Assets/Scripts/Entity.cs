@@ -4,56 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Entity : MonoBehaviour
+public class Entity : ComponentWithIP
 {
     public Directory currentDirectory;
-    public int maxIP;
-    protected int currentIP;
 
     [TextArea(2,10)]
     public string description;
 
     [Header("Events")]
-    public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
-    public DeathEvent onDeath = new DeathEvent();
     public CatEvent onCat = new CatEvent();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         currentDirectory = GetComponentInParent<Directory>();
-        currentIP = maxIP;
-    }
-
-    private void Start()
-    {
-        IOTerminal.I.onCommand.AddListener(OnCommand);
-        IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
-    }
-    protected virtual void OnCommand(Command command, ParsedCommand parsedCommand)
-    {
-        
-    }
-    protected virtual void OnTerminalTimePast(int terminalTimePast)
-    {
-        
-    }
-    public bool TakeDamage(int amount) {
-        currentIP -= amount;
-        if (currentIP <= 0)
-        {
-            Die();
-            return false;
-        }
-        onTakeDamage.Invoke(amount);
-        return true;
-    }
-    public void Die()
-    {
-        onDeath.Invoke();
-        GameObject.Destroy(gameObject, 1f);
-    }
-    public int GetCurrentIP() {
-        return currentIP;
     }
     public virtual string GetCatDescription()
     {
@@ -76,6 +40,4 @@ public class Entity : MonoBehaviour
         return string.Join("\n", result);
     }
 }
-public class TakeDamageEvent : UnityEvent<int> { }
-public class DeathEvent : UnityEvent { }
 public class CatEvent : UnityEvent { }

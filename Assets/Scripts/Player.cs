@@ -17,14 +17,18 @@ public class Player : Entity
     public MoveEvent onMove = new MoveEvent();
 
     // Start is called before the first frame update
-    private void Awake()
+    protected override void Awake()
     {
         Player.I = this;
+        currentIP = maxIP;
         commands.AddRange(GetComponentsInChildren<Command>());
     }
-    protected override void OnCommand(Command command, ParsedCommand parsedCommand)
+    private void Start()
     {
-        base.OnCommand(command, parsedCommand);
+        IOTerminal.I.onCommand.AddListener(OnCommand);
+    }
+    protected void OnCommand(Command command, ParsedCommand parsedCommand)
+    {
         currentCharacters -= parsedCommand.GetCommandString().Length;
     }
     private void Update()

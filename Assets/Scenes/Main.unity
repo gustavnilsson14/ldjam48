@@ -190,26 +190,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d793aed2f204c9948b7b20014d8ca3ae, type: 3}
---- !u!1 &343533598 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5598470582980602836, guid: b32a3743996d99349bb72b26461180e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 2042152316}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &343533599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 343533598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546a204c6400b8a4ea093b2a48127e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityParticlePrefab: {fileID: 4110619111931693869, guid: a0e3a715ddb81664490d17fcc5377418,
-    type: 3}
 --- !u!1 &811157571
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +255,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1764875621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1764875623}
+  - component: {fileID: 1764875622}
+  m_Layer: 0
+  m_Name: NameUtil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1764875622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764875621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f636a10d3ca884fa976c53273d88a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
+--- !u!4 &1764875623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764875621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.60266304, y: -1.5784574, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798452271
 GameObject:
@@ -391,28 +415,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &2007957289 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2007957289, guid: b32a3743996d99349bb72b26461180e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 2042152316}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2007957290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007957289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6360721c3d0a9d3428bd4ee1ba5932c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  maxIP: 2
-  description: 
-  command: {fileID: 0}
 --- !u!1001 &2042152316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -420,10 +422,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2007957291, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: description
-      value: A mean bean magenta killing machine
-      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -484,6 +482,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameLogic
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2007957291, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32a3743996d99349bb72b26461180e7, type: 3}

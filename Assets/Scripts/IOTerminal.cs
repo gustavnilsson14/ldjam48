@@ -75,6 +75,7 @@ public class IOTerminal : MonoBehaviour
     }
     private void RenderUserAndDir()
     {
+        Debug.Log(Player.I.currentDirectory + " " + baseUserDirString + " " + userDirField);
         userDirField.text = String.Format(baseUserDirString, "haxxor", "LDTerminal", "CSOS128", Player.I.currentDirectory.GetFullPath());
     }
 

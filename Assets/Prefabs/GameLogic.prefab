@@ -543,8 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f6d5740fe80fb468b329cd34376ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 1295044136196344403}
   maxIP: 10
+  currentDirectory: {fileID: 1295044136196344403}
   description: 
   currentCharacters: 10000
 --- !u!1 &8708997899838730441
