@@ -26,6 +26,8 @@ public class AttackComponent : EntityComponent
         if (!IsTargetInRange(target))
             return;
         target.TakeDamage(damageBase);
+        entityBody.Attack();
+       
     }
 
     private bool IsTargetInRange(ComponentWithIP target)

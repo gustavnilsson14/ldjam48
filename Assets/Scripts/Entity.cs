@@ -22,6 +22,7 @@ public class Entity : ComponentWithIP
     public MoveEvent onMove = new MoveEvent();
     public CatEvent onCat = new CatEvent();
     public DiscoverEvent onDiscover = new DiscoverEvent();
+    public AttackEvent onAttack = new AttackEvent();
     public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
 
     private bool isDiscovered = false;
@@ -46,6 +47,11 @@ public class Entity : ComponentWithIP
         };
         onCat.Invoke();
         return string.Join("\n", result);
+    }
+
+    public virtual void Attack()
+    {
+        onAttack.Invoke();
     }
 
     public virtual void Discover()
@@ -81,3 +87,4 @@ public class Entity : ComponentWithIP
 public class CatEvent : UnityEvent { }
 public class DiscoverEvent : UnityEvent { }
 public class PlayerEscapeEvent : UnityEvent { }
+public class AttackEvent : UnityEvent { }

@@ -20,6 +20,7 @@ public class HostHandler : MonoBehaviour
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
+        Player.I.FullRestore();
         IOTerminal.I.RenderUserAndDir();
     }
     public List<Host> GetHosts(bool onlyAvailable = true)
