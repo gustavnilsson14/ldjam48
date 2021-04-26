@@ -58,10 +58,12 @@ public class Command : MonoBehaviour
     protected bool ArgumentIsUserHostPair(string argument)
     {
         if (HostHandler.I.currentHost.keys.Find(key => key.GetName() == argument) != null)
-        {
             return true;
-        }
         return false;
+    }
+
+    protected bool ArgumentIsPathFromRoot(string argument) {
+        return HostHandler.I.currentHost.GetDirectoryByPath(argument, out Directory directory);
     }
 
     public CommandEntity InstantiateEntity(Transform parent)

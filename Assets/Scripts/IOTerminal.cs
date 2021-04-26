@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class IOTerminal : MonoBehaviour
     public TextMeshProUGUI outputField;
     public TextMeshProUGUI userDirField;
     public TMP_InputField commandField;
+    public Transform inputFieldsContainer;
 
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
@@ -48,12 +50,48 @@ public class IOTerminal : MonoBehaviour
     private void OnPlayerDeath()
     {
         commandField.onSubmit.RemoveListener(onCommandSubmit);
-        DisplayEpiloge();
+        Destroy(inputFieldsContainer.gameObject);
+        Destroy(userDirField.gameObject);
+        List<Command> commands = Player.I.GetCommands().FindAll(command => command.isAvailable);
+        List<string> commandStrings = new List<string>();
+        commandStrings.AddRange(commands.Select(command => command.name));
+        StartCoroutine(DisplayEpiloge(commandStrings));
     }
-    private void DisplayEpiloge()
+    private IEnumerator DisplayEpiloge(List<string> commandStrings)
     {
-        AppendTextLine("Oh my, you died");
+        yield return new WaitForSeconds(1f);
+        ClearOutput();
+        AppendTextLine("<color=red>TERMINAL ERROR:</color>");
+        yield return new WaitForSeconds(2f);
+        AppendTextLine("<color=red>Uplink terminated...</color>");
+        yield return new WaitForSeconds(2f);
+        AppendTextLine("Working.");
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < 4; i++)
+        {
+            yield return new WaitForSeconds(0.2f);
+            AppendTextLine(".");
+        }
+        AppendTextLine($".Total hosts visited: {HostHandler.I.exploredHosts.Count}");
+        yield return new WaitForSeconds(0.5f);
+        foreach (Host host in HostHandler.I.exploredHosts)
+        {
+            yield return new WaitForSeconds(0.1f);
+            AppendTextLine($"{host.name} as {host.userName}");
+        }
+        AppendTextLine($".Total commands: {commandStrings.Count}");
+        yield return new WaitForSeconds(0.5f);
+        foreach (string command in commandStrings)
+        {
+            yield return new WaitForSeconds(0.1f);
+            AppendTextLine($"{command}");
+        }
+        yield return new WaitForSeconds(0.5f);
         AppendTextLine("Press R to reboot");
+        yield return new WaitForSeconds(0.5f);
+        AppendTextLine("And thank you for playing!");
+        yield return new WaitForSeconds(0.5f);
+        AppendTextLine(NameUtil.RandomizeStringColors("By Red Pentagram Studios"));
         onEnter.AddListener(Restart);
     }
     public void Restart()

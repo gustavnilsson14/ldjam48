@@ -117,6 +117,23 @@ public class NameUtil : MonoBehaviour
         return string.Join("-", result);
     }
 
+    public static string RandomizeStringColors(string target)
+    {
+        string result = "";
+        int l = target.Length;
+        for (int i = 0; i < l; i++)
+        {
+            Color color = new Color(
+                UnityEngine.Random.Range(0.5f, 1f),
+                UnityEngine.Random.Range(0.5f, 1f),
+                UnityEngine.Random.Range(0.5f, 1f)
+            );
+            result += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{target[0]}</color>";
+            target = target.Substring(1);
+        }
+        return result;
+    }
+
     private string GetVersionNumber()
     {
         int type = UnityEngine.Random.Range(0,4);

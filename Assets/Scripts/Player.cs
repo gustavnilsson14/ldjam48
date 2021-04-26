@@ -71,13 +71,15 @@ public class Player : Entity
             return;
         TakeDamage(1, "", "Your input characters are depleted on this server, the system damages your IP by 1");
     }
-    public override bool TakeDamage(int amount, string source = "Something", string overrideTextLine = "")
+    public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
-        PrintDamage(amount, source, overrideTextLine);
+        if (alive)
+            PrintDamage(amount, source, overrideTextLine);
         return base.TakeDamage(amount);
     }
     protected void PrintDamage(int amount, string source, string overrideTextLine)
     {
+        source = (source == "") ? "Something" : source;
         IOTerminal.I.AppendTextLine((overrideTextLine == "") ? $"{source} interrupts your IP for {amount} damage" : overrideTextLine);
     }
     public float GetCharacterCostMultiplier()
