@@ -15,6 +15,7 @@ public class Entity : ComponentWithIP
 {
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
+    public List<DirectoryModifier> activeModifiers = new List<DirectoryModifier>();
 
     [TextArea(2, 10)]
     public string description;
@@ -40,7 +41,11 @@ public class Entity : ComponentWithIP
         directoryHistory.Insert(0, previousDirectory);
         transform.parent = currentDirectory.transform;
         onMove.Invoke(currentDirectory, previousDirectory);
+        if (previousDirectory != null)
+            previousDirectory.EntityExit(currentDirectory, this);
+        currentDirectory.EntityEnter(previousDirectory, this);
     }
+
     public virtual string GetCatDescription()
     {
         List<string> result = new List<string> {
@@ -88,6 +93,24 @@ public class Entity : ComponentWithIP
     }
     public virtual bool IsAllowedInDirectory(Directory directory) {
         return (!directory.bannedFactions.Contains(faction));
+    }
+    public void EnteredModifierZone(DirectoryModifier directoryModifier)
+    {
+        activeModifiers.Add(directoryModifier);
+    }
+    public void ExitModifierZone(DirectoryModifier directoryModifier)
+    {
+        activeModifiers.Remove(directoryModifier);
+    }
+    public float GetDamageMultiplier()
+    {
+        float multiplier = 1;
+        List<DirectoryModifier> charactersMultipliers = activeModifiers.FindAll(modifier => modifier is DamageMultiplier);
+        foreach (DirectoryModifier modifier in charactersMultipliers)
+        {
+            multiplier += (modifier as DamageMultiplier).multiplier;
+        }
+        return Mathf.Clamp(multiplier, 0, Mathf.Infinity);
     }
 }
 public class CatEvent : UnityEvent { }

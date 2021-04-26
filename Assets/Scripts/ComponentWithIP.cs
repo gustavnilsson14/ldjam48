@@ -13,6 +13,7 @@ public class ComponentWithIP : MonoBehaviour
 
     [Header("Events")]
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
+    public HealEvent onHeal = new HealEvent();
     public DeathEvent onDeath = new DeathEvent();
     protected virtual void Awake()
     {
@@ -30,6 +31,16 @@ public class ComponentWithIP : MonoBehaviour
         onTakeDamage.Invoke(amount);
         return true;
     }
+    public virtual bool Heal(int amount)
+    {
+        if (currentIP == maxIP)
+        {
+            return false;
+        }
+        currentIP = Mathf.Clamp(currentIP + amount,0,maxIP);
+        onHeal.Invoke(amount);
+        return true;
+    }
 
     public virtual void Die()
     {
@@ -42,5 +53,6 @@ public class ComponentWithIP : MonoBehaviour
     }
 }
 
+public class HealEvent : UnityEvent<int> { }
 public class TakeDamageEvent : UnityEvent<int> { }
 public class DeathEvent : UnityEvent { }

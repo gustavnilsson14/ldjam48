@@ -13,9 +13,8 @@ public class GenerateHost : MonoBehaviour
     public List<Entity> entitiesPrefabs = new List<Entity>();
     public DirectoryKey directoryKeyPrefab;
     public SshKey sshKeyPrefab;
-
-
     public Host linuxHostPrefab;
+
     public Host GenerateNewHost(HostType hosttype, int maxDirRoot, int maxDirSub, int maxDepth)
     {
         Host host = Instantiate(linuxHostPrefab, transform);
@@ -29,9 +28,17 @@ public class GenerateHost : MonoBehaviour
         Populate(host, maxEntities);
         GenerateSshKey(host);
         GenerateDirectoryKey(host);
+        RegisterDirectoryModifiers(host);
         GenerateCommands(host, 3, 2);
-
     }
+    private void RegisterDirectoryModifiers(Host host)
+    {
+        foreach (DirectoryModifier directoryModifier in host.GetComponentsInChildren<DirectoryModifier>())
+        {
+            directoryModifier.Register();
+        }
+    }
+
     public void PopulateHost(Host host, int maxEntities)
     {
         StartCoroutine(WaitBeforePopulate(host, maxEntities));
