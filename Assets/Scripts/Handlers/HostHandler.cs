@@ -11,6 +11,7 @@ public class HostHandler : MonoBehaviour
     private List<Host> hosts = new List<Host>();
     private GenerateHost generateHost;
     public List<Host> exploredHosts = new List<Host>();
+    public CommandEntity commandEntityPrefab;
     private void Awake()
     {
         generateHost = GetComponent<GenerateHost>();

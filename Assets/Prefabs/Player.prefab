@@ -48,7 +48,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: keys'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &2760016571857677258
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +96,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cp [file] [pathFromRoot]'
   speed: 0
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &2828140064733115421
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +146,6 @@ MonoBehaviour:
     Will run the command when you input a command"
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &3078258250215848715
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +194,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cat [fileInSameDirectory]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &3078258251084227984
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +242,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: clear'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &3884295862818155547
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +290,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: mv [file] [pathFromRoot]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &4253127692062917263
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +338,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: reboot'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5020344813303867038
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +386,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: netstat'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073493945512670
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +434,6 @@ MonoBehaviour:
   extendedHelpText: 
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
   help: 'Welcome to ldhaxxor 1.0
 
     You have an IP of {0}, when it runs out, you
@@ -516,7 +507,6 @@ MonoBehaviour:
     time"
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
   damageBase: 1
 --- !u!1 &5937073494237625831
 GameObject:
@@ -566,7 +556,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: look'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
   currentEntity: {fileID: 0}
 --- !u!1 &5937073494407856944
 GameObject:
@@ -616,7 +605,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cmd'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073494556071295
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +653,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: pwd'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073494569921496
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +750,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: status'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495430283140
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +798,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cd [path]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495649779897
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,7 +846,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: move [adjacentDirectory]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495786676437
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,6 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
   maxIP: 10
+  alive: 1
   faction: 0
   directoryHistory: []
   activeModifiers: []
@@ -968,8 +953,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: ls [path]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
-    type: 3}
 --- !u!1 &5941905146592493981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +1001,6 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cat [username@hostname]'
   speed: 2
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
 --- !u!1 &7264951361995103887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,4 +1049,3 @@ MonoBehaviour:
   extendedHelpText: 'Usage: mods'
   speed: 20
   maxFlags: 1
-  commandEntityPrefab: {fileID: 0}
