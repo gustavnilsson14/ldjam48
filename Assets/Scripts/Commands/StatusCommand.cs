@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ public class StatusCommand : Command
         result += "\nCharacters: " + Player.I.currentCharacters;
         result += "\nTime: " + Player.I.GetTimeLeft();
         result += "\nAdjacencies: " + string.Join(", ", directories);
+        result += "\nCurrent modifiers: \n" + string.Join("\n", Player.I.activeModifiers.Select(activeModifier => activeModifier.GetDescription()));
         return true;
     }
 }

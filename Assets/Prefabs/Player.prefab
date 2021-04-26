@@ -48,6 +48,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: keys'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &2828140064733115421
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,6 +99,7 @@ MonoBehaviour:
     Will run the command when you input a command"
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &3078258250215848715
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +148,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cat [fileInSameDirectory]'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &3078258251084227984
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +197,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: clear'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &4253127692062917263
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +246,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: reboot'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073493945512670
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,6 +295,7 @@ MonoBehaviour:
   extendedHelpText: 
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
   help: 'Welcome to ldhaxxor 1.0
 
     You have an IP of {0}, when it runs out, you
@@ -363,6 +369,7 @@ MonoBehaviour:
     time"
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
   damageBase: 1
 --- !u!1 &5937073494237625831
 GameObject:
@@ -412,6 +419,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: look'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
   currentEntity: {fileID: 0}
 --- !u!1 &5937073494407856944
 GameObject:
@@ -461,6 +469,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cmd'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073494556071295
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +518,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: pwd'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073494569921496
 GameObject:
   m_ObjectHideFlags: 0
@@ -551,6 +561,7 @@ Transform:
   - {fileID: 6956373066808039707}
   - {fileID: 4393810275722643465}
   - {fileID: 6331385754482131609}
+  - {fileID: 7284300488620668475}
   m_Father: {fileID: 5937073495786676435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -602,6 +613,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: status'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495430283140
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,6 +662,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cd [path]'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495649779897
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +711,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: move [adjacentDirectory]'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5937073495786676437
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,10 +760,14 @@ MonoBehaviour:
   maxIP: 10
   faction: 0
   directoryHistory: []
+  activeModifiers: []
   description: 
   currentCharacters: 10000
   maxCharacters: 10000
   currentSeconds: 0
+  onRealTime:
+    m_PersistentCalls:
+      m_Calls: []
   test: 0
 --- !u!1 &5937073495901655540
 GameObject:
@@ -799,6 +817,7 @@ MonoBehaviour:
   extendedHelpText: 'Usage: ls [path]'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
 --- !u!1 &5941905146592493981
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,3 +866,53 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cat [username@hostname]'
   speed: 2
   maxFlags: 1
+  commandEntityPrefab: {fileID: 0}
+--- !u!1 &7264951361995103887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7284300488620668475}
+  - component: {fileID: 2558777078700014059}
+  m_Layer: 0
+  m_Name: mods
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7284300488620668475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264951361995103887}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2558777078700014059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7264951361995103887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61ae9ec45029c34e9e77bb03f3dfa3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Displays all modifiers in the current host
+  extendedHelpText: 'Usage: mods'
+  speed: 20
+  maxFlags: 1
+  commandEntityPrefab: {fileID: 0}

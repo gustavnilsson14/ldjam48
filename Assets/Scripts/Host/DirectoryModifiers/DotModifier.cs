@@ -19,4 +19,8 @@ public class DotModifier : DirectoryModifier
             entity.TakeDamage(damage);
         }
     }
+    public override string GetDescription()
+    {
+        return $"{directory.GetFullPath()}\nEach {speed} seconds deals {damage} to all entities within";
+    }
 }

@@ -8,9 +8,8 @@ using UnityEngine;
 public class DirectoryModifier : MonoBehaviour
 {
     public List<Directory> affectedDirectories = new List<Directory>();
-    public string description;
     public int currentProcsOnEntities = -1;
-    private Directory directory;
+    protected Directory directory;
     protected List<Entity> entitiesAffected = new List<Entity>();
 
     private void Start()
@@ -31,6 +30,12 @@ public class DirectoryModifier : MonoBehaviour
         affectedDirectories.AddRange(GetComponentsInChildren<Directory>());
         directory = GetComponent<Directory>();
     }
+
+    public virtual string GetDescription()
+    {
+        return "";
+    }
+
     private void RegisterEvents()
     {
         directory.onEntityEnter.AddListener(OnEntityEnterDirectory);
@@ -57,6 +62,8 @@ public class DirectoryModifier : MonoBehaviour
     {
         if (entitiesAffected.Contains(entity))
             return;
+        if (entity == Player.I)
+            IOTerminal.I.AppendTextLine("The permissions feels different in this directory");
         entitiesAffected.Add(entity);
         entity.EnteredModifierZone(this);
     }
