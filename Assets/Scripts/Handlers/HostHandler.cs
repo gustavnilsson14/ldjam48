@@ -33,6 +33,7 @@ public class HostHandler : MonoBehaviour
         generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         Player.I.FullRestore();
+        AudioHandler.I.PlayMusic();
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
@@ -46,6 +47,7 @@ public class HostHandler : MonoBehaviour
         generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
         Player.I.LevelUp();
         Player.I.FullRestore();
+        AudioHandler.I.PlayMusic();
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
