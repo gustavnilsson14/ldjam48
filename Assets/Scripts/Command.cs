@@ -13,10 +13,26 @@ public class Command : MonoBehaviour
     public string extendedHelpText;
     public int speed = 2;
     public int maxFlags = 1;
+    public int level = 1;
+
+    public GameObject effectPrefab;
 
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
+        if (effectPrefab != null)
+        {
+            if (ValidateParsedCommand(out result, parsedCommand))
+                Destroy(Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform),10);
+        }
+
         return ValidateParsedCommand(out result, parsedCommand);
+    }
+
+    public virtual void LevelUp()
+    {
+        level++;
+        maxFlags++;
+        speed--;
     }
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";

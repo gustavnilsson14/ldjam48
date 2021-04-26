@@ -16,6 +16,7 @@ public class IOTerminal : MonoBehaviour
     public TextMeshProUGUI userDirField;
     public TMP_InputField commandField;
     public Transform inputFieldsContainer;
+    public bool levelUpCommand = false;
 
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
@@ -171,8 +172,47 @@ public class IOTerminal : MonoBehaviour
     {
         if (commandName == "")
             return;
+
+        if (levelUpCommand)
+        {
+            Debug.Log("Chose command");
+            LevelUpCommand(commandName);
+            ResetCommandField();
+            return;
+        }
         HandleStringInput(commandName);
         ResetCommandField();
+    }
+
+    public void DisplayLevelUp()
+    {
+        levelUpCommand = true;
+        List<string> resultStrings = new List<string>();
+        foreach (Command command in Player.GetCommands())
+        {
+            if (!command.isAvailable)
+                continue;
+            resultStrings.Add(command.name);
+        }
+        string result = string.Join(" ", resultStrings);
+
+        AppendTextLine($"<color=yellow>LEVEL UP! Type a command to level it up</color>");
+        AppendTextLine($"{result}");
+
+
+    }
+    private void LevelUpCommand(string commandName)
+    {
+        ParsedCommand parsedCommand = new ParsedCommand(commandName);
+        if (!Player.GetCommand(out Command command, parsedCommand.name))
+        {
+            AppendTextLine("<color=red>Command not found, try another one to level up!</color>");
+            return;
+        }
+
+        levelUpCommand = false;
+        command.LevelUp();
+        AppendTextLine($"<color=yellow>{command.name} is now level {command.level}, speed increased and can use {command.maxFlags} flags.</color>");
     }
 
     private void ResetCommandField()

@@ -51,6 +51,7 @@ public class HostHandler : MonoBehaviour
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
+        IOTerminal.I.DisplayLevelUp();
     }
     public List<Host> GetHosts(bool onlyAvailable = true)
     {
