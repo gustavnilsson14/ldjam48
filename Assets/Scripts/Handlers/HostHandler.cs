@@ -29,9 +29,11 @@ public class HostHandler : MonoBehaviour
     public void onSsh(SshKey sshKey)
     {
         Debug.Log("public void onSsh(SshKey sshKey)" + sshKey.GetHost().name);
+        
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
+        generateHost.PopulateHost(currentHost, 5);
         Player.I.FullRestore();
         IOTerminal.I.RenderUserAndDir();
     }
