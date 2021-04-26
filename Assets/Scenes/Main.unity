@@ -910,6 +910,7 @@ GameObject:
   - component: {fileID: 1798452273}
   - component: {fileID: 1798452272}
   - component: {fileID: 1798452275}
+  - component: {fileID: 1798452276}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1013,6 +1014,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1798452276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798452271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d2baec08ed47146b87ae4015a8af37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0
+  shakeAmount: 0.7
 --- !u!1 &1926748071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,33 +1292,32 @@ PrefabInstance:
     - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_text
-      value: 'Hacker going deeper into the terminal, ldjam48
+      value: 'Welcome to BashRL
 
-        Type "help"
-        to display help information.
+        Type "help" to display help information.
 
-        Type "cmd" to display all avalible
-        commands
+        Type
+        "cmd" to display all avalible commands
 
-        Type "help [command]" to explain a command
+        Type "help [command]" to
+        explain a command
 
-        You
-        can use TAB to autocomplete commands and arguments'
+        You can use TAB to autocomplete commands and arguments'
       objectReference: {fileID: 0}
     - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 229
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 35
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 36
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}

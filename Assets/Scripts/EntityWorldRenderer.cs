@@ -56,7 +56,7 @@ public class EntityWorldRenderer : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        RunAnimation("TakeDamage");
+        animator.Play("TakeDamage");
     }
 
     private void Die()

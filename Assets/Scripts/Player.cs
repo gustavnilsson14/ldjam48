@@ -78,9 +78,9 @@ public class Player : Entity
     }
     public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
-        Debug.Log($"{source} hits player for {amount}");
         if (alive)
             PrintDamage(amount, source, overrideTextLine);
+        Camera.main.GetComponent<CameraShake>().Shake();
         return base.TakeDamage(amount);
     }
     protected void PrintDamage(int amount, string source, string overrideTextLine)
