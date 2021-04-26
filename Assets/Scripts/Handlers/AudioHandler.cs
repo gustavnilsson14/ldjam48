@@ -24,7 +24,7 @@ public class AudioHandler : MonoBehaviour
 
         if (currentTrack == null)
             return musicTracks[0];
-        int index = musicTracks.IndexOf(currentTrack);
+        int index = musicTracks.IndexOf(currentTrack) +1;
         if (index >= musicTracks.Count)
             index = 0;
         return musicTracks[index];
