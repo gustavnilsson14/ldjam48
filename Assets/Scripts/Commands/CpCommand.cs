@@ -10,7 +10,14 @@ public class CpCommand : Command
         if (!base.Run(out result, parsedCommand))
             return false;
         List<Entity> entities = Player.I.currentDirectory.GetEntities();
+
         Entity target = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
+        if (target == Player.I)
+        {
+            result = $"You do not have permission to copy this file";
+            return true;
+        }
+
         HostHandler.I.currentHost.GetDirectoryByPath(parsedCommand.arguments[1], out Directory directory);
         Entity copy = Instantiate(target, directory.transform).GetComponent<Entity>();
         copy.currentDirectory = directory;
