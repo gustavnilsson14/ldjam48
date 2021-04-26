@@ -3,10 +3,13 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Directory : MonoBehaviour
 {
     public List<EntityFaction> bannedFactions = new List<EntityFaction>();
+    public DirectoryMoveEvent onEntityEnter = new DirectoryMoveEvent();
+    public DirectoryMoveEvent onEntityExit = new DirectoryMoveEvent();
     public List<Directory> GetAdjacentDirectories() {
         List<Directory> result = new List<Directory>();
         foreach (Transform child in transform)
@@ -21,6 +24,20 @@ public class Directory : MonoBehaviour
             return result;
         result.Add(parent);
         return result;
+    }
+    public void EntityEnter(Directory from, Entity entity) {
+        onEntityEnter.Invoke(from, this, entity);
+    }
+    public void EntityExit(Directory to, Entity entity) {
+        onEntityExit.Invoke(this, to, entity);
+    }
+
+    public bool GetClosestParent(out Directory parentDirectory)
+    {
+        parentDirectory = transform.parent.GetComponent<Directory>();
+        if (parentDirectory == null)
+            return false;
+        return true;
     }
 
     public List<Entity> GetEntities() {
@@ -112,3 +129,4 @@ public class PathNode {
         this.parent = parent;
     }
 }
+public class DirectoryMoveEvent : UnityEvent<Directory, Directory, Entity> { }

@@ -30,7 +30,7 @@ public class DdosCommand : Command
     }
     private int GetCurrentDamage(ParsedCommand parsedCommand)
     {
-        int result = damageBase;
+        int result = Mathf.FloorToInt((float)damageBase * Player.I.GetDamageMultiplier());
         if (parsedCommand.flags.Find(flag => flag == "--heavy") != null)
             result *= 2;
         if (parsedCommand.flags.Find(flag => flag == "--strong") != null)

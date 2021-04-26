@@ -25,7 +25,8 @@ public class AttackComponent : EntityComponent
     protected void Attack(ComponentWithIP target) {
         if (!IsTargetInRange(target))
             return;
-        target.TakeDamage(damageBase);
+        int damage = Mathf.FloorToInt((float)damageBase * entityBody.GetDamageMultiplier());
+        target.TakeDamage(damage);
         entityBody.Attack();
        
     }

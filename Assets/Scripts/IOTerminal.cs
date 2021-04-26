@@ -17,6 +17,7 @@ public class IOTerminal : MonoBehaviour
 
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
+
     public TerminalTimeEvent onTerminalTimePast = new TerminalTimeEvent();
     public UnityEvent onEnter = new UnityEvent();
 
@@ -237,4 +238,10 @@ public class IOTerminal : MonoBehaviour
     }
 }
 public class CommandEvent : UnityEvent<Command, ParsedCommand> { }
-public class TerminalTimeEvent : UnityEvent<int> { }
+public class TerminalTimeEvent : UnityEvent<int>
+{
+    internal void AddListener(object onTerminalTimePast)
+    {
+        throw new NotImplementedException();
+    }
+}

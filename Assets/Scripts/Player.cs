@@ -16,6 +16,7 @@ public class Player : Entity
     private float maxSeconds = 60 * 60;
 
     public CommandEvent onCommand = new CommandEvent();
+    public UnityEvent onRealTime = new UnityEvent();
 
     public bool test = false;
     private float overTime;
@@ -42,12 +43,14 @@ public class Player : Entity
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
-        ReduceCharacters(parsedCommand.GetCommandString());
+        ModifyCharacters(parsedCommand.GetCommandString());
         onCommand.Invoke(command, parsedCommand);
     }
     private void ReduceRealTime()
     {
-        currentSeconds -= Time.deltaTime;
+        float timePassed = Time.deltaTime * GetRealTimeMultiplier();
+        currentSeconds -= Mathf.Clamp(timePassed, 0, Mathf.Infinity);
+        onRealTime.Invoke();
         if (currentSeconds > 0)
             return;
         overTime += Time.deltaTime;
@@ -56,14 +59,34 @@ public class Player : Entity
         overTime = 0;
         TakeDamage(1);
     }
-    private void ReduceCharacters(string command)
+
+    public void ModifyCharacters(string command)
     {
-        currentCharacters -= command.Length;
+        currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
         if (currentCharacters > 0)
             return;
         TakeDamage(1);
     }
-
+    public float GetCharacterCostMultiplier()
+    {
+        float multiplier = 1;
+        List<DirectoryModifier> charactersMultipliers = activeModifiers.FindAll(modifier => modifier is CharactersMultiplier);
+        foreach (DirectoryModifier modifier in charactersMultipliers)
+        {
+            multiplier += (modifier as CharactersMultiplier).multiplier;
+        }
+        return Mathf.Clamp(multiplier, 0, Mathf.Infinity);
+    }
+    public float GetRealTimeMultiplier()
+    {
+        float multiplier = 1;
+        List<DirectoryModifier> charactersMultipliers = activeModifiers.FindAll(modifier => modifier is TimeMultiplier);
+        foreach (DirectoryModifier modifier in charactersMultipliers)
+        {
+            multiplier += (modifier as TimeMultiplier).multiplier;
+        }
+        return Mathf.Clamp(multiplier, 0, Mathf.Infinity);
+    }
     public void FullRestore()
     {
         directoryHistory.Clear();
