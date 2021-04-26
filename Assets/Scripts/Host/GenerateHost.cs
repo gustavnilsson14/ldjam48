@@ -29,6 +29,7 @@ public class GenerateHost : MonoBehaviour
         GenerateSshKey(host);
         GenerateDirectoryKey(host);
         RegisterDirectoryModifiers(host);
+        GenerateCommands(host, 3, 2);
     }
     private void RegisterDirectoryModifiers(Host host)
     {
@@ -41,6 +42,29 @@ public class GenerateHost : MonoBehaviour
     public void PopulateHost(Host host, int maxEntities)
     {
         StartCoroutine(WaitBeforePopulate(host, maxEntities));
+    }
+
+    public void GenerateCommands(Host host, int amount = 1, int depth = 2)
+    {
+        List<Command> commands = Player.I.GetCommands().FindAll(command => !command.isAvailable);
+        for(int i = 0; i < amount; i++)
+        {
+            int index = Random.Range(0, commands.Count - 1);
+            Command command = commands[index];
+            commands.RemoveAt(index);
+            GenerateCommand(host, command, depth);
+        }
+    }
+
+    private void GenerateCommand(Host host, Command command, int depth = 2)
+    {
+        if (!GetRandomDirectory(host.transform, out Directory directory, depth))
+            return;
+
+        Debug.Log($"Added command {command.name}");
+        CommandEntity entity = command.InstantiateEntity(directory.transform);
+        entity.command = command;
+        entity.name = $"{command.name}";
     }
 
     private void GenerateSshKey(Host host)
@@ -63,7 +87,12 @@ public class GenerateHost : MonoBehaviour
         KeyEntity keyEntity = directoryKeyPrefab.InstantiateEntityKey(directory.transform);
         keyEntity.publicKey = directoryKey;
 
-        GetRandomDirectory(host.GetRootDirectory().transform, out Directory dir);
+        if(!GetRandomDirectoryNotInPath(host.GetRootDirectory().transform, directory, out Directory dir))
+        {
+            Destroy(keyEntity.gameObject);
+            return;
+        }
+
         directoryKey.targetDirectory = dir;
         directoryKey.targetDirectory.bannedFactions.Add(EntityFaction.HACKER);
 
@@ -94,7 +123,48 @@ public class GenerateHost : MonoBehaviour
         return true;
     }
 
+    public bool GetRandomDirectoryNotInPath(Transform directoryTransform, Directory directory, out Directory outDirectory)
+    {
+        outDirectory = null;
+        List<Directory> directories = GetFirstDepthChildren(directoryTransform);
 
+        if (!directory.GetFullPathWithoutRoot(out string path))
+            return false;
+        
+        for(int i = 0; i < directories.Count; i++)
+        {
+            if (path.StartsWith(directories[i].name))
+            {
+                directories.Remove(directories[i]);
+                break;
+            }
+        }
+
+        if (directories.Count == 0)
+            return false;
+
+        GetRandomDirectory(directories[Random.Range(0, directories.Count)].transform, out outDirectory);
+        return true;
+
+    }
+
+    public List<Directory> GetAllDirectoryDeeperThen(Transform directoryTransform, int depth)
+    {
+        List<Directory> children = new List<Directory>();
+        children.AddRange(directoryTransform.GetComponentsInChildren<Directory>());
+        return children.FindAll(dir => dir.GetDepth() > depth);
+    }
+    public bool GetRandomDirectory(Transform directoryTransform, out Directory directory, int depth)
+    {
+        directory = null;
+        List<Directory> children = GetAllDirectoryDeeperThen(directoryTransform, depth);
+
+        if (children.Count == 0)
+            return false;
+
+        directory = children[Random.Range(0, children.Count)];
+        return true;
+    }
 
     public bool GetRandomDirectory(Transform directoryTransform, out Directory directory)
     {

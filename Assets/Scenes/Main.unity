@@ -226,6 +226,98 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 730913549}
     m_Modifications:
+    - target: {fileID: 426240088755356312, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 1698339911839446816, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3078258249945645237, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3078258250215848713, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3078258250354435815, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3448676318994742149, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 3875131715014895625, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3875131715014895625, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 4961763824965779777, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4961763824965779777, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 5937073494407856958, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 5937073494556071293, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937073494556071293, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 5937073495430283138, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937073495430283138, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
     - target: {fileID: 5937073495786676435, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -301,11 +393,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6017481429155897910, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6017481429155897910, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
     - target: {fileID: 8122157177264346204, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: extendedHelpText
       value: 'Usage: ssh [username@hostname]'
       objectReference: {fileID: 0}
+    - target: {fileID: 8122157177264346204, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510747a9aada968469407653c5f588ff, type: 3}
 --- !u!1001 &1243937587

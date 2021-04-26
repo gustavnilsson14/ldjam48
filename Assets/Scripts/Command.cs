@@ -13,6 +13,8 @@ public class Command : MonoBehaviour
     public string extendedHelpText;
     public int speed = 2;
     public int maxFlags = 1;
+
+    public CommandEntity commandEntityPrefab;
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         return ValidateParsedCommand(out result, parsedCommand);
@@ -60,6 +62,11 @@ public class Command : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public CommandEntity InstantiateEntity(Transform parent)
+    {
+        return Instantiate(commandEntityPrefab, parent);
     }
 }
 public class ParsedCommand
