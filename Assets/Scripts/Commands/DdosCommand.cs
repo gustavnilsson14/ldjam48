@@ -40,6 +40,8 @@ public class DdosCommand : Command
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
+        if (!base.ValidateParsedCommand(out result, parsedCommand))
+            return false;
         result = "ddos requires the first argument to be a target file or process id (pid)";
         if (!parsedCommand.HasArguments())
             return false;

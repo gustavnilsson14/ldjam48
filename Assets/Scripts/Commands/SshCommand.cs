@@ -15,6 +15,8 @@ public class SshCommand : Command
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
+        if (!base.ValidateParsedCommand(out result, parsedCommand))
+            return false;
         result = name + " requires the first argument to be a \"username@hostname\" pair for which you have aquired a public key";
         if (!parsedCommand.HasArguments())
             return true;

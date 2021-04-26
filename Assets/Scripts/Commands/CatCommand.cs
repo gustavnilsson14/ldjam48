@@ -15,6 +15,8 @@ public class CatCommand : Command
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
+        if (!base.ValidateParsedCommand(out result, parsedCommand))
+            return false;
         result = name + " requires the first argument to be an entity";
         if (!parsedCommand.HasArguments())
             return false;

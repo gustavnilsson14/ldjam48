@@ -42,6 +42,8 @@ public class LookCommand : Command
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
+        if (!base.ValidateParsedCommand(out result, parsedCommand))
+            return false;
         result = "";
         if (!parsedCommand.HasArguments())
             return true;
