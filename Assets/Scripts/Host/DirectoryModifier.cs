@@ -34,6 +34,13 @@ public class DirectoryModifier : MonoBehaviour
         RegisterAffectedEntities();
         RegisterEvents();
     }
+    private void OnMove(Directory arg0, Directory arg1)
+    {
+        Debug.Log("private void OnMove(Directory "+ arg0+", Directory "+ arg1+")");
+        UnRegisterEvents();
+        UnRegisterEntities();
+        Register();
+    }
     public void RegisterAffectedDirectories()
     {
         if (!GetMyDirectory(out directory))
@@ -42,11 +49,6 @@ public class DirectoryModifier : MonoBehaviour
             return;
         }
         affectedDirectories.AddRange(directory.GetComponentsInChildren<Directory>());
-    }
-
-    private void RegisterAffectedDirectories(Directory arg0, Directory arg1)
-    {
-        Register();
     }
 
     private bool GetMyDirectory(out Directory directory)
@@ -58,8 +60,17 @@ public class DirectoryModifier : MonoBehaviour
         if (entity == null)
             return false;
         directory = entity.currentDirectory;
-        entity.onMove.AddListener(RegisterAffectedDirectories);
+        entity.onMove.AddListener(OnMove);
+        entity.onDeath.AddListener(UnRegisterEntities);
         return true;
+    }
+
+    private void UnRegisterEntities()
+    {
+        foreach (Entity entity in entitiesAffected)
+        {
+            entity.activeModifiers.Remove(this);
+        }
     }
 
     public virtual string GetDescription()
@@ -71,6 +82,11 @@ public class DirectoryModifier : MonoBehaviour
     {
         directory.onEntityEnter.AddListener(OnEntityEnterDirectory);
         directory.onEntityExit.AddListener(OnEntityExitDirectory);
+    }
+    private void UnRegisterEvents()
+    {
+        directory.onEntityEnter.RemoveListener(OnEntityEnterDirectory);
+        directory.onEntityExit.RemoveListener(OnEntityExitDirectory);
     }
     private void RegisterAffectedEntities()
     {
@@ -122,5 +138,12 @@ public class DirectoryModifier : MonoBehaviour
             return false;
         currentProcsOnEntities = Mathf.Clamp(currentProcsOnEntities - GetAffectedEntities().Count, 0, int.MaxValue);
         return true;
+    }
+    public string GetSource() 
+    {
+        Entity entity = GetComponent<Entity>();
+        if (entity != null)
+            return entity.name;
+        return directory.GetFullPath();
     }
 }

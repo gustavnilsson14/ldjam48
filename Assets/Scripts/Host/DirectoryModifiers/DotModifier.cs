@@ -25,6 +25,6 @@ public class DotModifier : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{directory.GetFullPath()}\nEach {speed} seconds deals {damage} to all entities within";
+        return $"{GetSource()}\nEach {speed} seconds deals {damage} to all entities within";
     }
 }

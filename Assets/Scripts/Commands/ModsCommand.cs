@@ -11,7 +11,7 @@ public class ModsCommand : Command
             return false;
         foreach (DirectoryModifier directoryModifier in Player.I.activeModifiers)
         {
-            result += directoryModifier.GetDescription();
+            result += directoryModifier.GetDescription() + "\n";
         }
         return true;
     }

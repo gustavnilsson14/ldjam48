@@ -8,6 +8,6 @@ public class TimeMultiplier : DirectoryModifier
     public override string GetDescription()
     {
         string direction = (multiplier > 0) ? "increased" : "decreased";
-        return $"{directory.GetFullPath()}\nThe multiplier for real time spent is {direction} by {multiplier}";
+        return $"{GetSource()}\nThe multiplier for real time spent is {direction} by {multiplier}";
     }
 }

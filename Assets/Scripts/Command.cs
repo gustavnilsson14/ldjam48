@@ -27,7 +27,7 @@ public class Command : MonoBehaviour
             CommandDeactivator deactivator = modifier as CommandDeactivator;
             if (deactivator.command != this)
                 continue;
-            result += result = $"{deactivator.GetComponent<Directory>().GetFullPath()} deactivates {name}\n";
+            result += result = $"{deactivator.GetSource()} deactivates {name}\n";
             validationResult = false;
         }
         return validationResult;
