@@ -61,6 +61,18 @@ public class Directory : MonoBehaviour
         return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
     }
 
+    public bool GetFullPathWithoutRoot(out string path)
+    {
+        List<Directory> paths = GetAllParents();
+        path = "";
+        if (paths.Count < 2)
+            return false;
+        paths.RemoveAt(0);
+            
+        path = string.Join("/", paths.Select(directory => directory.name));
+        return true;
+    }
+
     public int GetDepth()
     {
         return GetAllParents().Count;

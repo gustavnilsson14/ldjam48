@@ -80,7 +80,12 @@ public class GenerateHost : MonoBehaviour
         KeyEntity keyEntity = directoryKeyPrefab.InstantiateEntityKey(directory.transform);
         keyEntity.publicKey = directoryKey;
 
-        GetRandomDirectory(host.GetRootDirectory().transform, out Directory dir);
+        if(!GetRandomDirectoryNotInPath(host.GetRootDirectory().transform, directory, out Directory dir))
+        {
+            Destroy(keyEntity.gameObject);
+            return;
+        }
+
         directoryKey.targetDirectory = dir;
         directoryKey.targetDirectory.bannedFactions.Add(EntityFaction.HACKER);
 
@@ -109,6 +114,31 @@ public class GenerateHost : MonoBehaviour
 
         entity = entitiesPrefabs[Random.Range(0, entitiesPrefabs.Count)];
         return true;
+    }
+
+    public bool GetRandomDirectoryNotInPath(Transform directoryTransform, Directory directory, out Directory outDirectory)
+    {
+        outDirectory = null;
+        List<Directory> directories = GetFirstDepthChildren(directoryTransform);
+
+        if (!directory.GetFullPathWithoutRoot(out string path))
+            return false;
+        
+        for(int i = 0; i < directories.Count; i++)
+        {
+            if (path.StartsWith(directories[i].name))
+            {
+                directories.Remove(directories[i]);
+                break;
+            }
+        }
+
+        if (directories.Count == 0)
+            return false;
+
+        GetRandomDirectory(directories[Random.Range(0, directories.Count)].transform, out outDirectory);
+        return true;
+
     }
 
     public List<Directory> GetAllDirectoryDeeperThen(Transform directoryTransform, int depth)
