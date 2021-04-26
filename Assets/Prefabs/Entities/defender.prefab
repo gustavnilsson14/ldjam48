@@ -47,7 +47,7 @@ MonoBehaviour:
   currentDirectory: {fileID: 0}
   maxIP: 0
   speed: 4
-  damageBase: 2
+  damageBase: 1
   range: 0
 --- !u!1001 &4811259722100907652
 PrefabInstance:
@@ -59,12 +59,17 @@ PrefabInstance:
     - target: {fileID: 194000878634578685, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_Name
-      value: Entity_IC
+      value: defender
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: description
-      value: 
+      value: '*.ic files wander around protecting the host from harm.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: maxIP
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}

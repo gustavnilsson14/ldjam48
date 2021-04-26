@@ -19,7 +19,7 @@ public class LookCommand : Command
         }
         currentEntity = GetCurrentEntity(entities);
         currentEntity.Discover();
-        result = $"{currentEntity.name} - {currentEntity.description}";
+        result = $"{currentEntity.name}";
         return true;
     }
     private Directory GetLookDirectory(ParsedCommand parsedCommand) {
