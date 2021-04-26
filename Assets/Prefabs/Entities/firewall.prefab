@@ -15,27 +15,9 @@ MonoBehaviour:
   currentDirectory: {fileID: 0}
   maxIP: 0
   alive: 1
-  speed: 4
+  speed: 12
   currentTarget: {fileID: 0}
   scanDepth: 1
---- !u!114 &7526287887956089048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4644405270696995961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8fb473c754eab4c8805fd248b2f448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  maxIP: 0
-  alive: 1
-  speed: 5
-  damageBase: 1
-  range: 0
 --- !u!114 &6648658478168533376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,6 +34,24 @@ MonoBehaviour:
   currentProcsOnEntities: -1
   command: {fileID: 0}
   commandName: move
+--- !u!114 &7526287887956089048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644405270696995961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8fb473c754eab4c8805fd248b2f448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  maxIP: 0
+  alive: 1
+  speed: 15
+  damageBase: 1
+  range: 0
 --- !u!1001 &4811259722100907652
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,10 +13,18 @@ public class Command : MonoBehaviour
     public string extendedHelpText;
     public int speed = 2;
     public int maxFlags = 1;
+    public int level = 1;
 
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         return ValidateParsedCommand(out result, parsedCommand);
+    }
+
+    public virtual void LevelUp()
+    {
+        level++;
+        maxFlags++;
+        speed--;
     }
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
