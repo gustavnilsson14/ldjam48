@@ -261,10 +261,15 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2558777078700014059, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: isAvailable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
@@ -321,6 +326,11 @@ PrefabInstance:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3110794048516659390, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3448676318994742149, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
@@ -364,10 +374,20 @@ PrefabInstance:
       propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5100573726026032410, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5614153508753048147, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: speed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614153508753048147, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5937073494407856958, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
@@ -490,7 +510,7 @@ PrefabInstance:
     - target: {fileID: 6017481429155897910, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: isAvailable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6017481429155897910, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
@@ -514,6 +534,11 @@ PrefabInstance:
       propertyPath: speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7297120619840188247, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8122157177264346204, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: extendedHelpText
@@ -534,6 +559,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8522240402695232382, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5937073495430283138, guid: 510747a9aada968469407653c5f588ff, type: 3}
@@ -763,7 +793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2eceeffcb79c247ac90f06a8000fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Move to any path
   extendedHelpText: 'Usage: cd [path]'
   speed: 6
