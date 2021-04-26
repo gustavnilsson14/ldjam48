@@ -65,7 +65,7 @@ public class Player : Entity
     }
     public void LevelUp()
     {
-        maxIP++;
+        maxIP+=2;
         maxCharacters += 50;
         maxSeconds += 120;
     }
