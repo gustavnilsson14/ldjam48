@@ -29,6 +29,8 @@ public class IOTerminal : MonoBehaviour
     private int currentTerminalTime;
     private int totalTerminalTime;
 
+    public List<string> destroyedEntities = new List<string>();
+
     private void Awake()
     {
         IOTerminal.I = this;
@@ -60,38 +62,69 @@ public class IOTerminal : MonoBehaviour
     private IEnumerator DisplayEpiloge(List<string> commandStrings)
     {
         yield return new WaitForSeconds(1f);
-        ClearOutput();
-        AppendTextLine("<color=red>TERMINAL ERROR:</color>");
+        string epilog = "<color=red>TERMINAL ERROR:</color>";
+        AppendTextLine(epilog, true);
         yield return new WaitForSeconds(2f);
-        AppendTextLine("<color=red>Uplink terminated...</color>");
+        epilog += "\n<color=red>Uplink terminated...</color>";
+        AppendTextLine(epilog, true);
         yield return new WaitForSeconds(2f);
-        AppendTextLine("Working.");
+        epilog += "\nWorking";
+        AppendTextLine(epilog, true);
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 10; i++)
         {
-            yield return new WaitForSeconds(0.2f);
-            AppendTextLine(".");
+            yield return new WaitForSeconds(0.05f);
+            epilog += ".";
+            AppendTextLine(epilog, true);
         }
-        AppendTextLine($".Total hosts visited: {HostHandler.I.exploredHosts.Count}");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.05f);
+        epilog += $"\nTotal hosts visited: {HostHandler.I.exploredHosts.Count}";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
         foreach (Host host in HostHandler.I.exploredHosts)
         {
             yield return new WaitForSeconds(0.1f);
-            AppendTextLine($"{host.name} as {host.userName}");
+            epilog += $"\n{host.name} as {host.userName}";
+            AppendTextLine(epilog, true);
         }
-        AppendTextLine($".Total commands: {commandStrings.Count}");
+        yield return new WaitForSeconds(1f);
+        epilog += $"\nTotal commands: {commandStrings.Count}\n";
+        AppendTextLine(epilog, true);
         yield return new WaitForSeconds(0.5f);
         foreach (string command in commandStrings)
         {
             yield return new WaitForSeconds(0.1f);
-            AppendTextLine($"{command}");
+            epilog += $"{command}, ";
+            AppendTextLine(epilog, true);
         }
+        yield return new WaitForSeconds(1f);
+        epilog += $"\nDestroyed files: {destroyedEntities.Count}\n";
+        AppendTextLine(epilog, true);
         yield return new WaitForSeconds(0.5f);
-        AppendTextLine("Press R to reboot");
-        yield return new WaitForSeconds(0.5f);
-        AppendTextLine("And thank you for playing!");
-        yield return new WaitForSeconds(0.5f);
-        AppendTextLine(NameUtil.RandomizeStringColors("By Red Pentagram Studios"));
+        foreach (string entity in destroyedEntities)
+        {
+            yield return new WaitForSeconds(0.05f);
+            epilog += $"{entity}, ";
+            AppendTextLine(epilog, true);
+        }
+        yield return new WaitForSeconds(1f);
+        epilog += "\nPress R to reboot";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        epilog += "\nAnd thank you for playing!";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        epilog += "\n" + NameUtil.RandomizeStringColors("By");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Red");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Pentagram");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Studios");
+        AppendTextLine(epilog,true);
         onEnter.AddListener(Restart);
     }
     public void Restart()
@@ -266,8 +299,10 @@ public class IOTerminal : MonoBehaviour
         AppendTextLine("$ " + commandField.text);
     }
 
-    public void AppendTextLine(string newText)
+    public void AppendTextLine(string newText, bool clear = false)
     {
+        if (clear)
+            ClearOutput();
         outputField.text += "\n" + newText;
     }
 
