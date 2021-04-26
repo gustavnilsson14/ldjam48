@@ -44,6 +44,7 @@ public class HostHandler : MonoBehaviour
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
         generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
+        Player.I.LevelUp();
         Player.I.FullRestore();
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();

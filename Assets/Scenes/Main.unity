@@ -246,6 +246,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
         type: 3}
+    - target: {fileID: 2558777078700014059, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: isAvailable
@@ -297,6 +302,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
         type: 3}
+    - target: {fileID: 5614153508753048147, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5937073494407856958, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
