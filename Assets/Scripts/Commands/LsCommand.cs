@@ -10,12 +10,6 @@ public class LsCommand : Command
             return false;
         List<Entity> entities = new List<Entity>();
         entities.AddRange(GetLookDirectory(parsedCommand).GetEntities());
-        entities.Remove(Player.I);
-        /*if (entities.Count == 0 )
-        {
-            result = "No files in this directory";
-            return true;
-        }*/
         List<string> resultStrings = new List<string>();
 
         foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
