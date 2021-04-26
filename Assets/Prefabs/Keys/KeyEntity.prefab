@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 316324035947255467}
   - component: {fileID: 2324339455087961806}
   m_Layer: 0
-  m_Name: directoryKey
+  m_Name: KeyEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
   maxIP: 5
-  faction: 0
+  faction: 1
+  directoryHistory: []
+  activeModifiers: []
   description: 
   publicKey: {fileID: 0}
