@@ -17,6 +17,8 @@ public class SensorComponent : EntityComponent
     protected override void Run()
     {
         base.Run();
+        if (!ShouldFindNewTarget())
+            return;
         currentTarget = null;
         EntityFaction myFaction = entityBody.faction;
         List<Directory> directories = entityBody.currentDirectory.GetDirectoriesByDepth(scanDepth);
@@ -32,5 +34,14 @@ public class SensorComponent : EntityComponent
         System.Random random = new System.Random();
         int index = random.Next(targets.Count);
         currentTarget = targets[index];
+    }
+
+    private bool ShouldFindNewTarget()
+    {
+        if (currentTarget == null)
+            return true;
+        if (currentTarget.currentDirectory == entityBody.currentDirectory)
+            return false;
+        return true;
     }
 }
