@@ -25,6 +25,7 @@ public class HostHandler : MonoBehaviour
         generateHost.PopulateHost(currentHost, 5);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         Player.I.FullRestore();
+        Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
     }
@@ -36,6 +37,7 @@ public class HostHandler : MonoBehaviour
         currentHost.SetUser(sshKey.GetUser());
         generateHost.PopulateHost(currentHost, 5);
         Player.I.FullRestore();
+        Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
     }

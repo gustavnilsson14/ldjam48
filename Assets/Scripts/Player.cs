@@ -140,5 +140,9 @@ public class Player : Entity
     {
         return (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()) != null);
     }
+    public override string GetCatDescription()
+    {
+        return "This is you\n" + base.GetCatDescription();
+    }
 }
 public class MoveEvent : UnityEvent<Directory, Directory> { }
