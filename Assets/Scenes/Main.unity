@@ -245,6 +245,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
         type: 3}
+    - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3078258249945645237, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
@@ -311,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 5937073495430283138, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: isAvailable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5937073495430283138, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
