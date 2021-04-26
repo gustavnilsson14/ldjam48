@@ -12,6 +12,14 @@ public class HostHandler : MonoBehaviour
     private GenerateHost generateHost;
     public List<Host> exploredHosts = new List<Host>();
     public CommandEntity commandEntityPrefab;
+
+    private int spawnEntity = 1;
+    private int maxRootDir = 2;
+    private int maxSubDir = 2;
+    private int maxDepth = 2;
+    private int maxCommands = 1;
+    private int maxDirectoryKeys = 1;
+
     private void Awake()
     {
         generateHost = GetComponent<GenerateHost>();
@@ -21,8 +29,8 @@ public class HostHandler : MonoBehaviour
 
     private void Start()
     {
-        currentHost = generateHost.GenerateNewHost(HostType.LINUX, 4, 3, 2);
-        generateHost.PopulateHost(currentHost, 5);
+        currentHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
+        generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         Player.I.FullRestore();
         Player.I.name = currentHost.userName + ".lock";
@@ -35,7 +43,7 @@ public class HostHandler : MonoBehaviour
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
-        generateHost.PopulateHost(currentHost, 5);
+        generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
         Player.I.FullRestore();
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
@@ -46,10 +54,20 @@ public class HostHandler : MonoBehaviour
         return hosts.FindAll(host => (host.isAvailable || !onlyAvailable));
     }
     public Host CreateHost() {
-        Host newHost = generateHost.GenerateNewHost(HostType.LINUX, 4, 3, 2);
-        //generateHost.PopulateHost(newHost, 5);
+        MakeHostsHarder();
+        Host newHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
         hosts.Add(newHost);
         return newHost;
+    }
+
+    public void MakeHostsHarder()
+    {
+        spawnEntity = spawnEntity+maxRootDir;
+        maxRootDir++;
+        maxSubDir++;
+        maxDepth++;
+        maxCommands++;
+        maxDirectoryKeys++;
     }
 
 }
