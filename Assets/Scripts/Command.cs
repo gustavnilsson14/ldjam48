@@ -20,7 +20,17 @@ public class Command : MonoBehaviour
     }
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
-        return true;
+        bool validationResult = true;
+        List<DirectoryModifier> modifiers = Player.I.activeModifiers.FindAll(mod => mod is CommandDeactivator);
+        foreach (DirectoryModifier modifier in modifiers)
+        {
+            CommandDeactivator deactivator = modifier as CommandDeactivator;
+            if (deactivator.command != this)
+                continue;
+            result += result = $"{deactivator.GetComponent<Directory>().GetFullPath()} deactivates {name}\n";
+            validationResult = false;
+        }
+        return validationResult;
     }
 
     public bool GetHelpText(out string helpText) {

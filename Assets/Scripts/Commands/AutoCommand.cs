@@ -46,6 +46,8 @@ public class AutoCommand : Command
 
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
+        if (!base.ValidateParsedCommand(out result, parsedCommand))
+            return false;
         result = name + " requires the first argument to be another command";
         if (!parsedCommand.HasArguments())
             return false;
