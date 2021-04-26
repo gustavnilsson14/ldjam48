@@ -84,9 +84,36 @@ public class IOTerminal : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             AutoCompleteCommand();
+            AutoCompleteSsh();
             AutoCompletePath();
             AutoCompleteEntityName();
         }
+    }
+
+    private void AutoCompleteSsh()
+    {
+        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
+        if (parsedCommand.name != "ssh")
+            return;
+
+        if (parsedCommand.arguments.Count != 1)
+            return;
+
+        if (parsedCommand.flags.Count > 0)
+            return;
+
+        foreach (PublicKey key in HostHandler.I.currentHost.keys)
+        {
+            if (!(key is SshKey))
+                continue;
+            
+            if (!(key as SshKey).GetName().StartsWith(parsedCommand.arguments[0]))
+                continue;
+
+            commandField.text = $"{parsedCommand.name} {(key as SshKey).GetName()}";
+        }
+        commandField.caretPosition = commandField.text.Length;
+
     }
 
     private void AutoCompleteCommand()
@@ -197,7 +224,7 @@ public class IOTerminal : MonoBehaviour
         string result = string.Join(" ", resultStrings);
 
         AppendTextLine($"<color=yellow>LEVEL UP! Type a command to level it up</color>");
-        AppendTextLine($"{result}");
+        AppendTextLine($"Your commands: {result}");
 
 
     }
