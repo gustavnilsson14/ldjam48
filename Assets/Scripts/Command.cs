@@ -14,7 +14,6 @@ public class Command : MonoBehaviour
     public int speed = 2;
     public int maxFlags = 1;
 
-    public CommandEntity commandEntityPrefab;
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         return ValidateParsedCommand(out result, parsedCommand);
@@ -58,15 +57,17 @@ public class Command : MonoBehaviour
     protected bool ArgumentIsUserHostPair(string argument)
     {
         if (HostHandler.I.currentHost.keys.Find(key => key.GetName() == argument) != null)
-        {
             return true;
-        }
         return false;
+    }
+
+    protected bool ArgumentIsPathFromRoot(string argument) {
+        return HostHandler.I.currentHost.GetDirectoryByPath(argument, out Directory directory);
     }
 
     public CommandEntity InstantiateEntity(Transform parent)
     {
-        return Instantiate(commandEntityPrefab, parent);
+        return Instantiate(HostHandler.I.commandEntityPrefab, parent);
     }
 }
 public class ParsedCommand

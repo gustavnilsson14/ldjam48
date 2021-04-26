@@ -10,6 +10,7 @@ public class ComponentWithIP : MonoBehaviour
 
     public int maxIP;
     protected int currentIP;
+    public bool alive = true;
 
     [Header("Events")]
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
@@ -22,6 +23,8 @@ public class ComponentWithIP : MonoBehaviour
     }
     public virtual bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
+        if (!alive)
+            return false;
         currentIP -= amount;
         if (currentIP <= 0)
         {
@@ -44,6 +47,7 @@ public class ComponentWithIP : MonoBehaviour
 
     public virtual void Die()
     {
+        alive = false;
         onDeath.Invoke();
         GameObject.Destroy(gameObject, 1f);
     }

@@ -14,10 +14,14 @@ public class DotModifier : DirectoryModifier
         if (momentum < speed)
             return;
         momentum = 0;
+        List<Entity> deadEntities = new List<Entity>();
         foreach (Entity entity in entitiesAffected)
         {
-            entity.TakeDamage(damage);
+            if (entity.TakeDamage(damage))
+                continue;
+            deadEntities.Add(entity);
         }
+        entitiesAffected.RemoveAll(entity => deadEntities.Contains(entity));
     }
     public override string GetDescription()
     {

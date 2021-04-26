@@ -27,4 +27,32 @@ public class Host : MonoBehaviour
             return;
         keys.Add(publicKey);
     }
+
+    public bool GetDirectoryByPath(string path, out Directory directory)
+    {
+        directory = GetRootDirectory();
+        List<string> pathSegments = new List<string>();
+        pathSegments.AddRange(path.Split(new string[] { "/" }, StringSplitOptions.None));
+        if (pathSegments.Count == 0)
+            return false;
+        pathSegments.RemoveAt(0);
+        if (pathSegments[0] != "root")
+            return false;
+        pathSegments.RemoveAt(0);
+        int iterations = 99;
+        while (pathSegments.Count > 0 && iterations > 0)
+        {
+            iterations--;
+            string pathSegment = pathSegments[0];
+            pathSegments.RemoveAt(0);
+            Transform child = directory.transform.Find(pathSegment);
+            if (child == null)
+                return false;
+            Directory childDirectory = child.GetComponent<Directory>();
+            if (childDirectory == null)
+                return false;
+            directory = childDirectory;
+        }
+        return true;
+    }
 }
