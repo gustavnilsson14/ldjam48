@@ -64,7 +64,6 @@ public class Entity : ComponentWithIP
 
     public virtual void Discover()
     {
-        Debug.Log($"discover entity {isDiscovered}");
         if (isDiscovered)
             return;
 
@@ -75,7 +74,6 @@ public class Entity : ComponentWithIP
 
     private void HandlePlayerMovement(Directory target, Directory origin)
     {
-        Debug.Log($"Player moved {this.name}");
         isDiscovered = false;
         onPlayerEscape.Invoke();
         Player.I.onMove.RemoveListener(HandlePlayerMovement);
