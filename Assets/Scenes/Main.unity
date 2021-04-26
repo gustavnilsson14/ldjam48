@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesPrefabs:
-  - {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4, type: 3}
+  - {fileID: 5867715903369445128, guid: 0569cd0dc1fd70a4683ad676dc2be773, type: 3}
   directoryKeyPrefab: {fileID: 1572174374806988481, guid: 0fb81a536d88aab4788287affc782174,
     type: 3}
   sshKeyPrefab: {fileID: 7806010436457728740, guid: 31042e2ca00c4a74eb141dee6bdc6952,
