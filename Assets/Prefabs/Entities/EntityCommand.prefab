@@ -45,7 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
   maxIP: 0
-  faction: 0
+  alive: 1
+  faction: 1
   directoryHistory: []
+  activeModifiers: []
   description: 
+  isDiscovered: 0
   command: {fileID: 0}
