@@ -20,6 +20,10 @@ public class Player : Entity
     public bool test = false;
     private float overTime;
 
+    public List<Command> GetCommands()
+    {
+        return commands;
+    }
     // Start is called before the first frame update
     protected override void Awake()
     {

@@ -29,11 +29,35 @@ public class GenerateHost : MonoBehaviour
         Populate(host, maxEntities);
         GenerateSshKey(host);
         GenerateDirectoryKey(host);
+        GenerateCommands(host, 3, 2);
 
     }
     public void PopulateHost(Host host, int maxEntities)
     {
         StartCoroutine(WaitBeforePopulate(host, maxEntities));
+    }
+
+    public void GenerateCommands(Host host, int amount = 1, int depth = 2)
+    {
+        List<Command> commands = Player.I.GetCommands().FindAll(command => !command.isAvailable);
+        for(int i = 0; i < amount; i++)
+        {
+            int index = Random.Range(0, commands.Count - 1);
+            Command command = commands[index];
+            commands.RemoveAt(index);
+            GenerateCommand(host, command, depth);
+        }
+    }
+
+    private void GenerateCommand(Host host, Command command, int depth = 2)
+    {
+        if (!GetRandomDirectory(host.transform, out Directory directory, depth))
+            return;
+
+        Debug.Log($"Added command {command.name}");
+        CommandEntity entity = command.InstantiateEntity(directory.transform);
+        entity.command = command;
+        entity.name = $"{command.name}";
     }
 
     private void GenerateSshKey(Host host)
@@ -87,7 +111,23 @@ public class GenerateHost : MonoBehaviour
         return true;
     }
 
+    public List<Directory> GetAllDirectoryDeeperThen(Transform directoryTransform, int depth)
+    {
+        List<Directory> children = new List<Directory>();
+        children.AddRange(directoryTransform.GetComponentsInChildren<Directory>());
+        return children.FindAll(dir => dir.GetDepth() > depth);
+    }
+    public bool GetRandomDirectory(Transform directoryTransform, out Directory directory, int depth)
+    {
+        directory = null;
+        List<Directory> children = GetAllDirectoryDeeperThen(directoryTransform, depth);
 
+        if (children.Count == 0)
+            return false;
+
+        directory = children[Random.Range(0, children.Count)];
+        return true;
+    }
 
     public bool GetRandomDirectory(Transform directoryTransform, out Directory directory)
     {
