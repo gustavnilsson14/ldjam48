@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesPrefabs:
-  - {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4, type: 3}
+  - {fileID: 5867715903369445128, guid: 0569cd0dc1fd70a4683ad676dc2be773, type: 3}
   directoryKeyPrefab: {fileID: 1572174374806988481, guid: 0fb81a536d88aab4788287affc782174,
     type: 3}
   sshKeyPrefab: {fileID: 7806010436457728740, guid: 31042e2ca00c4a74eb141dee6bdc6952,
@@ -244,6 +244,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
         type: 3}
+    - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: isAvailable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3078258249945645237, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
@@ -388,6 +393,11 @@ PrefabInstance:
       propertyPath: currentCharacters
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: maxIP
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: m_Name
@@ -399,6 +409,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6017481429155897910, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
+    - target: {fileID: 7297120619840188247, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
       value: 
@@ -766,6 +782,39 @@ PrefabInstance:
         type: 3}
       propertyPath: isAvailable
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_text
+      value: 'Hacker going deeper into the terminal, ldjam48
+
+        Type "help"
+        to display help information.
+
+        Type "cmd" to display all avalible
+        commands
+
+        Type "help [command]" to explain a command'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 174
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708997900401959469, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32a3743996d99349bb72b26461180e7, type: 3}

@@ -11,18 +11,24 @@ public class LsCommand : Command
         List<Entity> entities = new List<Entity>();
         entities.AddRange(GetLookDirectory(parsedCommand).GetEntities());
         entities.Remove(Player.I);
-        if (entities.Count == 0)
+        /*if (entities.Count == 0 )
         {
             result = "No files in this directory";
             return true;
-        }
+        }*/
         List<string> resultStrings = new List<string>();
+
+        foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
+        {
+            resultStrings.Add($"<color=#9095ff>{directory.name}</color>/");
+        }
+
         foreach (Entity entity in entities)
         {
-            resultStrings.Add($"{entity.name} - {entity.description}");
+            resultStrings.Add($"{entity.name}");
             entity.Discover();
         }
-        result = string.Join("\n", resultStrings);
+        result = string.Join(" ", resultStrings);
         return true;
     }
     private Directory GetLookDirectory(ParsedCommand parsedCommand) {

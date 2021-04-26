@@ -108,7 +108,9 @@ public class GenerateHost : MonoBehaviour
             if (!GetRandomEntity(out Entity entity))
                 return;
 
-            Instantiate(entity, directory.transform);
+            Entity e = Instantiate(entity, directory.transform);
+            e.name = e.name.Replace("(Clone)", "").Trim();
+            e.name = $"{e.name}_{Random.Range(0, 999)}.ic";
         }
     }
     
