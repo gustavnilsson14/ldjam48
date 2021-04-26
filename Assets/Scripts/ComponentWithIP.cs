@@ -20,7 +20,7 @@ public class ComponentWithIP : MonoBehaviour
         currentDirectory = GetComponentInParent<Directory>();
         currentIP = maxIP;
     }
-    public virtual bool TakeDamage(int amount)
+    public virtual bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
         currentIP -= amount;
         if (currentIP <= 0)

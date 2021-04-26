@@ -27,7 +27,7 @@ public class Entity : ComponentWithIP
     public AttackEvent onAttack = new AttackEvent();
     public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
 
-    private bool isDiscovered = false;
+    public bool isDiscovered = false;
 
     protected override void Awake()
     {

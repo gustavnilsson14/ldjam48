@@ -9,7 +9,7 @@ public class ModsCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        foreach (DirectoryModifier directoryModifier in HostHandler.I.currentHost.GetComponentsInChildren<DirectoryModifier>())
+        foreach (DirectoryModifier directoryModifier in Player.I.activeModifiers)
         {
             result += directoryModifier.GetDescription();
         }

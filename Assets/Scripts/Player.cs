@@ -13,7 +13,7 @@ public class Player : Entity
     public int currentCharacters = 0;
     public int maxCharacters = 10000;
     public float currentSeconds = 0;
-    private float maxSeconds = 60 * 60;
+    private float maxSeconds = 60 * 10;
 
     public CommandEvent onCommand = new CommandEvent();
     public UnityEvent onRealTime = new UnityEvent();
@@ -43,7 +43,7 @@ public class Player : Entity
         if (!test)
             return;
         test = false;
-        TakeDamage(1);
+        TakeDamage(1, "");
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
@@ -57,11 +57,11 @@ public class Player : Entity
         onRealTime.Invoke();
         if (currentSeconds > 0)
             return;
-        overTime += Time.deltaTime;
+        overTime += Mathf.Clamp(timePassed, 0, Mathf.Infinity);
         if (overTime < 10)
             return;
         overTime = 0;
-        TakeDamage(1);
+        TakeDamage(1, "", "Your time on this server is up, the system damages your IP by 1");
     }
 
     public void ModifyCharacters(string command)
@@ -69,7 +69,16 @@ public class Player : Entity
         currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
         if (currentCharacters > 0)
             return;
-        TakeDamage(1);
+        TakeDamage(1, "", "Your input characters are depleted on this server, the system damages your IP by 1");
+    }
+    public override bool TakeDamage(int amount, string source = "Something", string overrideTextLine = "")
+    {
+        PrintDamage(amount, source, overrideTextLine);
+        return base.TakeDamage(amount);
+    }
+    protected void PrintDamage(int amount, string source, string overrideTextLine)
+    {
+        IOTerminal.I.AppendTextLine((overrideTextLine == "") ? $"{source} interrupts your IP for {amount} damage" : overrideTextLine);
     }
     public float GetCharacterCostMultiplier()
     {

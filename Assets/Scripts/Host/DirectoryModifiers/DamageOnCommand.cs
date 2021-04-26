@@ -10,7 +10,9 @@ public class DamageOnCommand : DirectoryModifier
         base.OnCommand(command, parsedCommand);
         foreach (Entity entity in entitiesAffected)
         {
-            entity.TakeDamage(damage);
+            if (entity.TakeDamage(damage))
+                continue;
+            entitiesAffected.Remove(entity);
         }
     }
     public override string GetDescription()
