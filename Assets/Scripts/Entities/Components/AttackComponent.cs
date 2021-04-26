@@ -31,11 +31,13 @@ public class AttackComponent : EntityComponent
     }
 
     protected void DealDamage(ComponentWithIP target, int damage) {
+
         if (entityBody.isDiscovered)
         {
             target.TakeDamage(damage, entityBody.name);
             return;
         }
+
         target.TakeDamage(damage);
     }
 

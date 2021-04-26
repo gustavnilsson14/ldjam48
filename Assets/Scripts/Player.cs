@@ -73,6 +73,7 @@ public class Player : Entity
     }
     public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
+        Debug.Log($"{source} hits player for {amount}");
         if (alive)
             PrintDamage(amount, source, overrideTextLine);
         return base.TakeDamage(amount);
