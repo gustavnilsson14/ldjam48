@@ -668,6 +668,12 @@ PrefabInstance:
       propertyPath: currentHost
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1396740951743481200, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: commandEntityPrefab
+      value: 
+      objectReference: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
+        type: 3}
     - target: {fileID: 3264535154544970054, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_Name

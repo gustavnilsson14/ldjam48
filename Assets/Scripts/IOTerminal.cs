@@ -142,7 +142,6 @@ public class IOTerminal : MonoBehaviour
     {
         List<Entity> entities = new List<Entity>();
         entities.AddRange(Player.I.currentDirectory.GetEntities());
-        entities.Remove(Player.I);
         if (entities.Count == 0)
             return;
 
