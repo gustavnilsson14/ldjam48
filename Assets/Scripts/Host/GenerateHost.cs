@@ -61,7 +61,6 @@ public class GenerateHost : MonoBehaviour
         if (!GetRandomDirectory(host.transform, out Directory directory, depth))
             return;
 
-        Debug.Log($"Added command {command.name}");
         CommandEntity entity = command.InstantiateEntity(directory.transform);
         entity.command = command;
         entity.name = $"{command.name}";
