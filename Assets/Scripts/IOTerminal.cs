@@ -99,6 +99,9 @@ public class IOTerminal : MonoBehaviour
         if (parsedCommand.arguments.Count != 1)
             return;
 
+        if (parsedCommand.arguments[0].Length < 1)
+            return;
+
         if (parsedCommand.flags.Count > 0)
             return;
 
@@ -106,7 +109,10 @@ public class IOTerminal : MonoBehaviour
         {
             if (!(key is SshKey))
                 continue;
-            
+
+            if (!key.isAvailable)
+                return;
+
             if (!(key as SshKey).GetName().StartsWith(parsedCommand.arguments[0]))
                 continue;
 
@@ -120,6 +126,9 @@ public class IOTerminal : MonoBehaviour
     {
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
         if (parsedCommand.arguments.Count > 0)
+            return;
+
+        if (parsedCommand.name.Length < 1)
             return;
 
         foreach (Command command in Player.GetCommands())
@@ -144,6 +153,9 @@ public class IOTerminal : MonoBehaviour
         if (parsedCommand.arguments.Count != 1)
             return;
 
+        if (parsedCommand.arguments[0].Length < 1)
+            return;
+
         if (parsedCommand.flags.Count > 0)
             return;
 
@@ -161,6 +173,9 @@ public class IOTerminal : MonoBehaviour
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
 
         if (parsedCommand.arguments.Count != 1)
+            return;
+
+        if (parsedCommand.arguments[0].Length < 1)
             return;
 
         if (parsedCommand.flags.Count > 0)
