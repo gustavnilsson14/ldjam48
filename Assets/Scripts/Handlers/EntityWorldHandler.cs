@@ -7,6 +7,7 @@ public class EntityWorldHandler : MonoBehaviour
     public static EntityWorldHandler I;
 
     public List<Transform> spawnPoints = new List<Transform>();
+    public Transform commandEffectTransform;
 
     private void Awake()
     {

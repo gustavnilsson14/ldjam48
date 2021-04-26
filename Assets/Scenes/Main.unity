@@ -264,13 +264,19 @@ PrefabInstance:
     - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: isAvailable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3078258249741056852, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: effectPrefab
+      value: 
+      objectReference: {fileID: 5077173545692415162, guid: bec8f554d791e53499e43d1414db94b8,
+        type: 3}
     - target: {fileID: 3078258249945645237, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
@@ -282,6 +288,12 @@ PrefabInstance:
       propertyPath: speed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3078258249945645237, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: effectPrefab
+      value: 
+      objectReference: {fileID: 5077173545692415162, guid: 8c5d9aeaedfa1ac4c86a94a7a02cc374,
+        type: 3}
     - target: {fileID: 3078258250215848713, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: commandEntityPrefab
@@ -533,6 +545,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7279770949938992489, guid: a2fc424c9cbe211428bb8046cbf38263,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279770949938992489, guid: a2fc424c9cbe211428bb8046cbf38263,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.48
+      objectReference: {fileID: 0}
     - target: {fileID: 8868296411379076525, guid: a2fc424c9cbe211428bb8046cbf38263,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -618,6 +640,8 @@ MonoBehaviour:
   extendedHelpText: 'Usage: cd [path]'
   speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &1764875621
 GameObject:
   m_ObjectHideFlags: 0

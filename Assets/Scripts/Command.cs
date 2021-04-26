@@ -15,8 +15,16 @@ public class Command : MonoBehaviour
     public int maxFlags = 1;
     public int level = 1;
 
+    public GameObject effectPrefab;
+
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
+        if (effectPrefab != null)
+        {
+            if (ValidateParsedCommand(out result, parsedCommand))
+                Destroy(Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform),10);
+        }
+
         return ValidateParsedCommand(out result, parsedCommand);
     }
 
