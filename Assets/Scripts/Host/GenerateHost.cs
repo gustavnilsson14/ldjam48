@@ -95,7 +95,6 @@ public class GenerateHost : MonoBehaviour
 
         directoryKey.targetDirectory = dir;
         directoryKey.targetDirectory.bannedFactions.Add(EntityFaction.HACKER);
-
         keyEntity.name = $"{directoryKey.targetDirectory.name}.key";
     }
 
