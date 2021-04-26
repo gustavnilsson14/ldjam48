@@ -11,6 +11,7 @@ public class CdCommand : Command
 
         GetTargetDirectory(out Directory directory, out result, parsedCommand);
         Player.I.MoveTo(directory);
+        result = "";
         return true;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
