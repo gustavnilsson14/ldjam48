@@ -24,6 +24,6 @@ public class CommandDeactivator : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{directory.GetFullPath()}\nDeactives the use of the {command.name} while this modifier is active";
+        return $"{GetSource()}\nDeactives the use of the {command.name} while this modifier is active";
     }
 }

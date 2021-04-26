@@ -20,6 +20,6 @@ public class DamageOnCommand : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{directory.GetFullPath()}\nEach command you type damages all entities within by {damage}";
+        return $"{GetSource()}\nEach command you type damages all entities within by {damage}";
     }
 }

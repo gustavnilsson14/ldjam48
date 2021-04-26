@@ -17,6 +17,6 @@ public class IPRestoreOnCommand : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{directory.GetFullPath()}\nEach command you type restores {heal} IP to all entities within. Can restore a total of {currentProcsOnEntities} more IP";
+        return $"{GetSource()}\nEach command you type restores {heal} IP to all entities within. Can restore a total of {currentProcsOnEntities} more IP";
     }
 }
