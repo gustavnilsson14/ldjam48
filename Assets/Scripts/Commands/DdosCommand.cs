@@ -25,7 +25,9 @@ public class DdosCommand : Command
         if (verboseFlag != null) {
             string verbose = (stillAlive ? "\n{0} still has integrity" : "\n{0} crumbles into bits");
             result += string.Format(verbose, target.name);
-        }   
+        }
+        if (!stillAlive)
+            IOTerminal.I.destroyedEntities.Add(target.name);
         return result;
     }
     private int GetCurrentDamage(ParsedCommand parsedCommand)

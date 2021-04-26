@@ -63,7 +63,12 @@ public class Player : Entity
         overTime = 0;
         TakeDamage(1, "", "Your time on this server is up, the system damages your IP by 1");
     }
-
+    public void LevelUp()
+    {
+        maxIP++;
+        maxCharacters += 50;
+        maxSeconds += 120;
+    }
     public void ModifyCharacters(string command)
     {
         currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());

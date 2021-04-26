@@ -29,6 +29,8 @@ public class IOTerminal : MonoBehaviour
     private int currentTerminalTime;
     private int totalTerminalTime;
 
+    public List<string> destroyedEntities = new List<string>();
+
     private void Awake()
     {
         IOTerminal.I = this;
@@ -56,43 +58,6 @@ public class IOTerminal : MonoBehaviour
         List<string> commandStrings = new List<string>();
         commandStrings.AddRange(commands.Select(command => command.name));
         StartCoroutine(DisplayEpiloge(commandStrings));
-    }
-    private IEnumerator DisplayEpiloge(List<string> commandStrings)
-    {
-        yield return new WaitForSeconds(1f);
-        ClearOutput();
-        AppendTextLine("<color=red>TERMINAL ERROR:</color>");
-        yield return new WaitForSeconds(2f);
-        AppendTextLine("<color=red>Uplink terminated...</color>");
-        yield return new WaitForSeconds(2f);
-        AppendTextLine("Working.");
-        yield return new WaitForSeconds(1f);
-        for (int i = 0; i < 4; i++)
-        {
-            yield return new WaitForSeconds(0.2f);
-            AppendTextLine(".");
-        }
-        AppendTextLine($".Total hosts visited: {HostHandler.I.exploredHosts.Count}");
-        yield return new WaitForSeconds(0.5f);
-        foreach (Host host in HostHandler.I.exploredHosts)
-        {
-            yield return new WaitForSeconds(0.1f);
-            AppendTextLine($"{host.name} as {host.userName}");
-        }
-        AppendTextLine($".Total commands: {commandStrings.Count}");
-        yield return new WaitForSeconds(0.5f);
-        foreach (string command in commandStrings)
-        {
-            yield return new WaitForSeconds(0.1f);
-            AppendTextLine($"{command}");
-        }
-        yield return new WaitForSeconds(0.5f);
-        AppendTextLine("Press R to reboot");
-        yield return new WaitForSeconds(0.5f);
-        AppendTextLine("And thank you for playing!");
-        yield return new WaitForSeconds(0.5f);
-        AppendTextLine(NameUtil.RandomizeStringColors("By Red Pentagram Studios"));
-        onEnter.AddListener(Restart);
     }
     public void Restart()
     {
@@ -266,14 +231,84 @@ public class IOTerminal : MonoBehaviour
         AppendTextLine("$ " + commandField.text);
     }
 
-    public void AppendTextLine(string newText)
+    public void AppendTextLine(string newText, bool clear = false)
     {
+        if (clear)
+            ClearOutput();
         outputField.text += "\n" + newText;
     }
 
     public void ClearOutput()
     {
         outputField.text = "";
+    }
+    private IEnumerator DisplayEpiloge(List<string> commandStrings)
+    {
+        yield return new WaitForSeconds(1f);
+        string epilog = "<color=red>TERMINAL ERROR:</color>";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(2f);
+        epilog += "\n<color=red>Uplink terminated...</color>";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(2f);
+        epilog += "\nWorking";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.05f);
+            epilog += ".";
+            AppendTextLine(epilog, true);
+        }
+        yield return new WaitForSeconds(0.05f);
+        epilog += $"\nTotal hosts visited: {HostHandler.I.exploredHosts.Count}";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        foreach (Host host in HostHandler.I.exploredHosts)
+        {
+            yield return new WaitForSeconds(0.1f);
+            epilog += $"\n{host.name} as {host.userName}";
+            AppendTextLine(epilog, true);
+        }
+        yield return new WaitForSeconds(1f);
+        epilog += $"\nTotal commands: {commandStrings.Count}\n";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.5f);
+        foreach (string command in commandStrings)
+        {
+            yield return new WaitForSeconds(0.1f);
+            epilog += $"{command}, ";
+            AppendTextLine(epilog, true);
+        }
+        yield return new WaitForSeconds(1f);
+        epilog += $"\nDestroyed files: {destroyedEntities.Count}\n";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.5f);
+        foreach (string entity in destroyedEntities)
+        {
+            yield return new WaitForSeconds(0.05f);
+            epilog += $"{entity}, ";
+            AppendTextLine(epilog, true);
+        }
+        yield return new WaitForSeconds(1f);
+        epilog += "\nPress R to reboot";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        epilog += "\nAnd thank you for playing!";
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(1f);
+        epilog += "\n" + NameUtil.RandomizeStringColors("By");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Red");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Pentagram");
+        AppendTextLine(epilog, true);
+        yield return new WaitForSeconds(0.3f);
+        epilog += NameUtil.RandomizeStringColors(" Studios");
+        AppendTextLine(epilog, true);
+        onEnter.AddListener(Restart);
     }
 }
 public class CommandEvent : UnityEvent<Command, ParsedCommand> { }

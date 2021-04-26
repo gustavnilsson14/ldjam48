@@ -36,11 +36,12 @@ public class DirectoryModifier : MonoBehaviour
     }
     private void OnMove(Directory arg0, Directory arg1)
     {
-        Debug.Log("private void OnMove(Directory "+ arg0+", Directory "+ arg1+")");
+        UnRegisterAffectedDirectories();
         UnRegisterEvents();
         UnRegisterEntities();
         Register();
     }
+
     public void RegisterAffectedDirectories()
     {
         if (!GetMyDirectory(out directory))
@@ -87,6 +88,10 @@ public class DirectoryModifier : MonoBehaviour
     {
         directory.onEntityEnter.RemoveListener(OnEntityEnterDirectory);
         directory.onEntityExit.RemoveListener(OnEntityExitDirectory);
+    }
+    private void UnRegisterAffectedDirectories()
+    {
+        affectedDirectories.Clear();
     }
     private void RegisterAffectedEntities()
     {
