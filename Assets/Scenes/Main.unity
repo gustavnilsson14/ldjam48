@@ -391,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: maxIP
-      value: 15
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
         type: 3}

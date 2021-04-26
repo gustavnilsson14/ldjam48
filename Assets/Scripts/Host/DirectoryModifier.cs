@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Directory))]
 public class DirectoryModifier : MonoBehaviour
 {
     public List<Directory> affectedDirectories = new List<Directory>();
@@ -18,6 +17,16 @@ public class DirectoryModifier : MonoBehaviour
         IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
         Player.I.onRealTime.AddListener(OnRealTime);
     }
+
+    internal void DestroyMe()
+    {
+        foreach (Entity entity in entitiesAffected)
+        {
+            entity.activeModifiers.Remove(this);
+        }
+        Destroy(gameObject);
+    }
+
     public void Register() {
         //RegisterAffectedDirectories must be on top
         RegisterAffectedDirectories();
@@ -27,8 +36,30 @@ public class DirectoryModifier : MonoBehaviour
     }
     public void RegisterAffectedDirectories()
     {
-        affectedDirectories.AddRange(GetComponentsInChildren<Directory>());
+        if (!GetMyDirectory(out directory))
+        {
+            Destroy(this);
+            return;
+        }
+        affectedDirectories.AddRange(directory.GetComponentsInChildren<Directory>());
+    }
+
+    private void RegisterAffectedDirectories(Directory arg0, Directory arg1)
+    {
+        Register();
+    }
+
+    private bool GetMyDirectory(out Directory directory)
+    {
         directory = GetComponent<Directory>();
+        if (directory != null)
+            return true;
+        Entity entity = GetComponent<Entity>();
+        if (entity == null)
+            return false;
+        directory = entity.currentDirectory;
+        entity.onMove.AddListener(RegisterAffectedDirectories);
+        return true;
     }
 
     public virtual string GetDescription()
@@ -43,10 +74,13 @@ public class DirectoryModifier : MonoBehaviour
     }
     private void RegisterAffectedEntities()
     {
+        entitiesAffected.Clear();
         foreach (Entity entity in GetAffectedEntities())
         {
             entitiesAffected.Add(entity);
             entity.EnteredModifierZone(this);
+            if (entity == Player.I)
+                IOTerminal.I.AppendTextLine("The permissions feels different in this directory");
         }
     }
     private void OnEntityExitDirectory(Directory from, Directory to, Entity entity)
