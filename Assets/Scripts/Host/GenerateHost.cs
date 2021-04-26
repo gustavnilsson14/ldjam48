@@ -22,14 +22,14 @@ public class GenerateHost : MonoBehaviour
         CleanUnderRoot(host, maxDirRoot, maxDirSub, maxDepth);
         return host;
     }
-    public IEnumerator WaitBeforePopulate(Host host, int maxEntities)
+    public IEnumerator WaitBeforePopulate(Host host, int maxEntities, int maxCommands, int maxDirectoryKey)
     {
         yield return null;
         Populate(host, maxEntities);
         GenerateSshKey(host);
         GenerateDirectoryKey(host);
         RegisterDirectoryModifiers(host);
-        GenerateCommands(host, 3, 2);
+        GenerateCommands(host, maxCommands, 2);
     }
     private void RegisterDirectoryModifiers(Host host)
     {
@@ -39,9 +39,9 @@ public class GenerateHost : MonoBehaviour
         }
     }
 
-    public void PopulateHost(Host host, int maxEntities)
+    public void PopulateHost(Host host, int maxEntities, int maxCommands, int maxDirectoryKey)
     {
-        StartCoroutine(WaitBeforePopulate(host, maxEntities));
+        StartCoroutine(WaitBeforePopulate(host, maxEntities, maxCommands, maxDirectoryKey));
     }
 
     public void GenerateCommands(Host host, int amount = 1, int depth = 2)
@@ -193,10 +193,7 @@ public class GenerateHost : MonoBehaviour
     private void CleanDepth(Transform t, int maxDepth, int maxDir, bool randomNumber = false, bool recusiveClean = false, int depth = 1)
     {
         List<Directory> directories = GetFirstDepthChildren(t);
-
-        if (maxDir >= directories.Count)
-            return;
-
+        
         if (depth > maxDepth)
             ClearDirectory(directories);
 
