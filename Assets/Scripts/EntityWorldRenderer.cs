@@ -50,12 +50,13 @@ public class EntityWorldRenderer : MonoBehaviour
 
     public void Attack()
     {
-
         RunAnimation("Attack");
     }
 
     public void TakeDamage(int damage)
     {
+        if (animator == null)
+            return;
         animator.Play("TakeDamage");
     }
 

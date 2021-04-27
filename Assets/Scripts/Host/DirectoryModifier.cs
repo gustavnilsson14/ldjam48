@@ -66,7 +66,7 @@ public class DirectoryModifier : MonoBehaviour
         return true;
     }
 
-    private void UnRegisterEntities()
+    public void UnRegisterEntities()
     {
         foreach (Entity entity in entitiesAffected)
         {

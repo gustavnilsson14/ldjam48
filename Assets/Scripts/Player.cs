@@ -63,6 +63,11 @@ public class Player : Entity
         overTime = 0;
         TakeDamage(1, "", "Your time on this server is up, the system damages your IP by 1");
     }
+    public void ClearModifiers()
+    {
+        activeModifiers.Clear();
+    }
+
     public void LevelUp()
     {
         maxIP+=2;

@@ -5,7 +5,10 @@ using UnityEngine;
 public class KeyEntity : Entity
 {
     public PublicKey publicKey;
-
+    public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
+    {
+        return false;
+    }
     public override string GetCatDescription()
     {
         List<string> result = new List<string> {

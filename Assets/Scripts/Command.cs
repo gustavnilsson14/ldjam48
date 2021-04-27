@@ -62,7 +62,7 @@ public class Command : MonoBehaviour
     }
     public virtual int GetTerminalTimePast(ParsedCommand parsedCommand)
     {
-        return speed;
+        return Mathf.Clamp(speed,1,int.MaxValue);
     }
     protected bool GetAdjacentDirectory(string argument, out Directory adjacentDirectory)
     {

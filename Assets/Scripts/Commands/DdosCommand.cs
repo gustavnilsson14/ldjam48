@@ -58,10 +58,11 @@ public class DdosCommand : Command
 
     public override int GetTerminalTimePast(ParsedCommand parsedCommand)
     {
+        int speed = this.speed;
         if (parsedCommand.flags.Contains("--quick"))
-            return 1;
+            speed -= 2;
         if (parsedCommand.flags.Contains("--heavy"))
-            return speed+1;
-        return speed;
+            speed += 1;
+        return Mathf.Clamp(speed, 1, int.MaxValue);
     }
 }
