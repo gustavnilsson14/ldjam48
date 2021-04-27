@@ -61,11 +61,7 @@ public class Player : Entity
         if (overTime < 10)
             return;
         overTime = 0;
-        TakeDamage(1, "", "Your time on this server is up, the system damages your IP by 1");
-    }
-    public void ClearModifiers()
-    {
-        activeModifiers.Clear();
+        TakeDamage(1, "", "Your time on this server is up, the system <color=red>damages your IP by 1</color>");
     }
 
     public void LevelUp()
@@ -79,7 +75,7 @@ public class Player : Entity
         currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
         if (currentCharacters > 0)
             return;
-        TakeDamage(1, "", "Your input characters are depleted on this server, the system damages your IP by 1");
+        TakeDamage(1, "", "Your input characters are depleted on this server, the system <color=red>damages your IP by 1</color>");
     }
     public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
     {
@@ -91,12 +87,14 @@ public class Player : Entity
     protected void PrintDamage(int amount, string source, string overrideTextLine)
     {
         source = (source == "") ? "Something" : source;
-        IOTerminal.I.AppendTextLine((overrideTextLine == "") ? $"{source} interrupts your IP for {amount} damage" : overrideTextLine);
+        IOTerminal.I.AppendTextLine((overrideTextLine == "") ? $"{source} <color=red>interrupts your IP for {amount} damage</color>" : overrideTextLine);
     }
     public float GetCharacterCostMultiplier()
     {
         float multiplier = 1;
-        List<DirectoryModifier> charactersMultipliers = activeModifiers.FindAll(modifier => modifier is CharactersMultiplier);
+        if (currentDirectory == null)
+            return multiplier;
+        List<DirectoryModifier> charactersMultipliers = currentDirectory.GetModifiers().FindAll(modifier => modifier is CharactersMultiplier);
         foreach (DirectoryModifier modifier in charactersMultipliers)
         {
             multiplier += (modifier as CharactersMultiplier).multiplier;
@@ -106,7 +104,9 @@ public class Player : Entity
     public float GetRealTimeMultiplier()
     {
         float multiplier = 1;
-        List<DirectoryModifier> charactersMultipliers = activeModifiers.FindAll(modifier => modifier is TimeMultiplier);
+        if (currentDirectory == null)
+            return multiplier;
+        List<DirectoryModifier> charactersMultipliers = currentDirectory.GetModifiers().FindAll(modifier => modifier is TimeMultiplier);
         foreach (DirectoryModifier modifier in charactersMultipliers)
         {
             multiplier += (modifier as TimeMultiplier).multiplier;
@@ -151,9 +151,46 @@ public class Player : Entity
     {
         return (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()) != null);
     }
+    protected override void OnEntityEnterMyDirectory(Directory from, Directory current, Entity entity)
+    {
+        base.OnEntityEnterMyDirectory(from, current, entity);
+        if (entity == this)
+            return;
+        IOTerminal.I.AppendTextLine($"Something just entered this directory from {from.name}");
+    }
+    protected override void OnEntityExitMyDirectory(Directory current, Directory to, Entity entity)
+    {
+        base.OnEntityExitMyDirectory(current, to, entity);
+        if (entity == this)
+            return;
+        string entityName = (!entity.isDiscovered) ? "Something" : entity.name;
+        IOTerminal.I.AppendTextLine($"{entityName} just left this directory into {to.name}");
+    }
+
     public override string GetCatDescription()
     {
         return "This is you\n" + base.GetCatDescription();
+    }
+    public override void MoveTo(Directory directory)
+    {
+        if (currentDirectory == null)
+        {
+            base.MoveTo(directory);
+            return;
+        }
+        List<DirectoryModifier> previousModifiers = currentDirectory.GetModifiers();
+        base.MoveTo(directory);
+        DisplayPermissionsFeeling(previousModifiers, currentDirectory.GetModifiers());
+    }
+
+    private void DisplayPermissionsFeeling(List<DirectoryModifier> previousModifiers, List<DirectoryModifier> currentModifiers)
+    {
+        if (previousModifiers.Count == currentModifiers.Count)
+            return;
+        string feelings = "The chmod feels more <color=#f0f>rigid</color> in this directory";
+        if (previousModifiers.Count > currentModifiers.Count)
+            feelings = "The chmod feels more <color=#088>flexible</color> in this directory";
+        IOTerminal.I.AppendTextLine(feelings);
     }
 }
 public class MoveEvent : UnityEvent<Directory, Directory> { }

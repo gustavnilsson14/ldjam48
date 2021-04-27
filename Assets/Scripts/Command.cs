@@ -37,7 +37,7 @@ public class Command : MonoBehaviour
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
         bool validationResult = true;
-        List<DirectoryModifier> modifiers = Player.I.activeModifiers.FindAll(mod => mod is CommandDeactivator);
+        List<DirectoryModifier> modifiers = Player.I.currentDirectory.GetModifiers().FindAll(mod => mod is CommandDeactivator);
         foreach (DirectoryModifier modifier in modifiers)
         {
             CommandDeactivator deactivator = modifier as CommandDeactivator;

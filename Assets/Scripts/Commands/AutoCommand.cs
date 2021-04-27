@@ -10,6 +10,7 @@ public class AutoCommand : Command
     protected bool runOnTakeDamage = false;
     protected bool runOnMove = false;
     protected bool runOnCommand = false;
+    protected bool runOnEntityEnterMyDirectory = false;
     private float lastExecution;
 
     private void Start()
@@ -17,6 +18,7 @@ public class AutoCommand : Command
         Player.I.onTakeDamage.AddListener(OnTakeDamage);
         Player.I.onMove.AddListener(OnMove);
         Player.I.onCommand.AddListener(OnCommand);
+        Player.I.onEntityEnterMyDirectory.AddListener(OnEntityEnterMyDirectory);
     }
 
     public override bool Run(out string result, ParsedCommand parsedCommand)
@@ -31,6 +33,7 @@ public class AutoCommand : Command
         runOnTakeDamage = parsedCommand.flags.Contains("--onTakeDamage");
         runOnMove= parsedCommand.flags.Contains("--onMove");
         runOnCommand = parsedCommand.flags.Contains("--onCommand");
+        runOnEntityEnterMyDirectory = parsedCommand.flags.Contains("--onEntityEnterMyDirectory");
         result = $"{this.parsedCommand.name} will now run {string.Join(", ", parsedCommand.flags)}";
         return true;
     }
@@ -42,6 +45,7 @@ public class AutoCommand : Command
         runOnTakeDamage = false;
         runOnMove = false;
         runOnCommand = false;
+        runOnEntityEnterMyDirectory = false;
     }
 
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
@@ -103,4 +107,12 @@ public class AutoCommand : Command
             return;
         RunAutoCommand();
     }
+
+    private void OnEntityEnterMyDirectory(Directory arg0, Directory arg1, Entity arg2)
+    {
+        if (!runOnEntityEnterMyDirectory)
+            return;
+        RunAutoCommand();
+    }
+
 }

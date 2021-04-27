@@ -10,7 +10,7 @@ public class IPRestoreOnCommand : DirectoryModifier
         base.OnCommand(command, parsedCommand);
         if (!CheckProcLimit())
             return;
-        foreach (Entity entity in entitiesAffected)
+        foreach (Entity entity in GetAffectedEntities())
         {
             entity.Heal(heal);
         }

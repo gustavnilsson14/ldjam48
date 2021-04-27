@@ -89,6 +89,24 @@ public class Directory : MonoBehaviour
         path = string.Join("/", paths.Select(directory => directory.name));
         return true;
     }
+    public List<DirectoryModifier> GetModifiers() {
+        List<DirectoryModifier> result = new List<DirectoryModifier>();
+        if (GetClosestParent(out Directory parent))
+            result.AddRange(parent.GetModifiers());
+        result.AddRange(GetLocalModifiers());
+        return result;
+    }
+
+    private List<DirectoryModifier> GetLocalModifiers()
+    {
+        List<DirectoryModifier> result = new List<DirectoryModifier>();
+        result.AddRange(GetComponents<DirectoryModifier>());
+        foreach (Entity entity in GetEntities())
+        {
+            result.AddRange(entity.GetComponents<DirectoryModifier>());
+        }
+        return result;
+    }
 
     public int GetDepth()
     {
@@ -130,6 +148,14 @@ public class Directory : MonoBehaviour
         return result;
     }
 
+    public bool test = false;
+    private void Update()
+    {
+        if (!test)
+            return;
+        test = false;
+        Debug.Log(string.Join(", ", GetModifiers()));
+    }
 }
 public class PathNode {
     public int distance;

@@ -14,6 +14,7 @@ public class CdCommand : Command
         result = "";
         return true;
     }
+
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
         if (!base.ValidateParsedCommand(out result, parsedCommand))
@@ -55,10 +56,7 @@ public class CdCommand : Command
                         return false;
                     break;
                 }
-
-                List<Directory> children = new List<Directory>();
-                children.AddRange(HostHandler.I.currentHost.GetComponentsInChildren<Directory>());
-                directory = children.Find(x => x.name == parsedCommand.arguments[0]);
+                directory = Player.I.currentDirectory.GetAdjacentDirectories().Find(x => x.name == parsedCommand.arguments[0]);
                 break;
         }
         result = "General error, no directory";

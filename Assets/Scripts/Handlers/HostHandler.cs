@@ -41,7 +41,6 @@ public class HostHandler : MonoBehaviour
 
     public void onSsh(SshKey sshKey)
     {
-        Player.I.ClearModifiers();
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
