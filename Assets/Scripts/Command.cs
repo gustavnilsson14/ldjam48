@@ -19,13 +19,17 @@ public class Command : MonoBehaviour
 
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
-        if (effectPrefab != null)
-        {
-            if (ValidateParsedCommand(out result, parsedCommand))
-                Destroy(Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform),10);
-        }
+        bool validation = ValidateParsedCommand(out result, parsedCommand);
+        if (validation)
+            RenderEffect();
+        return validation;
+    }
+    private void RenderEffect() {
 
-        return ValidateParsedCommand(out result, parsedCommand);
+        if (effectPrefab == null)
+            return;
+        GameObject newEffect = Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform);
+        Destroy(newEffect, 10);
     }
 
     public virtual void LevelUp()
@@ -37,13 +41,12 @@ public class Command : MonoBehaviour
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
         bool validationResult = true;
-        List<DirectoryModifier> modifiers = Player.I.currentDirectory.GetModifiers().FindAll(mod => mod is CommandDeactivator);
-        foreach (DirectoryModifier modifier in modifiers)
+        List<ICommandDisabler> disablers = Player.I.GetActiveICommandDisablers();
+        foreach (ICommandDisabler disabler in disablers)
         {
-            CommandDeactivator deactivator = modifier as CommandDeactivator;
-            if (deactivator.command != this)
+            if (disabler.GetCommand() != this)
                 continue;
-            result += result = $"{deactivator.GetSource()} deactivates {name}\n";
+            result += result = $"{disabler.GetSource()} deactivates {name}\n";
             validationResult = false;
         }
         return validationResult;
@@ -72,13 +75,34 @@ public class Command : MonoBehaviour
             return false;
         return true;
     }
+    public CommandEntity InstantiateEntity(Transform parent)
+    {
+        return Instantiate(HostHandler.I.commandEntityPrefab, parent);
+    }
     protected bool ArgumentIsEntity(string argument)
     {
+        return ArgumentIsEntity(argument, out Entity entity);
+    }
+    protected bool ArgumentIsEntity(string argument, out Entity entity)
+    {
         List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        Entity target = entities.Find(entity => entity.name == argument);
-        if (target == null)
-            return false;
-        return true;
+        entity = entities.Find(e => e.name == argument);
+        return (entity != null);
+    }
+    protected bool ArgumentIsEntityComponent(string argument, Entity targetEntity)
+    {
+        return ArgumentIsEntityComponent(argument, targetEntity, out EntityComponent targetComponent);
+    }
+    protected bool ArgumentIsEntityComponent(string argument, Entity targetEntity, out EntityComponent targetComponent)
+    {
+        targetComponent = null;
+        foreach (EntityComponent entityComponent in targetEntity.GetComponents<EntityComponent>())
+        {
+            if (entityComponent.GetComponentId() != argument)
+                continue;
+            targetComponent = entityComponent;
+        }
+        return (targetComponent != null);
     }
     protected bool ArgumentIsUserHostPair(string argument)
     {
@@ -90,10 +114,9 @@ public class Command : MonoBehaviour
     protected bool ArgumentIsPathFromRoot(string argument) {
         return HostHandler.I.currentHost.GetDirectoryByPath(argument, out Directory directory);
     }
-
-    public CommandEntity InstantiateEntity(Transform parent)
+    protected bool ArgumentIsPid(string argument)
     {
-        return Instantiate(HostHandler.I.commandEntityPrefab, parent);
+        return ProcessHandler.I.GetProcess(out IProcess process, argument);
     }
 }
 public class ParsedCommand

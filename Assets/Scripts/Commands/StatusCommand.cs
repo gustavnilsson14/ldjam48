@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class StatusCommand : Command
 {
@@ -18,7 +19,28 @@ public class StatusCommand : Command
         result += "\nCharacters: " + Player.I.currentCharacters;
         result += "\nTime: " + Player.I.GetTimeLeft();
         result += "\nAdjacencies: " + string.Join(", ", directories);
-        result += "\nCurrent modifiers: \n" + string.Join("\n", Player.I.currentDirectory.GetModifiers().Select(activeModifier => activeModifier.GetDescription()));
+        IEnumerable<string> modifierDescriptions = Player.I.currentDirectory.GetModifiers().Select(activeModifier => activeModifier.GetDescription());
+        if (GetStatusList(out string modifiersDescription, modifierDescriptions))
+        {
+            result += "\nCurrent modifiers: ";
+            result += modifiersDescription;
+        }
+        IEnumerable<string> conditionDescriptions = Player.I.GetAllConditions().Select(condition => condition.GetDescription());
+        if (GetStatusList(out string conditionsDescription, conditionDescriptions))
+        {
+            result += "\nCurrent conditions: ";
+            result += conditionsDescription;
+        }
+        return true;
+    }
+
+    private bool GetStatusList(out string result, IEnumerable<string> strings)
+    {
+        result = "";
+        if (strings.Count() == 0)
+            return false;
+        result = "\n    ";
+        result += string.Join("\n    ", strings);
         return true;
     }
 }

@@ -10,7 +10,7 @@ public class LookCommand : Command
         if (!base.Run(out result, parsedCommand))
             return false;
         List<Entity> entities = new List<Entity>();
-        entities.AddRange(GetLookDirectory(parsedCommand).GetEntities());
+        entities.AddRange(GetTargetDirectory(parsedCommand).GetEntities());
         entities.Remove(Player.I);
         if (entities.Count == 0)
         {
@@ -22,7 +22,7 @@ public class LookCommand : Command
         result = $"{currentEntity.name}";
         return true;
     }
-    private Directory GetLookDirectory(ParsedCommand parsedCommand) {
+    private Directory GetTargetDirectory(ParsedCommand parsedCommand) {
         if (!parsedCommand.HasArguments())
             return Player.I.currentDirectory;
         return Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]);

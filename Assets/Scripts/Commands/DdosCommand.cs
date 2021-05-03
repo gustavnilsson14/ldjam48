@@ -10,21 +10,20 @@ public class DdosCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        Entity target = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
+        ComponentWithIP target = GetTarget(parsedCommand);
         result = ApplyTo(target, parsedCommand);
         return true;
     }
-    private string ApplyTo(Entity target, ParsedCommand parsedCommand)
+    private string ApplyTo(ComponentWithIP target, ParsedCommand parsedCommand)
     {
         int damage = GetCurrentDamage(parsedCommand);
         bool stillAlive = target.TakeDamage(damage);
-        string result = string.Format("{0} took {1} IP damage", target.name, damage);
+        string result = $"{target.GetName()} took {damage} IP damage";
         string verboseFlag = parsedCommand.flags.Find(flag => flag == "--verbose");
 
         if (verboseFlag != null) {
             string verbose = (stillAlive ? "\n{0} still has integrity" : "\n{0} crumbles into bits");
-            result += string.Format(verbose, target.name);
+            result += (stillAlive ? $"\n{target.GetName()} still has integrity" : $"\n{target.GetName()} crumbles into bits");
         }
         if (!stillAlive)
             IOTerminal.I.destroyedEntities.Add(target.name);
@@ -38,20 +37,32 @@ public class DdosCommand : Command
         if (parsedCommand.flags.Find(flag => flag == "--strong") != null)
             result += 2;
         return result;
-
+    }
+    private ComponentWithIP GetTarget(ParsedCommand parsedCommand) {
+        List<Entity> entities = Player.I.currentDirectory.GetEntities();
+        Entity targetEntity = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
+        if (parsedCommand.arguments.Count == 1)
+            return targetEntity;
+        ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity, out EntityComponent targetComponent);
+        return targetComponent;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {
         if (!base.ValidateParsedCommand(out result, parsedCommand))
             return false;
-        result = "ddos requires the first argument to be a target file or process id (pid)";
+        result = $"{name} requires the first argument to be a target file or process id (pid)";
         if (!parsedCommand.HasArguments())
             return false;
         result = parsedCommand.arguments[0] + " is not a file or process id (pid)";
-        if (!ArgumentIsEntity(parsedCommand.arguments[0]))
+        if (!ArgumentIsEntity(parsedCommand.arguments[0], out Entity targetEntity))
             return false;
-        result = string.Format("ddos cannot be used with more than {0} flags", maxFlags);
+        result = $"{name} cannot be used with more than {maxFlags} flags";
         if (parsedCommand.flags.Count > maxFlags)
+            return false;
+        if (parsedCommand.arguments.Count == 1)
+            return true;
+        result = $"{parsedCommand.arguments[1]} is not a component of the target";
+        if (!ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity))
             return false;
         return true;
     }

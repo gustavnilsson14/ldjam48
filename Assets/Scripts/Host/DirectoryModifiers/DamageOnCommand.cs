@@ -8,6 +8,8 @@ public class DamageOnCommand : DirectoryModifier
     protected override void OnCommand(Command command, ParsedCommand parsedCommand)
     {
         base.OnCommand(command, parsedCommand);
+        if (IsDisabled())
+            return;
         foreach (Entity entity in GetAffectedEntities())
         {
             if (entity.TakeDamage(damage))
@@ -17,6 +19,6 @@ public class DamageOnCommand : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{GetSource()}\nEach command you type damages all entities within by {damage}";
+        return $"{GetSource()}\nEach command you type damages all entities within by {damage}. pid: {GetPid()}";
     }
 }

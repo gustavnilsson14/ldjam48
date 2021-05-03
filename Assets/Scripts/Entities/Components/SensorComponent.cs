@@ -22,13 +22,11 @@ public class SensorComponent : EntityComponent
         currentTarget = null;
         EntityFaction myFaction = entityBody.faction;
         List<Directory> directories = entityBody.currentDirectory.GetDirectoriesByDepth(scanDepth);
-        List<Entity> targets = new List<Entity>();
-        foreach (Directory directory in directories)
-        {
-            targets.AddRange(directory.GetEntities().FindAll(e => e.faction != myFaction && !targets.Contains(e)));
-        }
+        if (!Directory.GetAllEntitiesInDirectories(out List<Entity> targets, directories))
+            return;
         if (targets.Contains(Player.I) && Player.I.IsSafeInDirectory(Player.I.currentDirectory))
             targets.Remove(Player.I);
+        targets = targets.FindAll(e => e.faction != myFaction);
         if (targets.Count == 0)
             return;
         System.Random random = new System.Random();

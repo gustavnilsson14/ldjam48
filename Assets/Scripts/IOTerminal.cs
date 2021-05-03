@@ -285,7 +285,6 @@ public class IOTerminal : MonoBehaviour
             AppendTextLine("<color=red>ERROR:</color> " + result);
             return;
         }
-
         CommandPassed(command, parsedCommand);
         AppendTextLine(result);
     }

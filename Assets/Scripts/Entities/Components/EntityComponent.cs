@@ -3,21 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityComponent : ComponentWithIP
+public class EntityComponent : Actor
 {
-    public int speed = 4;
-    protected float currentMomentum = 0;
     protected Entity entityBody;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         entityBody = GetComponent<Entity>();
-    }
-    private void Start()
-    {
-        IOTerminal.I.onCommand.AddListener(OnCommand);
-        IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
     }
     protected virtual bool GetSensorComponent(out SensorComponent sensorComponent) {
         sensorComponent = GetComponent<SensorComponent>();
@@ -25,24 +18,22 @@ public class EntityComponent : ComponentWithIP
             return false;
         return true;
     }
-    protected virtual void OnCommand(Command command, ParsedCommand parsedCommand)
-    {
+    public virtual string GetComponentId() {
+        return $"{Array.IndexOf(GetComponents<EntityComponent>(),this)}-{GetType().ToString().ToLower().Replace("component","")}";
+    }
 
-    }
-    protected virtual void OnTerminalTimePast(int terminalTimePast)
+    public override string GetName()
     {
-        if (speed == 0)
-            return;
-        currentMomentum += terminalTimePast;
-        int turnsToTake = Mathf.FloorToInt((float)currentMomentum / (float)speed);
-        currentMomentum -= turnsToTake * speed;
-        for (int i = 0; i < turnsToTake; i++)
-        {
-            Run();
-        }
+        return $"{GetComponentId()} on {name}";
     }
-    protected virtual void Run()
+    public override string GetDescription()
     {
-        
+        return $"{GetComponentId()}: {base.GetDescription()}";
+    }
+    public override void Die()
+    {
+        alive = false;
+        onDeath.Invoke();
+        GameObject.Destroy(this);
     }
 }

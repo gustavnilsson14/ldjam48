@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,6 @@ public class Entity : ComponentWithIP
 {
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
-
-    [TextArea(2, 10)]
-    public string description;
 
     [Header("Events")]
     public DirectoryMoveEvent onEntityEnterMyDirectory = new DirectoryMoveEvent();
@@ -66,10 +64,22 @@ public class Entity : ComponentWithIP
         List<string> result = new List<string> {
             GetBinaryStatic(),
             string.Format("IP: {0}", currentIP),
-            description
+            description,
+            GetEntityComponentsDescriptions()
+
         };
         onCat.Invoke();
         return string.Join("\n", result);
+    }
+
+    protected virtual string GetEntityComponentsDescriptions()
+    {
+        string result = "Components;";
+        foreach (EntityComponent entityComponent in GetComponents<EntityComponent>())
+        {
+            result += $"\n    {entityComponent.GetDescription()}";
+        }
+        return result;
     }
 
     public virtual void Attack()
@@ -116,6 +126,9 @@ public class Entity : ComponentWithIP
             multiplier += (modifier as DamageMultiplier).multiplier;
         }
         return Mathf.Clamp(multiplier, 0, Mathf.Infinity);
+    }
+    public List<Condition> GetAllConditions() {
+        return new List<Condition>(GetComponents<Condition>()).FindAll(condition => condition.IsActiveCondition());
     }
 }
 public class CatEvent : UnityEvent { }

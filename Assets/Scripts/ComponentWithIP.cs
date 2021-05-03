@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class ComponentWithIP : MonoBehaviour
 {
     public Directory currentDirectory;
 
+    [TextArea(2, 10)]
+    public string description;
     public int maxIP;
     protected int currentIP;
     public bool alive = true;
@@ -45,6 +48,11 @@ public class ComponentWithIP : MonoBehaviour
         return true;
     }
 
+    public virtual string GetName()
+    {
+        return name;
+    }
+
     public virtual void Die()
     {
         alive = false;
@@ -54,6 +62,10 @@ public class ComponentWithIP : MonoBehaviour
     public int GetCurrentIP()
     {
         return currentIP;
+    }
+    public virtual string GetDescription()
+    {
+        return description;
     }
 }
 

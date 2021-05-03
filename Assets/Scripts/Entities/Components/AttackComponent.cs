@@ -22,7 +22,7 @@ public class AttackComponent : EntityComponent
         Attack(target);
     }
 
-    protected void Attack(ComponentWithIP target) {
+    protected virtual void Attack(ComponentWithIP target) {
         if (!IsTargetInRange(target))
             return;
         int damage = Mathf.FloorToInt((float)damageBase * entityBody.GetDamageMultiplier());
@@ -30,7 +30,7 @@ public class AttackComponent : EntityComponent
         DealDamage(target, damage);
     }
 
-    protected void DealDamage(ComponentWithIP target, int damage) {
+    protected virtual void DealDamage(ComponentWithIP target, int damage) {
 
         if (entityBody.isDiscovered)
         {

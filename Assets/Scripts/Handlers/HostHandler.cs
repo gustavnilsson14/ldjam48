@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HostHandler : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class HostHandler : MonoBehaviour
     private int maxDepth = 2;
     private int maxCommands = 1;
     private int maxDirectoryKeys = 1;
+
+    public SshEvent onSsh = new SshEvent();
 
     private void Awake()
     {
@@ -39,7 +42,7 @@ public class HostHandler : MonoBehaviour
         exploredHosts.Add(currentHost);
     }
 
-    public void onSsh(SshKey sshKey)
+    public void OnSsh(SshKey sshKey)
     {
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
@@ -52,6 +55,7 @@ public class HostHandler : MonoBehaviour
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
         IOTerminal.I.DisplayLevelUp();
+        onSsh.Invoke(sshKey);
     }
     public List<Host> GetHosts(bool onlyAvailable = true)
     {
@@ -75,3 +79,5 @@ public class HostHandler : MonoBehaviour
     }
 
 }
+
+public class SshEvent : UnityEvent<SshKey> { }

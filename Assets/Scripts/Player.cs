@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class Player : Entity
     public int maxCharacters = 10000;
     public float currentSeconds = 0;
     private float maxSeconds = 60 * 10;
+
+    private float pausedSeconds = 0;
 
     public CommandEvent onCommand = new CommandEvent();
     public UnityEvent onRealTime = new UnityEvent();
@@ -50,9 +53,29 @@ public class Player : Entity
         ModifyCharacters(parsedCommand.GetCommandString());
         onCommand.Invoke(command, parsedCommand);
     }
+
+    public List<ICommandDisabler> GetActiveICommandDisablers()
+    {
+        List<ICommandDisabler> result = new List<ICommandDisabler>();
+        foreach (ICommandDisabler mod in currentDirectory.GetModifiers().FindAll(modifier => modifier is CommandDisablerModifier))
+        {
+            result.Add(mod);
+        }
+        foreach (ICommandDisabler mod in GetComponents<CommandDisablerCondition>())
+        {
+            result.Add(mod);
+        }
+        return result;
+    }
+
     private void ReduceRealTime()
     {
         float timePassed = Time.deltaTime * GetRealTimeMultiplier();
+        if (pausedSeconds > 0)
+        {
+            pausedSeconds -= Time.deltaTime;
+            return;
+        }
         currentSeconds -= Mathf.Clamp(timePassed, 0, Mathf.Infinity);
         onRealTime.Invoke();
         if (currentSeconds > 0)
@@ -181,6 +204,10 @@ public class Player : Entity
         List<DirectoryModifier> previousModifiers = currentDirectory.GetModifiers();
         base.MoveTo(directory);
         DisplayPermissionsFeeling(previousModifiers, currentDirectory.GetModifiers());
+    }
+    public void PauseRealTime(int time)
+    {
+        pausedSeconds = time;
     }
 
     private void DisplayPermissionsFeeling(List<DirectoryModifier> previousModifiers, List<DirectoryModifier> currentModifiers)

@@ -25,6 +25,7 @@ public class Directory : MonoBehaviour
         result.Add(parent);
         return result;
     }
+
     public void EntityEnter(Directory from, Entity entity) {
         onEntityEnter.Invoke(from, this, entity);
     }
@@ -105,7 +106,7 @@ public class Directory : MonoBehaviour
         {
             result.AddRange(entity.GetComponents<DirectoryModifier>());
         }
-        return result;
+        return result.FindAll(mod => !mod.IsDisabled());
     }
 
     public int GetDepth()
@@ -155,6 +156,24 @@ public class Directory : MonoBehaviour
             return;
         test = false;
         Debug.Log(string.Join(", ", GetModifiers()));
+    }
+    /*timestop: stops real time
+    disarm: disarms modifier*/
+
+    public static bool GetAllEntitiesInDirectories(out List<Entity> targets, List<Directory> directories)
+    {
+        targets = new List<Entity>();
+        List<Entity> result = new List<Entity>();
+        if (directories.Count == 0)
+            return false;
+        foreach (Directory directory in directories)
+        {
+            result.AddRange(directory.GetEntities().FindAll(e => !result.Contains(e)));
+        }
+        targets.AddRange(result);
+        if (targets.Count == 0)
+            return false;
+        return true;
     }
 }
 public class PathNode {

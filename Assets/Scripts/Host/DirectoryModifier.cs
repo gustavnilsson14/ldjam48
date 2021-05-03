@@ -4,20 +4,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectoryModifier : MonoBehaviour
+public class DirectoryModifier : MonoBehaviour, IProcess
 {
     public List<Directory> affectedDirectories = new List<Directory>();
     public int currentProcsOnEntities = -1;
     protected Directory directory;
+    private string pid;
+    private bool isDisabled = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         IOTerminal.I.onCommand.AddListener(OnCommand);
         IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
         Player.I.onRealTime.AddListener(OnRealTime);
         Register();
     }
-    public void Register()
+    public virtual void Register()
     {
         if (GetMyDirectory(out directory))
             return;
@@ -67,4 +69,24 @@ public class DirectoryModifier : MonoBehaviour
     protected virtual void OnRealTime() { }
     protected virtual void OnTerminalTimePast(int time) { }
     protected virtual void OnCommand(Command command, ParsedCommand parsedCommand) { }
+
+    public void SetPid(string pid)
+    {
+        this.pid = pid;
+    }
+
+    public string GetPid()
+    {
+        return this.pid;
+    }
+
+    public void Disable()
+    {
+        isDisabled = true;
+    }
+
+    public bool IsDisabled()
+    {
+        return isDisabled;
+    }
 }

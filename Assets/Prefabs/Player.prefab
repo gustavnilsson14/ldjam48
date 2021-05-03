@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1347863456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1347863457}
+  - component: {fileID: 1347863458}
+  m_Layer: 0
+  m_Name: sleep
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1347863457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347863456}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1347863458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347863456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93bcdc82bb4a0a42806a588eb9d0da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Pauses the terminals real time clock for the specified amount of time.
+    The longer time is paused, the more terminal time passes
+  extendedHelpText: 'Usage: sleep [seconds]'
+  speed: 2
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &942649355022545245
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,11 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9be877e006f26240a76488c173f45dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Finds any file on search term. Reduces IP if search term is too short.
   extendedHelpText: 'Usage: find [substring]'
-  speed: 2
+  speed: 8
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &2499074726644818333
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,8 +147,10 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Displays your public keys
   extendedHelpText: 'Usage: keys'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &2760016571857677258
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,11 +194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38c9f6bc0b42ce4a87ccdbb2e579da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Copies a file in your directory to a remote path
   extendedHelpText: 'Usage: cp [file] [pathFromRoot]'
-  speed: 0
+  speed: 10
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &2828140064733115421
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,13 +244,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8cafba65fc938489afeaf486354169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Allows you to execute another command
   extendedHelpText: "Usage: auto [commandName]\nFlags\n\t--onMove: Will run the command
     when you move\n\t--onTakeDamage: Will run the command when you take damage\n\t--onCommand:
     Will run the command when you input a command"
-  speed: 2
+  speed: 10
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &3078258250215848715
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,8 +299,10 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Displays file information, and stores programs for later use
   extendedHelpText: 'Usage: cat [fileInSameDirectory]'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &3078258251084227984
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,11 +346,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1c7386094d2ee4da5b79f09e4d2851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Clears the console
   extendedHelpText: 'Usage: clear'
   speed: 2
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &3884295862818155547
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,11 +396,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9bacdfb2fa844f4f8d0b819f93cb111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Moves a file in your directory to a remote path
   extendedHelpText: 'Usage: mv [file] [pathFromRoot]'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &4253127692062917263
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,11 +446,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fcb995c684f3d41951ca49156169a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 0
+  isAvailable: 1
   helpText: Reboot your terminal, reboots the game
   extendedHelpText: 'Usage: reboot'
-  speed: 2
+  speed: 3
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5020344813303867038
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,11 +496,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450ea6f1530605a488d68ebbcddd4063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Shows current connections
   extendedHelpText: 'Usage: netstat'
-  speed: 2
+  speed: 4
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073493945512670
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,8 +549,10 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Shows game help
   extendedHelpText: 
-  speed: 2
+  speed: 1
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
   help: 'Welcome to ldhaxxor 1.0
 
     You have an IP of {0}, when it runs out, you
@@ -553,8 +624,11 @@ MonoBehaviour:
   extendedHelpText: "Usage: ddos [file] [flags]\nFlags\n\t--heavy: Deals double damage,
     slow\n\t--strong: Deals 2 extra damage\n\t--quick: Requires only half terminal
     time"
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 5077173545692415162, guid: 8c5d9aeaedfa1ac4c86a94a7a02cc374,
+    type: 3}
   damageBase: 1
 --- !u!1 &5937073494237625831
 GameObject:
@@ -602,8 +676,11 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Displays the next file in the current directory
   extendedHelpText: 'Usage: look'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 5077173545692415162, guid: f569e967d4116354ea8fbf2ffefc0a8d,
+    type: 3}
   currentEntity: {fileID: 0}
 --- !u!1 &5937073494407856944
 GameObject:
@@ -651,8 +728,10 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Displays all available commands
   extendedHelpText: 'Usage: cmd'
-  speed: 2
+  speed: 3
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073494556071295
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,11 +775,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ca409b3b72bc74ab402bdd41b633ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Shows current directory
   extendedHelpText: 'Usage: pwd'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073494569921496
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +829,8 @@ Transform:
   - {fileID: 3918682999835834341}
   - {fileID: 1455601509793116930}
   - {fileID: 35600996478643185}
+  - {fileID: 4345547952631317999}
+  - {fileID: 1347863457}
   m_Father: {fileID: 5937073495786676435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -799,6 +882,8 @@ MonoBehaviour:
   extendedHelpText: 'Usage: status'
   speed: 2
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073495430283140
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5937073495430283139}
-  - component: {fileID: 5937073495430283138}
+  - component: {fileID: 1444183611}
   m_Layer: 0
   m_Name: cd
   m_TagString: Untagged
@@ -830,7 +915,7 @@ Transform:
   m_Father: {fileID: 5937073494569921511}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5937073495430283138
+--- !u!114 &1444183611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -839,14 +924,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5937073495430283140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ca409b3b72bc74ab402bdd41b633ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c2eceeffcb79c247ac90f06a8000fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Move to any path
   extendedHelpText: 'Usage: cd [path]'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073495649779897
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,8 +980,10 @@ MonoBehaviour:
   isAvailable: 1
   helpText: Move to any adjacent directory
   extendedHelpText: 'Usage: move [adjacentDirectory]'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5937073495786676437
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5937073495786676435}
   - component: {fileID: 5937073495786676436}
+  - component: {fileID: 1068020974}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -919,7 +1009,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5937073495786676437}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -496, y: -248.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -940,20 +1030,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
-  maxIP: 10
+  description: 
+  maxIP: 25
   alive: 1
   faction: 0
   directoryHistory: []
-  activeModifiers: []
-  description: 
   isDiscovered: 0
-  currentCharacters: 10000
-  maxCharacters: 10000
+  currentCharacters: 500
+  maxCharacters: 500
   currentSeconds: 0
   onRealTime:
     m_PersistentCalls:
       m_Calls: []
   test: 0
+--- !u!114 &1068020974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073495786676437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71d725ac5b19b2e4e9976139478f0672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  speed: 4
+  isRealTime: 1
+  lifeTime: 30
+  commandName: look
+  command: {fileID: 0}
 --- !u!1 &5937073495901655540
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,11 +1107,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b841b0b62267845b1c9321b759cd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 1
+  isAvailable: 0
   helpText: Displays all files and directories in the current directory
   extendedHelpText: 'Usage: ls [path]'
-  speed: 2
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 5077173545692415162, guid: bec8f554d791e53499e43d1414db94b8,
+    type: 3}
 --- !u!1 &5941905146592493981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1047,9 +1160,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAvailable: 1
   helpText: Logs into another host
-  extendedHelpText: 'Usage: cat [username@hostname]'
-  speed: 2
+  extendedHelpText: 'Usage: ssh [username@hostname]'
+  speed: 6
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &7264951361995103887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1209,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAvailable: 1
-  helpText: Displays all modifiers affecting your current directory
-  extendedHelpText: 'Usage: mods'
-  speed: 20
+  helpText: Displays all modifiers affecting a directory
+  extendedHelpText: 'Usage: mods [directory]'
+  speed: 5
   maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
+--- !u!1 &9141930940835917260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4345547952631317999}
+  - component: {fileID: 6674104229311216445}
+  m_Layer: 0
+  m_Name: kill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4345547952631317999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141930940835917260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6674104229311216445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141930940835917260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f0999050a34aa49a943261b4952b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Kills a process
+  extendedHelpText: 'Usage: kill [pid]'
+  speed: 10
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}

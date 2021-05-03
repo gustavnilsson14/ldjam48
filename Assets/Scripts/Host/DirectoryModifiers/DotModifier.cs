@@ -10,6 +10,8 @@ public class DotModifier : DirectoryModifier
     protected override void OnRealTime()
     {
         base.OnRealTime();
+        if (IsDisabled())
+            return;
         momentum += Time.deltaTime;
         if (momentum < speed)
             return;
@@ -21,6 +23,6 @@ public class DotModifier : DirectoryModifier
     }
     public override string GetDescription()
     {
-        return $"{GetSource()}\nEach {speed} seconds deals {damage} to all entities within";
+        return $"{GetSource()}\nEach {speed} seconds deals {damage} to all entities within. pid: {GetPid()}";
     }
 }

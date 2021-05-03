@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
-using System.Collections;
 
 public class CameraShake : MonoBehaviour
 {
@@ -19,12 +17,9 @@ public class CameraShake : MonoBehaviour
 
 	void Update()
 	{
-        if (test)
-        {
-			test = false;
-			Shake();
-		}
-		if (shakeDuration > 0) {
+		HandleDebug();
+
+        if (shakeDuration > 0) {
 			ShakeUpdate();
 			return;
 		}
@@ -32,8 +27,16 @@ public class CameraShake : MonoBehaviour
 		transform.localPosition = originalPos;
 	}
 
-	public void Shake() {
-		shakeDuration = 0.3f;
+    private void HandleDebug()
+    {
+		if (!test)
+			return;
+		test = false;
+		Shake();
+	}
+
+	public void Shake(float duration = 0.3f) {
+		shakeDuration = duration;
 	}
 
     private void ShakeUpdate()
