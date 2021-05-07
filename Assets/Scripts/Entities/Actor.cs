@@ -8,17 +8,15 @@ public class Actor : ComponentWithIP
     public int speed = 4;
     public bool isRealTime = false;
     protected float currentMomentum = 0;
-    
-    protected virtual void Start()
+
+    public override void StartRegister()
     {
+        base.StartRegister();
         IOTerminal.I.onCommand.AddListener(OnCommand);
         IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
         Player.I.onRealTime.AddListener(OnRealTime);
     }
-    protected virtual void OnCommand(Command command, ParsedCommand parsedCommand)
-    {
-
-    }
+    protected virtual void OnCommand(Command command, ParsedCommand parsedCommand) { }
     protected virtual void OnTerminalTimePast(int terminalTimePast)
     {
         if (isRealTime)
@@ -42,8 +40,5 @@ public class Actor : ComponentWithIP
             Run();
         }
     }
-    protected virtual void Run()
-    {
-
-    }
+    protected virtual void Run() { }
 }

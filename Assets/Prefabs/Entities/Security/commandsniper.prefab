@@ -16,11 +16,14 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 4
   isRealTime: 0
+  lootValue: 5
   damageBase: 1
   range: 2
-  onHitCondition: {fileID: 240607464399672139}
+  onHitConditions: []
+  onHitConditionsRoot: {fileID: 438433034771029652}
 --- !u!114 &4484580725670582555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,8 +40,10 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 12
   isRealTime: 0
+  lootValue: 5
   currentTarget: {fileID: 0}
   scanDepth: 2
 --- !u!1 &6304161651381630271
@@ -88,6 +93,7 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 3
   isRealTime: 0
   lifeTime: 8
@@ -114,12 +120,12 @@ PrefabInstance:
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: maxIP
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: faction
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}

@@ -9,18 +9,13 @@ public class Condition : Actor
     protected float currentLifeTime;
     private IConditionOrigin origin;
     private bool isStatic = false;
-
     protected override void Start()
     {
         base.Start();
         currentLifeTime = lifeTime;
     }
-    public virtual void Init(IConditionOrigin origin, Condition clone = null) {
+    public virtual void Init(IConditionOrigin origin) {
         this.origin = origin;
-        if (clone == null)
-            return;
-        lifeTime = clone.lifeTime;
-        isRealTime = clone.isRealTime;
     }
     public void SetToStatic() {
         isStatic = true;

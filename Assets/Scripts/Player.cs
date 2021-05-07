@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class Player : Entity
 {
     public static Player I;
-
     private List<Command> commands = new List<Command>();
 
     public int currentCharacters = 0;
@@ -20,6 +19,10 @@ public class Player : Entity
 
     public CommandEvent onCommand = new CommandEvent();
     public UnityEvent onRealTime = new UnityEvent();
+    public EntityComponentEvent onInstall = new EntityComponentEvent();
+    public EntityComponentEvent onUnInstall = new EntityComponentEvent();
+
+    private List<string> takeDamageMessage = new List<string>();
 
     public bool test = false;
     private float overTime;
@@ -40,13 +43,18 @@ public class Player : Entity
     {
         IOTerminal.I.onCommand.AddListener(OnCommand);
     }
+
     private void Update()
     {
         ReduceRealTime();
         if (!test)
             return;
         test = false;
-        TakeDamage(1, "");
+        AttackComponent source = gameObject.AddComponent<AttackComponent>();
+        source.StartRegister();
+        source.damageBase = 4;
+        TakeHit(source, out int armorDamageTaken, out int bodyDamageTaken);
+        Destroy(source);
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
@@ -67,7 +75,6 @@ public class Player : Entity
         }
         return result;
     }
-
     private void ReduceRealTime()
     {
         float timePassed = Time.deltaTime * GetRealTimeMultiplier();
@@ -84,7 +91,7 @@ public class Player : Entity
         if (overTime < 10)
             return;
         overTime = 0;
-        TakeDamage(1, "", "Your time on this server is up, the system <color=red>damages your IP by 1</color>");
+        //TakeDamage(1, "", "Your time on this server is up, the system <color=red>damages your IP by 1</color>");
     }
 
     public void LevelUp()
@@ -98,19 +105,40 @@ public class Player : Entity
         currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
         if (currentCharacters > 0)
             return;
-        TakeDamage(1, "", "Your input characters are depleted on this server, the system <color=red>damages your IP by 1</color>");
+        //TakeDamage(1, "", "Your input characters are depleted on this server, the system <color=red>damages your IP by 1</color>");
     }
-    public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
+    public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
     {
-        if (alive)
-            PrintDamage(amount, source, overrideTextLine);
+        takeDamageMessage.Add($"{source.GetDamageSourceName()} <color=red>hits you!</color>");
+        bool result = base.TakeHit(source, out armorDamageTaken, out bodyDamageTaken);
+        CommitTakeDamageMessage();
+        return result;
+    }
+    protected override bool ArmorAbsorbedHit(IDamageSource source, ref int remainingDamage, out int damageTaken)
+    {
+        bool result = base.ArmorAbsorbedHit(source, ref remainingDamage, out damageTaken);
+        if (!GetComponent<ArmorComponent>(out ArmorComponent armor))
+            return result;
+        if (!armor.IsProtecting(this, source))
+            return result;
+        string color = result ? "#088" : "#f0f";
+        takeDamageMessage.Add($"Your component {armor.GetCurrentIdentifier()} absorbed <color={color}>{damageTaken} IP damage{(!result ? ", and was deleted" : "")}</color>");
+        if (result)
+            Camera.main.GetComponent<CameraShake>().Shake(CameraShakeType.HIT);
+        return result;
+    }
+    public override bool SurvivedHit(IDamageSource source, ref int remainingDamage, out int damageTaken)
+    {
+        bool result = base.SurvivedHit(source, ref remainingDamage, out damageTaken);
         Camera.main.GetComponent<CameraShake>().Shake();
-        return base.TakeDamage(amount);
+        takeDamageMessage.Add($"Your integrity was interrupted by <color=red>{damageTaken} IP damage</color>");
+        return result;
     }
-    protected void PrintDamage(int amount, string source, string overrideTextLine)
+
+    private void CommitTakeDamageMessage()
     {
-        source = (source == "") ? "Something" : source;
-        IOTerminal.I.AppendTextLine((overrideTextLine == "") ? $"{source} <color=red>interrupts your IP for {amount} damage</color>" : overrideTextLine);
+        IOTerminal.I.AppendTextLine(string.Join("\n", takeDamageMessage));
+        takeDamageMessage.Clear();
     }
     public float GetCharacterCostMultiplier()
     {
@@ -189,7 +217,10 @@ public class Player : Entity
         string entityName = (!entity.isDiscovered) ? "Something" : entity.name;
         IOTerminal.I.AppendTextLine($"{entityName} just left this directory into {to.name}");
     }
-
+    public List<EntityComponent> GetInstalledComponents()
+    {
+        return new List<EntityComponent>(GetComponents<EntityComponent>());
+    }
     public override string GetCatDescription()
     {
         return "This is you\n" + base.GetCatDescription();
@@ -205,11 +236,25 @@ public class Player : Entity
         base.MoveTo(directory);
         DisplayPermissionsFeeling(previousModifiers, currentDirectory.GetModifiers());
     }
+    public bool InstallComponent(out EntityComponent installedComponent, StoredObject storedObject)
+    {
+        installedComponent = Player.I.gameObject.AddComponent(storedObject.objectType) as EntityComponent;
+        if (installedComponent == null)
+            return false;
+        ReflectionUtil.ApplyStoredObject(storedObject, installedComponent);
+        installedComponent.SetActiveState(true);
+        onInstall.Invoke(installedComponent);
+        return true;
+    }
+    public void UnInstallComponent(EntityComponent entityComponent)
+    {
+        Destroy(entityComponent);
+        onUnInstall.Invoke(entityComponent);
+    }
     public void PauseRealTime(int time)
     {
         pausedSeconds = time;
     }
-
     private void DisplayPermissionsFeeling(List<DirectoryModifier> previousModifiers, List<DirectoryModifier> currentModifiers)
     {
         if (previousModifiers.Count == currentModifiers.Count)
@@ -221,3 +266,4 @@ public class Player : Entity
     }
 }
 public class MoveEvent : UnityEvent<Directory, Directory> { }
+public class EntityComponentEvent : UnityEvent<EntityComponent> { }

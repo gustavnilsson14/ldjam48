@@ -29,7 +29,7 @@ public class FindCommand : Command
         damage -= search.Length;
         if (damage < 1)
             return true;
-        Player.I.TakeDamage(damage, "Search");
+        //Player.I.TakeDamage(damage, "Search");
         return true;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)

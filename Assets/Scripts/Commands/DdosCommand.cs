@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DdosCommand : Command
+public class DdosCommand : Command, IDamageSource
 {
     public int damageBase = 1;
+    private int currentTotalDamage;
+
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
@@ -16,19 +18,27 @@ public class DdosCommand : Command
     }
     private string ApplyTo(ComponentWithIP target, ParsedCommand parsedCommand)
     {
-        int damage = GetCurrentDamage(parsedCommand);
-        bool stillAlive = target.TakeDamage(damage);
-        string result = $"{target.GetName()} took {damage} IP damage";
-        string verboseFlag = parsedCommand.flags.Find(flag => flag == "--verbose");
-
-        if (verboseFlag != null) {
-            string verbose = (stillAlive ? "\n{0} still has integrity" : "\n{0} crumbles into bits");
-            result += (stillAlive ? $"\n{target.GetName()} still has integrity" : $"\n{target.GetName()} crumbles into bits");
-        }
-        if (!stillAlive)
+        currentTotalDamage = GetCurrentDamage(parsedCommand);
+        bool isDead = target.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken);
+        bool isVerbose = (parsedCommand.flags.Find(flag => flag == "--verbose") != null);
+        if (isDead)
             IOTerminal.I.destroyedEntities.Add(target.name);
+        return GetOutput(isVerbose, isDead, target, armorDamageTaken, bodyDamageTaken);
+    }
+
+    private string GetOutput(bool isVerbose, bool isDead, ComponentWithIP target, int armorDamageTaken, int bodyDamageTaken)
+    {
+        string result = $"{target.GetName()} recieved a force of {StringUtil.ColorWrap($"{currentTotalDamage} IP damage", Color.red)}";
+        if (!isVerbose)
+            return result;
+        if (armorDamageTaken > 0)
+            result += $"\nThe IP armor of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {armorDamageTaken}","#f0f")}";
+        if (bodyDamageTaken > 0)
+            result += $"\nThe IP of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {bodyDamageTaken}", "#088")}";
+        result += (isDead ? $"\n{target.GetName()} {StringUtil.ColorWrap($"crumbles into bits", Color.red)}" : $"\n{target.GetName()} still has integrity");
         return result;
     }
+
     private int GetCurrentDamage(ParsedCommand parsedCommand)
     {
         int result = Mathf.FloorToInt((float)damageBase * Player.I.GetDamageMultiplier());
@@ -75,5 +85,20 @@ public class DdosCommand : Command
         if (parsedCommand.flags.Contains("--heavy"))
             speed += 1;
         return Mathf.Clamp(speed, 1, int.MaxValue);
+    }
+
+    public int GetDamageBase()
+    {
+        return damageBase;
+    }
+
+    public int GetTotalDamage()
+    {
+        return currentTotalDamage;
+    }
+
+    public string GetDamageSourceName()
+    {
+        return "A ddos command";
     }
 }

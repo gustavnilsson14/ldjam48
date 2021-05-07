@@ -12,14 +12,6 @@ public class CommandDisablerCondition : Condition, ICommandDisabler
         base.Start();
         RegisterCommand();
     }
-    public override void Init(IConditionOrigin origin, Condition clone = null)
-    {
-        base.Init(origin, clone);
-        if (clone == null)
-            return;
-        commandName = (clone as CommandDisablerCondition).commandName;
-        RegisterCommand();
-    }
     private void RegisterCommand()
     {
         List<Command> commands = new List<Command>();

@@ -25,7 +25,6 @@ public class DirectoryWorldRenderer : MonoBehaviour
             RunAnimation("MoveDown");
         if (directory.GetDepth() < origin.GetDepth())
             RunAnimation("MoveUp");
-
         if (Player.I.IsSafeInDirectory(directory))
         {
             RunAnimation("Friendly");

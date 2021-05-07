@@ -128,7 +128,7 @@ public class NameUtil : MonoBehaviour
                 UnityEngine.Random.Range(0.5f, 1f),
                 UnityEngine.Random.Range(0.5f, 1f)
             );
-            result += $"<color=#{ColorUtility.ToHtmlStringRGB(color)}>{target[0]}</color>";
+            result += StringUtil.ColorWrap(target[0].ToString(),color);
             target = target.Substring(1);
         }
         return result;

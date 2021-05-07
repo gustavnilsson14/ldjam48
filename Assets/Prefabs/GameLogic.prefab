@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &202080836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202080837}
+  m_Layer: 0
+  m_Name: EntityHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &202080837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202080836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6431651335494408404}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &625909250
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,6 +100,51 @@ MonoBehaviour:
   sshKeyPrefab: {fileID: 7806010436457728740, guid: 31042e2ca00c4a74eb141dee6bdc6952,
     type: 3}
   linuxHostPrefab: {fileID: 6939597564025854419, guid: dfafb642e5992ed4c9ceadf8f18cd5d3,
+    type: 3}
+--- !u!1 &688778934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 688778935}
+  - component: {fileID: 688778936}
+  m_Layer: 0
+  m_Name: PickupHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &688778935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688778934}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6431651335494408404}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &688778936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688778934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ade2c742fa60294284b779c4dc6a2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupEntityPrefab: {fileID: 8387749918881673180, guid: 53eafa7d48c3a70418de9cd5705cead2,
     type: 3}
 --- !u!1 &1435795119
 GameObject:
@@ -311,6 +386,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1872546263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073494814626117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef60d642db4020429c05e5118655d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 10
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 5
+  protectedComponents:
+  - {fileID: 5937073494814626116}
+--- !u!114 &1872546265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073494814626117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da112c6be27c1d44b17034560f7920e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 0
+  storedComponents: []
 --- !u!1 &8100233181660612992
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +460,8 @@ Transform:
   - {fileID: 625909251}
   - {fileID: 4788762900308118440}
   - {fileID: 1435795120}
+  - {fileID: 688778935}
+  - {fileID: 202080837}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1449,6 +1569,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
+        type: 3}
+      propertyPath: description
+      value: A hacker, an unwanted alien in a harsh system.
+      objectReference: {fileID: 0}
     - target: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: m_Name
@@ -1456,6 +1581,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510747a9aada968469407653c5f588ff, type: 3}
+--- !u!1 &5937073494814626117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175482768}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5937073494814626116 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1175482768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073494814626117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f6d5740fe80fb468b329cd34376ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5937073494814626115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5937073495786676435, guid: 510747a9aada968469407653c5f588ff,

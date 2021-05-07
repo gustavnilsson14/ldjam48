@@ -5,8 +5,10 @@ using UnityEngine;
 public class KeyEntity : Entity
 {
     public PublicKey publicKey;
-    public override bool TakeDamage(int amount, string source = "", string overrideTextLine = "")
+    public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
     {
+        armorDamageTaken = 0;
+        bodyDamageTaken = 0;
         return false;
     }
     public override string GetCatDescription()

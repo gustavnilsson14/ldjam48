@@ -8,7 +8,8 @@ public class Host : MonoBehaviour
     public bool isAvailable = false;
     public string userName = "haxxor";
     public List<PublicKey> keys = new List<PublicKey>();
-    public Transform KeysTransform;
+    public Transform keysTransform;
+    public float lootValueMultiplier = 1f;
     private void Awake()
     {
         keys.AddRange(GetComponentsInChildren<PublicKey>());
@@ -54,5 +55,17 @@ public class Host : MonoBehaviour
             directory = childDirectory;
         }
         return true;
+    }
+
+    public List<EntityFaction> GetPresentFactions()
+    {
+        List<EntityFaction> result = new List<EntityFaction>();
+        foreach (Entity entity in GetComponentsInChildren<Entity>())
+        {
+            if (result.Contains(entity.faction))
+                continue;
+            result.Add(entity.faction);
+        }
+        return result;
     }
 }

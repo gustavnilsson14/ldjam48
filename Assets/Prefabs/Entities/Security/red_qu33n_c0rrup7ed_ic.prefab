@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1342189532423052507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934892562171525097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 1
+  isRealTime: 1
+  lootValue: 5
+--- !u!114 &1346905553738923022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934892562171525097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef60d642db4020429c05e5118655d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: protects ya neck
+  maxIP: 15
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 5
+  protectedComponents:
+  - {fileID: 2296745278244391173}
+--- !u!114 &2296745278244391173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934892562171525097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6500ca1590ffa6846a773206e3791488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 3
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 1
+  lootValue: 5
+  damageBase: 2
+  range: 0
+  startWaveDistance: 1
+  maxWaveDistance: 5
+--- !u!114 &4023228172529293796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934892562171525097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd14b59fd3931f4fa514a59e27eaa97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 1
+  isRealTime: 1
+  lootValue: 5
+  scanDepth: 4
+  targetsMax: -1
+  targets: []
+--- !u!114 &9178453178633816728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934892562171525097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e8fb473c754eab4c8805fd248b2f448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 5
+  damageBase: 3
+  range: 0
+--- !u!1001 &5831532125244343572
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 169819753468501238, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: challengeRating
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 169819753468501238, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: description
+      value: A virus infested deadly <color=red>red ic!</color> Her previously predictable
+        operations are now <color=#088>virus controlled</color>, and she executes
+        using the main cpu clock, in realtime. A <color=blue>standard ic attack component</color>
+        is patched onto her side, still retaining factory settings. <color=#f0f>Novas
+        of corrupted data</color> constantly emits from directories adjacent to her.
+      objectReference: {fileID: 0}
+    - target: {fileID: 194000878634578685, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_Name
+      value: red_qu33n_c0rrup7ed_ic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506259033347830992, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2472a9108bb0382449cbe9f7cf2d100b, type: 3}
+--- !u!1 &5934892562171525097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 194000878634578685, guid: 2472a9108bb0382449cbe9f7cf2d100b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5831532125244343572}
+  m_PrefabAsset: {fileID: 0}

@@ -8,27 +8,25 @@ public class MovementComponent : EntityComponent
     protected override void Run()
     {
         base.Run();
-        if (!GetSensorComponent(out SensorComponent sensorComponent))
-        {
-            HandleNoSensor();
+        if (!GetCurrentSensorTarget(out SensorComponent.TargetData target))
             return;
-        }
-        if (!sensorComponent.GetCurrentTarget(out ComponentWithIP target))
+        if (target.lastPosition == entityBody.currentDirectory)
             return;
-        if (target.currentDirectory == entityBody.currentDirectory)
-            return;
-        Move(target);
+        Move(target.lastPosition);
     }
-    private void Move(ComponentWithIP target)
+    protected virtual bool GetDestinationDirectory(out Directory directory) {
+        directory = null;
+        return true;
+    }
+    private void Move(Directory goal)
     {
-        List<PathNode> path = entityBody.currentDirectory.FindPath(target.currentDirectory);
+        List<PathNode> path = entityBody.currentDirectory.FindPath(goal);
         if (path.Count == 0)
             return;
         entityBody.MoveTo(path[0].directory);
     }
-
-    private void HandleNoSensor()
+    protected override void HandleNoSensor()
     {
-
+        base.HandleNoSensor();
     }
 }

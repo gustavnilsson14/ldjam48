@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class DirectoryModifier : MonoBehaviour, IProcess
 {
-    public List<Directory> affectedDirectories = new List<Directory>();
     public int currentProcsOnEntities = -1;
     protected Directory directory;
     private string pid;

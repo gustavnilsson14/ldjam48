@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3554136164609383906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644405270696995961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7f0178c6a7e5d4aa7c8c029e8ed609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootValue: 1
+  damage: 5
+--- !u!114 &2660154453294497325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644405270696995961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e3cfb470bcc79f46adbaa0bd08ef53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootValue: 1
+  extraCharacters: 500
 --- !u!114 &4484580725670582555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,10 +44,13 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 12
+  isRealTime: 0
+  lootValue: 5
   currentTarget: {fileID: 0}
   scanDepth: 1
---- !u!114 &6648658478168533376
+--- !u!114 &5125738113172755129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -28,12 +59,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 4644405270696995961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2b076c0fb6a644aa06f95ea923c281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
-  currentProcsOnEntities: -1
-  condition: {fileID: 3512405982417999358}
+  lootValue: 1
+  extraIP: 20
+--- !u!114 &6753862231027247011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644405270696995961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 24
+  isRealTime: 0
+  lootValue: 5
+--- !u!114 &7344480381994185912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4644405270696995961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b183d2647ec8443b6eb0bf29a538ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootValue: 1
+  extraSeconds: 300
 --- !u!114 &7526287887956089048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,30 +114,12 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 15
+  isRealTime: 0
+  lootValue: 5
   damageBase: 1
   range: 0
---- !u!114 &3512405982417999358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4644405270696995961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71d725ac5b19b2e4e9976139478f0672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
-  speed: 4
-  lifeTime: -1
-  currentLifeTime: 0
-  commandName: move
-  command: {fileID: 0}
 --- !u!1001 &4811259722100907652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,21 +130,26 @@ PrefabInstance:
     - target: {fileID: 194000878634578685, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_Name
-      value: firewall
+      value: ic
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: description
-      value: Firewalls block movement, and deals damage to unwanted software.
+      value: IC files wander around protecting the host from harm.
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: maxIP
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: faction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: challengeRating
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
@@ -156,12 +207,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7336614084124270745, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
-        type: 3}
-      propertyPath: entityParticlePrefab
-      value: 
-      objectReference: {fileID: 4110619111931693869, guid: 1af0cdfc87285cf4d9c0381ee1a1a738,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c430a8bb6fbe8a4e90b487a50c655c4, type: 3}
 --- !u!1 &4644405270696995961 stripped

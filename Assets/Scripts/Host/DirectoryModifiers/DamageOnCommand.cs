@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageOnCommand : DirectoryModifier
+public class DamageOnCommand : DirectoryModifier, IDamageSource
 {
-    public int damage;
+    public int damageBase;
     protected override void OnCommand(Command command, ParsedCommand parsedCommand)
     {
         base.OnCommand(command, parsedCommand);
@@ -12,13 +12,28 @@ public class DamageOnCommand : DirectoryModifier
             return;
         foreach (Entity entity in GetAffectedEntities())
         {
-            if (entity.TakeDamage(damage))
+            if (entity.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken))
                 continue;
         }
 
     }
     public override string GetDescription()
     {
-        return $"{GetSource()}\nEach command you type damages all entities within by {damage}. pid: {GetPid()}";
+        return $"{GetSource()}\nEach command you type damages all entities within by {damageBase}. pid: {GetPid()}";
+    }
+
+    public int GetDamageBase()
+    {
+        return damageBase;
+    }
+
+    public int GetTotalDamage()
+    {
+        return damageBase;
+    }
+
+    public string GetDamageSourceName()
+    {
+        return $"{GetType().ToString()} at {GetSource()}";
     }
 }

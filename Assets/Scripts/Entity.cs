@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public enum EntityFaction
 {
+    NONE,
     HACKER,
     SECURITY,
     VIRUS
@@ -14,6 +15,7 @@ public enum EntityFaction
 
 public class Entity : ComponentWithIP
 {
+    public int uniqueId;
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
 
@@ -28,9 +30,10 @@ public class Entity : ComponentWithIP
 
     public bool isDiscovered = false;
 
-    protected override void Awake()
+    public override void StartRegister()
     {
-        base.Awake();
+        base.StartRegister();
+        uniqueId = EntityHandler.I.GetUniqueId();
         currentDirectory = GetComponentInParent<Directory>();
     }
     public virtual void MoveTo(Directory directory)
@@ -58,12 +61,17 @@ public class Entity : ComponentWithIP
     {
         onEntityExitMyDirectory.Invoke(current, to, entity);
     }
-
+    public virtual int GetNewTargetWeight(Entity newTarget) {
+        if (newTarget.faction != faction)
+            return 5;
+        return 0;
+    }
     public virtual string GetCatDescription()
     {
         List<string> result = new List<string> {
             GetBinaryStatic(),
-            string.Format("IP: {0}", currentIP),
+            $"IP: {currentIP}",
+            $"UserGroup: {faction.ToString()}",
             description,
             GetEntityComponentsDescriptions()
 
@@ -116,16 +124,6 @@ public class Entity : ComponentWithIP
     }
     public virtual bool IsAllowedInDirectory(Directory directory) {
         return (!directory.bannedFactions.Contains(faction));
-    }
-    public float GetDamageMultiplier()
-    {
-        float multiplier = 1;
-        List<DirectoryModifier> charactersMultipliers = currentDirectory.GetModifiers().FindAll(modifier => modifier is DamageMultiplier);
-        foreach (DirectoryModifier modifier in charactersMultipliers)
-        {
-            multiplier += (modifier as DamageMultiplier).multiplier;
-        }
-        return Mathf.Clamp(multiplier, 0, Mathf.Infinity);
     }
     public List<Condition> GetAllConditions() {
         return new List<Condition>(GetComponents<Condition>()).FindAll(condition => condition.IsActiveCondition());

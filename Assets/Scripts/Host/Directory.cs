@@ -26,6 +26,12 @@ public class Directory : MonoBehaviour
         return result;
     }
 
+    public virtual bool GetEntity(out Entity entity, int id)
+    {
+        entity = GetEntities().Find(e => e.uniqueId == id);
+        return entity != null;
+    }
+
     public void EntityEnter(Directory from, Entity entity) {
         onEntityEnter.Invoke(from, this, entity);
     }
@@ -61,7 +67,8 @@ public class Directory : MonoBehaviour
         directories.Add(this);
         return directories;
     }
-    public List<Directory> GetDirectoriesByDepth(int scanDepth = 0) {
+    public List<Directory> GetDirectoriesByDepth(int scanDepth = 0)
+    {
         List<Directory> result = new List<Directory>();
         if (scanDepth != 0)
         {
@@ -72,6 +79,41 @@ public class Directory : MonoBehaviour
         }
         if (!result.Contains(this))
             result.Add(this);
+        return result;
+    }
+    public List<Directory> GetDirectoriesAtDepth(int scanDepth = 0)
+    {
+        int iterations = 99;
+        if (scanDepth == 0)
+            return new List<Directory>() { this };
+        List<Directory> result = new List<Directory>();
+        List<PathNode> openNodes = new List<PathNode>() { new PathNode(0, this, null) };
+        List<PathNode> closedNodes = new List<PathNode>();
+        PathNode currentNode = openNodes[0];
+        while (openNodes.Count > 0 && iterations > 0)
+        {
+            iterations--;
+            foreach (Directory neighbor in currentNode.directory.GetAdjacentDirectories())
+            {
+                if (openNodes.Find(node => node.directory == neighbor) != null)
+                    continue;
+                if (closedNodes.Find(node => node.directory == neighbor) != null)
+                    continue;
+                PathNode newNode = new PathNode(currentNode.distance + 1, neighbor, currentNode);
+                openNodes.Add(newNode);
+                if (newNode.distance != scanDepth)
+                    continue;
+                closedNodes.Add(newNode);
+                openNodes.Remove(newNode);
+                result.Add(newNode.directory);
+            }
+            openNodes.Remove(currentNode);
+            closedNodes.Add(currentNode);
+            if (openNodes.Count == 0)
+                continue;
+            openNodes.Sort((a, b) => a.distance.CompareTo(b.distance));
+            currentNode = openNodes[0];
+        }
         return result;
     }
     public string GetFullPath()
@@ -131,10 +173,12 @@ public class Directory : MonoBehaviour
                     continue;
                 openNodes.Add(new PathNode(currentNode.distance + 1, neighbor, currentNode));
             }
-            openNodes.Sort((a, b) => a.distance.CompareTo(b.distance));
-            currentNode = openNodes[0];
             openNodes.Remove(currentNode);
             closedNodes.Add(currentNode);
+            if (openNodes.Count == 0)
+                continue;
+            openNodes.Sort((a, b) => a.distance.CompareTo(b.distance));
+            currentNode = openNodes[0];
         }
 
         while (currentNode.directory != this && iterations > 0)
@@ -155,10 +199,10 @@ public class Directory : MonoBehaviour
         if (!test)
             return;
         test = false;
-        Debug.Log(string.Join(", ", GetModifiers()));
+        Debug.Log($" --------- TESTING DEPTH 1 {string.Join(", ", GetDirectoriesAtDepth(1).Select(dir => dir.GetFullPath()))}---------");
+        Debug.Log($" --------- TESTING DEPTH 2 {string.Join(", ", GetDirectoriesAtDepth(2).Select(dir => dir.GetFullPath()))}---------");
+        Debug.Log($" --------- TESTING DEPTH 3 {string.Join(", ", GetDirectoriesAtDepth(3).Select(dir => dir.GetFullPath()))}---------");
     }
-    /*timestop: stops real time
-    disarm: disarms modifier*/
 
     public static bool GetAllEntitiesInDirectories(out List<Entity> targets, List<Directory> directories)
     {

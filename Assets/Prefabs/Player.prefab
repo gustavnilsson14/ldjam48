@@ -51,6 +51,57 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+--- !u!1 &1640299682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1640299683}
+  - component: {fileID: 1640299684}
+  m_Layer: 0
+  m_Name: sql
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1640299683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640299682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1640299684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640299682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca894cc2e49d23b4bb9e9952f99f90c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Changes the usergroup of a local entity
+  extendedHelpText: "Usage: faction [targetEntity] [newGroup]\nFlags\n\t--list: Ignores
+    arguments, only prints present usergroups"
+  speed: 2
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &942649355022545245
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +504,57 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+--- !u!1 &4362890913501350040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9122250100816415981}
+  - component: {fileID: 6299976130543784788}
+  m_Layer: 0
+  m_Name: usermod
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9122250100816415981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362890913501350040}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6299976130543784788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4362890913501350040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f7c6a80aca66b47b0c4d686a5512fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Changes the usergroup of a local entity
+  extendedHelpText: "Usage: faction [targetEntity] [newGroup]\nFlags\n\t--list: Ignores
+    arguments, only prints present usergroups"
+  speed: 10
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
 --- !u!1 &5020344813303867038
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,6 +933,8 @@ Transform:
   - {fileID: 35600996478643185}
   - {fileID: 4345547952631317999}
   - {fileID: 1347863457}
+  - {fileID: 9122250100816415981}
+  - {fileID: 1640299683}
   m_Father: {fileID: 5937073495786676435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -994,7 +1098,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5937073495786676435}
   - component: {fileID: 5937073495786676436}
-  - component: {fileID: 1068020974}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1033,9 +1136,10 @@ MonoBehaviour:
   description: 
   maxIP: 25
   alive: 1
-  faction: 0
+  faction: 1
   directoryHistory: []
   isDiscovered: 0
+  sqlRoot: {fileID: 0}
   currentCharacters: 500
   maxCharacters: 500
   currentSeconds: 0
@@ -1043,27 +1147,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   test: 0
---- !u!114 &1068020974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937073495786676437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71d725ac5b19b2e4e9976139478f0672, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
-  speed: 4
-  isRealTime: 1
-  lifeTime: 30
-  commandName: look
-  command: {fileID: 0}
 --- !u!1 &5937073495901655540
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
+  description: 
   maxIP: 0
   alive: 1
+  challengeRating: 1
   speed: 12
+  isRealTime: 0
+  lootValue: 5
   currentTarget: {fileID: 0}
   scanDepth: 1
---- !u!114 &6753862231027247011
+--- !u!114 &6648658478168533376
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27,13 +31,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4644405270696995961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
+  m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  maxIP: 0
-  alive: 1
-  speed: 24
+  currentProcsOnEntities: -1
+  commandName: move
+  command: {fileID: 0}
 --- !u!114 &7526287887956089048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,10 +50,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
+  description: 
   maxIP: 0
   alive: 1
-  speed: 24
-  damageBase: 3
+  challengeRating: 1
+  speed: 15
+  isRealTime: 0
+  lootValue: 5
+  damageBase: 1
   range: 0
 --- !u!1001 &4811259722100907652
 PrefabInstance:
@@ -62,17 +69,27 @@ PrefabInstance:
     - target: {fileID: 194000878634578685, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_Name
-      value: BigIC
+      value: firewall
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: description
-      value: IC files wander around protecting the host from harm.
+      value: Firewalls block movement, and deals damage to unwanted software.
       objectReference: {fileID: 0}
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: maxIP
-      value: 6
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: faction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: challengeRating
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
@@ -133,7 +150,7 @@ PrefabInstance:
         type: 3}
       propertyPath: entityParticlePrefab
       value: 
-      objectReference: {fileID: 4110619111931693869, guid: fd42a5b87ca9f5647b9ad5a16cfe59aa,
+      objectReference: {fileID: 4110619111931693869, guid: 1af0cdfc87285cf4d9c0381ee1a1a738,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c430a8bb6fbe8a4e90b487a50c655c4, type: 3}

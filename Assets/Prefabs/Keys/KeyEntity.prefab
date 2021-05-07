@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
+  description: 
   maxIP: 5
   alive: 1
-  faction: 1
+  faction: 2
   directoryHistory: []
-  activeModifiers: []
-  description: 
   isDiscovered: 0
   publicKey: {fileID: 0}
 --- !u!114 &4686398823585832612

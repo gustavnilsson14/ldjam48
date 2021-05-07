@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackComponent : EntityComponent
+public class AttackComponent : EntityComponent, IDamageSource
 {
     public int damageBase = 1;
     public int range = 0;
@@ -12,50 +12,48 @@ public class AttackComponent : EntityComponent
     protected override void Run()
     {
         base.Run();
-        if (!GetSensorComponent(out SensorComponent sensorComponent))
-        {
-            HandleNoSensor();
+        if (!GetCurrentSensorTarget(out SensorComponent.TargetData targetData))
             return;
-        }
-        if (!sensorComponent.GetCurrentTarget(out ComponentWithIP target))
-            return;
-        Attack(target);
+        Attack(targetData);
+    }
+    protected override void HandleNoSensor()
+    {
+        base.HandleNoSensor();
     }
 
-    protected virtual void Attack(ComponentWithIP target) {
-        if (!IsTargetInRange(target))
+    protected virtual void Attack(SensorComponent.TargetData targetData)
+    {
+        if (!IsDirectoryInRange(targetData.lastPosition))
             return;
-        int damage = Mathf.FloorToInt((float)damageBase * entityBody.GetDamageMultiplier());
+        if (!targetData.lastPosition.GetEntity(out Entity target, targetData.targetId))
+            return;
         entityBody.Attack();
-        DealDamage(target, damage);
+        DealDamage(target);
     }
 
-    protected virtual void DealDamage(ComponentWithIP target, int damage) {
-
-        if (entityBody.isDiscovered)
-        {
-            target.TakeDamage(damage, entityBody.name);
-            return;
-        }
-
-        target.TakeDamage(damage);
-    }
-
-    private bool IsTargetInRange(ComponentWithIP target)
+    protected virtual void DealDamage(Entity target)
     {
-        List<Directory> directories = entityBody.currentDirectory.GetDirectoriesByDepth(range);
-        List<Entity> targets = new List<Entity>();
-        foreach (Directory directory in directories)
-        {
-            targets.AddRange(directory.GetEntities());
-        }
-        if (targets.Contains(target))
-            return true;
-        return false;
+        target.TakeHit(this);
     }
 
-    private void HandleNoSensor()
+    protected virtual bool IsDirectoryInRange(Directory targetDirectory)
     {
-        
+        return entityBody.currentDirectory.GetDirectoriesByDepth(range).Contains(targetDirectory);
+    }
+    
+    public int GetDamageBase()
+    {
+        return damageBase;
+    }
+
+    public int GetTotalDamage()
+    {
+        return Mathf.FloorToInt((float)damageBase * entityBody.GetDamageMultiplier());
+    }
+    public string GetDamageSourceName()
+    {
+        if (!entityBody.isDiscovered)
+            return "Something";
+        return $"The {GetCurrentIdentifier()}-component on {name}";
     }
 }

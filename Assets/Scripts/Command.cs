@@ -98,7 +98,7 @@ public class Command : MonoBehaviour
         targetComponent = null;
         foreach (EntityComponent entityComponent in targetEntity.GetComponents<EntityComponent>())
         {
-            if (entityComponent.GetComponentId() != argument)
+            if (entityComponent.GetCurrentIdentifier() != argument)
                 continue;
             targetComponent = entityComponent;
         }
@@ -117,6 +117,17 @@ public class Command : MonoBehaviour
     protected bool ArgumentIsPid(string argument)
     {
         return ProcessHandler.I.GetProcess(out IProcess process, argument);
+    }
+    protected bool ArgumentIsFaction(string argument)
+    {
+        return ArgumentIsFaction(argument, out EntityFaction entityFaction);
+    }
+    protected bool ArgumentIsFaction(string argument, out EntityFaction entityFaction)
+    {
+        entityFaction = (EntityFaction)Enum.Parse(typeof(EntityFaction), argument.ToUpper());
+        if (!HostHandler.I.currentHost.GetPresentFactions().Contains(entityFaction))
+            return false;
+        return true;
     }
 }
 public class ParsedCommand

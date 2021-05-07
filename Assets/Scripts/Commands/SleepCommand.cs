@@ -12,6 +12,7 @@ public class SleepCommand : Command
             return false;
         int.TryParse(parsedCommand.arguments[0], out int time);
         Player.I.PauseRealTime(time);
+        result = $"Real-time clock has been paused for {time} IRL seconds";
         return true;
     }
     public override int GetTerminalTimePast(ParsedCommand parsedCommand)

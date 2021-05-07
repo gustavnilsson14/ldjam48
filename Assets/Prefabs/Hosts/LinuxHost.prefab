@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   multiplier: 10
 --- !u!114 &1872422750087574211
@@ -27,7 +26,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
@@ -80,7 +78,8 @@ MonoBehaviour:
   isAvailable: 0
   userName: haxxor
   keys: []
-  KeysTransform: {fileID: 2879886690638555401}
+  keysTransform: {fileID: 2879886690638555401}
+  lootValueMultiplier: 1
 --- !u!114 &2373524727399481265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
@@ -110,7 +108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
@@ -127,7 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff95dab7304656438d04cebd93f9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &3083080635035054198
@@ -142,10 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: mv
+  command: {fileID: 0}
 --- !u!114 &7027776358035975092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,10 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: cp
+  command: {fileID: 0}
 --- !u!114 &7241665644876507349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 1
@@ -191,25 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: move
---- !u!114 &4243295063362733856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138129428631085378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49cc514c751e32e4f9135086fa5c5e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedDirectories: []
-  currentProcsOnEntities: -1
-  multiplier: 3
+  command: {fileID: 0}
 --- !u!114 &1877091342845362942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,10 +199,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: cat
+  command: {fileID: 0}
+--- !u!114 &4243295063362733856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138129428631085378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cc514c751e32e4f9135086fa5c5e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentProcsOnEntities: -1
+  multiplier: 3
 --- !u!114 &5973956666695308398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6667e2b287bf3ef4d8faf6b6f733eea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: 50
   heal: 1
 --- !u!1 &4694186907364853099
@@ -283,7 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &4262099351080946149
@@ -298,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
@@ -315,26 +302,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
   momentum: 0
---- !u!114 &9065088272668769375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7277008797954187289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8eee9a919b77f547bdefd53cd215e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedDirectories: []
-  currentProcsOnEntities: -1
-  damage: 2
 --- !u!114 &4739641338038871922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,10 +318,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: reboot
+  command: {fileID: 0}
+--- !u!114 &9065088272668769375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7277008797954187289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8eee9a919b77f547bdefd53cd215e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentProcsOnEntities: -1
+  damage: 2
 --- !u!1 &7694200265976645069
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!114 &8221597814881603936
@@ -409,7 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   damage: 1
   speed: 0.1
@@ -426,10 +408,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
-  command: {fileID: 0}
   commandName: ddos
+  command: {fileID: 0}
 --- !u!114 &2117456842822317951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff95dab7304656438d04cebd93f9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedDirectories: []
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!1001 &66091458399887636

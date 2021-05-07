@@ -121,6 +121,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &202080836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 202080836, guid: b32a3743996d99349bb72b26461180e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2042152316}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &202080837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202080836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5d97e0dba0e2942aec00addfe94bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &811157571
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,8 +632,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d2baec08ed47146b87ae4015a8af37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeDuration: 0
   shakeAmount: 0.7
+  hitAmount: 2
+  hitRotationAmount: 15
   test: 0
 --- !u!1 &1926748071
 GameObject:
@@ -752,23 +771,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 373731888, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: m_Name
-      value: sleep
-      objectReference: {fileID: 0}
-    - target: {fileID: 373731890, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: isAvailable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 373731890, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: extendedHelpText
-      value: 'Usage: sleep [seconds]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 373731890, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: helpText
-      value: Pauses the terminals real time clock for the specified amount of time.
-        The longer time is paused, the more terminal time passes
-      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -829,8 +831,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameLogic
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2042152318, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32a3743996d99349bb72b26461180e7, type: 3}
 --- !u!1001 &5341060305765479459
 PrefabInstance:

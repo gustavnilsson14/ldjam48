@@ -1,45 +1,121 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SensorComponent : EntityComponent
 {
-    public ComponentWithIP currentTarget;
     public int scanDepth = 0;
-    public bool GetCurrentTarget(out ComponentWithIP target)
+    public int targetsMax = -1;
+    public List<TargetData> targets = new List<TargetData>();
+
+    protected override void Run() {
+        targets.Clear();
+        FindTargets();
+        SortTargets();
+    }
+    public virtual bool GetCurrentTarget(out TargetData target)
     {
-        target = currentTarget;
-        if (target == null)
+        target = null;
+        if (targets.Count == 0)
             return false;
+        target = targets[0];
         return true;
     }
-    protected override void Run()
+    protected virtual void FindTargets()
     {
-        base.Run();
-        if (!ShouldFindNewTarget())
-            return;
-        currentTarget = null;
         EntityFaction myFaction = entityBody.faction;
+        if (!GetEntitiesInScanRange(out List<Entity> entities))
+            return;
+        entities = entities.OrderBy(x => RandomHandler.random.Next()).ToList();
+        foreach (Entity entity in entities)
+        {
+            ProcessNewTargetData(entity);
+        }
+    }
+    protected virtual void SortTargets()
+    {
+        targets.Sort((x,y) => y.weight.CompareTo(x.weight));
+    }
+    protected virtual bool GetEntitiesInScanRange(out List<Entity> targets)
+    {
         List<Directory> directories = entityBody.currentDirectory.GetDirectoriesByDepth(scanDepth);
-        if (!Directory.GetAllEntitiesInDirectories(out List<Entity> targets, directories))
-            return;
-        if (targets.Contains(Player.I) && Player.I.IsSafeInDirectory(Player.I.currentDirectory))
-            targets.Remove(Player.I);
-        targets = targets.FindAll(e => e.faction != myFaction);
-        if (targets.Count == 0)
-            return;
-        System.Random random = new System.Random();
-        int index = random.Next(targets.Count);
-        currentTarget = targets[index];
+        return Directory.GetAllEntitiesInDirectories(out targets, directories);
+    }
+    protected virtual bool ProcessNewTargetData(Entity entity) {
+        if (entity == entityBody)
+            return false;
+        if (!HasMaxTargets(out int max))
+            return AddNewTargetData(entity);
+        if (targets.Count >= max)
+            return false;
+        return AddNewTargetData(entity);
+    }
+    
+    protected virtual bool AddNewTargetData(Entity entity) {
+        if (!CreateNewTargetData(out TargetData newTargetData, entity))
+            return false;
+        targets.Add(newTargetData);
+        return true;
+    }
+    protected virtual bool CreateNewTargetData(out TargetData newTargetData, Entity entity, float weight = 0, int ttl = 30) {
+        newTargetData = null;
+        if (targets.Find(target => target.targetId == entity.uniqueId) != null)
+            return false;
+        newTargetData = new TargetData(entity, entityBody.GetNewTargetWeight(entity), ttl);
+        return true;
+    }
+    protected virtual bool HasMaxTargets(out int max) {
+        max = targetsMax;
+        if (targetsMax == -1)
+            return false;
+        return true;
     }
 
-    private bool ShouldFindNewTarget()
-    {
-        if (currentTarget == null)
-            return true;
-        if (currentTarget.currentDirectory == entityBody.currentDirectory)
-            return false;
-        return true;
+    [System.Serializable]
+    /// <summary>
+    /// A target discovered by a sensor
+    /// </summary>
+    public class TargetData {
+        /// <summary>
+        /// The uniqueId of the target componentwithip
+        /// </summary>
+        public int targetId;
+        public EntityFaction targetFaction;
+        /// <summary>
+        /// The last known position of the target, at the time of the scan
+        /// </summary>
+        public Directory lastPosition;
+        public float weight;
+        /// <summary>
+        /// Time to live, in terminal time
+        /// </summary>
+        private int ttl;
+        private TargetDataExpireEvent onTargetDataExpire = new TargetDataExpireEvent();
+        public TargetData(Entity target, float weight, int ttl)
+        {
+            Init(target.uniqueId, target.faction, target.currentDirectory, weight, ttl);
+        }
+        public TargetData(int targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl)
+        {
+            Init(targetId, targetFaction, lastPosition, weight, ttl);
+        }
+        private void Init(int targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl) {
+            this.targetId = targetId;
+            this.targetFaction = targetFaction;
+            this.lastPosition = lastPosition;
+            this.weight = weight;
+            this.ttl = ttl;
+            IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
+        }
+        public void OnTerminalTimePast(int time) {
+            ttl -= time;
+            if (ttl > 0)
+                return;
+            onTargetDataExpire.Invoke(this);
+        }
     }
+    public class TargetDataExpireEvent : UnityEvent<TargetData> { }
 }

@@ -7,7 +7,6 @@ public enum HostType
     WINDOWS,
     MAC
 }
-
 public class GenerateHost : MonoBehaviour
 {
     public List<Entity> entitiesPrefabs = new List<Entity>();
@@ -71,7 +70,7 @@ public class GenerateHost : MonoBehaviour
         if(!GetRandomDirectory(host.transform, out Directory directory))
             return;
 
-        SshKey sshKey = Instantiate(sshKeyPrefab, host.KeysTransform);
+        SshKey sshKey = Instantiate(sshKeyPrefab, host.keysTransform);
         KeyEntity keyEntity = sshKey.InstantiateEntityKey(directory.transform);
         keyEntity.publicKey = sshKey;
         keyEntity.name = $"{sshKey.GetHost().name}.ssh";
@@ -82,7 +81,7 @@ public class GenerateHost : MonoBehaviour
         if (!GetRandomDirectory(host.transform, out Directory directory))
             return;
 
-        DirectoryKey directoryKey = Instantiate(directoryKeyPrefab, host.KeysTransform);
+        DirectoryKey directoryKey = Instantiate(directoryKeyPrefab, host.keysTransform);
         KeyEntity keyEntity = directoryKeyPrefab.InstantiateEntityKey(directory.transform);
         keyEntity.publicKey = directoryKey;
 
