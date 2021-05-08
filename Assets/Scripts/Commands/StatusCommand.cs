@@ -15,32 +15,30 @@ public class StatusCommand : Command
         {
             directories.Add(directory.name);
         }
-        result += "IP: " + Player.I.GetCurrentIP() + "/" + Player.I.maxIP;
-        result += "\nCharacters: " + Player.I.currentCharacters;
-        result += "\nTime: " + Player.I.GetTimeLeft();
-        result += "\nAdjacencies: " + string.Join(", ", directories);
+        result += $"IP: {Player.I.GetCurrentIP()}/{Player.I.maxIP}\n";
+        result += $"Characters: {Player.I.currentCharacters}\n";
+        result += $"Time: {Player.I.GetTimeLeft()}\n";
+        result += $"Adjacencies: {string.Join(", ", directories)}\n";
+
         IEnumerable<string> modifierDescriptions = Player.I.currentDirectory.GetModifiers().Select(activeModifier => activeModifier.GetDescription());
         if (GetStatusList(out string modifiersDescription, modifierDescriptions))
-        {
-            result += "\nCurrent modifiers: ";
-            result += modifiersDescription;
-        }
+            result += $"Current modifiers:\n{modifiersDescription}\n";
+
         IEnumerable<string> conditionDescriptions = Player.I.GetAllConditions().Select(condition => condition.GetDescription());
         if (GetStatusList(out string conditionsDescription, conditionDescriptions))
-        {
-            result += "\nCurrent conditions: ";
-            result += conditionsDescription;
-        }
+            result += $"Current conditions:\n{conditionsDescription}\n";
+
+        IEnumerable<string> componentIdentifiers = Player.I.GetInstalledComponents().Select(component => component.GetCurrentIdentifier());
+        if (GetStatusList(out string componentIdentifiersDescription, componentIdentifiers))
+            result += $"Installed components:\n{componentIdentifiersDescription}\n";
         return true;
     }
 
     private bool GetStatusList(out string result, IEnumerable<string> strings)
     {
-        result = "";
+        result = $"    {string.Join("\n    ", strings)}";
         if (strings.Count() == 0)
             return false;
-        result = "\n    ";
-        result += string.Join("\n    ", strings);
         return true;
     }
 }

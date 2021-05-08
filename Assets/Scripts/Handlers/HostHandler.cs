@@ -22,14 +22,12 @@ public class HostHandler : MonoBehaviour
     private int maxDirectoryKeys = 1;
 
     public SshEvent onSsh = new SshEvent();
-
     private void Awake()
     {
         generateHost = GetComponent<GenerateHost>();
         HostHandler.I = this;
         hosts.AddRange(GetComponentsInChildren<Host>());
     }
-
     private void Start()
     {
         currentHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
@@ -41,7 +39,6 @@ public class HostHandler : MonoBehaviour
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
     }
-
     public void OnSsh(SshKey sshKey)
     {
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
@@ -67,7 +64,6 @@ public class HostHandler : MonoBehaviour
         hosts.Add(newHost);
         return newHost;
     }
-
     public void MakeHostsHarder()
     {
         spawnEntity = spawnEntity+maxRootDir;

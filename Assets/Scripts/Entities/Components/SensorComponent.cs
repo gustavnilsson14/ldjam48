@@ -15,6 +15,7 @@ public class SensorComponent : EntityComponent
         targets.Clear();
         FindTargets();
         SortTargets();
+        TriggerOutput();
     }
     public virtual bool GetCurrentTarget(out TargetData target)
     {
@@ -34,6 +35,16 @@ public class SensorComponent : EntityComponent
         {
             ProcessNewTargetData(entity);
         }
+    }
+    protected virtual void TriggerOutput()
+    {
+        if (!GetCurrentTarget(out TargetData target))
+            return;
+        onOutput.Invoke(this, GetFormattedOutput(target));
+    }
+    private string GetFormattedOutput(TargetData target)
+    {
+        return $"{target.lastPosition.GetFullPath()}/{target.targetId}";
     }
     protected virtual void SortTargets()
     {
@@ -82,7 +93,7 @@ public class SensorComponent : EntityComponent
         /// <summary>
         /// The uniqueId of the target componentwithip
         /// </summary>
-        public int targetId;
+        public string targetId;
         public EntityFaction targetFaction;
         /// <summary>
         /// The last known position of the target, at the time of the scan
@@ -98,11 +109,11 @@ public class SensorComponent : EntityComponent
         {
             Init(target.uniqueId, target.faction, target.currentDirectory, weight, ttl);
         }
-        public TargetData(int targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl)
+        public TargetData(string targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl)
         {
             Init(targetId, targetFaction, lastPosition, weight, ttl);
         }
-        private void Init(int targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl) {
+        private void Init(string targetId, EntityFaction targetFaction, Directory lastPosition, float weight, int ttl) {
             this.targetId = targetId;
             this.targetFaction = targetFaction;
             this.lastPosition = lastPosition;

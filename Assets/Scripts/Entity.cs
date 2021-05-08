@@ -13,9 +13,9 @@ public enum EntityFaction
     VIRUS
 }
 
-public class Entity : ComponentWithIP
+public class Entity : ComponentWithIP, ILootDropper
 {
-    public int uniqueId;
+    public string uniqueId;
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
 
@@ -27,14 +27,34 @@ public class Entity : ComponentWithIP
     public DiscoverEvent onDiscover = new DiscoverEvent();
     public AttackEvent onAttack = new AttackEvent();
     public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
+    public LootDropEvent onLootDrop = new LootDropEvent();
+
+    public float challengeRating;
 
     public bool isDiscovered = false;
+    
 
     public override void StartRegister()
     {
         base.StartRegister();
-        uniqueId = EntityHandler.I.GetUniqueId();
+        uniqueId = EntityHandler.I.GetUniqueId(this);
         currentDirectory = GetComponentInParent<Directory>();
+        RegisterComponentConnections();
+        RegisterWithPickupHandler();
+    }
+    protected virtual void RegisterComponentConnections()
+    {
+        if (!TryGetComponent<SensorComponent>(out SensorComponent sensorComponent))
+            return;
+        if (TryGetComponent<AttackComponent>(out AttackComponent attackComponent)) {
+            ConnectComponentIO(sensorComponent, attackComponent);
+        }
+        if (TryGetComponent<MovementComponent>(out MovementComponent movementComponent))
+            ConnectComponentIO(sensorComponent, movementComponent);
+    }
+    public void ConnectComponentIO(EntityComponent output, EntityComponent input)
+    {
+        output.onOutput.AddListener(input.OnInput);
     }
     public virtual void MoveTo(Directory directory)
     {
@@ -104,6 +124,11 @@ public class Entity : ComponentWithIP
         onDiscover.Invoke();
         Player.I.onMove.AddListener(HandlePlayerMovement);
     }
+    public override void Die()
+    {
+        onLootDrop.Invoke(this);
+        base.Die();
+    }
 
     private void HandlePlayerMovement(Directory target, Directory origin)
     {
@@ -128,7 +153,42 @@ public class Entity : ComponentWithIP
     public List<Condition> GetAllConditions() {
         return new List<Condition>(GetComponents<Condition>()).FindAll(condition => condition.IsActiveCondition());
     }
+
+    public float GetChallengeRating()
+    {
+        return challengeRating;
+    }
+
+    public List<IPickup> GetPickups()
+    {
+        return new List<IPickup>(GetComponents<IPickup>());
+    }
+
+    public LootDropEvent GetLootDropEvent()
+    {
+        return onLootDrop;
+    }
+
+    public void RegisterWithPickupHandler()
+    {
+        PickupHandler.I.RegisterLootDropper(this);
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public bool die = false;
+    private void Update()
+    {
+        if (!die)
+            return;
+        die = false;
+        Die();
+    }
 }
+
 public class CatEvent : UnityEvent { }
 public class DiscoverEvent : UnityEvent { }
 public class PlayerEscapeEvent : UnityEvent { }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,14 +12,32 @@ public class EntityHandler : MonoBehaviour
     {
         EntityHandler.I = this;
     }
-    public int GetUniqueId()
+    public string GetUniqueId(Entity entity)
     {
         currentId++;
-        return currentId;
+        return $"{entity.name}-{currentId}";
     }
-    public Entity GetEntityById(int id)
+    public bool GetEntityById(out Entity entity, string id)
     {
         List<Entity> all = new List<Entity>(HostHandler.I.currentHost.GetComponentsInChildren<Entity>());
-        return all.Find(component => component.uniqueId == id);
+        entity = all.Find(component => component.uniqueId == id);
+        return entity != null;
+    }
+
+    public bool test = false;
+    public string value = "";
+    public ParsedPath parsedPath;
+    private void Update()
+    {
+        if (!test)
+            return;
+        test = false;
+        parsedPath = new ParsedPath(Player.I.currentDirectory, value);
+        if (parsedPath.error != "")
+        {
+            Debug.Log(parsedPath.error);
+            return;
+        }
+        Debug.Log($"START {string.Join(" - ", parsedPath.directories.Select(d => d.name))} END");
     }
 }

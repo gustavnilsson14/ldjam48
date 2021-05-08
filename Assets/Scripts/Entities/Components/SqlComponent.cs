@@ -11,11 +11,6 @@ public class SqlComponent : EntityComponent
     protected override void Run()
     {
         base.Run();
-        if (!GetSensorComponent(out SensorComponent sensorComponent))
-        {
-            HandleNoSensor();
-            return;
-        }
         /*
         if (!sensorComponent.GetCurrentTarget(out ComponentWithIP target))
             return;
@@ -24,11 +19,6 @@ public class SqlComponent : EntityComponent
             return;
         AddItem(pickupEntity.pickup);
         pickupEntity.DestroyMe();*/
-    }
-
-    private void HandleNoSensor()
-    {
-        
     }
 
     public void AddItem(StoredObject item)

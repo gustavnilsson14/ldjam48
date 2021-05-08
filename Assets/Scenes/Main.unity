@@ -121,24 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &202080836 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 202080836, guid: b32a3743996d99349bb72b26461180e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 2042152316}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &202080837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 202080836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d5d97e0dba0e2942aec00addfe94bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &811157571
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +753,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+      propertyPath: entitiesPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+      propertyPath: entitiesPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 5867715903369445128, guid: 6738a1304d10fa84f90f4afbafc12dc9,
+        type: 3}
+    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+      propertyPath: entitiesPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 5867715903369445128, guid: 1e9260eeec3fdb246a2c855da65df503,
+        type: 3}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x

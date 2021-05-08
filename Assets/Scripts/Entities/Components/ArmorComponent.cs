@@ -8,6 +8,16 @@ using UnityEngine;
 public class ArmorComponent : EntityComponent
 {
     public List<ComponentWithIP> protectedComponents;
+    public bool protectAllComponents = false;
+
+    public override void StartRegister()
+    {
+        base.StartRegister();
+        if (!protectAllComponents)
+            return;
+        protectedComponents.Add(entityBody);
+        protectedComponents.AddRange(GetComponents<EntityComponent>());
+    }
 
     public bool IsProtecting(ComponentWithIP componentWithIP, IDamageSource source)
     {

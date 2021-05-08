@@ -36,14 +36,14 @@ public class Player : Entity
     {
         base.Awake();
         Player.I = this;
+    }
+    public override void StartRegister()
+    {
+        base.StartRegister();
+        IOTerminal.I.onCommand.AddListener(OnCommand);
         commands.AddRange(GetComponentsInChildren<Command>());
         FullRestore();
     }
-    private void Start()
-    {
-        IOTerminal.I.onCommand.AddListener(OnCommand);
-    }
-
     private void Update()
     {
         ReduceRealTime();

@@ -26,12 +26,16 @@ public class Directory : MonoBehaviour
         return result;
     }
 
-    public virtual bool GetEntity(out Entity entity, int id)
+    public virtual bool GetEntity(out Entity entity, string id)
     {
         entity = GetEntities().Find(e => e.uniqueId == id);
         return entity != null;
     }
-
+    public virtual bool GetEntityByName(out Entity entity, string name)
+    {
+        entity = GetEntities().Find(e => e.name == name);
+        return entity != null;
+    }
     public void EntityEnter(Directory from, Entity entity) {
         onEntityEnter.Invoke(from, this, entity);
     }
@@ -118,9 +122,14 @@ public class Directory : MonoBehaviour
     }
     public string GetFullPath()
     {
-        return "/" + string.Join("/", GetAllParents().Select(directory => directory.name));
+        return $"/{string.Join("/", GetAllParents().Select(directory => directory.GetName()).Where(name => name != string.Empty))}";
     }
-
+    public string GetName()
+    {
+        if (this == HostHandler.I.currentHost.GetRootDirectory())
+            return "";
+        return name;
+    }
     public bool GetFullPathWithoutRoot(out string path)
     {
         List<Directory> paths = GetAllParents();
@@ -128,7 +137,6 @@ public class Directory : MonoBehaviour
         if (paths.Count < 2)
             return false;
         paths.RemoveAt(0);
-            
         path = string.Join("/", paths.Select(directory => directory.name));
         return true;
     }
@@ -139,16 +147,19 @@ public class Directory : MonoBehaviour
         result.AddRange(GetLocalModifiers());
         return result;
     }
-
     private List<DirectoryModifier> GetLocalModifiers()
     {
-        List<DirectoryModifier> result = new List<DirectoryModifier>();
-        result.AddRange(GetComponents<DirectoryModifier>());
+        List<DirectoryModifier> result = new List<DirectoryModifier>(GetComponents<DirectoryModifier>());
         foreach (Entity entity in GetEntities())
         {
             result.AddRange(entity.GetComponents<DirectoryModifier>());
         }
         return result.FindAll(mod => !mod.IsDisabled());
+    }
+    public bool GetDirectoriesFromPath(out List<Directory> directories, string fullPath) {
+        directories = new List<Directory>();
+        
+        return true;
     }
 
     public int GetDepth()
@@ -192,18 +203,6 @@ public class Directory : MonoBehaviour
         //Debug.Log("FindPath " + string.Join("-", result.Select(s => s.directory.name)) + " iterations " + iterations);
         return result;
     }
-
-    public bool test = false;
-    private void Update()
-    {
-        if (!test)
-            return;
-        test = false;
-        Debug.Log($" --------- TESTING DEPTH 1 {string.Join(", ", GetDirectoriesAtDepth(1).Select(dir => dir.GetFullPath()))}---------");
-        Debug.Log($" --------- TESTING DEPTH 2 {string.Join(", ", GetDirectoriesAtDepth(2).Select(dir => dir.GetFullPath()))}---------");
-        Debug.Log($" --------- TESTING DEPTH 3 {string.Join(", ", GetDirectoriesAtDepth(3).Select(dir => dir.GetFullPath()))}---------");
-    }
-
     public static bool GetAllEntitiesInDirectories(out List<Entity> targets, List<Directory> directories)
     {
         targets = new List<Entity>();
@@ -218,6 +217,89 @@ public class Directory : MonoBehaviour
         if (targets.Count == 0)
             return false;
         return true;
+    }
+}
+[System.Serializable]
+public class ParsedPath
+{
+    private string input;
+    public List<string> pathSegments;
+    public List<Directory> directories;
+    public Entity entity;
+    public string error;
+
+    public bool isAbsolute = false;
+    public ParsedPath(Directory directory, string path) {
+        input = path;
+        ParsePath(path);
+        GetDirectoryListRecursive(out directories, out error, isAbsolute ? HostHandler.I.currentHost.GetRootDirectory() : directory, pathSegments);
+    }
+
+    private void ParsePath(string path)
+    {
+        error = "";
+        //Debug.Log($"path {path}");
+        if (path.Substring(0,1) == "/")
+        {
+            isAbsolute = true;
+            path = path.Substring(1);
+        }
+        pathSegments = new List<string>(path.Split(new string[] { "/" }, StringSplitOptions.None));
+        pathSegments = pathSegments.FindAll(segment => segment != string.Empty && segment != ".");
+    }
+
+    private bool GetDirectoryListRecursive(out List<Directory> directories, out string error, Directory currentDirectory, List<string> pathSegments)
+    {
+        directories = new List<Directory>() { currentDirectory };
+        error = "";
+        if (pathSegments.Count == 0)
+            return true;
+        if (!GetNextDirectoryOrEntity(out Directory nextDirectory, out Entity entity, currentDirectory, pathSegments)) {
+            error = $"{input} is not a valid path";
+            return false;
+        }
+        if (entity != null)
+        {
+            this.entity = entity;
+            return true;
+        }
+        pathSegments.RemoveAt(0);
+        GetDirectoryListRecursive(out List<Directory> recursiveDirectories, out error, nextDirectory, pathSegments);
+        directories.AddRange(recursiveDirectories);
+        return true;
+    }
+
+    private bool GetNextDirectoryOrEntity(out Directory nextDirectory, out Entity entity, Directory currentDirectory, List<string> pathSegments)
+    {
+        string segment = pathSegments[0];
+        nextDirectory = null;
+        entity = null;
+        switch (segment)
+        {
+            case "..":
+                currentDirectory.GetClosestParent(out nextDirectory);
+                break;
+            default:
+                GetDirectoryOrEntity(out nextDirectory, out entity, currentDirectory, segment);
+                break;
+        }
+        if (nextDirectory == null && entity == null)
+            return false;
+        return true;
+    }
+    private bool GetDirectoryOrEntity(out Directory nextDirectory, out Entity entity, Directory currentDirectory, string segment) {
+        currentDirectory.GetClosestParent(out Directory parent);
+        nextDirectory = currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == segment && dir != parent);
+        if (!currentDirectory.GetEntity(out entity, segment))
+            currentDirectory.GetEntityByName(out entity, segment);
+        return nextDirectory != null;
+    }
+
+    public Directory GetLastDirectory()
+    {
+        if (directories.Count == 0)
+            return null;
+        return directories[directories.Count - 1];
     }
 }
 public class PathNode {

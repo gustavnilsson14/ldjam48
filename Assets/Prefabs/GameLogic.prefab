@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202080837}
+  - component: {fileID: 202080838}
   m_Layer: 0
   m_Name: EntityHandler
   m_TagString: Untagged
@@ -30,6 +31,26 @@ Transform:
   m_Father: {fileID: 6431651335494408404}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &202080838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202080836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5d97e0dba0e2942aec00addfe94bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: 0
+  value: 
+  parsedPath:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    isAbsolute: 0
 --- !u!1 &625909250
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,49 +407,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1872546263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937073494814626117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ef60d642db4020429c05e5118655d9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 10
-  alive: 1
-  challengeRating: 1
-  speed: 4
-  isRealTime: 0
-  lootValue: 5
-  protectedComponents:
-  - {fileID: 5937073494814626116}
---- !u!114 &1872546265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937073494814626117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7da112c6be27c1d44b17034560f7920e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
-  challengeRating: 1
-  speed: 4
-  isRealTime: 0
-  lootValue: 0
-  storedComponents: []
 --- !u!1 &8100233181660612992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,11 +1547,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
-        type: 3}
-      propertyPath: description
-      value: A hacker, an unwanted alien in a harsh system.
-      objectReference: {fileID: 0}
     - target: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
         type: 3}
       propertyPath: m_Name
@@ -1581,24 +1554,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510747a9aada968469407653c5f588ff, type: 3}
---- !u!1 &5937073494814626117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5937073495786676437, guid: 510747a9aada968469407653c5f588ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1175482768}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5937073494814626116 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5937073495786676436, guid: 510747a9aada968469407653c5f588ff,
-    type: 3}
-  m_PrefabInstance: {fileID: 1175482768}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5937073494814626117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5f6d5740fe80fb468b329cd34376ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5937073494814626115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5937073495786676435, guid: 510747a9aada968469407653c5f588ff,

@@ -12,32 +12,31 @@ public class AttackComponent : EntityComponent, IDamageSource
     protected override void Run()
     {
         base.Run();
-        if (!GetCurrentSensorTarget(out SensorComponent.TargetData targetData))
+        if (parsedInput == null)
             return;
-        Attack(targetData);
+        Attack();
     }
-    protected override void HandleNoSensor()
+    protected virtual void Attack()
     {
-        base.HandleNoSensor();
-    }
-
-    protected virtual void Attack(SensorComponent.TargetData targetData)
-    {
-        if (!IsDirectoryInRange(targetData.lastPosition))
+        if (!IsDirectoryInRange(parsedInput.GetLastDirectory()))
             return;
-        if (!targetData.lastPosition.GetEntity(out Entity target, targetData.targetId))
+        if (!parsedInput.GetLastDirectory().GetEntities().Contains(parsedInput.entity))
             return;
         entityBody.Attack();
-        DealDamage(target);
+        DealDamage(parsedInput.entity);
     }
 
     protected virtual void DealDamage(Entity target)
     {
-        target.TakeHit(this);
+        if (!target.TakeHit(this))
+            return;
+        parsedInput = null;
     }
 
     protected virtual bool IsDirectoryInRange(Directory targetDirectory)
     {
+        if (targetDirectory == null)
+            return false;
         return entityBody.currentDirectory.GetDirectoriesByDepth(range).Contains(targetDirectory);
     }
     

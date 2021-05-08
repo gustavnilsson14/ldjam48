@@ -14,7 +14,6 @@ public class ComponentWithIP : MonoBehaviour
     public int maxIP;
     protected int currentIP;
     public bool alive = true;
-    public float challengeRating = 1;
 
     [Header("Events")]
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
@@ -92,27 +91,7 @@ public class ComponentWithIP : MonoBehaviour
     {
         alive = false;
         onDeath.Invoke();
-        DropLoot();
         GameObject.Destroy(gameObject);
-    }
-    protected virtual void DropLoot()
-    {
-        List<IPickup> possiblePickups = new List<IPickup>(GetComponentsInChildren<IPickup>());
-        float currentLootValueTotal = challengeRating * HostHandler.I.currentHost.lootValueMultiplier;
-        bool canAfford = true;
-        while (canAfford)
-        {
-            canAfford = false;
-            if (possiblePickups.Count == 0)
-                continue;
-            IPickup pickup = possiblePickups[UnityEngine.Random.Range(0,possiblePickups.Count)];
-            if (pickup.GetLootValue() > currentLootValueTotal)
-                continue;
-            canAfford = true;
-            currentLootValueTotal -= pickup.GetLootValue();
-            possiblePickups.Remove(pickup);
-            PickupHandler.I.CreatePickup(currentDirectory.transform,pickup);
-        }
     }
     public int GetCurrentIP()
     {

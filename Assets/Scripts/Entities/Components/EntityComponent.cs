@@ -2,35 +2,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class EntityComponent : Actor, IPickup
+public class EntityComponent : Actor, IPickup, IComponentIO
 {
     public float lootValue = 5;
+    public ParsedPath parsedInput;
     protected Entity entityBody;
     private bool isActive = true;
+
+    public IOEvent onOutput = new IOEvent();
+
     public override void StartRegister()
     {
         base.StartRegister();
         entityBody = GetComponent<Entity>();
     }
-    protected virtual bool GetCurrentSensorTarget(out SensorComponent.TargetData target)
+    public virtual void OnInput(IComponentIO source, string input) {
+        parsedInput = new ParsedPath(entityBody.currentDirectory, input);
+        if (!HandleInputError(source, parsedInput.error))
+            return;
+        parsedInput = null;
+    }
+    public virtual bool HandleInputError(object source, string error)
     {
-        target = null;
-        if (!TryGetComponent<SensorComponent>(out SensorComponent sensorComponent)) {
-            HandleNoSensor();
-            return false;
-        }
-        if (!sensorComponent.GetCurrentTarget(out target))
+        onOutput.Invoke(this, GetInputReply(source, error));
+        if (error == string.Empty)
             return false;
         return true;
     }
-    protected virtual bool GetSensorComponent(out SensorComponent sensorComponent) {
-        sensorComponent = GetComponent<SensorComponent>();
-        if (sensorComponent == null) { }
-            return false;
-        return true;
+    protected virtual string GetInputReply(object source, string error) {
+        if (error == string.Empty)
+            return $"Input to {this.GetCurrentIdentifier()} accepted";
+        return $"Error in input from {source.GetType().ToString().ToLower()}: {error}";
     }
-    protected virtual void HandleNoSensor() { }
     public virtual Dictionary<string, string> GetComponentId()
     {
         return new Dictionary<string, string>(){
@@ -83,4 +88,14 @@ public class EntityComponent : Actor, IPickup
     {
         return lootValue;
     }
+
+    public IOEvent GetOnOutputEvent()
+    {
+        return onOutput;
+    }
+}
+public class IOEvent : UnityEvent<IComponentIO, string> { }
+public interface IComponentIO {
+    IOEvent GetOnOutputEvent();
+    void OnInput(IComponentIO source, string input);
 }

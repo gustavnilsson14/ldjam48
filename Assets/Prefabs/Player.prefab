@@ -935,6 +935,7 @@ Transform:
   - {fileID: 1347863457}
   - {fileID: 9122250100816415981}
   - {fileID: 1640299683}
+  - {fileID: 1353498188193279113}
   m_Father: {fileID: 5937073495786676435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1098,6 +1099,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5937073495786676435}
   - component: {fileID: 5937073495786676436}
+  - component: {fileID: 1872546265}
+  - component: {fileID: 7003879373346376575}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1133,13 +1136,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
-  description: 
+  description: A hacker, an unwanted alien in a harsh system.
   maxIP: 25
   alive: 1
+  challengeRating: 1
+  uniqueId: 
   faction: 1
   directoryHistory: []
   isDiscovered: 0
-  sqlRoot: {fileID: 0}
   currentCharacters: 500
   maxCharacters: 500
   currentSeconds: 0
@@ -1147,6 +1151,59 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   test: 0
+--- !u!114 &1872546265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073495786676437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da112c6be27c1d44b17034560f7920e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 0
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    isAbsolute: 0
+  storedComponents: []
+--- !u!114 &7003879373346376575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5937073495786676437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  challengeRating: 1
+  speed: 4
+  isRealTime: 0
+  lootValue: 5
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    isAbsolute: 0
 --- !u!1 &5937073495901655540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,6 +1302,56 @@ MonoBehaviour:
   helpText: Logs into another host
   extendedHelpText: 'Usage: ssh [username@hostname]'
   speed: 6
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
+--- !u!1 &6417341225498952712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353498188193279113}
+  - component: {fileID: 8722310862498705705}
+  m_Layer: 0
+  m_Name: component
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1353498188193279113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417341225498952712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8722310862498705705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417341225498952712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f5564afa6cf814a9689065c50c1929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Configure, or issue manual commands to your installed components
+  extendedHelpText: 
+  speed: 2
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}

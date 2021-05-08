@@ -76,6 +76,8 @@ public class StoredObject
             return true;
         if (value is List<StoredObject>)
             return true;
+        if (value is Enum)
+            return true;
         return false;
     }
 }

@@ -32,14 +32,8 @@ public class Host : MonoBehaviour
     public bool GetDirectoryByPath(string path, out Directory directory)
     {
         directory = GetRootDirectory();
-        List<string> pathSegments = new List<string>();
-        pathSegments.AddRange(path.Split(new string[] { "/" }, StringSplitOptions.None));
-        if (pathSegments.Count == 0)
+        if (!GetPathSegments(out List<string> pathSegments, path))
             return false;
-        pathSegments.RemoveAt(0);
-        if (pathSegments[0] != "root")
-            return false;
-        pathSegments.RemoveAt(0);
         int iterations = 99;
         while (pathSegments.Count > 0 && iterations > 0)
         {
@@ -54,6 +48,19 @@ public class Host : MonoBehaviour
                 return false;
             directory = childDirectory;
         }
+        return true;
+    }
+
+    public bool GetPathSegments(out List<string> pathSegments, string path) {
+
+        pathSegments = new List<string>();
+        pathSegments.AddRange(path.Split(new string[] { "/" }, StringSplitOptions.None));
+        if (pathSegments.Count == 0)
+            return false;
+        pathSegments.RemoveAt(0);
+        if (pathSegments[0] != "root")
+            return false;
+        pathSegments.RemoveAt(0);
         return true;
     }
 
