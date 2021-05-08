@@ -123,12 +123,7 @@ public class NameUtil : MonoBehaviour
         int l = target.Length;
         for (int i = 0; i < l; i++)
         {
-            Color color = new Color(
-                UnityEngine.Random.Range(0.5f, 1f),
-                UnityEngine.Random.Range(0.5f, 1f),
-                UnityEngine.Random.Range(0.5f, 1f)
-            );
-            result += StringUtil.ColorWrap(target[0].ToString(),color);
+            result += StringUtil.ColorWrap(target[0].ToString(), Palette.RANDOM);
             target = target.Substring(1);
         }
         return result;

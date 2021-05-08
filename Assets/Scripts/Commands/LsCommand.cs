@@ -14,12 +14,12 @@ public class LsCommand : Command
 
         foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
         {
-            resultStrings.Add($"<color=#9095ff>{directory.name}</color>/");
+            resultStrings.Add(StringUtil.ColorWrap(directory.name, Palette.BLUE));
         }
 
         foreach (Entity entity in entities)
         {
-            resultStrings.Add($"{entity.name}");
+            resultStrings.Add(entity.name);
             entity.Discover();
         }
         result = string.Join(" ", resultStrings);

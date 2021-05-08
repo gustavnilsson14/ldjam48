@@ -28,14 +28,14 @@ public class DdosCommand : Command, IDamageSource
 
     private string GetOutput(bool isVerbose, bool isDead, ComponentWithIP target, int armorDamageTaken, int bodyDamageTaken)
     {
-        string result = $"{target.GetName()} recieved a force of {StringUtil.ColorWrap($"{currentTotalDamage} IP damage", Color.red)}";
+        string result = $"{target.GetName()} recieved a force of {StringUtil.ColorWrap($"{currentTotalDamage} IP damage", Palette.RED)}";
         if (!isVerbose)
             return result;
         if (armorDamageTaken > 0)
-            result += $"\nThe IP armor of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {armorDamageTaken}","#f0f")}";
+            result += $"\nThe IP armor of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {armorDamageTaken}", Palette.TEAL)}";
         if (bodyDamageTaken > 0)
-            result += $"\nThe IP of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {bodyDamageTaken}", "#088")}";
-        result += (isDead ? $"\n{target.GetName()} {StringUtil.ColorWrap($"crumbles into bits", Color.red)}" : $"\n{target.GetName()} still has integrity");
+            result += $"\nThe IP of {target.GetName()} was {StringUtil.ColorWrap($"interrupted by {bodyDamageTaken}", Palette.MAGENTA)}";
+        result += (isDead ? $"\n{target.GetName()} {StringUtil.ColorWrap($"crumbles into bits", Palette.RED)}" : $"\n{target.GetName()} still has integrity");
         return result;
     }
 

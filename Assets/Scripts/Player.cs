@@ -91,7 +91,20 @@ public class Player : Entity
         if (overTime < 10)
             return;
         overTime = 0;
-        //TakeDamage(1, "", "Your time on this server is up, the system <color=red>damages your IP by 1</color>");
+        int damage = HostHandler.I.currentHost.GetTotalDamage();
+        takeDamageMessage.Add($"Your time on this server is up, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
+        SurvivedHit(HostHandler.I.currentHost);
+        CommitTakeDamageMessage();
+    }
+    public void ModifyCharacters(string command)
+    {
+        currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
+        if (currentCharacters > 0)
+            return;
+        int damage = HostHandler.I.currentHost.GetTotalDamage();
+        takeDamageMessage.Add($"Your input characters are depleted on this server, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
+        SurvivedHit(HostHandler.I.currentHost);
+        CommitTakeDamageMessage();
     }
 
     public void LevelUp()
@@ -99,13 +112,6 @@ public class Player : Entity
         maxIP+=2;
         maxCharacters += 50;
         maxSeconds += 120;
-    }
-    public void ModifyCharacters(string command)
-    {
-        currentCharacters -= Mathf.FloorToInt((float)command.Length * GetCharacterCostMultiplier());
-        if (currentCharacters > 0)
-            return;
-        //TakeDamage(1, "", "Your input characters are depleted on this server, the system <color=red>damages your IP by 1</color>");
     }
     public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
     {

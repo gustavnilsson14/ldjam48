@@ -238,7 +238,7 @@ public class IOTerminal : MonoBehaviour
         }
         string result = string.Join(" ", resultStrings);
 
-        AppendTextLine($"<color=yellow>LEVEL UP! Type a command to level it up</color>");
+        AppendTextLine(StringUtil.ColorWrap($"LEVEL UP! Type a command to level it up", Palette.YELLOW));
         AppendTextLine($"Your commands: {result}");
 
 
@@ -248,13 +248,13 @@ public class IOTerminal : MonoBehaviour
         ParsedCommand parsedCommand = new ParsedCommand(commandName);
         if (!Player.GetCommand(out Command command, parsedCommand.name))
         {
-            AppendTextLine("<color=red>Command not found, try another one to level up!</color>");
+            AppendTextLine(StringUtil.ColorWrap("Command not found, try another one to level up!", Palette.MAGENTA));
             return;
         }
 
         levelUpCommand = false;
         command.LevelUp();
-        AppendTextLine($"<color=yellow>{command.name} is now level {command.level}, speed increased and can use {command.maxFlags} flags.</color>");
+        AppendTextLine(StringUtil.ColorWrap($"{command.name} is now level {command.level}, speed increased and can use {command.maxFlags} flags", Palette.YELLOW));
     }
 
     private void ResetCommandField()
@@ -282,10 +282,12 @@ public class IOTerminal : MonoBehaviour
         if (!command.Run(out string result, parsedCommand))
         {
             TerminalTimePast(parsedCommand.GetCommandString().Length * 2);
-            AppendTextLine("<color=red>ERROR:</color> " + result);
+            AppendTextLine($"{StringUtil.ColorWrap("ERROR:", Palette.RED)} {result}");
             return;
         }
         CommandPassed(command, parsedCommand);
+        if (result == "")
+            return;
         AppendTextLine(result);
     }
     private void CommandPassed(Command command, ParsedCommand parsedCommand)

@@ -33,7 +33,6 @@ public class Entity : ComponentWithIP, ILootDropper
 
     public bool isDiscovered = false;
     
-
     public override void StartRegister()
     {
         base.StartRegister();

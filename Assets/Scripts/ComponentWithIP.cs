@@ -57,6 +57,11 @@ public class ComponentWithIP : MonoBehaviour
             return false;
         return armor.SurvivedHit(source, ref remainingDamage, out damageTaken);
     }
+    public virtual bool SurvivedHit(IDamageSource source)
+    {
+        int remainingDamage = source.GetTotalDamage();
+        return SurvivedHit(source, ref remainingDamage, out int damageTaken);
+    }
     public virtual bool SurvivedHit(IDamageSource source, ref int remainingDamage, out int damageTaken)
     {
         damageTaken = Mathf.Clamp(remainingDamage, 0, currentIP);

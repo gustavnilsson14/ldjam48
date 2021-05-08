@@ -14,7 +14,7 @@ public class BossEntity : Entity
     public override void Discover()
     {
         base.Discover();
-        IOTerminal.I.AppendTextLine($"---- {StringUtil.ColorWrap("ATTENTION, DANGER", Color.red)} ----");
+        IOTerminal.I.AppendTextLine($"---- {StringUtil.ColorWrap("ATTENTION, DANGER", Palette.RED)} ----");
         IOTerminal.I.AppendTextLine($"{name} encountered!\n{description}");
         IOTerminal.I.AppendTextLine($"---------------------------");
 

@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class StringUtil
 {
-    public static string ColorWrap(string s, Color color)
+    public static string ColorWrap(string s, Palette color)
     {
-        string colorHex = ColorUtility.ToHtmlStringRGB(color);
-        return $"<color=#{colorHex}>{s}</color>";
-    }
-    public static string ColorWrap(string s, string color)
-    {
-        return $"<color=#{color}>{s}</color>";
+        string colorHex = PaletteUtil.Get(color);
+        return $"<color={colorHex}>{s}</color>";
     }
 }

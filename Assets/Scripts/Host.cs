@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Host : MonoBehaviour
+public class Host : MonoBehaviour, IDamageSource
 {
     public bool isAvailable = false;
     public string userName = "haxxor";
@@ -74,5 +74,20 @@ public class Host : MonoBehaviour
             result.Add(entity.faction);
         }
         return result;
+    }
+
+    public int GetDamageBase()
+    {
+        return 1;
+    }
+
+    public int GetTotalDamage()
+    {
+        return 1;
+    }
+
+    public string GetDamageSourceName()
+    {
+        return name;
     }
 }
