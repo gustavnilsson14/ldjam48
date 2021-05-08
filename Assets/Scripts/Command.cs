@@ -31,8 +31,7 @@ public class Command : MonoBehaviour, IAutoCompleteObject
         ParsedPath parsedPath = new ParsedPath(Player.I.currentDirectory, input);
         if (parsedPath.pathSegments.Count == 0)
             return false;
-        Transform parent = parsedPath.GetLastDirectory().transform;
-        List<IAutoCompleteObject> targets = parent.Cast<Transform>().SelectMany(t => t.GetComponents<IAutoCompleteObject>()).ToList();
+        List<IAutoCompleteObject> targets = parsedPath.GetLastDirectory().transform.GetComponentsInDirectChildren<IAutoCompleteObject>().ToList();
         targets = targets.FindAll(t => t.GetName().StartsWith(parsedPath.pathSegments[0]) && t.GetName() != parsedPath.pathSegments[0]);
         if (targets.Count == 0)
             return false;
