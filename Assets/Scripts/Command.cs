@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Command : MonoBehaviour
+public class Command : MonoBehaviour, IAutoCompleteObject
 {
     public bool isAvailable = false;
     [TextArea(2, 10)]
@@ -24,6 +24,22 @@ public class Command : MonoBehaviour
             RenderEffect();
         return validation;
     }
+    public virtual bool AutoComplete(out string correction, ParsedCommand parsedCommand) {
+        correction = "";
+        if (!parsedCommand.PopArgument(out string input))
+            return false;
+        ParsedPath parsedPath = new ParsedPath(Player.I.currentDirectory, input);
+        if (parsedPath.pathSegments.Count == 0)
+            return false;
+        Transform parent = parsedPath.GetLastDirectory().transform;
+        List<IAutoCompleteObject> targets = parent.Cast<Transform>().SelectMany(t => t.GetComponents<IAutoCompleteObject>()).ToList();
+        targets = targets.FindAll(t => t.GetName().StartsWith(parsedPath.pathSegments[0]) && t.GetName() != parsedPath.pathSegments[0]);
+        if (targets.Count == 0)
+            return false;
+        parsedCommand.arguments.Add($"{(parsedPath.isAbsolute ? "/" : "")}{parsedPath.validPath}{targets[0].GetName()}");
+        correction = parsedCommand.GetCommandString();
+        return true;
+    }
     private void RenderEffect() {
 
         if (effectPrefab == null)
@@ -31,7 +47,6 @@ public class Command : MonoBehaviour
         GameObject newEffect = Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform);
         Destroy(newEffect, 10);
     }
-
     public virtual void LevelUp()
     {
         level++;
@@ -51,7 +66,6 @@ public class Command : MonoBehaviour
         }
         return validationResult;
     }
-
     public bool GetHelpText(out string helpText) {
         helpText = "";
         if (this.helpText == "")
@@ -110,7 +124,6 @@ public class Command : MonoBehaviour
             return true;
         return false;
     }
-
     protected bool ArgumentIsPathFromRoot(string argument) {
         return HostHandler.I.currentHost.GetDirectoryByPath(argument, out Directory directory);
     }
@@ -129,16 +142,22 @@ public class Command : MonoBehaviour
             return false;
         return true;
     }
+
+    public string GetName()
+    {
+        return name;
+    }
 }
 public class ParsedCommand
 {
+    public string value;
     public string name;
     public List<string> arguments = new List<string>();
     public List<string> flags = new List<string>();
 
     public ParsedCommand(string value) {
-        List<string> commandSegments = new List<string>();
-        commandSegments.AddRange(value.Split(new string[] { " " }, StringSplitOptions.None));
+        this.value = value;
+        List<string> commandSegments = new List<string>(value.Split(new string[] { " " }, StringSplitOptions.None));
         if (commandSegments.Count == 0)
             return;
         ParseName(commandSegments);
@@ -154,6 +173,8 @@ public class ParsedCommand
     {
         foreach(string segment in commandSegments)
         {
+            if (segment.Trim() == "")
+                continue;
             if (segment.Length < 2)
             {
                 arguments.Add(segment);
@@ -192,4 +213,17 @@ public class ParsedCommand
         allStrings.AddRange(flags);
         return string.Join(" ", allStrings);
     }
+
+    public bool PopArgument(out string arg)
+    {
+        arg = "";
+        if (arguments.Count == 0)
+            return false;
+        arg = arguments[arguments.Count - 1];
+        arguments.RemoveAt(arguments.Count - 1);
+        return true;
+    }
+}
+public interface IAutoCompleteObject {
+    string GetName();
 }

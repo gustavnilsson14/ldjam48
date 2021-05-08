@@ -28,7 +28,6 @@ public class Host : MonoBehaviour, IDamageSource
             return;
         keys.Add(publicKey);
     }
-
     public bool GetDirectoryByPath(string path, out Directory directory)
     {
         directory = GetRootDirectory();
@@ -50,7 +49,6 @@ public class Host : MonoBehaviour, IDamageSource
         }
         return true;
     }
-
     public bool GetPathSegments(out List<string> pathSegments, string path) {
 
         pathSegments = new List<string>();
@@ -63,7 +61,6 @@ public class Host : MonoBehaviour, IDamageSource
         pathSegments.RemoveAt(0);
         return true;
     }
-
     public List<EntityFaction> GetPresentFactions()
     {
         List<EntityFaction> result = new List<EntityFaction>();
@@ -75,17 +72,14 @@ public class Host : MonoBehaviour, IDamageSource
         }
         return result;
     }
-
     public int GetDamageBase()
     {
         return 1;
     }
-
     public int GetTotalDamage()
     {
         return 1;
     }
-
     public string GetDamageSourceName()
     {
         return name;

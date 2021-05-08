@@ -14,7 +14,7 @@ public class HostHandler : MonoBehaviour
     public List<Host> exploredHosts = new List<Host>();
     public CommandEntity commandEntityPrefab;
 
-    private int spawnEntity = 1;
+    private int maxEntities = 1;
     private int maxRootDir = 2;
     private int maxSubDir = 2;
     private int maxDepth = 2;
@@ -31,7 +31,7 @@ public class HostHandler : MonoBehaviour
     private void Start()
     {
         currentHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
-        generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
+        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         Player.I.FullRestore();
         AudioHandler.I.PlayMusic();
@@ -44,7 +44,7 @@ public class HostHandler : MonoBehaviour
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
-        generateHost.PopulateHost(currentHost, spawnEntity, maxCommands, maxDirectoryKeys);
+        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
         Player.I.LevelUp();
         Player.I.FullRestore();
         AudioHandler.I.PlayMusic();
@@ -66,14 +66,13 @@ public class HostHandler : MonoBehaviour
     }
     public void MakeHostsHarder()
     {
-        spawnEntity = spawnEntity+maxRootDir;
+        maxEntities = maxEntities + maxRootDir;
         maxRootDir++;
         maxSubDir++;
         maxDepth++;
         maxCommands++;
         maxDirectoryKeys++;
     }
-
 }
 
 public class SshEvent : UnityEvent<SshKey> { }

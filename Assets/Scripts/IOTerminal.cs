@@ -68,7 +68,6 @@ public class IOTerminal : MonoBehaviour
     {
         RenderUserAndDir();
     }
-
     private void Update()
     {
         HandleInput();
@@ -82,114 +81,35 @@ public class IOTerminal : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             onEnter.Invoke();
         if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            AutoCompleteCommand();
-            AutoCompleteSsh();
-            AutoCompletePath();
-            AutoCompleteEntityName();
-        }
+            AutoComplete();
     }
 
-    private void AutoCompleteSsh()
+    private void AutoComplete()
     {
         ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
-        if (parsedCommand.name != "ssh")
+        if (!GetAutoCompleteCorrection(out string correction, parsedCommand))
             return;
-
-        if (parsedCommand.arguments.Count != 1)
-            return;
-
-        if (parsedCommand.arguments[0].Length < 1)
-            return;
-
-        if (parsedCommand.flags.Count > 0)
-            return;
-
-        foreach (PublicKey key in HostHandler.I.currentHost.keys)
-        {
-            if (!(key is SshKey))
-                continue;
-
-            if (!key.isAvailable)
-                return;
-
-            if (!(key as SshKey).GetName().StartsWith(parsedCommand.arguments[0]))
-                continue;
-
-            commandField.text = $"{parsedCommand.name} {(key as SshKey).GetName()}";
-        }
+        commandField.text = correction;
         commandField.caretPosition = commandField.text.Length;
-
+        
+    }
+    public bool GetAutoCompleteCorrection(out string correction, ParsedCommand parsedCommand) {
+        correction = "";
+        if (!Player.GetCommand(out Command command, parsedCommand.name))
+        {
+            return AutoCompleteCommand(out correction, parsedCommand.name);
+        }
+        return command.AutoComplete(out correction, parsedCommand);
     }
 
-    private void AutoCompleteCommand()
+    private bool AutoCompleteCommand(out string correction, string input)
     {
-        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
-        if (parsedCommand.arguments.Count > 0)
-            return;
-
-        if (parsedCommand.name.Length < 1)
-            return;
-
-        foreach (Command command in Player.GetCommands())
-        {
-            if (!command.name.StartsWith(parsedCommand.name))
-                continue;
-
-            commandField.text = $"{command.name}";
-        }
-        commandField.caretPosition = commandField.text.Length;
-    }
-    private void AutoCompleteEntityName()
-    {
-        List<Entity> entities = new List<Entity>();
-        entities.AddRange(Player.I.currentDirectory.GetEntities());
-
-        if (entities.Count == 0)
-            return;
-
-        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
-
-        if (parsedCommand.arguments.Count != 1)
-            return;
-
-        if (parsedCommand.arguments[0].Length < 1)
-            return;
-
-        if (parsedCommand.flags.Count > 0)
-            return;
-
-        foreach (Entity entity in entities)
-        {
-            if (!entity.name.StartsWith(parsedCommand.arguments[0]))
-                continue;
-
-            commandField.text = $"{parsedCommand.name} {entity.name}";
-        }
-        commandField.caretPosition = commandField.text.Length;
-    }
-    private void AutoCompletePath()
-    {
-        ParsedCommand parsedCommand = new ParsedCommand(commandField.text);
-
-        if (parsedCommand.arguments.Count != 1)
-            return;
-
-        if (parsedCommand.arguments[0].Length < 1)
-            return;
-
-        if (parsedCommand.flags.Count > 0)
-            return;
-
-        foreach (Directory directory in Player.I.currentDirectory.GetAdjacentDirectories())
-        {
-            if (!directory.name.StartsWith(parsedCommand.arguments[0]))
-                continue;
-
-            commandField.text = $"{parsedCommand.name} {directory.name}";
-
-        }
-        commandField.caretPosition = commandField.text.Length;
+        correction = "";
+        IAutoCompleteObject command = Player.GetCommands().Find(c => c.GetName().StartsWith(input));
+        if (command == null)
+            return false;
+        correction = command.GetName();
+        return true;
     }
 
     private void HistoryMove(int direction)
@@ -395,10 +315,4 @@ public class IOTerminal : MonoBehaviour
     }
 }
 public class CommandEvent : UnityEvent<Command, ParsedCommand> { }
-public class TerminalTimeEvent : UnityEvent<int>
-{
-    internal void AddListener(object onTerminalTimePast)
-    {
-        throw new NotImplementedException();
-    }
-}
+public class TerminalTimeEvent : UnityEvent<int> { }

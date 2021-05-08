@@ -25,10 +25,10 @@ public class HelpCommand : Command
         result = "";
         if (!parsedCommand.HasArguments())
             return true;
-        result = parsedCommand.arguments[0] + " command not found";
+        result = $"{parsedCommand.arguments[0]} command not found";
         if (!Player.GetCommand(out Command command, parsedCommand.arguments[0]))
             return false;
-        result = parsedCommand.arguments[0] + " cannot be the help command";
+        result = "There is no help for the help command!";
         if (command == this)
             return false;
         return true;

@@ -772,6 +772,34 @@ PrefabInstance:
       propertyPath: isAvailable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3448676320100993557, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: help
+      value: 'Welcome to ldhaxxor 1.0
+
+        You have an IP of {0}, when it runs
+        out, you will be ejected from the system.
+
+        You have {1} characters
+        remaining. After typing these many characters, it costs 1 IP per character
+        written.
+
+        You have {2} seconds remaining on this server. After time
+        runs out, each 10 seconds will reduce your IP by 1.
+
+        Find a key to
+        another server before your IP runs out, then use the ssh command to transfer
+        there, restoring your IP, characters, and time in the process.
+
+        To
+        see the commands available to you, type cmd then press enter.
+
+        Arguments
+        are written as plain text.
+
+        Flags are written as plain text, with
+        "--" as a prefix.'
+      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x

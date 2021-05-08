@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Directory : MonoBehaviour
+public class Directory : MonoBehaviour, IAutoCompleteObject
 {
     public List<EntityFaction> bannedFactions = new List<EntityFaction>();
     public DirectoryMoveEvent onEntityEnter = new DirectoryMoveEvent();
@@ -227,6 +227,7 @@ public class ParsedPath
     public List<Directory> directories;
     public Entity entity;
     public string error;
+    public string validPath;
 
     public bool isAbsolute = false;
     public ParsedPath(Directory directory, string path) {
@@ -238,7 +239,6 @@ public class ParsedPath
     private void ParsePath(string path)
     {
         error = "";
-        //Debug.Log($"path {path}");
         if (path.Substring(0,1) == "/")
         {
             isAbsolute = true;
@@ -250,17 +250,19 @@ public class ParsedPath
 
     private bool GetDirectoryListRecursive(out List<Directory> directories, out string error, Directory currentDirectory, List<string> pathSegments)
     {
-        directories = new List<Directory>() { currentDirectory };
         error = "";
+        directories = new List<Directory>() { currentDirectory };
         if (pathSegments.Count == 0)
             return true;
         if (!GetNextDirectoryOrEntity(out Directory nextDirectory, out Entity entity, currentDirectory, pathSegments)) {
             error = $"{input} is not a valid path";
             return false;
         }
+        validPath += $"{pathSegments[0]}/";
         if (entity != null)
         {
             this.entity = entity;
+            validPath += $"{entity.name}";
             return true;
         }
         pathSegments.RemoveAt(0);
