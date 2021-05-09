@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,10 @@ public static class ReflectionUtil
         if (t.IsSubclassOf(typeof(T)) || t == typeof(T))
             return true;
         return false;
+    }
+    public static List<Type> GetAllImplementationsOfInterface<T>()
+    {
+        return Assembly.GetExecutingAssembly().GetTypes().Where(myType => myType.GetInterfaces().Contains(typeof(T))).ToList();
     }
 }
 [System.Serializable]

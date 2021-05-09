@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: 10
 --- !u!114 &1872422750087574211
@@ -26,6 +27,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -93,10 +95,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a79f305b957f74a9090bc517fd0f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challengeRating: 1
-  lootValue: 1
+  challengeRating: 100
+  lootValue: 10
   maxDirectoryDepth: 3
   maxDirectoryChildren: 3
+  challengePrefabs:
+  - {fileID: 4622689308999205141, guid: 234cd0ed5bc6c1d46bd47d7c7460fcb3, type: 3}
+  - {fileID: 4644405270696995961, guid: 8f064fa72e350544cbdb2f0a6418b02c, type: 3}
+  - {fileID: 4644405270696995961, guid: 72c184f1366c0d745a681243c3cc366d, type: 3}
+  - {fileID: 4644405270696995961, guid: 1e9260eeec3fdb246a2c855da65df503, type: 3}
+  - {fileID: 4644405270696995961, guid: b41c27387f2b90a46bada3843653bd1c, type: 3}
+  - {fileID: 4644405270696995961, guid: 0569cd0dc1fd70a4683ad676dc2be773, type: 3}
+  - {fileID: 4644405270696995961, guid: 6738a1304d10fa84f90f4afbafc12dc9, type: 3}
+  pickupPrefabs:
+  - {fileID: 9067226111906260510, guid: eeea823091002e043b18f304825687d3, type: 3}
 --- !u!114 &2373524727399481265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -125,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -141,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff95dab7304656438d04cebd93f9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &3083080635035054198
@@ -155,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: mv
   command: {fileID: 0}
@@ -170,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: cp
   command: {fileID: 0}
@@ -185,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 1
@@ -201,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: move
   command: {fileID: 0}
@@ -216,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: cat
   command: {fileID: 0}
@@ -231,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cc514c751e32e4f9135086fa5c5e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: 3
 --- !u!114 &5973956666695308398
@@ -245,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6667e2b287bf3ef4d8faf6b6f733eea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: 50
   heal: 1
 --- !u!1 &4694186907364853099
@@ -289,6 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &4262099351080946149
@@ -303,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -319,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -335,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: reboot
   command: {fileID: 0}
@@ -350,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8eee9a919b77f547bdefd53cd215e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 0
 --- !u!1 &7694200265976645069
@@ -395,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d701152d38205e48a1f19a38bd5f341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!114 &8221597814881603936
@@ -409,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4b155b4b073e24096989cbd13bcd82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -425,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   commandName: ddos
   command: {fileID: 0}
@@ -440,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff95dab7304656438d04cebd93f9705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!1001 &66091458399887636

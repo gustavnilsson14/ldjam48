@@ -15,6 +15,11 @@ public enum EntityFaction
 
 public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge
 {
+    [Header("Challenge")]
+    [Range(1, 100)]
+    public float challengeRating;
+
+    [Header("Entity")]
     public string uniqueId;
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
@@ -29,7 +34,6 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
     public LootDropEvent onLootDrop = new LootDropEvent();
 
-    public float challengeRating;
 
     public bool isDiscovered = false;
     
@@ -185,6 +189,18 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
             return;
         die = false;
         Die();
+    }
+
+    public IChallenge AddToDirectory(Directory directory)
+    {
+        if (!EntityHandler.I.InstantiateEntity(directory, gameObject, out Entity newEntity))
+            return null;
+        return newEntity as IChallenge;
+    }
+
+    public bool RequiresPrefab()
+    {
+        return true;
     }
 }
 

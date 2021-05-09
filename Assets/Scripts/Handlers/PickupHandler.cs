@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,22 @@ public class PickupHandler : MonoBehaviour
 {
     public static PickupHandler I;
     public PickupEntity pickupEntityPrefab;
+    public List<Type> allPickupTypes;
+    
     private void Awake()
     {
         PickupHandler.I = this;
     }
+    private void Start()
+    {
+        Register();
+    }
+
+    private void Register()
+    {
+        allPickupTypes = ReflectionUtil.GetAllImplementationsOfInterface<IPickup>();
+    }
+
     public void CreatePickups(ILootDropper lootDropper)
     {
         Debug.Log($"public void CreatePickups(ILootDropper lootDropper) {lootDropper.GetTransform().name}");

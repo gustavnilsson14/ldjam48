@@ -15,8 +15,12 @@ public class HostGenerator : MonoBehaviour
     private List<Directory> priorityDirectories = new List<Directory>();
 
     [Header("Prefabs")]
-    public List<IChallenge> challenges = new List<IChallenge>();
-    public List<IPickup> pickups = new List<IPickup>();
+    public List<GameObject> challengePrefabs = new List<GameObject>();
+    public List<GameObject> pickupPrefabs = new List<GameObject>();
+    private List<IChallenge> challenges = new List<IChallenge>();
+    private List<IPickup> pickups = new List<IPickup>();
+
+
 
     private Host host;
     private int levelIndex;
@@ -29,6 +33,9 @@ public class HostGenerator : MonoBehaviour
     private void Register()
     {
         host = GetComponent<Host>();
+        challenges.AddRange(challengePrefabs.SelectMany(c => c.GetComponents<IChallenge>()));
+        Debug.Log(string.Join("--", challenges));
+        pickups.AddRange(pickupPrefabs.SelectMany(p => p.GetComponents<IPickup>()));
     }
 
     public void Run(int levelIndex = 1)
@@ -56,7 +63,7 @@ public class HostGenerator : MonoBehaviour
         if (current == host.GetRootDirectory())
             currentMaxChildren = GetMaxDirectoryChildren();
         List<Directory> children = current.GetChildren();
-        children = children.OrderBy(x => RandomHandler.random.Next()).ToList();
+        children = RandomHandler.Shuffle<Directory>(children);
         int iterations = 99;
         while (children.Count > currentMaxChildren && iterations > 0 ) {
             iterations--;
@@ -67,20 +74,43 @@ public class HostGenerator : MonoBehaviour
     }
     private void AddChallenges()
     {
+        if (challenges.Count == 0)
+            return;
         float totalChallengeRating = challengeRating * (float)levelIndex;
-        while (totalChallengeRating > 0)
+        int iterations = 9999;
+        while (totalChallengeRating > 0 && iterations > 0)
         {
-            totalChallengeRating--;
+            iterations--;
+            challenges = RandomHandler.Shuffle<IChallenge>(challenges);
+            IChallenge challenge = challenges.Find(c => c.GetChallengeRating() <= totalChallengeRating);
+            if (challenge == null)
+                break;
+            priorityDirectories = RandomHandler.Shuffle<Directory>(priorityDirectories);
+            EntityHandler.I.CreateChallengeAt(priorityDirectories[0], challenge, out IChallenge newChallenge);
+            totalChallengeRating -= challenge.GetChallengeRating();
         }
     }
     private void AddPickups()
     {
+        if (pickups.Count == 0)
+            return;
         float totalLootValue = lootValue * (float)levelIndex;
+        int iterations = 9999;
+        while (totalLootValue > 0 && iterations > 0)
+        {
+            iterations--;
+            pickups = RandomHandler.Shuffle<IPickup>(pickups);
+            IPickup pickup = pickups.Find(p => p.GetLootValue() <= totalLootValue);
+            if (pickup == null)
+                break;
+            priorityDirectories = RandomHandler.Shuffle<Directory>(priorityDirectories);
+            PickupHandler.I.CreatePickup(priorityDirectories[0].transform, pickup);
+            totalLootValue -= pickup.GetLootValue();
+        }
     }
     private void SelectPriorityDirectories() {
         priorityDirectories = host.GetLeafDirectories();
         priorityDirectories = RandomHandler.Shuffle<Directory>(priorityDirectories);
-        Debug.Log($"priorityDirectories: {string.Join("-", priorityDirectories)}");
     }
     private int GetMaxDirectoryDepth()
     {

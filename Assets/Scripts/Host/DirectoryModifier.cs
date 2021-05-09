@@ -4,8 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectoryModifier : MonoBehaviour, IProcess
+public class DirectoryModifier : MonoBehaviour, IProcess, IChallenge
 {
+    [Header("Challenge")]
+    [Range(1, 100)]
+    public float challengeRating = 1;
+
+    [Header("DirectoryModifier")]
     public int currentProcsOnEntities = -1;
     protected Directory directory;
     private string pid;
@@ -87,5 +92,20 @@ public class DirectoryModifier : MonoBehaviour, IProcess
     public bool IsDisabled()
     {
         return isDisabled;
+    }
+
+    public float GetChallengeRating()
+    {
+        return challengeRating;
+    }
+
+    public IChallenge AddToDirectory(Directory directory)
+    {
+        return directory.gameObject.AddComponent(this.GetType()) as IChallenge;
+    }
+
+    public bool RequiresPrefab()
+    {
+        return false;
     }
 }

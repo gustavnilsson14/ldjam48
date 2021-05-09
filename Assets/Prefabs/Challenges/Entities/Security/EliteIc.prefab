@@ -30,7 +30,6 @@ MonoBehaviour:
   description: 
   maxIP: 15
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
@@ -39,6 +38,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
   protectedComponents: []
   protectAllComponents: 1
@@ -72,7 +72,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 60
   isRealTime: 0
   lootValue: 5
@@ -81,6 +80,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
   damageBase: 0
   range: 1
@@ -102,7 +102,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 12
   isRealTime: 0
   lootValue: 5
@@ -111,6 +110,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
   scanDepth: 2
   targetsMax: -1
@@ -145,7 +145,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 24
   isRealTime: 0
   lootValue: 5
@@ -154,6 +153,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
 --- !u!114 &7344480381994185912
 MonoBehaviour:
@@ -185,7 +185,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 15
   isRealTime: 0
   lootValue: 5
@@ -194,6 +193,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
   damageBase: 2
   range: 0
@@ -244,7 +244,6 @@ MonoBehaviour:
   description: 
   maxIP: 3
   alive: 1
-  challengeRating: 1
   speed: 3
   isRealTime: 0
   lifeTime: 8
@@ -280,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: challengeRating
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}

@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class Consumable : MonoBehaviour, IPickup
 {
+    [Header("Pickup")]
+    [Range(1, 100)]
+    public float lootValue = 1;
+
+    [Header("Consumable")]
     private Entity entityBody;
     private bool isActive = true;
-    public float lootValue = 1;
+    
 
     private void Start()
     {

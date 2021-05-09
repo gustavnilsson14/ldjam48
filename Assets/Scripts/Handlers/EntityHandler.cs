@@ -8,9 +8,19 @@ public class EntityHandler : MonoBehaviour
 {
     public static EntityHandler I;
     private int currentId = 0;
+    public List<Type> allChallengeTypes;
     private void Awake()
     {
         EntityHandler.I = this;
+    }
+    private void Start()
+    {
+        Register();
+    }
+    private void Register()
+    {
+        allChallengeTypes = ReflectionUtil.GetAllImplementationsOfInterface<IChallenge>();
+        Debug.Log(string.Join("-", allChallengeTypes));
     }
     public string GetUniqueId(Entity entity)
     {
@@ -23,9 +33,23 @@ public class EntityHandler : MonoBehaviour
         entity = all.Find(component => component.uniqueId == id);
         return entity != null;
     }
+    public bool CreateChallengeAt(Directory directory, IChallenge challenge, out IChallenge newChallenge) {
+        newChallenge = challenge.AddToDirectory(directory);
+        return newChallenge != null;
+    }
+    public bool InstantiateEntity(Directory directory, GameObject entityPrefab, out Entity newEntity) {
+        GameObject newInstance = Instantiate(entityPrefab, directory.transform);
+        if (!newInstance.TryGetComponent<Entity>(out newEntity))
+        {
+            Destroy(newInstance);
+            return false;
+        }
+        return true;
+    }
 }
-
 public interface IChallenge
 {
     float GetChallengeRating();
+    IChallenge AddToDirectory(Directory directory);
+    bool RequiresPrefab();
 }

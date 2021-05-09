@@ -6,7 +6,11 @@ using UnityEngine.Events;
 
 public class EntityComponent : Actor, IPickup, IComponentIO
 {
+    [Header("Pickup")]
+    [Range(1, 100)]
     public float lootValue = 5;
+
+    [Header("EntityComponent")]
     public ParsedPath parsedInput;
     protected Entity entityBody;
     private bool isActive = true;
