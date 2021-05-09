@@ -13,7 +13,7 @@ public enum EntityFaction
     VIRUS
 }
 
-public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject
+public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge
 {
     public string uniqueId;
     public EntityFaction faction;

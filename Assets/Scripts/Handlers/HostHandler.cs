@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+public enum HostType
+{
+    LINUX,
+    WINDOWS,
+    MAC,
+    TUTORIAL
+}
 
 public class HostHandler : MonoBehaviour
 {
@@ -22,22 +29,41 @@ public class HostHandler : MonoBehaviour
     private int maxDirectoryKeys = 1;
 
     public SshEvent onSsh = new SshEvent();
+    
+    [Header("Host Prefabs")]
+    public Host tutorialHostPrefab;
+
     private void Awake()
     {
-        generateHost = GetComponent<GenerateHost>();
         HostHandler.I = this;
-        hosts.AddRange(GetComponentsInChildren<Host>());
     }
     private void Start()
     {
-        currentHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
-        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
+        Register();
+        currentHost = GetNextHost(HostType.TUTORIAL);
         Player.I.MoveTo(currentHost.GetRootDirectory());
+        currentHost.Init(1);
+        /*
+        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
         Player.I.FullRestore();
         AudioHandler.I.PlayMusic();
         Player.I.name = currentHost.userName + ".lock";
         IOTerminal.I.RenderUserAndDir();
         exploredHosts.Add(currentHost);
+        */
+    }
+
+    private Host GetNextHost(HostType hostType)
+    {
+        if (hostType == HostType.TUTORIAL)
+            return Instantiate(tutorialHostPrefab, transform).GetComponent<Host>();
+        return null;
+    }
+
+    private void Register()
+    {
+        generateHost = GetComponent<GenerateHost>();
+        hosts.AddRange(GetComponentsInChildren<Host>());
     }
     public void OnSsh(SshKey sshKey)
     {

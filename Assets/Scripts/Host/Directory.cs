@@ -7,9 +7,24 @@ using UnityEngine.Events;
 
 public class Directory : MonoBehaviour, IAutoCompleteObject
 {
+    private List<Directory> children;
+
     public List<EntityFaction> bannedFactions = new List<EntityFaction>();
     public DirectoryMoveEvent onEntityEnter = new DirectoryMoveEvent();
     public DirectoryMoveEvent onEntityExit = new DirectoryMoveEvent();
+
+    public List<Directory> GetChildren()
+    {
+        if (children == null)
+            children = transform.GetComponentsInDirectChildren<Directory>().ToList();
+        return children;
+    }
+    public void DestroyChild(Directory child)
+    {
+        Destroy(child.gameObject);
+        children.Remove(child);
+    }
+
     public List<Directory> GetAdjacentDirectories() {
         List<Directory> result = new List<Directory>();
         foreach (Transform child in transform)

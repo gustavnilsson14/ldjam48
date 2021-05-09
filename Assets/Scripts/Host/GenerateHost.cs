@@ -1,12 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum HostType
-{
-    LINUX,
-    WINDOWS,
-    MAC
-}
 public class GenerateHost : MonoBehaviour
 {
     public List<Entity> entitiesPrefabs = new List<Entity>();

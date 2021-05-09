@@ -35,7 +35,6 @@ public class PickupHandler : MonoBehaviour
     }
     public PickupEntity CreatePickup(Transform parent, IPickup pickup) {
         PickupEntity result = Instantiate(pickupEntityPrefab, parent) as PickupEntity;
-        Debug.Log("public PickupEntity CreatePickup(Transform parent, IPickup pickup) {" + pickup.GetType().ToString() + " " + parent.name);
         result.Init(pickup);
         return result;
     }

@@ -10,9 +10,23 @@ public class Host : MonoBehaviour, IDamageSource
     public List<PublicKey> keys = new List<PublicKey>();
     public Transform keysTransform;
     public float lootValueMultiplier = 1f;
-    private void Awake()
+
+    private void Start()
     {
+        Register();
+    }
+
+    private void Register()
+    {
+        name = NameUtil.I.GetHostName();
         keys.AddRange(GetComponentsInChildren<PublicKey>());
+    }
+
+    public void Init(int levelIndex)
+    {
+        if (!TryGetComponent<HostGenerator>(out HostGenerator hostGenerator))
+            return;
+        hostGenerator.Run(levelIndex);
     }
     public Directory GetRootDirectory()
     {
@@ -71,6 +85,10 @@ public class Host : MonoBehaviour, IDamageSource
             result.Add(entity.faction);
         }
         return result;
+    }
+    public List<Directory> GetLeafDirectories()
+    {
+        return new List<Directory>(GetComponentsInChildren<Directory>()).FindAll(d => d.GetChildren().Count == 0);
     }
     public int GetDamageBase()
     {

@@ -23,21 +23,9 @@ public class EntityHandler : MonoBehaviour
         entity = all.Find(component => component.uniqueId == id);
         return entity != null;
     }
+}
 
-    public bool test = false;
-    public string value = "";
-    public ParsedPath parsedPath;
-    private void Update()
-    {
-        if (!test)
-            return;
-        test = false;
-        parsedPath = new ParsedPath(Player.I.currentDirectory, value);
-        if (parsedPath.error != "")
-        {
-            Debug.Log(parsedPath.error);
-            return;
-        }
-        Debug.Log($"START {string.Join(" - ", parsedPath.directories.Select(d => d.name))} END");
-    }
+public interface IChallenge
+{
+    float GetChallengeRating();
 }

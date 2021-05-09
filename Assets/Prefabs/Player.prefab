@@ -843,7 +843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5937073494556071294}
-  - component: {fileID: 5937073494556071293}
+  - component: {fileID: 500177897892074432}
   m_Layer: 0
   m_Name: pwd
   m_TagString: Untagged
@@ -865,7 +865,7 @@ Transform:
   m_Father: {fileID: 5937073494569921511}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5937073494556071293
+--- !u!114 &500177897892074432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -874,13 +874,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5937073494556071295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ca409b3b72bc74ab402bdd41b633ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0736dcf810ac6264b9ca9030a686000e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAvailable: 0
+  isAvailable: 1
   helpText: Shows current directory
   extendedHelpText: 'Usage: pwd'
-  speed: 6
+  speed: 2
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
@@ -1139,11 +1139,12 @@ MonoBehaviour:
   description: A hacker, an unwanted alien in a harsh system.
   maxIP: 25
   alive: 1
-  challengeRating: 1
   uniqueId: 
   faction: 1
   directoryHistory: []
+  challengeRating: 1
   isDiscovered: 0
+  die: 0
   currentCharacters: 500
   maxCharacters: 500
   currentSeconds: 0
@@ -1167,7 +1168,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 0
   lootValue: 0
@@ -1176,6 +1176,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
   storedComponents: []
 --- !u!114 &7003879373346376575
@@ -1194,7 +1195,6 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
@@ -1203,6 +1203,7 @@ MonoBehaviour:
     directories: []
     entity: {fileID: 0}
     error: 
+    validPath: 
     isAbsolute: 0
 --- !u!1 &5937073495901655540
 GameObject:

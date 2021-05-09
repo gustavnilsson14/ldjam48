@@ -767,6 +767,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5867715903369445128, guid: 1e9260eeec3fdb246a2c855da65df503,
         type: 3}
+    - target: {fileID: 1396740951743481200, guid: b32a3743996d99349bb72b26461180e7,
+        type: 3}
+      propertyPath: tutorialHostPrefab
+      value: 
+      objectReference: {fileID: 6939597564025854419, guid: dfafb642e5992ed4c9ceadf8f18cd5d3,
+        type: 3}
     - target: {fileID: 3078258250713090756, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: isAvailable
