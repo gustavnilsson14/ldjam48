@@ -47,6 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 4
   damageBase: 5
 --- !u!114 &9067226111906260498
 MonoBehaviour:
@@ -61,6 +65,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   extraCharacters: 500
 --- !u!114 &9067226111906260499
 MonoBehaviour:
@@ -75,6 +83,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 3
   extraIP: 20
 --- !u!114 &9067226111906260496
 MonoBehaviour:
@@ -89,4 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   extraSeconds: 300

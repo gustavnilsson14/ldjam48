@@ -51,5 +51,4 @@ public interface IChallenge
 {
     float GetChallengeRating();
     IChallenge AddToDirectory(Directory directory);
-    bool RequiresPrefab();
 }

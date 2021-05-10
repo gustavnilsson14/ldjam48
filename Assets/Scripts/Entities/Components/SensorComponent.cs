@@ -30,7 +30,7 @@ public class SensorComponent : EntityComponent
         EntityFaction myFaction = entityBody.faction;
         if (!GetEntitiesInScanRange(out List<Entity> entities))
             return;
-        entities = entities.OrderBy(x => RandomHandler.random.Next()).ToList();
+        entities = entities.OrderBy(x => RandomUtil.random.Next()).ToList();
         foreach (Entity entity in entities)
         {
             ProcessNewTargetData(entity);

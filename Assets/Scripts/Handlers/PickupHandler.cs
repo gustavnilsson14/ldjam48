@@ -27,10 +27,8 @@ public class PickupHandler : MonoBehaviour
 
     public void CreatePickups(ILootDropper lootDropper)
     {
-        Debug.Log($"public void CreatePickups(ILootDropper lootDropper) {lootDropper.GetTransform().name}");
         List<IPickup> possiblePickups = lootDropper.GetPickups();
         float currentLootValueTotal = lootDropper.GetChallengeRating() * HostHandler.I.currentHost.lootValueMultiplier;
-        Debug.Log(currentLootValueTotal + " " +lootDropper.GetChallengeRating() + " " +possiblePickups.Count);
         bool canAfford = true;
         while (canAfford)
         {
@@ -46,8 +44,10 @@ public class PickupHandler : MonoBehaviour
             CreatePickup(lootDropper.GetTransform().parent, pickup);
         }
     }
-    public PickupEntity CreatePickup(Transform parent, IPickup pickup) {
+    public PickupEntity CreatePickup(Transform parent, IPickup pickup, bool invulnerable = false)
+    {
         PickupEntity result = Instantiate(pickupEntityPrefab, parent) as PickupEntity;
+        result.invulnerable = invulnerable;
         result.Init(pickup);
         return result;
     }
@@ -65,7 +65,6 @@ public interface IPickup
     void OnBodyDeath();
     Dictionary<string, string> GetComponentId();
     string GetComponentTypeName();
-    void SetActiveState(bool state);
     bool IsActive();
     float GetLootValue();
 }

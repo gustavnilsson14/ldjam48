@@ -84,10 +84,10 @@ public class GenerateHost : MonoBehaviour
             Destroy(keyEntity.gameObject);
             return;
         }
-
+        /*
         directoryKey.targetDirectory = dir;
         directoryKey.targetDirectory.bannedFactions.Add(EntityFaction.HACKER);
-        keyEntity.name = $"{directoryKey.targetDirectory.name}.key";
+        keyEntity.name = $"{directoryKey.targetDirectory.name}.key";*/
     }
 
     private void Populate(Host host, int maxEntities)

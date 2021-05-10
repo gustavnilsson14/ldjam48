@@ -42,10 +42,12 @@ public class StoredObject
 {
     public Dictionary<string, string> id;
     public Type objectType;
+    public string objectTypeName;
     public List<StoredObjectValue> values;
     private BindingFlags flags;
     public StoredObject(object original, Dictionary<string, string> id, BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Default) {
         this.objectType = original.GetType();
+        this.objectTypeName = original.GetType().ToString();
         this.id = id;
         this.flags = flags;
         values = new List<StoredObjectValue>();
@@ -91,9 +93,11 @@ public class StoredObjectValue
 {
     public string fieldName;
     public object value;
+    public string valueString;
     public StoredObjectValue(string fieldName, object value)
     {
         this.fieldName = fieldName;
         this.value = value;
+        this.valueString = value.ToString();
     }
 }

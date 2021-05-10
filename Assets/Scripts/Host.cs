@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,12 +19,12 @@ public class Host : MonoBehaviour, IDamageSource
 
     private void Register()
     {
-        name = NameUtil.I.GetHostName();
-        keys.AddRange(GetComponentsInChildren<PublicKey>());
+        keys.AddRange(GetRootDirectory().GetComponentsInChildren<PublicKey>());
     }
 
     public void Init(int levelIndex)
     {
+        name = NameUtil.I.GetHostName();
         if (!TryGetComponent<HostGenerator>(out HostGenerator hostGenerator))
             return;
         hostGenerator.Run(levelIndex);
@@ -36,11 +37,12 @@ public class Host : MonoBehaviour, IDamageSource
     {
         this.userName = userName;
     }
-    public void RegisterKey(PublicKey publicKey)
+    public void RegisterKey(StoredObject key)
     {
-        if (keys.Contains(publicKey))
+        PublicKey newKey = gameObject.AddComponent(key.objectType) as PublicKey;
+        if (!ReflectionUtil.ApplyStoredObject(key, newKey))
             return;
-        keys.Add(publicKey);
+        keys.Add(newKey);
     }
     public bool GetDirectoryByPath(string path, out Directory directory)
     {
@@ -88,7 +90,15 @@ public class Host : MonoBehaviour, IDamageSource
     }
     public List<Directory> GetLeafDirectories()
     {
-        return new List<Directory>(GetComponentsInChildren<Directory>()).FindAll(d => d.GetChildren().Count == 0);
+        return GetComponentsInChildren<Directory>().ToList().FindAll(d => d.GetChildren().Count == 0);
+    }
+    public List<Directory> GetLeafDirectories(Directory directory)
+    {
+        return directory.GetComponentsInChildren<Directory>().ToList().FindAll(d => d.GetChildren().Count == 0);
+    }
+    public List<Directory> GetBranchDirectories()
+    {
+        return GetComponentsInChildren<Directory>().ToList().FindAll(d => d.GetChildren().Count != 0 && d != GetRootDirectory());
     }
     public int GetDamageBase()
     {

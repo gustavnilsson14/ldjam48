@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,22 @@ public class AudioHandler : MonoBehaviour
     private void Awake()
     {
         AudioHandler.I = this;
+    }
+
+    private void Start()
+    {
+        StartRegister();
+    }
+
+    private void StartRegister()
+    {
+        PlayMusic();
+        HostHandler.I.onSsh.AddListener(OnSsh);
+    }
+
+    private void OnSsh(SshKey arg0)
+    {
+        PlayMusic();
     }
 
     public void PlayMusic() {

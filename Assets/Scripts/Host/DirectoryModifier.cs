@@ -4,11 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirectoryModifier : MonoBehaviour, IProcess, IChallenge
+public class DirectoryModifier : MonoBehaviour, IProcess, IChallenge, IGeneratedHostInhabitant
 {
     [Header("Challenge")]
     [Range(1, 100)]
     public float challengeRating = 1;
+
+    [Header("GeneratedHostInhabitant")]
+    public bool generatesInLeafDirectory = true;
+    public bool generatesInBranchDirectory = false;
+    public bool generatesInPriorityDirectory = false;
+    [Range(1, 100)]
+    public float rarity = 1;
 
     [Header("DirectoryModifier")]
     public int currentProcsOnEntities = -1;
@@ -104,8 +111,23 @@ public class DirectoryModifier : MonoBehaviour, IProcess, IChallenge
         return directory.gameObject.AddComponent(this.GetType()) as IChallenge;
     }
 
-    public bool RequiresPrefab()
+    public bool GeneratesInLeafDirectory()
     {
-        return false;
+        return generatesInLeafDirectory;
+    }
+
+    public bool GeneratesInBranchDirectory()
+    {
+        return generatesInBranchDirectory;
+    }
+
+    public bool GeneratesInPriorityDirectory()
+    {
+        return generatesInPriorityDirectory;
+    }
+
+    public float GetRarity()
+    {
+        return rarity;
     }
 }

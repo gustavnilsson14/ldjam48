@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   damageBase: 5
 --- !u!114 &600017403732862987
 MonoBehaviour:
@@ -33,6 +37,10 @@ MonoBehaviour:
   speed: 4
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -55,6 +63,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   extraCharacters: 500
 --- !u!114 &4484580725670582555
 MonoBehaviour:
@@ -75,6 +87,10 @@ MonoBehaviour:
   speed: 12
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -98,6 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   extraIP: 20
 --- !u!114 &6753862231027247011
 MonoBehaviour:
@@ -118,6 +138,10 @@ MonoBehaviour:
   speed: 24
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -138,6 +162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootValue: 1
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   extraSeconds: 300
 --- !u!114 &7526287887956089048
 MonoBehaviour:
@@ -158,6 +186,10 @@ MonoBehaviour:
   speed: 15
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -197,6 +229,11 @@ PrefabInstance:
     - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: challengeRating
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: rarity
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,

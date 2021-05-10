@@ -3,11 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumable : MonoBehaviour, IPickup
+public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant
 {
     [Header("Pickup")]
     [Range(1, 100)]
     public float lootValue = 1;
+
+    [Header("GeneratedHostInhabitant")]
+    public bool generatesInLeafDirectory = false;
+    public bool generatesInBranchDirectory = false;
+    public bool generatesInPriorityDirectory = true;
+    [Range(1, 100)]
+    public float rarity = 1;
 
     [Header("Consumable")]
     private Entity entityBody;
@@ -42,14 +49,28 @@ public class Consumable : MonoBehaviour, IPickup
     {
         PickupHandler.I.CreatePickup(GetBody().currentDirectory.transform, this);
     }
-    public void SetActiveState(bool state)
-    {
-        isActive = state;
-    }
 
     public float GetLootValue()
     {
         return lootValue;
+    }
+    public bool GeneratesInLeafDirectory()
+    {
+        return generatesInLeafDirectory;
+    }
+
+    public bool GeneratesInBranchDirectory()
+    {
+        return generatesInBranchDirectory;
+    }
+
+    public bool GeneratesInPriorityDirectory()
+    {
+        return generatesInPriorityDirectory;
+    }
+    public float GetRarity()
+    {
+        return rarity;
     }
 }
 public class TopUp : Consumable {

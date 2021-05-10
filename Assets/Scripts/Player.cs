@@ -42,8 +42,17 @@ public class Player : Entity
         base.StartRegister();
         IOTerminal.I.onCommand.AddListener(OnCommand);
         commands.AddRange(GetComponentsInChildren<Command>());
+        HostHandler.I.onSsh.AddListener(OnSsh);
         FullRestore();
     }
+
+    private void OnSsh(SshKey key)
+    {
+        LevelUp();
+        FullRestore();
+        name = $"{key.GetUser()}.lock";
+    }
+
     private void Update()
     {
         ReduceRealTime();
@@ -248,7 +257,6 @@ public class Player : Entity
         if (installedComponent == null)
             return false;
         ReflectionUtil.ApplyStoredObject(storedObject, installedComponent);
-        installedComponent.SetActiveState(true);
         onInstall.Invoke(installedComponent);
         return true;
     }

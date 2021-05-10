@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: 10
 --- !u!114 &1872422750087574211
@@ -28,6 +32,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -43,6 +51,7 @@ GameObject:
   - component: {fileID: 5550076265224565538}
   - component: {fileID: 6939597564025854419}
   - component: {fileID: 4529450901203871811}
+  - component: {fileID: 3001141666236454552}
   m_Layer: 0
   m_Name: LinuxHost
   m_TagString: Untagged
@@ -95,10 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a79f305b957f74a9090bc517fd0f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challengeRating: 100
-  lootValue: 10
-  maxDirectoryDepth: 3
-  maxDirectoryChildren: 3
+  challengeRating: 3
+  lootValue: 1
+  maxDirectories: 5
+  leafDirectories: []
+  branchDirectories: []
+  priorityDirectories: []
   challengePrefabs:
   - {fileID: 4622689308999205141, guid: 234cd0ed5bc6c1d46bd47d7c7460fcb3, type: 3}
   - {fileID: 4644405270696995961, guid: 8f064fa72e350544cbdb2f0a6418b02c, type: 3}
@@ -109,6 +120,21 @@ MonoBehaviour:
   - {fileID: 4644405270696995961, guid: 6738a1304d10fa84f90f4afbafc12dc9, type: 3}
   pickupPrefabs:
   - {fileID: 9067226111906260510, guid: eeea823091002e043b18f304825687d3, type: 3}
+--- !u!114 &3001141666236454552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682051998247385940}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7dde15c10dbb424087eba97bbccc473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  publicKeyEntityPrefab: {fileID: 0}
+  isAvailable: 0
+  path: 
 --- !u!114 &2373524727399481265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -139,6 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -156,6 +190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &3083080635035054198
@@ -171,6 +209,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: mv
   command: {fileID: 0}
@@ -187,6 +229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: cp
   command: {fileID: 0}
@@ -203,6 +249,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 1
@@ -220,6 +270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: move
   command: {fileID: 0}
@@ -236,6 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: cat
   command: {fileID: 0}
@@ -252,6 +310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: 3
 --- !u!114 &5973956666695308398
@@ -267,6 +329,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: 50
   heal: 1
 --- !u!1 &4694186907364853099
@@ -312,6 +378,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: -1
 --- !u!114 &4262099351080946149
@@ -327,6 +397,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -344,6 +418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -361,6 +439,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: reboot
   command: {fileID: 0}
@@ -377,6 +459,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 0
 --- !u!1 &7694200265976645069
@@ -423,6 +509,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!114 &8221597814881603936
@@ -438,6 +528,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 0.1
@@ -455,6 +549,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: ddos
   command: {fileID: 0}
@@ -471,6 +569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!1001 &66091458399887636
@@ -980,15 +1082,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!1 &2826488551284197787 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 552765891796752098}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8590362672849128779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 552765891796752098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2826488551284197787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 552765891796752098}
   m_PrefabAsset: {fileID: 0}
@@ -1619,15 +1721,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!4 &7426076468205316164 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 1698545095509160941}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3963189907428584596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 1698545095509160941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7426076468205316164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 1698545095509160941}
   m_PrefabAsset: {fileID: 0}
@@ -2201,15 +2303,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!1 &198705140903182562 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 2473484168817516443}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5967089526221718578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 2473484168817516443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &198705140903182562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 2473484168817516443}
   m_PrefabAsset: {fileID: 0}
@@ -3968,15 +4070,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!1 &7277008797954187289 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 4931236019804323680}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3815549408666313929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 4931236019804323680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7277008797954187289 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 4931236019804323680}
   m_PrefabAsset: {fileID: 0}
@@ -5195,15 +5297,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!1 &8906484783392810867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 6559586599270840330}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3140308228894532515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 6559586599270840330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8906484783392810867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 6559586599270840330}
   m_PrefabAsset: {fileID: 0}
@@ -5846,15 +5948,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54cb84700acfd1f4390ffe485d278937, type: 3}
---- !u!1 &5079337039296599770 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
-    type: 3}
-  m_PrefabInstance: {fileID: 7417160146473552291}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1617851279704347146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8114581562647763881, guid: 54cb84700acfd1f4390ffe485d278937,
+    type: 3}
+  m_PrefabInstance: {fileID: 7417160146473552291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5079337039296599770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2347050483677372281, guid: 54cb84700acfd1f4390ffe485d278937,
     type: 3}
   m_PrefabInstance: {fileID: 7417160146473552291}
   m_PrefabAsset: {fileID: 0}

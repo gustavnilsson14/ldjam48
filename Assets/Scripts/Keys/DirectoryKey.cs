@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DirectoryKey : PublicKey
 {
-    public Directory targetDirectory;
+    public string path;
+
     public override string GetName()
     {
-        return targetDirectory.GetFullPath();
+        return path;
     }
     public override string GetUsageDescription()
     {
-        return $"You are now completely safe in {targetDirectory.GetFullPath()}";
+        return $"You are now completely safe in {path}";
     }
 }

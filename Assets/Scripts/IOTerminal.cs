@@ -35,11 +35,16 @@ public class IOTerminal : MonoBehaviour
     private void Awake()
     {
         IOTerminal.I = this;
-        baseUserDirString = userDirField.text;
-        commandField.onSubmit.AddListener(onCommandSubmit);
     }
     private void Start()
     {
+        StartRegister();
+    }
+
+    private void StartRegister()
+    {
+        baseUserDirString = userDirField.text;
+        commandField.onSubmit.AddListener(onCommandSubmit);
         RenderUserAndDir();
         ResetCommandField();
         RegisterListeners();
@@ -49,7 +54,15 @@ public class IOTerminal : MonoBehaviour
     {
         Player.I.onMove.AddListener(OnMove);
         Player.I.onDeath.AddListener(OnPlayerDeath);
+        HostHandler.I.onSsh.AddListener(OnSsh);
     }
+
+    private void OnSsh(SshKey arg0)
+    {
+        RenderUserAndDir();
+        DisplayLevelUp();
+    }
+
     private void OnPlayerDeath()
     {
         commandField.onSubmit.RemoveListener(onCommandSubmit);

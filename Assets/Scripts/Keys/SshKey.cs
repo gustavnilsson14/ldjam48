@@ -6,12 +6,13 @@ public class SshKey : PublicKey
 {
     protected Host targetHost;
     protected string userName;
-    protected override void Awake()
+    protected override void Register()
     {
-        base.Awake();
+        base.Register();
         userName = NameUtil.I.GetHackerName();
-        targetHost = HostHandler.I.CreateHost();
+        targetHost = HostHandler.I.GetNextHost();
     }
+
     public Host GetHost()
     {
         return targetHost;
@@ -26,6 +27,6 @@ public class SshKey : PublicKey
     }
     public override string GetUsageDescription()
     {
-        return $"You can now use \"ssh {GetName()} to proceed deeper into cyberspace!\"";
+        return $"You can now use \"ssh {GetName()}\" to proceed deeper into cyberspace!";
     }
 }

@@ -17,16 +17,8 @@ public class HostHandler : MonoBehaviour
     public Host currentHost;
     //public Host hostPrefab;
     private List<Host> hosts = new List<Host>();
-    private GenerateHost generateHost;
     public List<Host> exploredHosts = new List<Host>();
     public CommandEntity commandEntityPrefab;
-
-    private int maxEntities = 1;
-    private int maxRootDir = 2;
-    private int maxSubDir = 2;
-    private int maxDepth = 2;
-    private int maxCommands = 1;
-    private int maxDirectoryKeys = 1;
 
     public SshEvent onSsh = new SshEvent();
     
@@ -42,63 +34,41 @@ public class HostHandler : MonoBehaviour
         Register();
         currentHost = GetNextHost(HostType.TUTORIAL);
         Player.I.MoveTo(currentHost.GetRootDirectory());
-        currentHost.Init(1);
-        /*
-        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
-        Player.I.FullRestore();
-        AudioHandler.I.PlayMusic();
-        Player.I.name = currentHost.userName + ".lock";
+        currentHost.Init(3);
         IOTerminal.I.RenderUserAndDir();
-        exploredHosts.Add(currentHost);
-        */
     }
 
-    private Host GetNextHost(HostType hostType)
+    public Host GetNextHost(HostType hostType = HostType.LINUX)
     {
         if (hostType == HostType.TUTORIAL)
             return Instantiate(tutorialHostPrefab, transform).GetComponent<Host>();
-        return null;
+        return Instantiate(tutorialHostPrefab, transform).GetComponent<Host>();
     }
 
     private void Register()
     {
-        generateHost = GetComponent<GenerateHost>();
         hosts.AddRange(GetComponentsInChildren<Host>());
     }
     public void OnSsh(SshKey sshKey)
     {
+        exploredHosts.Add(currentHost);
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
-        generateHost.PopulateHost(currentHost, maxEntities, maxCommands, maxDirectoryKeys);
-        Player.I.LevelUp();
-        Player.I.FullRestore();
-        AudioHandler.I.PlayMusic();
-        Player.I.name = currentHost.userName + ".lock";
-        IOTerminal.I.RenderUserAndDir();
-        exploredHosts.Add(currentHost);
-        IOTerminal.I.DisplayLevelUp();
+        currentHost.Init(3);
         onSsh.Invoke(sshKey);
     }
     public List<Host> GetHosts(bool onlyAvailable = true)
     {
         return hosts.FindAll(host => (host.isAvailable || !onlyAvailable));
     }
-    public Host CreateHost() {
-        MakeHostsHarder();
-        Host newHost = generateHost.GenerateNewHost(HostType.LINUX, maxRootDir, maxSubDir, maxDepth);
-        hosts.Add(newHost);
-        return newHost;
-    }
-    public void MakeHostsHarder()
-    {
-        maxEntities = maxEntities + maxRootDir;
-        maxRootDir++;
-        maxSubDir++;
-        maxDepth++;
-        maxCommands++;
-        maxDirectoryKeys++;
-    }
 }
 
 public class SshEvent : UnityEvent<SshKey> { }
+public interface IGeneratedHostInhabitant
+{
+    bool GeneratesInLeafDirectory();
+    bool GeneratesInBranchDirectory();
+    bool GeneratesInPriorityDirectory();
+    float GetRarity();
+}

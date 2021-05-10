@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EntityComponent : Actor, IPickup, IComponentIO
+public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhabitant
 {
     [Header("Pickup")]
     [Range(1, 100)]
     public float lootValue = 5;
+
+    [Header("GeneratedHostInhabitant")]
+    public bool generatesInLeafDirectory = false;
+    public bool generatesInBranchDirectory = false;
+    public bool generatesInPriorityDirectory = true;
+    [Range(1, 100)]
+    public float rarity = 1;
 
     [Header("EntityComponent")]
     public ParsedPath parsedInput;
@@ -74,11 +81,6 @@ public class EntityComponent : Actor, IPickup, IComponentIO
         PickupHandler.I.CreatePickup(GetBody().currentDirectory.transform, this);
     }
 
-    public void SetActiveState(bool state)
-    {
-        isActive = state;
-    }
-
     public bool IsActive()
     {
         return isActive;
@@ -96,6 +98,25 @@ public class EntityComponent : Actor, IPickup, IComponentIO
     public IOEvent GetOnOutputEvent()
     {
         return onOutput;
+    }
+    public bool GeneratesInLeafDirectory()
+    {
+        return generatesInLeafDirectory;
+    }
+
+    public bool GeneratesInBranchDirectory()
+    {
+        return generatesInBranchDirectory;
+    }
+
+    public bool GeneratesInPriorityDirectory()
+    {
+        return generatesInPriorityDirectory;
+    }
+
+    public float GetRarity()
+    {
+        return rarity;
     }
 }
 public class IOEvent : UnityEvent<IComponentIO, string> { }

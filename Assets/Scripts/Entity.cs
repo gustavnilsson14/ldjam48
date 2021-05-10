@@ -13,11 +13,18 @@ public enum EntityFaction
     VIRUS
 }
 
-public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge
+public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant
 {
     [Header("Challenge")]
     [Range(1, 100)]
     public float challengeRating;
+
+    [Header("GeneratedHostInhabitant")]
+    public bool generatesInLeafDirectory = true;
+    public bool generatesInBranchDirectory = true;
+    public bool generatesInPriorityDirectory = true;
+    [Range(1, 100)]
+    public float rarity = 1;
 
     [Header("Entity")]
     public string uniqueId;
@@ -44,7 +51,15 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
         currentDirectory = GetComponentInParent<Directory>();
         RegisterComponentConnections();
         RegisterWithPickupHandler();
+        RegisterName();
     }
+
+    protected virtual void RegisterName()
+    {
+        name = name.Replace("(Clone)", "").Trim();
+        name = NameUtil.I.GetEntityName(name);
+    }
+
     protected virtual void RegisterComponentConnections()
     {
         if (!TryGetComponent<SensorComponent>(out SensorComponent sensorComponent))
@@ -183,6 +198,7 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     }
 
     public bool die = false;
+
     private void Update()
     {
         if (!die)
@@ -198,9 +214,23 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
         return newEntity as IChallenge;
     }
 
-    public bool RequiresPrefab()
+    public bool GeneratesInLeafDirectory()
     {
-        return true;
+        return generatesInLeafDirectory;
+    }
+
+    public bool GeneratesInBranchDirectory()
+    {
+        return generatesInBranchDirectory;
+    }
+
+    public bool GeneratesInPriorityDirectory()
+    {
+        return generatesInPriorityDirectory;
+    }
+    public float GetRarity()
+    {
+        return rarity;
     }
 }
 

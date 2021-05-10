@@ -19,6 +19,10 @@ MonoBehaviour:
   speed: 4
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -49,6 +53,10 @@ MonoBehaviour:
   speed: 12
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -143,6 +151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: challengeRating
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: rarity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2420773234421788748}
   - component: {fileID: 4161972184117605103}
   m_Layer: 0
-  m_Name: ModifiersCollection
+  m_Name: DirectoryModifiersCollection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 2
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 6
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!114 &8886797640163959946
@@ -64,6 +68,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 3
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 10
   currentProcsOnEntities: -1
   damageBase: 1
 --- !u!114 &133928643578882360
@@ -79,6 +87,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 4
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 10
   currentProcsOnEntities: -1
   damageBase: 1
   speed: 1
@@ -96,6 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 6
   currentProcsOnEntities: -1
   multiplier: 1
 --- !u!114 &2420773234421788748
@@ -111,6 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 2
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 6
   currentProcsOnEntities: -1
   commandName: 
   command: {fileID: 0}
@@ -127,5 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeRating: 2
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 6
   currentProcsOnEntities: -1
   multiplier: 1
