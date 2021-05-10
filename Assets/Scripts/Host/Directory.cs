@@ -51,10 +51,10 @@ public class Directory : MonoBehaviour, IAutoCompleteObject
         entity = GetEntities().Find(e => e.name == name);
         return entity != null;
     }
-    public void EntityEnter(Directory from, Entity entity) {
+    public virtual void EntityEnter(Directory from, Entity entity) {
         onEntityEnter.Invoke(from, this, entity);
     }
-    public void EntityExit(Directory to, Entity entity) {
+    public virtual void EntityExit(Directory to, Entity entity) {
         onEntityExit.Invoke(this, to, entity);
     }
 
@@ -232,6 +232,12 @@ public class Directory : MonoBehaviour, IAutoCompleteObject
         if (targets.Count == 0)
             return false;
         return true;
+    }
+    public List<IDiscoverable> GetDiscoverables()
+    {
+        List<IDiscoverable> result = new List<IDiscoverable>(GetComponents<IDiscoverable>());
+        result.AddRange(transform.GetComponentsInDirectChildren<IDiscoverable>().ToList().FindAll(d => !(d is Directory)));
+        return result;
     }
 }
 [System.Serializable]

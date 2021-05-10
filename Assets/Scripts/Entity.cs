@@ -13,7 +13,7 @@ public enum EntityFaction
     VIRUS
 }
 
-public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant
+public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant, IDiscoverable
 {
     [Header("Challenge")]
     [Range(1, 100)]
@@ -26,6 +26,11 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     [Range(1, 100)]
     public float rarity = 1;
 
+    [Header("Discoverable")]
+    public bool isDiscovered;
+    private DiscoveryEvent onDiscover = new DiscoveryEvent();
+    private DiscoveryEvent onForget = new DiscoveryEvent();
+
     [Header("Entity")]
     public string uniqueId;
     public EntityFaction faction;
@@ -36,14 +41,9 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     public DirectoryMoveEvent onEntityExitMyDirectory = new DirectoryMoveEvent();
     public MoveEvent onMove = new MoveEvent();
     public CatEvent onCat = new CatEvent();
-    public DiscoverEvent onDiscover = new DiscoverEvent();
     public AttackEvent onAttack = new AttackEvent();
-    public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
     public LootDropEvent onLootDrop = new LootDropEvent();
 
-
-    public bool isDiscovered = false;
-    
     public override void StartRegister()
     {
         base.StartRegister();
@@ -132,27 +132,10 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     {
         onAttack.Invoke();
     }
-
-    public virtual void Discover()
-    {
-        if (isDiscovered)
-            return;
-
-        isDiscovered = true;
-        onDiscover.Invoke();
-        Player.I.onMove.AddListener(HandlePlayerMovement);
-    }
     public override void Die()
     {
         onLootDrop.Invoke(this);
         base.Die();
-    }
-
-    private void HandlePlayerMovement(Directory target, Directory origin)
-    {
-        isDiscovered = false;
-        onPlayerEscape.Invoke();
-        Player.I.onMove.RemoveListener(HandlePlayerMovement);
     }
 
     protected string GetBinaryStatic()
@@ -198,7 +181,7 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     }
 
     public bool die = false;
-
+    
     private void Update()
     {
         if (!die)
@@ -232,9 +215,29 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     {
         return rarity;
     }
+
+    public bool IsDiscovered() => isDiscovered;
+
+    public virtual void Discover()
+    {
+        isDiscovered = true;
+        GetOnDiscover().Invoke(this as IDiscoverable, true);
+    }
+
+    public virtual void Forget()
+    {
+        isDiscovered = false;
+        GetOnForget().Invoke(this as IDiscoverable, false);
+    }
+    public virtual DiscoveryEvent GetOnDiscover()
+    {
+        return onDiscover;
+    }
+    public virtual DiscoveryEvent GetOnForget()
+    {
+        return onForget;
+    }
 }
 
 public class CatEvent : UnityEvent { }
-public class DiscoverEvent : UnityEvent { }
-public class PlayerEscapeEvent : UnityEvent { }
 public class AttackEvent : UnityEvent { }

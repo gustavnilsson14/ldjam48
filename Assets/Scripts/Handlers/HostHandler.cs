@@ -35,7 +35,6 @@ public class HostHandler : MonoBehaviour
         currentHost = GetNextHost(HostType.TUTORIAL);
         Player.I.MoveTo(currentHost.GetRootDirectory());
         currentHost.Init(3);
-        IOTerminal.I.RenderUserAndDir();
     }
 
     public Host GetNextHost(HostType hostType = HostType.LINUX)

@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class LookCommand : Command
 {
-    public Entity currentEntity;
+    public IDiscoverable currentDiscovery;
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        List<Entity> entities = new List<Entity>();
-        entities.AddRange(GetTargetDirectory(parsedCommand).GetEntities());
-        entities.Remove(Player.I);
-        if (entities.Count == 0)
+        List<IDiscoverable> discoverables = new List<IDiscoverable>(GetTargetDirectory(parsedCommand).GetDiscoverables());
+        if (discoverables.Count == 0)
         {
             result = "No files in this directory";
             return true;
         }
-        currentEntity = GetCurrentEntity(entities);
-        currentEntity.Discover();
-        result = $"{currentEntity.name}";
+        currentDiscovery = GetCurrentDiscoverable(discoverables);
+        DiscoveryHandler.I.Discover(currentDiscovery);
+        result = $"{currentDiscovery.GetName()}";
         return true;
     }
     private Directory GetTargetDirectory(ParsedCommand parsedCommand) {
@@ -28,17 +26,17 @@ public class LookCommand : Command
         return Player.I.currentDirectory.GetAdjacentDirectories().Find(dir => dir.name == parsedCommand.arguments[0]);
     }
 
-    private Entity GetCurrentEntity(List<Entity> entities) 
+    private IDiscoverable GetCurrentDiscoverable(List<IDiscoverable> discoverables) 
     {
-        if (currentEntity == null)
-            return entities[0];
-        int entityIndex = entities.IndexOf(currentEntity);
-        if (entityIndex == -1)
-            return entities[0];
-        entityIndex += 1;
-        if (entityIndex < entities.Count)
-            return entities[entityIndex];
-        return entities[0];
+        if (currentDiscovery == null)
+            return discoverables[0];
+        int discoveryIndex = discoverables.IndexOf(currentDiscovery);
+        if (discoveryIndex == -1)
+            return discoverables[0];
+        discoveryIndex += 1;
+        if (discoveryIndex < discoverables.Count)
+            return discoverables[discoveryIndex];
+        return discoverables[0];
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
     {

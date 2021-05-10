@@ -43,14 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d5d97e0dba0e2942aec00addfe94bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 0
-  value: 
-  parsedPath:
-    pathSegments: []
-    directories: []
-    entity: {fileID: 0}
-    error: 
-    isAbsolute: 0
 --- !u!1 &625909250
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 625909251}
   - component: {fileID: 1396740951743481200}
-  - component: {fileID: 730913551}
   m_Layer: 0
   m_Name: HostHandler
   m_TagString: Untagged
@@ -100,27 +91,7 @@ MonoBehaviour:
   exploredHosts: []
   commandEntityPrefab: {fileID: 312117439366045288, guid: 341a53550ef430f428083076803e36f1,
     type: 3}
---- !u!114 &730913551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625909250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b159abe9f3bc1084d95af31f8115389b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entitiesPrefabs:
-  - {fileID: 5867715903369445128, guid: 0569cd0dc1fd70a4683ad676dc2be773, type: 3}
-  - {fileID: 5867715903369445128, guid: 8f064fa72e350544cbdb2f0a6418b02c, type: 3}
-  - {fileID: 5867715903369445128, guid: b41c27387f2b90a46bada3843653bd1c, type: 3}
-  directoryKeyPrefab: {fileID: 1572174374806988481, guid: 0fb81a536d88aab4788287affc782174,
-    type: 3}
-  sshKeyPrefab: {fileID: 7806010436457728740, guid: 31042e2ca00c4a74eb141dee6bdc6952,
-    type: 3}
-  linuxHostPrefab: {fileID: 6939597564025854419, guid: dfafb642e5992ed4c9ceadf8f18cd5d3,
+  tutorialHostPrefab: {fileID: 2119464073244511867, guid: 79a9d0bfa25d1264ea9981facdb2c57b,
     type: 3}
 --- !u!1 &688778934
 GameObject:
@@ -440,9 +411,53 @@ Transform:
   - {fileID: 1435795120}
   - {fileID: 688778935}
   - {fileID: 202080837}
+  - {fileID: 422020937026908084}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8118096683838612171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 422020937026908084}
+  - component: {fileID: 6735274620856929675}
+  m_Layer: 0
+  m_Name: DiscoveryHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &422020937026908084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118096683838612171}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -27.40747, y: 8.221756, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6431651335494408404}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6735274620856929675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8118096683838612171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14717f6c8c22df54f9fba489556ee218, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8708997899416272274
 GameObject:
   m_ObjectHideFlags: 0

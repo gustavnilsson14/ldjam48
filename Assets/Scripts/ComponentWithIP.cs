@@ -19,6 +19,10 @@ public class ComponentWithIP : MonoBehaviour
     public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
     public HealEvent onHeal = new HealEvent();
     public DeathEvent onDeath = new DeathEvent();
+    /*
+    public DiscoverEvent onDiscover = new DiscoverEvent();
+    public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
+    */
     protected virtual void Awake()
     {
         currentDirectory = GetComponentInParent<Directory>();
@@ -124,6 +128,24 @@ public class ComponentWithIP : MonoBehaviour
             return false;
         return true;
     }
+    /*
+    public virtual void Discover()
+    {
+        if (isDiscovered)
+            return;
+
+        isDiscovered = true;
+        onDiscover.Invoke();
+        Player.I.onMove.AddListener(OnPlayerMove);
+    }
+
+    private void OnPlayerMove(Directory arg0, Directory arg1)
+    {
+        isDiscovered = false;
+        onPlayerEscape.Invoke();
+        Player.I.onMove.RemoveListener(OnPlayerMove);
+    }
+    */
 }
 public interface IDamageSource {
     int GetDamageBase();
@@ -134,3 +156,4 @@ public interface IDamageSource {
 public class HealEvent : UnityEvent<int> { }
 public class TakeDamageEvent : UnityEvent<int> { }
 public class DeathEvent : UnityEvent { }
+public class PlayerEscapeEvent : UnityEvent { }

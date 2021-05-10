@@ -46,6 +46,11 @@ public class Player : Entity
         FullRestore();
     }
 
+    protected override void RegisterName()
+    {
+        name = $"{HostHandler.I.currentHost.userName}.lock";
+    }
+
     private void OnSsh(SshKey key)
     {
         LevelUp();

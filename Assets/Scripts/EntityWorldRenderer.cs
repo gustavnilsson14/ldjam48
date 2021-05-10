@@ -19,19 +19,23 @@ public class EntityWorldRenderer : MonoBehaviour
 
         entity.onTakeDamage.AddListener(TakeDamage);
         entity.onDeath.AddListener(Die);
-        entity.onDiscover.AddListener(Discover);
+        entity.GetOnDiscover().AddListener(OnDiscover);
         entity.onAttack.AddListener(Attack);
-        entity.onPlayerEscape.AddListener(PlayerEscape);
+        entity.GetOnForget().AddListener(OnForget);
         entity.onMove.AddListener(Move);
-
     }
 
-    private void Move(Directory target, Directory origin)
+    private void OnDiscover(IDiscoverable arg0, bool arg1)
+    {
+        Render();
+    }
+
+    private void OnForget(IDiscoverable arg0, bool arg1)
     {
         EntityWorldHandler.I.RemoveChildFromSpawnPoint(entityParticle);
     }
 
-    private void PlayerEscape()
+    private void Move(Directory target, Directory origin)
     {
         EntityWorldHandler.I.RemoveChildFromSpawnPoint(entityParticle);
     }
@@ -41,11 +45,6 @@ public class EntityWorldRenderer : MonoBehaviour
         if(!EntityWorldHandler.I.RenderEntity(entityParticlePrefab, out entityParticle))
             return;
         animator = entityParticle.GetComponent<Animator>();
-    }
-
-    private void Discover()
-    {
-        Render();
     }
 
     public void Attack()

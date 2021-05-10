@@ -7,14 +7,16 @@ public class PickupEntity : Entity
 {
     public StoredObject pickup;
     public bool invulnerable = false;
-    //public IPickup pickup;
+
     public void Init(IPickup pickup) {
         ReflectionUtil.GetStoredObject(out this.pickup, pickup, pickup.GetComponentId());
     }
     protected override void RegisterName()
     {
-        base.RegisterName();
-        name = $"{this.pickup.id["name"].Replace("/","-")}.{this.pickup.id["pickupType"]}";
+        name = $"UnnamedPickup";
+        if (pickup.id == null)
+            return;
+        name = $"{pickup.id["name"].Replace("/","-")}.{pickup.id["pickupType"]}";
     }
     public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
     {

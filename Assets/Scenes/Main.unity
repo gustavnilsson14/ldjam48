@@ -753,59 +753,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: entitiesPrefabs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: entitiesPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 5867715903369445128, guid: 6738a1304d10fa84f90f4afbafc12dc9,
-        type: 3}
-    - target: {fileID: 730913551, guid: b32a3743996d99349bb72b26461180e7, type: 3}
-      propertyPath: entitiesPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 5867715903369445128, guid: 1e9260eeec3fdb246a2c855da65df503,
-        type: 3}
-    - target: {fileID: 1396740951743481200, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: tutorialHostPrefab
-      value: 
-      objectReference: {fileID: 6939597564025854419, guid: dfafb642e5992ed4c9ceadf8f18cd5d3,
-        type: 3}
-    - target: {fileID: 3078258250713090756, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: isAvailable
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3448676320100993557, guid: b32a3743996d99349bb72b26461180e7,
-        type: 3}
-      propertyPath: help
-      value: 'Welcome to ldhaxxor 1.0
-
-        You have an IP of {0}, when it runs
-        out, you will be ejected from the system.
-
-        You have {1} characters
-        remaining. After typing these many characters, it costs 1 IP per character
-        written.
-
-        You have {2} seconds remaining on this server. After time
-        runs out, each 10 seconds will reduce your IP by 1.
-
-        Find a key to
-        another server before your IP runs out, then use the ssh command to transfer
-        there, restoring your IP, characters, and time in the process.
-
-        To
-        see the commands available to you, type cmd then press enter.
-
-        Arguments
-        are written as plain text.
-
-        Flags are written as plain text, with
-        "--" as a prefix.'
-      objectReference: {fileID: 0}
     - target: {fileID: 6431651335494408404, guid: b32a3743996d99349bb72b26461180e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -868,6 +815,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32a3743996d99349bb72b26461180e7, type: 3}
+--- !u!1001 &110583918922014004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.8083916
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.76604444
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.64278764
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960584, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_Name
+      value: ImagePlane
+      objectReference: {fileID: 0}
+    - target: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
 --- !u!1001 &5341060305765479459
 PrefabInstance:
   m_ObjectHideFlags: 0

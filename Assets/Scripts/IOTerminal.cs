@@ -141,7 +141,11 @@ public class IOTerminal : MonoBehaviour
     }
     public void RenderUserAndDir()
     {
-        userDirField.text = String.Format(baseUserDirString, HostHandler.I.currentHost.userName, HostHandler.I.currentHost.name, "CSOS128", Player.I.currentDirectory.GetFullPath());
+        string userName = HostHandler.I.currentHost.userName;
+        string hostName = HostHandler.I.currentHost.name;
+        string terminalName = "CSOS128";
+        string workingDirectory = Player.I.currentDirectory.GetFullPath();
+        userDirField.text = String.Format(baseUserDirString, userName, hostName, terminalName, workingDirectory);
     }
     private void onCommandSubmit(string commandName)
     {

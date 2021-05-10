@@ -11,6 +11,7 @@ public class BossEntity : Entity
         onBossDeath.Invoke();
         base.Die();
     }
+
     public override void Discover()
     {
         base.Discover();
