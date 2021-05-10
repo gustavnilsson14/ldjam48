@@ -215,28 +215,12 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     {
         return rarity;
     }
-
     public bool IsDiscovered() => isDiscovered;
-
-    public virtual void Discover()
-    {
-        isDiscovered = true;
-        GetOnDiscover().Invoke(this as IDiscoverable, true);
-    }
-
-    public virtual void Forget()
-    {
-        isDiscovered = false;
-        GetOnForget().Invoke(this as IDiscoverable, false);
-    }
-    public virtual DiscoveryEvent GetOnDiscover()
-    {
-        return onDiscover;
-    }
-    public virtual DiscoveryEvent GetOnForget()
-    {
-        return onForget;
-    }
+    public void SetIsDiscovered(bool isDiscovered) => this.isDiscovered = isDiscovered;
+    public virtual void Discover() { }
+    public virtual void Forget() { }
+    public virtual DiscoveryEvent GetOnDiscover() => onDiscover;
+    public virtual DiscoveryEvent GetOnForget() => onForget;
 }
 
 public class CatEvent : UnityEvent { }

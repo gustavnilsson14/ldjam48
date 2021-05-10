@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1001018032087801150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5948983076211426949}
+  - component: {fileID: 1660497329374136631}
+  m_Layer: 0
+  m_Name: thumbnail2.png
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5948983076211426949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001018032087801150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427129933700968600}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1660497329374136631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001018032087801150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0773c6cac682914a97abcd6d853549c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  isDiscovered: 0
+  prefab: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
+  positionType: 0
+  image: {fileID: 21300000, guid: c870b07a7b628a54fb439b28afe738f1, type: 3}
 --- !u!1 &1087868203891143952
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,6 +443,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4992936191566412179}
+  - {fileID: 322910206601353646}
   m_Father: {fileID: 2367800973080791347}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -412,6 +464,57 @@ MonoBehaviour:
     status to learn your adjacent directories, and move to transfer yourself into
     your destination!\nTo reread any message in the tutorial, simply revisit the
     directory.\n\nExample commands; \nstatus\nmove tutorial"
+--- !u!1 &4530231774381227195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4827978000166894696}
+  - component: {fileID: 1847534732870942566}
+  m_Layer: 0
+  m_Name: thumbnail4.png
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4827978000166894696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530231774381227195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427129933700968600}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1847534732870942566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4530231774381227195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0773c6cac682914a97abcd6d853549c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  isDiscovered: 0
+  prefab: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
+  positionType: 0
+  image: {fileID: 21300000, guid: 9bc839a50900ad34db2420fd6da112c6, type: 3}
 --- !u!1 &4889640043999195227
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +639,7 @@ GameObject:
   - component: {fileID: 3139179173497350173}
   - component: {fileID: 4207368296669675123}
   m_Layer: 0
-  m_Name: image
+  m_Name: thumbnail1.png
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -573,8 +676,9 @@ MonoBehaviour:
   maxIP: 0
   alive: 1
   isDiscovered: 0
-  image: {fileID: 21300000, guid: fd38b4215b562cf448b7f4e2681ead5d, type: 3}
   prefab: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
+  positionType: 0
+  image: {fileID: 21300000, guid: fd38b4215b562cf448b7f4e2681ead5d, type: 3}
 --- !u!1 &5289058963627265700
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +708,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3139179173497350173}
+  - {fileID: 5948983076211426949}
+  - {fileID: 41449635756240429}
+  - {fileID: 4827978000166894696}
   m_Father: {fileID: 5198277944462403810}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -621,6 +728,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bannedFactions: 01000000
   entryMessage: 
+--- !u!1 &5887864304668578174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 41449635756240429}
+  - component: {fileID: 2391840596685128160}
+  m_Layer: 0
+  m_Name: thumbnail3.png
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &41449635756240429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887864304668578174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427129933700968600}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2391840596685128160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887864304668578174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0773c6cac682914a97abcd6d853549c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  isDiscovered: 0
+  prefab: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
+  positionType: 0
+  image: {fileID: 21300000, guid: 88160603ca64a8e4bb8f5427d460a295, type: 3}
 --- !u!1 &7669743478214569212
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +842,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527a86322cf92c54da7b548d0517c9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9149640860228962809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322910206601353646}
+  - component: {fileID: 1218741070536954478}
+  m_Layer: 0
+  m_Name: thumbnail1.png
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &322910206601353646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149640860228962809}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7980059970206061910}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1218741070536954478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149640860228962809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0773c6cac682914a97abcd6d853549c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDirectory: {fileID: 0}
+  description: 
+  maxIP: 0
+  alive: 1
+  isDiscovered: 0
+  prefab: {fileID: 110583919496960588, guid: 4a780002a43539d41945dbd79da04a1e, type: 3}
+  positionType: 0
+  image: {fileID: 21300000, guid: fd38b4215b562cf448b7f4e2681ead5d, type: 3}
 --- !u!1001 &6424970907843269881
 PrefabInstance:
   m_ObjectHideFlags: 0

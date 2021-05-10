@@ -20,7 +20,7 @@ public class ComponentWithIP : MonoBehaviour
     public HealEvent onHeal = new HealEvent();
     public DeathEvent onDeath = new DeathEvent();
     /*
-    public DiscoverEvent onDiscover = new DiscoverEvent();
+    public DiscoveryEvent onDiscover = new DiscoveryEvent();
     public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
     */
     protected virtual void Awake()
