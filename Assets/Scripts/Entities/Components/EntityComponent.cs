@@ -20,7 +20,6 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
     [Header("EntityComponent")]
     public ParsedPath parsedInput;
     protected Entity entityBody;
-    private bool isActive = true;
 
     public IOEvent onOutput = new IOEvent();
 
@@ -30,6 +29,7 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
         entityBody = GetComponent<Entity>();
     }
     public virtual void OnInput(IComponentIO source, string input) {
+        Debug.Log($"OnInput: {source} {input} {entityBody}");
         parsedInput = new ParsedPath(entityBody.currentDirectory, input);
         if (!HandleInputError(source, parsedInput.error))
             return;
@@ -70,20 +70,9 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
     {
         return $"{GetCurrentIdentifier()}: {base.GetDescription()}";
     }
-    public override void Die()
-    {
-        alive = false;
-        onDeath.Invoke();
-        GameObject.Destroy(this);
-    }
     public virtual void OnBodyDeath()
     {
         PickupHandler.I.CreatePickup(GetBody().currentDirectory.transform, this);
-    }
-
-    public bool IsActive()
-    {
-        return isActive;
     }
 
     public Entity GetBody() {
@@ -118,6 +107,18 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
     {
         return rarity;
     }
+
+    public void InitPickup()
+    {
+        PickupHandler.I.InitPickup(this);
+    }
+
+    public string GetShortDescription()
+    {
+        return "";
+    }
+
+    public PickupType GetPickupType() => PickupType.COMPONENT;
 }
 public class IOEvent : UnityEvent<IComponentIO, string> { }
 public interface IComponentIO {

@@ -15,7 +15,7 @@ public class StatusCommand : Command
         {
             directories.Add(directory.name);
         }
-        result += $"IP: {Player.I.GetCurrentIP()}/{Player.I.maxIP}\n";
+        result += $"IP: {Player.I.currentIP}/{Player.I.maxIP}\n";
         result += $"Characters: {Player.I.currentCharacters}\n";
         result += $"Time: {Player.I.GetTimeLeft()}\n";
         result += $"Adjacencies: {string.Join(", ", directories)}\n";

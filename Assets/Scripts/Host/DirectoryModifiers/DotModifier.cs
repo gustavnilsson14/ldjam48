@@ -18,7 +18,7 @@ public class DotModifier : DirectoryModifier, IDamageSource
         momentum = 0;
         foreach (Entity entity in GetAffectedEntities())
         {
-            entity.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken);
+            DamageHandler.I.TakeHit(entity, this, out int armorDamageTaken, out int bodyDamageTaken);
         }
     }
     public override string GetDescription()

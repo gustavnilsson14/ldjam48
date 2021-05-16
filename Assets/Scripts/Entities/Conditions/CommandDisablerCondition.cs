@@ -7,9 +7,9 @@ public class CommandDisablerCondition : Condition, ICommandDisabler
     public string commandName;
     public Command command;
 
-    protected override void Start()
+    public override void StartRegister()
     {
-        base.Start();
+        base.StartRegister();
         RegisterCommand();
     }
     private void RegisterCommand()

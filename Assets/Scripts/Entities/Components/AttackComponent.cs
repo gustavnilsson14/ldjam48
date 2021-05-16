@@ -22,13 +22,12 @@ public class AttackComponent : EntityComponent, IDamageSource
             return;
         if (!parsedInput.GetLastDirectory().GetEntities().Contains(parsedInput.entity))
             return;
-        entityBody.Attack();
         DealDamage(parsedInput.entity);
     }
 
-    protected virtual void DealDamage(Entity target)
+    protected virtual void DealDamage(IDamageable target)
     {
-        if (!target.TakeHit(this))
+        if (!DamageHandler.I.TakeHit(target, this))
             return;
         parsedInput = null;
     }
@@ -47,11 +46,11 @@ public class AttackComponent : EntityComponent, IDamageSource
 
     public int GetTotalDamage()
     {
-        return Mathf.FloorToInt((float)damageBase * entityBody.GetDamageMultiplier());
+        return Mathf.FloorToInt((float)damageBase * DamageHandler.I.GetDamageMultiplier(entityBody));
     }
     public string GetDamageSourceName()
     {
-        if (!entityBody.isDiscovered)
+        if (!entityBody.discovered)
             return "Something";
         return $"The {GetCurrentIdentifier()}-component on {name}";
     }

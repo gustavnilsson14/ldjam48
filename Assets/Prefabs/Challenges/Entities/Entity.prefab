@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1506259033347830992}
   - component: {fileID: 1417322987447050636}
-  - component: {fileID: 7336614084124270745}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -45,21 +44,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentDirectory: {fileID: 0}
+  description: Big *** :O
   maxIP: 5
+  alive: 1
+  challengeRating: 0
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 1
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  isDiscovered: 0
+  uniqueId: 
   faction: 1
   directoryHistory: []
-  description: Big *** :O
---- !u!114 &7336614084124270745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194000878634578685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546a204c6400b8a4ea093b2a48127e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entityParticlePrefab: {fileID: 4110619111931693869, guid: a0e3a715ddb81664490d17fcc5377418,
+  worldObjectPrefab: {fileID: 5105838333210016435, guid: d050892412dea6c488f65ba00a856b26,
     type: 3}
+  die: 0

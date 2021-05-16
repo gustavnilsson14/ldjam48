@@ -19,12 +19,12 @@ public class Host : MonoBehaviour, IDamageSource
 
     private void Register()
     {
+        name = NameUtil.I.GetHostName();
         keys.AddRange(GetRootDirectory().GetComponentsInChildren<PublicKey>());
     }
 
     public void Init(int levelIndex)
     {
-        name = NameUtil.I.GetHostName();
         if (!TryGetComponent<HostGenerator>(out HostGenerator hostGenerator))
             return;
         hostGenerator.Run(levelIndex);

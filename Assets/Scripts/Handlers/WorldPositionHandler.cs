@@ -11,26 +11,25 @@ public class WorldPositionHandler : Handler
 {
     public static WorldPositionHandler I;
     public Collider imagePositionBounds;
-    public void CreateWorldPositionObject(IWorldPositionObject worldPositionObject, out GameObject instance, out Animator animator, out Renderer renderer)
+    public Collider entityPositionBounds;
+    public Collider pickupPositionBounds;
+
+    public void CreateWorldPositionObject(IWorldPositionObject worldPositionObject, out GameObject instance)
     {
         Collider collider = GetCollider(worldPositionObject.GetWorldPositionType());
-        instance = Instantiate(worldPositionObject.GetPrefab(), collider.transform);
+        instance = Instantiate(worldPositionObject.GetWorldObjectPrefab(), collider.transform);
         instance.transform.position = GetRandomPointInBounds(collider.bounds);
-        animator = instance.GetComponentInChildren<Animator>();
-        renderer = instance.GetComponentInChildren<Renderer>();
     }
     
     public Collider GetCollider(WorldPositionType worldPositionType) {
         switch (worldPositionType)
         {
             case WorldPositionType.ENTITY:
-                break;
+                return entityPositionBounds;
             case WorldPositionType.PICKUP:
-                break;
+                return pickupPositionBounds;
             case WorldPositionType.IMAGE:
-                break;
-            default:
-                break;
+                return imagePositionBounds;
         }
         return imagePositionBounds;
     }
@@ -49,12 +48,33 @@ public class WorldPositionHandler : Handler
             child.position += transform.forward*2;
         }
     }
+
+    public void PlayAnimation(IWorldPositionObject worldPositionObject, string animation)
+    {
+        if (!GetAnimator(worldPositionObject, out Animator animator))
+            return;
+        animator.Play(animation);
+    }
+    public bool GetAnimator(IWorldPositionObject worldPositionObject, out Animator animator)
+    {
+        animator = null;
+        if (worldPositionObject.instance == null)
+            return false;
+        animator = worldPositionObject.instance.GetComponentInChildren<Animator>();
+        return animator != null;
+    }
+    public bool GetRenderer(IWorldPositionObject worldPositionObject, out Renderer renderer)
+    {
+        renderer = null;
+        if (worldPositionObject.instance == null)
+            return false;
+        renderer = worldPositionObject.instance.GetComponentInChildren<Renderer>();
+        return renderer != null;
+    }
 }
 public interface IWorldPositionObject
 {
+    GameObject instance { get; set; }
+    GameObject GetWorldObjectPrefab();
     WorldPositionType GetWorldPositionType();
-    GameObject GetPrefab();
-    Animator GetAnimator();
-    Renderer GetRenderer();
-    GameObject GetInstance();
 }

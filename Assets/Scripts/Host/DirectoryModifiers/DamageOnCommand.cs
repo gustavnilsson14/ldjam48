@@ -12,7 +12,7 @@ public class DamageOnCommand : DirectoryModifier, IDamageSource
             return;
         foreach (Entity entity in GetAffectedEntities())
         {
-            if (entity.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken))
+            if (DamageHandler.I.TakeHit(entity, this, out int armorDamageTaken, out int bodyDamageTaken))
                 continue;
         }
 

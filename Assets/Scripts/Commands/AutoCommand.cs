@@ -7,7 +7,8 @@ public class AutoCommand : Command
 {
     protected Command currentCommand;
     protected ParsedCommand parsedCommand;
-    protected bool runOnTakeDamage = false;
+    protected bool runOnArmorDamage = false;
+    protected bool runOnBodyDamage = false;
     protected bool runOnMove = false;
     protected bool runOnCommand = false;
     protected bool runOnEntityEnterMyDirectory = false;
@@ -15,7 +16,8 @@ public class AutoCommand : Command
 
     private void Start()
     {
-        Player.I.onTakeDamage.AddListener(OnTakeDamage);
+        Player.I.onArmorDamage.AddListener(OnArmorDamage);
+        Player.I.onBodyDamage.AddListener(OnBodyDamage);
         Player.I.onMove.AddListener(OnMove);
         Player.I.onCommand.AddListener(OnCommand);
         Player.I.onEntityEnterMyDirectory.AddListener(OnEntityEnterMyDirectory);
@@ -30,8 +32,9 @@ public class AutoCommand : Command
         this.parsedCommand = new ParsedCommand(parsedCommand.GetCommandString());
         this.parsedCommand.name = this.parsedCommand.arguments[0];
         this.parsedCommand.arguments.RemoveAt(0);
-        runOnTakeDamage = parsedCommand.flags.Contains("--onTakeDamage");
-        runOnMove= parsedCommand.flags.Contains("--onMove");
+        runOnArmorDamage = parsedCommand.flags.Contains("--onArmorDamage");
+        runOnBodyDamage = parsedCommand.flags.Contains("--onBodyDamage");
+        runOnMove = parsedCommand.flags.Contains("--onMove");
         runOnCommand = parsedCommand.flags.Contains("--onCommand");
         runOnEntityEnterMyDirectory = parsedCommand.flags.Contains("--onEntityEnterMyDirectory");
         result = $"{this.parsedCommand.name} will now run {string.Join(", ", parsedCommand.flags)}";
@@ -42,7 +45,8 @@ public class AutoCommand : Command
     {
         currentCommand = null;
         parsedCommand = null;
-        runOnTakeDamage = false;
+        runOnArmorDamage = false;
+        runOnBodyDamage = false;
         runOnMove = false;
         runOnCommand = false;
         runOnEntityEnterMyDirectory = false;
@@ -87,10 +91,15 @@ public class AutoCommand : Command
         lastExecution = now;
         return false;
     }
-
-    private void OnTakeDamage(int damage)
+    private void OnArmorDamage(ArmorComponent arg0, bool arg1, int arg2)
     {
-        if (!runOnTakeDamage)
+        if (!runOnArmorDamage)
+            return;
+        RunAutoCommand();
+    }
+    private void OnBodyDamage(bool arg0, int arg1)
+    {
+        if (!runOnBodyDamage)
             return;
         RunAutoCommand();
     }
@@ -107,7 +116,7 @@ public class AutoCommand : Command
             return;
         RunAutoCommand();
     }
-
+    
     private void OnEntityEnterMyDirectory(Directory arg0, Directory arg1, Entity arg2)
     {
         if (!runOnEntityEnterMyDirectory)

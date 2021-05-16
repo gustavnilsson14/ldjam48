@@ -8,9 +8,9 @@ public class DirectoryKey : PublicKey
 
     public override string GetName()
     {
-        return path;
+        return $"{path.Replace("/","_")}";
     }
-    public override string GetUsageDescription()
+    public override string GetShortDescription()
     {
         return $"You are now completely safe in {path}";
     }

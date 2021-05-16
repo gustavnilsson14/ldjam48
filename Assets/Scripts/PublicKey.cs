@@ -8,19 +8,17 @@ public class PublicKey : MonoBehaviour, IPickup
     public KeyEntity publicKeyEntityPrefab;
     public bool isAvailable = false;
     protected void Start() {
-        Register();
+        StartRegister();
     }
-    protected virtual void Register()
+    protected virtual void StartRegister()
     {
-
+        InitPickup();
+    }
+    public void InitPickup()
+    {
+        PickupHandler.I.InitPickup(this);
     }
     public virtual string GetName() { return name; }
-    public virtual string GetUsageDescription() { return ""; }
-    public virtual KeyEntity InstantiateEntityKey(Transform parent)
-    {
-        KeyEntity publicKeyEntity = Instantiate(publicKeyEntityPrefab, parent);
-        return publicKeyEntity;
-    }
 
     public void OnBodyDeath()
     {
@@ -40,13 +38,15 @@ public class PublicKey : MonoBehaviour, IPickup
         return GetType().ToString().ToLower();
     }
 
-    public bool IsActive()
-    {
-        return true;
-    }
-
     public float GetLootValue()
     {
         return 0;
     }
+
+    public virtual string GetShortDescription()
+    {
+        return "";
+    }
+
+    public PickupType GetPickupType() => PickupType.KEY;
 }

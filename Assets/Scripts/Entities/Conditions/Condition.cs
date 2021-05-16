@@ -9,9 +9,10 @@ public class Condition : Actor
     protected float currentLifeTime;
     private IConditionOrigin origin;
     private bool isStatic = false;
-    protected override void Start()
+
+    public override void StartRegister()
     {
-        base.Start();
+        base.StartRegister();
         currentLifeTime = lifeTime;
     }
     public virtual void Init(IConditionOrigin origin) {
@@ -35,19 +36,13 @@ public class Condition : Actor
         currentLifeTime -= time;
         if (currentLifeTime > 0)
             return;
-        Die();
+        DamageHandler.I.Die(this);
     }
     public string GetSource()
     {
         if (origin == null)
             return "Without Source";
         return origin.GetSource();
-    }
-    public override void Die()
-    {
-        alive = false;
-        onDeath.Invoke();
-        GameObject.Destroy(this, 1f);
     }
 }
 

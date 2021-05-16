@@ -13,7 +13,7 @@ public enum EntityFaction
     VIRUS
 }
 
-public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant, IDiscoverable
+public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant, IDiscoverable, IWorldPositionObject
 {
     [Header("Challenge")]
     [Range(1, 100)]
@@ -27,9 +27,13 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     public float rarity = 1;
 
     [Header("Discoverable")]
-    public bool isDiscovered;
-    private DiscoveryEvent onDiscover = new DiscoveryEvent();
-    private DiscoveryEvent onForget = new DiscoveryEvent();
+    public string description;
+
+    [Header("WorldPositionObject")]
+    public GameObject worldObjectPrefab;
+
+    [Header("Damageable")]
+    public int maxIP;
 
     [Header("Entity")]
     public string uniqueId;
@@ -40,18 +44,67 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
     public DirectoryMoveEvent onEntityEnterMyDirectory = new DirectoryMoveEvent();
     public DirectoryMoveEvent onEntityExitMyDirectory = new DirectoryMoveEvent();
     public MoveEvent onMove = new MoveEvent();
-    public CatEvent onCat = new CatEvent();
     public AttackEvent onAttack = new AttackEvent();
-    public LootDropEvent onLootDrop = new LootDropEvent();
 
-    public override void StartRegister()
+    private void Start()
     {
-        base.StartRegister();
+        StartRegister();
+    }
+
+    public virtual void StartRegister()
+    {
+        InitDamageable();
+        InitLootDropper();
+        InitDiscoverable();
+
         uniqueId = EntityHandler.I.GetUniqueId(this);
         currentDirectory = GetComponentInParent<Directory>();
+
         RegisterComponentConnections();
-        RegisterWithPickupHandler();
         RegisterName();
+        RegisterEventListeners();
+    }
+    public virtual void InitDamageable() => DamageHandler.I.InitDamageable(this);
+    public virtual void InitLootDropper() => PickupHandler.I.InitLootDropper(this);
+    public virtual void InitDiscoverable() => DiscoveryHandler.I.InitDiscoverable(this);
+    protected virtual void RegisterEventListeners()
+    {
+        onHitTaken.AddListener(OnHitTaken);
+        onDeath.AddListener(OnDeath);
+        onDiscover.AddListener(OnDiscover);
+        onForget.AddListener(OnForget);
+    }
+    public virtual void OnDiscover(IDiscoverable arg0, bool arg1)
+    {
+        WorldPositionHandler.I.CreateWorldPositionObject(this, out GameObject worldObjectInstance);
+        instance = worldObjectInstance;
+    }
+    public void OnForget(IDiscoverable arg0, bool arg1)
+    {
+        WorldPositionHandler.I.PlayAnimation(this, "Out");
+        Destroy(instance, 1f);
+    }
+
+    protected void OnDeath()
+    {
+        Destroy(instance, 1f);
+        WorldPositionHandler.I.PlayAnimation(this, "Die");
+        PickupHandler.I.DropLoot(this);
+    }
+
+    private void OnHitTaken(IDamageSource source, bool isDead, int armorDamage, int bodyDamage)
+    {
+        WorldPositionHandler.I.PlayAnimation(this, GetHitAnimationName(isDead, armorDamage, bodyDamage));
+    }
+    private string GetHitAnimationName(bool isDead, int armorDamage, int bodyDamage) {
+
+        if (isDead)
+            return "Death";
+        if (bodyDamage > 0)
+            return "BodyDamage";
+        if (armorDamage > 0)
+            return "ArmorDamage";
+        return "";
     }
 
     protected virtual void RegisterName()
@@ -66,9 +119,20 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
             return;
         if (TryGetComponent<AttackComponent>(out AttackComponent attackComponent)) {
             ConnectComponentIO(sensorComponent, attackComponent);
+            attackComponent.onRun.AddListener(OnAttack);
         }
-        if (TryGetComponent<MovementComponent>(out MovementComponent movementComponent))
+        if (TryGetComponent<MovementComponent>(out MovementComponent movementComponent)) {
             ConnectComponentIO(sensorComponent, movementComponent);
+        }
+    }
+
+    public virtual void OnAttack(Actor actor)
+    {
+        if (!alive)
+            return;
+        if (!(actor is AttackComponent))
+            return;
+        WorldPositionHandler.I.PlayAnimation(this, "Attack");
     }
     public void ConnectComponentIO(EntityComponent output, EntityComponent input)
     {
@@ -104,18 +168,16 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
             return 5;
         return 0;
     }
-    public virtual string GetCatDescription()
+    public virtual List<string> FormatCatDescription(List<string> catDescription)
     {
-        List<string> result = new List<string> {
-            GetBinaryStatic(),
-            $"IP: {currentIP}",
-            $"UserGroup: {faction.ToString()}",
-            description,
-            GetEntityComponentsDescriptions()
-
-        };
-        onCat.Invoke();
-        return string.Join("\n", result);
+        catDescription.AddRange(
+            new List<string> {
+                $"IP: {currentIP}",
+                $"UserGroup: {faction.ToString()}",
+                GetEntityComponentsDescriptions()
+            }
+        );
+        return catDescription;
     }
 
     protected virtual string GetEntityComponentsDescriptions()
@@ -128,26 +190,6 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
         return result;
     }
 
-    public virtual void Attack()
-    {
-        onAttack.Invoke();
-    }
-    public override void Die()
-    {
-        onLootDrop.Invoke(this);
-        base.Die();
-    }
-
-    protected string GetBinaryStatic()
-    {
-        List<string> result = new List<string>();
-        var rand = new System.Random();
-        for (int i = 0; i < 10; i++)
-        {
-            result.Add(Convert.ToString(rand.Next(1024), 2).PadLeft(10, '0'));
-        }
-        return string.Join("\n", result);
-    }
     public virtual bool IsAllowedInDirectory(Directory directory) {
         return (!directory.bannedFactions.Contains(faction));
     }
@@ -155,41 +197,12 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
         return new List<Condition>(GetComponents<Condition>()).FindAll(condition => condition.IsActiveCondition());
     }
 
-    public float GetChallengeRating()
-    {
-        return challengeRating;
-    }
+    public float GetChallengeRating() => challengeRating;
 
     public List<IPickup> GetPickups()
     {
         return new List<IPickup>(GetComponents<IPickup>());
     }
-
-    public LootDropEvent GetLootDropEvent()
-    {
-        return onLootDrop;
-    }
-
-    public void RegisterWithPickupHandler()
-    {
-        PickupHandler.I.RegisterLootDropper(this);
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public bool die = false;
-    
-    private void Update()
-    {
-        if (!die)
-            return;
-        die = false;
-        Die();
-    }
-
     public IChallenge AddToDirectory(Directory directory)
     {
         if (!EntityHandler.I.InstantiateEntity(directory, gameObject, out Entity newEntity))
@@ -197,31 +210,34 @@ public class Entity : ComponentWithIP, ILootDropper, IAutoCompleteObject, IChall
         return newEntity as IChallenge;
     }
 
-    public bool GeneratesInLeafDirectory()
-    {
-        return generatesInLeafDirectory;
-    }
-
-    public bool GeneratesInBranchDirectory()
-    {
-        return generatesInBranchDirectory;
-    }
-
-    public bool GeneratesInPriorityDirectory()
-    {
-        return generatesInPriorityDirectory;
-    }
-    public float GetRarity()
-    {
-        return rarity;
-    }
-    public bool IsDiscovered() => isDiscovered;
-    public void SetIsDiscovered(bool isDiscovered) => this.isDiscovered = isDiscovered;
-    public virtual void Discover() { }
-    public virtual void Forget() { }
-    public virtual DiscoveryEvent GetOnDiscover() => onDiscover;
-    public virtual DiscoveryEvent GetOnForget() => onForget;
+    public GameObject instance { get; set; }
+    public string GetName() => name;
+    public string GetShortDescription() => description;
+    public string GetFileName() => name;
+    public bool GeneratesInLeafDirectory() => generatesInLeafDirectory;
+    public bool GeneratesInBranchDirectory() => generatesInBranchDirectory;
+    public bool GeneratesInPriorityDirectory() => generatesInPriorityDirectory;
+    public float GetRarity() => rarity;
+    public WorldPositionType GetWorldPositionType() => WorldPositionType.ENTITY;
+    public GameObject GetWorldObjectPrefab() => worldObjectPrefab;
+    public Transform GetTransform() => transform;
+    public int GetMaxIP() => maxIP;
+    public GameObject GetGameObject() => gameObject;
+    public bool alive { get; set; }
+    public int currentIP { get; set; }
+    public ArmorDamageEvent onArmorDamage { get; set; }
+    public BodyDamageEvent onBodyDamage { get; set; }
+    public HealEvent onHeal { get; set; }
+    public DeathEvent onDeath { get; set; }
+    public LootDropEvent onLootDrop { get; set; }
+    public TakeHitEvent onTakeHit { get; set; }
+    public HitTakenEvent onHitTaken { get; set; }
+    public DiscoveryEvent onDiscover { get; set; }
+    public DiscoveryEvent onForget { get; set; }
+    public bool discovered { get; set; }
+    public DirectDamageEvent onDirectDamage { get; set; }
+    public CatEvent onCat { get; set; }
+    public Directory currentDirectory { get; set; }
 }
 
-public class CatEvent : UnityEvent { }
 public class AttackEvent : UnityEvent { }

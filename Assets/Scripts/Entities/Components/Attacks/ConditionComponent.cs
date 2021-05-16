@@ -6,9 +6,8 @@ public class ConditionComponent : AttackComponent, IConditionOrigin
 {
     public List<StoredObject> onHitConditions = new List<StoredObject>();
     public Transform onHitConditionsRoot;
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         if (onHitConditionsRoot == null)
             return;
         foreach (Condition onHitCondition in onHitConditionsRoot.GetComponents<Condition>())
@@ -18,12 +17,12 @@ public class ConditionComponent : AttackComponent, IConditionOrigin
         }
         Destroy(onHitConditionsRoot.gameObject);
     }
-    protected override void DealDamage(Entity target)
+    protected override void DealDamage(IDamageable target)
     {
         base.DealDamage(target);
         foreach (StoredObject storedOnHitCondition in onHitConditions)
         {
-            Condition newCondition = target.gameObject.AddComponent(storedOnHitCondition.objectType) as Condition;
+            Condition newCondition = target.GetGameObject().AddComponent(storedOnHitCondition.objectType) as Condition;
             if (newCondition == null)
                 continue;
             ReflectionUtil.ApplyStoredObject(storedOnHitCondition, newCondition);
@@ -33,7 +32,7 @@ public class ConditionComponent : AttackComponent, IConditionOrigin
     public string GetSource()
     {
         string entityName = $"{entityBody.currentDirectory.GetFullPath()}/{entityBody.name}";
-        string sourceName = entityBody.isDiscovered ? entityName : "something unknown";
+        string sourceName = entityBody.discovered ? entityName : "something unknown";
         return $"Lingering effects from the attack of {sourceName}";
     }
 }

@@ -8,9 +8,8 @@ public class CatCommand : Command
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        Entity target = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
-        result = target.GetCatDescription();
+        ArgumentIsDiscoverable(parsedCommand.arguments[0], out IDiscoverable discoverable);
+        result = DiscoveryHandler.I.GetCatDescription(discoverable);
         return true;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)
@@ -20,8 +19,8 @@ public class CatCommand : Command
         result = name + " requires the first argument to be an entity";
         if (!parsedCommand.HasArguments())
             return false;
-        result = parsedCommand.arguments[0] + " is not an entity";
-        if (!ArgumentIsEntity(parsedCommand.arguments[0]))
+        result = parsedCommand.arguments[0] + " is not available for cat";
+        if (!ArgumentIsDiscoverable(parsedCommand.arguments[0]))
             return false;
         return true;
     }

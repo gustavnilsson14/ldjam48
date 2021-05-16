@@ -106,7 +106,6 @@ public class HostGenerator : MonoBehaviour
             directoryKeyTemplate.path = randomDirToLock.GetFullPath();
             PickupEntity directoryKey = PickupHandler.I.CreatePickup(keyDirectory.transform, directoryKeyTemplate, true);
             randomDirToLock.bannedFactions.Add(EntityFaction.HACKER);
-            directoryKey.name = $"{randomDirToLock.name}.key";
         }
         sshLocations = RandomUtil.Shuffle<Directory>(sshLocations);
         PickupEntity sshKey = PickupHandler.I.CreatePickup(sshLocations[0].transform, this.sshKey, true);

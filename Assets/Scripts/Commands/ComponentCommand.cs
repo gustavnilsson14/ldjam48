@@ -103,8 +103,7 @@ public class ComponentCommand : Command, IComponentIO
     }
     private bool ArgumentIsOperation(string argument, out OperationType operationType)
     {
-        operationType = (OperationType)Enum.Parse(typeof(OperationType), argument.ToUpper());
-        return operationType != OperationType.NONE;
+        return Enum.TryParse<OperationType>(argument.ToUpper(), out operationType);
     }
     public void OnInput(IComponentIO source, string input)
     {

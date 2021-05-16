@@ -6,9 +6,9 @@ public class SshKey : PublicKey
 {
     protected Host targetHost;
     protected string userName;
-    protected override void Register()
+    protected override void StartRegister()
     {
-        base.Register();
+        base.StartRegister();
         userName = NameUtil.I.GetHackerName();
         targetHost = HostHandler.I.GetNextHost();
     }
@@ -25,7 +25,7 @@ public class SshKey : PublicKey
     {
         return $"{userName}@{targetHost.name}";
     }
-    public override string GetUsageDescription()
+    public override string GetShortDescription()
     {
         return $"You can now use \"ssh {GetName()}\" to proceed deeper into cyberspace!";
     }

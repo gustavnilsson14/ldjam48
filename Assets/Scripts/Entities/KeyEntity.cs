@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyEntity : Entity
+public class KeyEntity : PickupEntity
 {
     public PublicKey publicKey;
-    public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
+    public override List<string> FormatCatDescription(List<string> catDescription)
     {
-        armorDamageTaken = 0;
-        bodyDamageTaken = 0;
-        return false;
-    }
-    public override string GetCatDescription()
-    {
-        List<string> result = new List<string> {
-            GetBinaryStatic(),
-            $"The key to {publicKey.GetName()} was added to lib!",
-            publicKey.GetUsageDescription()
-        };
-        onCat.Invoke();
+        return catDescription;
+        /*
+        catDescription.AddRange(
+            new List<string> {
+                $"The key to {publicKey.GetName()} was added to lib!",
+                publicKey.GetUsageDescription()
+            }
+        );
         publicKey.isAvailable = true;
-        Die();
-        return string.Join("\n", result);
+        return catDescription;
+        */
     }
 }

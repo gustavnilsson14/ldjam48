@@ -16,12 +16,23 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 12
   isRealTime: 0
   lootValue: 5
-  currentTarget: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   scanDepth: 1
+  targetsMax: -1
+  targets: []
 --- !u!114 &6648658478168533376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59e69959b66a554fa995721ac78bbb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 0
+  rarity: 1
   currentProcsOnEntities: -1
   commandName: move
   command: {fileID: 0}
@@ -53,10 +69,20 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 15
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   damageBase: 1
   range: 0
 --- !u!1001 &4811259722100907652
@@ -91,6 +117,12 @@ PrefabInstance:
       propertyPath: challengeRating
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: worldObjectPrefab
+      value: 
+      objectReference: {fileID: 5105838333210016435, guid: 8a119d411234b8d4daaa9e7ece7668b3,
+        type: 3}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_LocalPosition.x

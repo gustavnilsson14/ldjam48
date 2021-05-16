@@ -4,24 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EntityHandler : MonoBehaviour
+public class EntityHandler : Handler
 {
     public static EntityHandler I;
     private int currentId = 0;
-    public List<Type> allChallengeTypes;
-    private void Awake()
-    {
-        EntityHandler.I = this;
-    }
-    private void Start()
-    {
-        Register();
-    }
-    private void Register()
-    {
-        allChallengeTypes = ReflectionUtil.GetAllImplementationsOfInterface<IChallenge>();
-        Debug.Log(string.Join("-", allChallengeTypes));
-    }
     public string GetUniqueId(Entity entity)
     {
         currentId++;

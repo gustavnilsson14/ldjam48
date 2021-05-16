@@ -14,7 +14,7 @@ public class IPRestoreOnCommand : DirectoryModifier
             return;
         foreach (Entity entity in GetAffectedEntities())
         {
-            entity.Heal(heal);
+            DamageHandler.I.Heal(entity, heal);
         }
     }
     public override string GetDescription()

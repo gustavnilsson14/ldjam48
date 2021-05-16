@@ -3,76 +3,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupEntity : Entity
+public class PickupEntity : MonoBehaviour, IDiscoverable, IWorldPositionObject, IAutoCompleteObject, ILootable
 {
-    public StoredObject pickup;
-    public bool invulnerable = false;
+    public GameObject prefab;
+    public string description;
+    public bool initWithComponent = false;
 
-    public void Init(IPickup pickup) {
-        ReflectionUtil.GetStoredObject(out this.pickup, pickup, pickup.GetComponentId());
-    }
-    protected override void RegisterName()
+    private void Start()
     {
-        name = $"UnnamedPickup";
-        if (pickup.id == null)
-            return;
-        name = $"{pickup.id["name"].Replace("/","-")}.{pickup.id["pickupType"]}";
+        InitDiscoverable();
+        RegisterEventListeners();
+        if (initWithComponent)
+            InitWithComponent();
     }
-    public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
+    public void InitDiscoverable()
     {
-        if (!invulnerable)
-            return base.TakeHit(source, out armorDamageTaken, out bodyDamageTaken);
-        armorDamageTaken = 0;
-        bodyDamageTaken = 0;
-        return false;
+        DiscoveryHandler.I.InitDiscoverable(this);
     }
-    public override string GetCatDescription()
+    protected virtual void InitWithComponent()
     {
-        if (pickup.objectType.IsSubclassOf(typeof(PublicKey)))
-            return GetKeyCatDescription();
-        List<string> result = new List<string> {
-            GetBinaryStatic(),
-            $"{pickup.id["name"]}-{pickup.id["pickupType"]} was added to sql"
-        };
-        onCat.Invoke();
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
-        sqlComponent.AddItem(this.pickup);
-        DestroyMe();
-        return string.Join("\n", result);
+        Init(GetComponent<IPickup>());
+    }
+    public void Init(IPickup pickup)
+    {
+        name = $"{pickup.GetComponentId()["name"]}.{pickup.GetComponentId()["pickupType"]}";
+        pickupDescription = pickup.GetShortDescription();
+        pickupType = pickup.GetPickupType();
+        ReflectionUtil.GetStoredObject(out StoredObject lootObject, pickup, pickup.GetComponentId());
+        loot = lootObject;
+    }
+    protected virtual void RegisterEventListeners()
+    {
+        onDiscover.AddListener(OnDiscover);
+        onForget.AddListener(OnForget);
+    }
+    public virtual void OnDiscover(IDiscoverable arg0, bool arg1)
+    {
+        prefab = PickupHandler.I.GetPickupPrefab(this);
+        WorldPositionHandler.I.CreateWorldPositionObject(this, out GameObject worldObjectInstance);
+        instance = worldObjectInstance;
+    }
+    public void OnForget(IDiscoverable arg0, bool arg1)
+    {
+        WorldPositionHandler.I.PlayAnimation(this, "Out");
+        Destroy(instance, 1f);
+    }
+    public virtual List<string> FormatCatDescription(List<string> catDescription)
+    {
+        Destroy(gameObject, 1f);
+        WorldPositionHandler.I.PlayAnimation(this, "Out");
+        PickupHandler.I.Pickup(this);
+        catDescription.Add(pickupDescription);
+        return catDescription;
+    }
+    public string GetFileName() => name;
+
+    public GameObject GetGameObject() => gameObject;
+
+    public string GetName() => name;
+
+    public string GetShortDescription() => description;
+
+    public GameObject GetWorldObjectPrefab() => prefab;
+
+    public WorldPositionType GetWorldPositionType() => WorldPositionType.PICKUP;
+
+    public void InitLootable()
+    {
+        PickupHandler.I.InitLootable(this);
     }
 
-    private string GetKeyCatDescription()
-    {
-        List<string> result = new List<string> {
-            GetBinaryStatic(),
-            $"The key to {pickup.id["name"]} was added to your keys!",
-        };
-        onCat.Invoke();
-        if (pickup.objectType == typeof(SshKey))
-        {
-            SshKey key = HostHandler.I.currentHost.GetComponent<SshKey>();
-            HostHandler.I.currentHost.GetComponent<SshKey>().isAvailable = true;
-            HostHandler.I.currentHost.keys.Add(key);
-            DestroyMe();
-            return string.Join("\n", result);
-        }
-        HostHandler.I.currentHost.RegisterKey(pickup);
-        DestroyMe();
-        return string.Join("\n", result);
-    }
-
-    public void DestroyMe() {
-        Destroy(gameObject);
-    }
-
-    public bool test = false;
-    public EntityComponent debugEntityComponent;
-
-    private void Update()
-    {
-        if (!test)
-            return;
-        test = false;
-        Init(debugEntityComponent);
-    }
+    public DiscoveryEvent onDiscover { get; set; }
+    public DiscoveryEvent onForget { get; set; }
+    public CatEvent onCat { get; set; }
+    public bool discovered { get; set; }
+    public GameObject instance { get; set; }
+    public Directory currentDirectory { get; set; }
+    public StoredObject loot { get; set; }
+    public string pickupDescription { get; set; }
+    public PickupType pickupType { get; set; }
 }

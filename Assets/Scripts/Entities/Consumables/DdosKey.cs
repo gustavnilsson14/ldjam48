@@ -13,7 +13,7 @@ public class DdosKey : Expendable, IDamageSource
         foreach (Entity entity in Player.I.currentDirectory.GetEntities().FindAll(e => e.faction != Player.I.faction && e.alive))
         {
             string damageString = $"    {entity.name}";
-            if (entity.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken))
+            if (DamageHandler.I.TakeHit(entity, this, out int armorDamageTaken, out int bodyDamageTaken))
                 damageString = $"{damageString}, which crumbles to bits";
             damageResults.Add(damageString);
         }

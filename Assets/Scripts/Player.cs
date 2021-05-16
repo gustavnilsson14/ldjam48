@@ -32,9 +32,8 @@ public class Player : Entity
         return commands;
     }
     // Start is called before the first frame update
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         Player.I = this;
     }
     public override void StartRegister()
@@ -44,6 +43,39 @@ public class Player : Entity
         commands.AddRange(GetComponentsInChildren<Command>());
         HostHandler.I.onSsh.AddListener(OnSsh);
         FullRestore();
+    }
+    public override void InitDamageable()
+    {
+        base.InitDamageable();
+        onArmorDamage.AddListener(OnArmorDamage);
+        onBodyDamage.AddListener(OnBodyDamage);
+        onHitTaken.AddListener(OnHitTaken);
+    }
+    protected override void RegisterEventListeners()
+    {
+        onHitTaken.AddListener(OnHitTaken);
+        onDeath.AddListener(OnDeath);
+    }
+
+    private void OnHitTaken(IDamageSource source, bool survived, int armorDamage, int bodyDamage)
+    {
+        CommitTakeDamageMessage();
+        if (armorDamage > 0 && bodyDamage == 0)
+            Camera.main.GetComponent<CameraShake>().Shake(CameraShakeType.HIT);
+        if (bodyDamage > 0)
+            Camera.main.GetComponent<CameraShake>().Shake();
+        
+    }
+
+    private void OnArmorDamage(ArmorComponent armorComponent, bool survived, int damage)
+    {
+        string color = survived ? "#088" : "#f0f";
+        takeDamageMessage.Add($"Your component {armorComponent.GetCurrentIdentifier()} absorbed <color={color}>{damage} IP damage{(!survived ? ", and was deleted" : "")}</color>");
+    }
+
+    private void OnBodyDamage(bool survived, int damage)
+    {
+        takeDamageMessage.Add($"Your integrity was interrupted by <color=red>{damage} IP damage</color>");
     }
 
     protected override void RegisterName()
@@ -56,19 +88,6 @@ public class Player : Entity
         LevelUp();
         FullRestore();
         name = $"{key.GetUser()}.lock";
-    }
-
-    private void Update()
-    {
-        ReduceRealTime();
-        if (!test)
-            return;
-        test = false;
-        AttackComponent source = gameObject.AddComponent<AttackComponent>();
-        source.StartRegister();
-        source.damageBase = 4;
-        TakeHit(source, out int armorDamageTaken, out int bodyDamageTaken);
-        Destroy(source);
     }
     protected void OnCommand(Command command, ParsedCommand parsedCommand)
     {
@@ -106,8 +125,8 @@ public class Player : Entity
             return;
         overTime = 0;
         int damage = HostHandler.I.currentHost.GetTotalDamage();
+        DamageHandler.I.TakeDirectDamage(this, HostHandler.I.currentHost);
         takeDamageMessage.Add($"Your time on this server is up, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
-        SurvivedHit(HostHandler.I.currentHost);
         CommitTakeDamageMessage();
     }
     public void ModifyCharacters(string command)
@@ -116,8 +135,8 @@ public class Player : Entity
         if (currentCharacters > 0)
             return;
         int damage = HostHandler.I.currentHost.GetTotalDamage();
+        DamageHandler.I.TakeDirectDamage(this, HostHandler.I.currentHost);
         takeDamageMessage.Add($"Your input characters are depleted on this server, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
-        SurvivedHit(HostHandler.I.currentHost);
         CommitTakeDamageMessage();
     }
 
@@ -126,33 +145,6 @@ public class Player : Entity
         maxIP+=2;
         maxCharacters += 50;
         maxSeconds += 120;
-    }
-    public override bool TakeHit(IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken)
-    {
-        takeDamageMessage.Add($"{source.GetDamageSourceName()} <color=red>hits you!</color>");
-        bool result = base.TakeHit(source, out armorDamageTaken, out bodyDamageTaken);
-        CommitTakeDamageMessage();
-        return result;
-    }
-    protected override bool ArmorAbsorbedHit(IDamageSource source, ref int remainingDamage, out int damageTaken)
-    {
-        bool result = base.ArmorAbsorbedHit(source, ref remainingDamage, out damageTaken);
-        if (!GetComponent<ArmorComponent>(out ArmorComponent armor))
-            return result;
-        if (!armor.IsProtecting(this, source))
-            return result;
-        string color = result ? "#088" : "#f0f";
-        takeDamageMessage.Add($"Your component {armor.GetCurrentIdentifier()} absorbed <color={color}>{damageTaken} IP damage{(!result ? ", and was deleted" : "")}</color>");
-        if (result)
-            Camera.main.GetComponent<CameraShake>().Shake(CameraShakeType.HIT);
-        return result;
-    }
-    public override bool SurvivedHit(IDamageSource source, ref int remainingDamage, out int damageTaken)
-    {
-        bool result = base.SurvivedHit(source, ref remainingDamage, out damageTaken);
-        Camera.main.GetComponent<CameraShake>().Shake();
-        takeDamageMessage.Add($"Your integrity was interrupted by <color=red>{damageTaken} IP damage</color>");
-        return result;
     }
 
     private void CommitTakeDamageMessage()
@@ -234,16 +226,18 @@ public class Player : Entity
         base.OnEntityExitMyDirectory(current, to, entity);
         if (entity == this)
             return;
-        string entityName = (!entity.isDiscovered) ? "Something" : entity.name;
+        string entityName = (!entity.discovered) ? "Something" : entity.name;
         IOTerminal.I.AppendTextLine($"{entityName} just left this directory into {to.name}");
     }
     public List<EntityComponent> GetInstalledComponents()
     {
         return new List<EntityComponent>(GetComponents<EntityComponent>());
     }
-    public override string GetCatDescription()
+    public override List<string> FormatCatDescription(List<string> catDescription)
     {
-        return "This is you\n" + base.GetCatDescription();
+        catDescription = base.FormatCatDescription(catDescription);
+        catDescription.Add("This is you");
+        return catDescription;
     }
     public override void MoveTo(Directory directory)
     {

@@ -12,14 +12,14 @@ public class FindCommand : Command
         result = "Find results;\n";
         string search = parsedCommand.arguments[0];
         List<GameObject> results = new List<GameObject>();
-        foreach (ComponentWithIP componentWithIP in HostHandler.I.currentHost.GetComponentsInChildren<ComponentWithIP>())
+        foreach (IDiscoverable discoverable in HostHandler.I.currentHost.GetComponentsInChildren<ComponentWithIP>())
         {
-            if (!componentWithIP.name.Contains(search))
+            if (!discoverable.GetName().Contains(search))
                 continue;
-            if (results.Contains(componentWithIP.gameObject))
+            if (results.Contains(discoverable.GetGameObject()))
                 continue;
-            results.Add(componentWithIP.gameObject);
-            result += $"{componentWithIP.currentDirectory.GetFullPath()}/{componentWithIP.name}\n";
+            results.Add(discoverable.GetGameObject());
+            result += $"{discoverable.currentDirectory.GetFullPath()}/{discoverable.GetName()}\n";
         }
         int damage = 4;
         if (parsedCommand.flags.Contains("--reduceCost"))

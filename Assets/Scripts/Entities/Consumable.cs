@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant
+public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant, IWorldPositionObject
 {
+    public string description;
+
     [Header("Pickup")]
     [Range(1, 100)]
     public float lootValue = 1;
@@ -18,12 +20,18 @@ public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant
 
     [Header("Consumable")]
     private Entity entityBody;
-    private bool isActive = true;
-    
+    private GameObject prefab;
+
+    public GameObject instance { get; set; }
 
     private void Start()
     {
         entityBody = GetComponent<Entity>();
+        InitPickup();
+    }
+    public void InitPickup()
+    {
+        PickupHandler.I.InitPickup(this);
     }
     public virtual void Consume( out string result) {
         Destroy(this);
@@ -37,10 +45,6 @@ public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant
     {
         return $"{GetType().ToString().ToLower()}";
     }
-    public bool IsActive()
-    {
-        return isActive;
-    }
     public Entity GetBody()
     {
         return entityBody;
@@ -50,28 +54,31 @@ public class Consumable : MonoBehaviour, IPickup, IGeneratedHostInhabitant
         PickupHandler.I.CreatePickup(GetBody().currentDirectory.transform, this);
     }
 
-    public float GetLootValue()
+    public float GetLootValue() => lootValue;
+    public bool GeneratesInLeafDirectory() => generatesInLeafDirectory;
+    public bool GeneratesInBranchDirectory() => generatesInBranchDirectory;
+    public bool GeneratesInPriorityDirectory() => generatesInPriorityDirectory;
+    public float GetRarity() => rarity;
+    public bool GetAnimator(out Animator animator)
     {
-        return lootValue;
+        animator = instance.GetComponentInChildren<Animator>();
+        return animator != null;
     }
-    public bool GeneratesInLeafDirectory()
+    public bool GetRenderer(out Renderer renderer)
     {
-        return generatesInLeafDirectory;
+        renderer = instance.GetComponentInChildren<Renderer>();
+        return renderer != null;
+    }
+    public GameObject GetWorldObjectPrefab() => prefab;
+    public WorldPositionType GetWorldPositionType() => WorldPositionType.PICKUP;
+
+    public string GetShortDescription()
+    {
+        return description;
     }
 
-    public bool GeneratesInBranchDirectory()
-    {
-        return generatesInBranchDirectory;
-    }
+    public PickupType GetPickupType() => PickupType.CONSUMABLE;
 
-    public bool GeneratesInPriorityDirectory()
-    {
-        return generatesInPriorityDirectory;
-    }
-    public float GetRarity()
-    {
-        return rarity;
-    }
 }
 public class TopUp : Consumable {
 

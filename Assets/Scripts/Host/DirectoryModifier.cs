@@ -74,7 +74,7 @@ public class DirectoryModifier : MonoBehaviour, IProcess, IChallenge, IGenerated
     {
         Entity entity = GetComponent<Entity>();
         if (entity != null)
-            return entity.isDiscovered ? entity.name : "Something";
+            return entity.discovered ? entity.name : "Something";
         return directory.GetFullPath();
     }
     protected virtual void OnRealTime() { }

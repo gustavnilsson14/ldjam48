@@ -9,7 +9,7 @@ public class SshCommand : Command
         if (!base.Run(out result, parsedCommand))
             return false;
         result = $"ssh to {parsedCommand.arguments[0]}, please wait...";
-        SshKey sshKey = HostHandler.I.currentHost.keys.Find(key => key.GetName() == parsedCommand.arguments[0]) as SshKey;
+        SshKey sshKey = HostHandler.I.currentHost.GetComponent<SshKey>();
         HostHandler.I.OnSsh(sshKey);
         return true;
     }
@@ -18,8 +18,12 @@ public class SshCommand : Command
         correction = "";
         if (!parsedCommand.PopArgument(out string input))
             return false;
-        PublicKey key = HostHandler.I.currentHost.keys.Find(k => k.isAvailable && k is SshKey && k.GetName().StartsWith(input));
+        PublicKey key = HostHandler.I.currentHost.GetComponent<SshKey>();
         if (key == null)
+            return false;
+        if (!key.isAvailable)
+            return false;
+        if (!key.GetName().StartsWith(input))
             return false;
         parsedCommand.arguments.Add(key.GetName());
         correction = parsedCommand.GetCommandString();

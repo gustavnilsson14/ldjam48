@@ -5,19 +5,11 @@ using UnityEngine;
 public class BossEntity : Entity
 {
     public DeathEvent onBossDeath = new DeathEvent();
-    
-    public override void Die()
+    public override void OnDiscover(IDiscoverable arg0, bool arg1)
     {
-        onBossDeath.Invoke();
-        base.Die();
-    }
-
-    public override void Discover()
-    {
-        base.Discover();
+        base.OnDiscover(arg0, arg1);
         IOTerminal.I.AppendTextLine($"---- {StringUtil.ColorWrap("ATTENTION, DANGER", Palette.RED)} ----");
-        IOTerminal.I.AppendTextLine($"{name} encountered!\n{description}");
+        IOTerminal.I.AppendTextLine($"{name} encountered!\n{"description"}");
         IOTerminal.I.AppendTextLine($"---------------------------");
-
     }
 }

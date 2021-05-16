@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class ArmorComponent : EntityComponent
 {
-    public List<ComponentWithIP> protectedComponents;
+    public List<IDamageable> protectedComponents = new List<IDamageable>();
+    public List<IDamageable> protects;
     public bool protectAllComponents = false;
 
     public override void StartRegister()
@@ -19,11 +20,11 @@ public class ArmorComponent : EntityComponent
         protectedComponents.AddRange(GetComponents<EntityComponent>());
     }
 
-    public bool IsProtecting(ComponentWithIP componentWithIP, IDamageSource source)
+    public bool IsProtecting(IDamageable target, IDamageSource source)
     {
-        if (componentWithIP == this)
+        if (target == this)
             return false;
-        if (!protectedComponents.Contains(componentWithIP))
+        if (!protects.Contains(target))
             return false;
         if (source is DirectoryModifier)
             return false;

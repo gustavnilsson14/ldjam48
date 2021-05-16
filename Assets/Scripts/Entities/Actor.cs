@@ -2,19 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Actor : ComponentWithIP
+public class Actor : MonoBehaviour, IDamageable
 {
     public int speed = 4;
     public bool isRealTime = false;
     protected float currentMomentum = 0;
 
-    public override void StartRegister()
+    public ActorRunEvent onRun = new ActorRunEvent();
+    private Directory currentDirectory;
+    private int maxIP;
+
+    private void Start()
     {
-        base.StartRegister();
+        StartRegister();
+    }
+    public virtual void StartRegister()
+    {
         IOTerminal.I.onCommand.AddListener(OnCommand);
         IOTerminal.I.onTerminalTimePast.AddListener(OnTerminalTimePast);
         Player.I.onRealTime.AddListener(OnRealTime);
+        InitDamageable();
+    }
+
+    public void InitDamageable()
+    {
+        DamageHandler.I.InitDamageable(this);
     }
     protected virtual void OnCommand(Command command, ParsedCommand parsedCommand) { }
     protected virtual void OnTerminalTimePast(int terminalTimePast)
@@ -40,5 +54,25 @@ public class Actor : ComponentWithIP
             Run();
         }
     }
-    protected virtual void Run() { }
+    protected virtual void Run() {
+        onRun.Invoke(this);
+    }
+
+    public virtual string GetName() => name;
+    public virtual string GetDescription() => "";
+
+    public int GetMaxIP() => maxIP;
+
+    public GameObject GetGameObject() => gameObject;
+    public bool alive { get; set; }
+    public int currentIP { get; set; }
+    public TakeHitEvent onTakeHit { get; set; }
+    public ArmorDamageEvent onArmorDamage { get; set; }
+    public BodyDamageEvent onBodyDamage { get; set; }
+    public DirectDamageEvent onDirectDamage { get; set; }
+    public HitTakenEvent onHitTaken { get; set; }
+    public HealEvent onHeal { get; set; }
+    public DeathEvent onDeath { get; set; }
+    Directory IDamageable.currentDirectory { get; set; }
 }
+public class ActorRunEvent : UnityEvent<Actor> { }

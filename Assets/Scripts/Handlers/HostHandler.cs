@@ -11,7 +11,7 @@ public enum HostType
     TUTORIAL
 }
 
-public class HostHandler : MonoBehaviour
+public class HostHandler : Handler
 {
     public static HostHandler I;
     public Host currentHost;
@@ -25,31 +25,24 @@ public class HostHandler : MonoBehaviour
     [Header("Host Prefabs")]
     public Host tutorialHostPrefab;
 
-    private void Awake()
-    {
-        HostHandler.I = this;
-    }
-    private void Start()
-    {
-        Register();
-        currentHost = GetNextHost(HostType.TUTORIAL);
-        Player.I.MoveTo(currentHost.GetRootDirectory());
-        currentHost.Init(3);
-    }
-
     public Host GetNextHost(HostType hostType = HostType.LINUX)
     {
         if (hostType == HostType.TUTORIAL)
             return Instantiate(tutorialHostPrefab, transform).GetComponent<Host>();
         return Instantiate(tutorialHostPrefab, transform).GetComponent<Host>();
     }
-
-    private void Register()
+    protected override void StartRegister()
     {
+        base.StartRegister();
         hosts.AddRange(GetComponentsInChildren<Host>());
+        currentHost = GetNextHost(HostType.TUTORIAL);
+        Player.I.MoveTo(currentHost.GetRootDirectory());
+        currentHost.Init(3);
     }
+
     public void OnSsh(SshKey sshKey)
     {
+        Debug.Log(sshKey);
         exploredHosts.Add(currentHost);
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();

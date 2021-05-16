@@ -16,8 +16,5 @@ public class Handler : MonoBehaviour
         StartRegister();
     }
 
-    protected virtual void StartRegister()
-    {
-        
-    }
+    protected virtual void StartRegister() { }
 }

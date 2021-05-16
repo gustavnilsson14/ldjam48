@@ -102,6 +102,16 @@ public class Command : MonoBehaviour, IAutoCompleteObject
         entity = entities.Find(e => e.name == argument);
         return (entity != null);
     }
+    protected bool ArgumentIsDiscoverable(string argument)
+    {
+        return ArgumentIsDiscoverable(argument, out IDiscoverable discoverable);
+    }
+    protected bool ArgumentIsDiscoverable(string argument, out IDiscoverable discoverable)
+    {
+        List<IDiscoverable> targets = new List<IDiscoverable>(Player.I.currentDirectory.GetComponentsInDirectChildren<IDiscoverable>());
+        discoverable = targets.Find(t => t.GetFileName() == argument);
+        return (discoverable != null);
+    }
     protected bool ArgumentIsEntityComponent(string argument, Entity targetEntity)
     {
         return ArgumentIsEntityComponent(argument, targetEntity, out EntityComponent targetComponent);
@@ -119,9 +129,12 @@ public class Command : MonoBehaviour, IAutoCompleteObject
     }
     protected bool ArgumentIsUserHostPair(string argument)
     {
-        if (HostHandler.I.currentHost.keys.Find(key => key.GetName() == argument) != null)
-            return true;
-        return false;
+        PublicKey key = HostHandler.I.currentHost.GetComponent<SshKey>();
+        if (key.GetName() != argument)
+            return false;
+        if (!key.isAvailable)
+            return false;
+        return true;
     }
     protected bool ArgumentIsPathFromRoot(string argument) {
         return HostHandler.I.currentHost.GetDirectoryByPath(argument, out Directory directory);

@@ -16,10 +16,20 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 1
   isRealTime: 1
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
 --- !u!114 &1346905553738923022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,12 +46,23 @@ MonoBehaviour:
   description: protects ya neck
   maxIP: 15
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   protectedComponents:
   - {fileID: 2296745278244391173}
+  protectAllComponents: 0
 --- !u!114 &2296745278244391173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,10 +79,20 @@ MonoBehaviour:
   description: 
   maxIP: 3
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 1
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   damageBase: 2
   range: 0
   startWaveDistance: 1
@@ -82,10 +113,20 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 1
   isRealTime: 1
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   scanDepth: 4
   targetsMax: -1
   targets: []
@@ -105,10 +146,20 @@ MonoBehaviour:
   description: 
   maxIP: 0
   alive: 1
-  challengeRating: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  parsedInput:
+    pathSegments: []
+    directories: []
+    entity: {fileID: 0}
+    error: 
+    validPath: 
+    isAbsolute: 0
   damageBase: 3
   range: 0
 --- !u!1001 &5831532125244343572

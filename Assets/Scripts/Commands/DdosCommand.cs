@@ -12,21 +12,21 @@ public class DdosCommand : Command, IDamageSource
     {
         if (!base.Run(out result, parsedCommand))
             return false;
-        ComponentWithIP target = GetTarget(parsedCommand);
+        IDamageable target = GetTarget(parsedCommand);
         result = ApplyTo(target, parsedCommand);
         return true;
     }
-    private string ApplyTo(ComponentWithIP target, ParsedCommand parsedCommand)
+    private string ApplyTo(IDamageable target, ParsedCommand parsedCommand)
     {
         currentTotalDamage = GetCurrentDamage(parsedCommand);
-        bool isDead = target.TakeHit(this, out int armorDamageTaken, out int bodyDamageTaken);
+        bool isDead = DamageHandler.I.TakeHit(target, this, out int armorDamageTaken, out int bodyDamageTaken);
         bool isVerbose = (parsedCommand.flags.Find(flag => flag == "--verbose") != null);
         if (isDead)
-            IOTerminal.I.destroyedEntities.Add(target.name);
+            IOTerminal.I.destroyedEntities.Add(target.GetName());
         return GetOutput(isVerbose, isDead, target, armorDamageTaken, bodyDamageTaken);
     }
 
-    private string GetOutput(bool isVerbose, bool isDead, ComponentWithIP target, int armorDamageTaken, int bodyDamageTaken)
+    private string GetOutput(bool isVerbose, bool isDead, IDamageable target, int armorDamageTaken, int bodyDamageTaken)
     {
         string result = $"{target.GetName()} recieved a force of {StringUtil.ColorWrap($"{currentTotalDamage} IP damage", Palette.RED)}";
         if (!isVerbose)
@@ -41,19 +41,19 @@ public class DdosCommand : Command, IDamageSource
 
     private int GetCurrentDamage(ParsedCommand parsedCommand)
     {
-        int result = Mathf.FloorToInt((float)damageBase * Player.I.GetDamageMultiplier());
+        int result = Mathf.FloorToInt((float)damageBase * DamageHandler.I.GetDamageMultiplier(Player.I));
         if (parsedCommand.flags.Find(flag => flag == "--heavy") != null)
             result *= 2;
         if (parsedCommand.flags.Find(flag => flag == "--strong") != null)
             result += 2;
         return result;
     }
-    private ComponentWithIP GetTarget(ParsedCommand parsedCommand) {
+    private IDamageable GetTarget(ParsedCommand parsedCommand) {
         List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        Entity targetEntity = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
+        IDamageable targetEntity = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
         if (parsedCommand.arguments.Count == 1)
             return targetEntity;
-        ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity, out EntityComponent targetComponent);
+        ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity as Entity, out EntityComponent targetComponent);
         return targetComponent;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)

@@ -6,7 +6,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class ComponentWithIP : MonoBehaviour
-{
+{ }
+
+    /*
     public Directory currentDirectory;
 
     [TextArea(2, 10)]
@@ -16,13 +18,11 @@ public class ComponentWithIP : MonoBehaviour
     public bool alive = true;
 
     [Header("Events")]
-    public TakeDamageEvent onTakeDamage = new TakeDamageEvent();
+    public ArmorDamageEvent onArmorDamage = new ArmorDamageEvent();
+    public BodyDamageEvent onBodyDamage = new BodyDamageEvent();
     public HealEvent onHeal = new HealEvent();
     public DeathEvent onDeath = new DeathEvent();
-    /*
-    public DiscoveryEvent onDiscover = new DiscoveryEvent();
-    public PlayerEscapeEvent onPlayerEscape = new PlayerEscapeEvent();
-    */
+
     protected virtual void Awake()
     {
         currentDirectory = GetComponentInParent<Directory>();
@@ -59,7 +59,9 @@ public class ComponentWithIP : MonoBehaviour
             return false;
         if (!armor.IsProtecting(this, source))
             return false;
-        return armor.SurvivedHit(source, ref remainingDamage, out damageTaken);
+        bool result = armor.SurvivedHit(source, ref remainingDamage, out damageTaken);
+        onArmorDamage.Invoke(damageTaken);
+        return result;
     }
     public virtual bool SurvivedHit(IDamageSource source)
     {
@@ -71,12 +73,12 @@ public class ComponentWithIP : MonoBehaviour
         damageTaken = Mathf.Clamp(remainingDamage, 0, currentIP);
         remainingDamage = Mathf.Clamp(remainingDamage - damageTaken, 0, int.MaxValue);
         currentIP -= damageTaken;
+        onBodyDamage.Invoke(damageTaken);
         if (currentIP <= 0)
         {
             Die();
             return false;
         }
-        onTakeDamage.Invoke(damageTaken);
         return true;
     }
 
@@ -128,32 +130,5 @@ public class ComponentWithIP : MonoBehaviour
             return false;
         return true;
     }
-    /*
-    public virtual void Discover()
-    {
-        if (isDiscovered)
-            return;
-
-        isDiscovered = true;
-        onDiscover.Invoke();
-        Player.I.onMove.AddListener(OnPlayerMove);
-    }
-
-    private void OnPlayerMove(Directory arg0, Directory arg1)
-    {
-        isDiscovered = false;
-        onPlayerEscape.Invoke();
-        Player.I.onMove.RemoveListener(OnPlayerMove);
-    }
-    */
 }
-public interface IDamageSource {
-    int GetDamageBase();
-    int GetTotalDamage();
-    string GetDamageSourceName();
-}
-
-public class HealEvent : UnityEvent<int> { }
-public class TakeDamageEvent : UnityEvent<int> { }
-public class DeathEvent : UnityEvent { }
-public class PlayerEscapeEvent : UnityEvent { }
+*/

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7696173194744467325}
   - component: {fileID: 8387749918881673180}
   m_Layer: 0
-  m_Name: DisconnectedEntityComponent
+  m_Name: PickupEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,13 +43,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ab089bb6f071546b483535c235947e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
+  challengeRating: 0
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 1
+  generatesInPriorityDirectory: 1
+  rarity: 1
+  worldObjectPrefab: {fileID: 0}
   maxIP: 0
-  alive: 1
+  uniqueId: 
   faction: 0
   directoryHistory: []
-  isDiscovered: 0
-  entityComponent: {fileID: 0}
+  currentDirectory: {fileID: 0}
+  die: 0
+  pickup:
+    objectTypeName: 
+    values: []
+  invulnerable: 0
   test: 0
   debugEntityComponent: {fileID: 0}

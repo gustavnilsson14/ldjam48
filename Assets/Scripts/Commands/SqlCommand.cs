@@ -50,7 +50,7 @@ public class SqlCommand : Command
         storedObject = null;
         if (!ValidateConsumableArgumentCommand<T>(out result, parsedCommand))
             return false;
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
+        Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent);
         sqlComponent.FetchItem(out storedObject, parsedCommand.arguments[1]);
         return true;
     }
@@ -71,7 +71,7 @@ public class SqlCommand : Command
         if (!ValidateInstallArgumentCommand(out result, parsedCommand))
             return false;
 
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
+        Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent);
         sqlComponent.FetchItem(out StoredObject storedObject, parsedCommand.arguments[1]);
         result = $"Could not install component";
         if (!Player.I.InstallComponent(out EntityComponent installedComponent, storedObject))
@@ -97,7 +97,7 @@ public class SqlCommand : Command
         if (!parsedCommand.flags.Contains("--list"))
             return false;
         result += $"Sql database contains;";
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
+        Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent);
         if (sqlComponent.storedComponents.Count == 0)
         {
             result = $"Sql database is empty...";
@@ -129,7 +129,7 @@ public class SqlCommand : Command
         if (parsedCommand.flags.Contains("--new"))
             return true;
         result = $"Your sql component has been deleted. Run 'sql --new' to generate a new one!";
-        if (!Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent))
+        if (!Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent))
             return false;
         return true;
     }
@@ -140,7 +140,7 @@ public class SqlCommand : Command
         if (parsedCommand.arguments.Count < 2)
             return false;
         result = $"{parsedCommand.arguments[1]} is not a component stored in your sql database";
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
+        Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent);
         if (sqlComponent.storedComponents.Find(item => $"{item.id["name"]}" == parsedCommand.arguments[1] && ReflectionUtil.IsSubClassOrClass<EntityComponent>(item.objectType)) == null)
             return false;
         return true;
@@ -162,7 +162,7 @@ public class SqlCommand : Command
         if (parsedCommand.arguments.Count < 2)
             return false;
         result = $"{parsedCommand.arguments[1]} is not a topup code stored in your sql database";
-        Player.I.GetComponent<SqlComponent>(out SqlComponent sqlComponent);
+        Player.I.TryGetComponent<SqlComponent>(out SqlComponent sqlComponent);
         if (sqlComponent.storedComponents.Find(item => item.id["name"] == parsedCommand.arguments[1] && ReflectionUtil.IsSubClassOrClass<T>(item.objectType)) == null)
             return false;
         return true;

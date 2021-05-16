@@ -23,7 +23,7 @@ public class NovaComponent : AttackComponent
     {
         currentWaveDistance = startWaveDistance;
         novaOrigin = entityBody.currentDirectory;
-        if (!entityBody.isDiscovered)
+        if (!entityBody.discovered)
             return;
         IOTerminal.I.AppendTextLine($"Nova started at {novaOrigin.GetFullPath()}!");
     }
