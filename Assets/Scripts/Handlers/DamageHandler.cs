@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class DamageHandler : Handler
 {
     public static DamageHandler I;
+
+    public DeathEvent onAnyDeath = new DeathEvent();
     public void InitDamageable(IDamageable target)
     {
         target.currentIP = target.GetMaxIP();
@@ -105,7 +107,8 @@ public class DamageHandler : Handler
     public virtual void Die(IDamageable target)
     {
         target.alive = false;
-        target.onDeath.Invoke();
+        target.onDeath.Invoke(target);
+        onAnyDeath.Invoke(target);
         if (target is IWorldPositionObject) {
             Destroy((target as IWorldPositionObject).instance, 1f);
             WorldPositionHandler.I.PlayAnimation((target as IWorldPositionObject),"Die");
@@ -113,6 +116,11 @@ public class DamageHandler : Handler
             
         if (target is ILootDropper)
             (target as ILootDropper).onLootDrop.Invoke((target as ILootDropper));
+        if (!target.IsBaseComponent())
+        {
+            Destroy(target as Component);
+            return;
+        }
         GameObject.Destroy(target.GetGameObject());
     }
     /*
@@ -137,6 +145,7 @@ public interface IDamageable {
     string GetName();
     int GetMaxIP();
     GameObject GetGameObject();
+    bool IsBaseComponent();
     Directory currentDirectory { get; set; }
     bool alive { get; set; }
     int currentIP { get; set; }
@@ -160,4 +169,4 @@ public class ArmorDamageEvent : UnityEvent<ArmorComponent, bool, int> { }
 public class BodyDamageEvent : UnityEvent<bool, int> { }
 public class DirectDamageEvent : UnityEvent<bool, int> { }
 public class HitTakenEvent : UnityEvent<IDamageSource, bool, int, int> { }
-public class DeathEvent : UnityEvent { }
+public class DeathEvent : UnityEvent<IDamageable> { }

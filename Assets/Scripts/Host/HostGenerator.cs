@@ -41,6 +41,7 @@ public class HostGenerator : MonoBehaviour
         directoryKeyTemplate = GetComponent<DirectoryKey>();
         challenges.AddRange(challengePrefabs.SelectMany(c => c.GetComponents<IChallenge>()));
         pickups.AddRange(pickupPrefabs.SelectMany(p => p.GetComponents<IPickup>()));
+        pickups.AddRange(Player.I.GetCommands());
     }
 
     public void Run(int levelIndex = 1)
@@ -171,7 +172,9 @@ public class HostGenerator : MonoBehaviour
         if (generatedHostInhabitant.GeneratesInPriorityDirectory())
             result.AddRange(priorityDirectories);
         result = result.OrderBy(d => GetDirectoryWeight(d) * RandomUtil.random.Next()).ToList();
-        directory = result[0];
+        directory = null;
+        if (result.Count > 0)
+            directory = result[0];
         return directory != null;
     }
     private float GetDirectoryWeight(Directory directory) {

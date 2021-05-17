@@ -12,7 +12,6 @@ public enum EntityFaction
     SECURITY,
     VIRUS
 }
-
 public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObject, IChallenge, IGeneratedHostInhabitant, IDiscoverable, IWorldPositionObject
 {
     [Header("Challenge")]
@@ -85,7 +84,7 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
         Destroy(instance, 1f);
     }
 
-    protected void OnDeath()
+    protected void OnDeath(IDamageable target)
     {
         Destroy(instance, 1f);
         WorldPositionHandler.I.PlayAnimation(this, "Die");
@@ -125,7 +124,6 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
             ConnectComponentIO(sensorComponent, movementComponent);
         }
     }
-
     public virtual void OnAttack(Actor actor)
     {
         if (!alive)
@@ -223,6 +221,9 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
     public Transform GetTransform() => transform;
     public int GetMaxIP() => maxIP;
     public GameObject GetGameObject() => gameObject;
+
+    public bool IsBaseComponent() => true;
+
     public bool alive { get; set; }
     public int currentIP { get; set; }
     public ArmorDamageEvent onArmorDamage { get; set; }

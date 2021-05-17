@@ -63,7 +63,7 @@ public class IOTerminal : MonoBehaviour
         DisplayLevelUp();
     }
 
-    private void OnPlayerDeath()
+    private void OnPlayerDeath(IDamageable target)
     {
         commandField.onSubmit.RemoveListener(onCommandSubmit);
         Destroy(inputFieldsContainer.gameObject);
@@ -152,15 +152,19 @@ public class IOTerminal : MonoBehaviour
         if (commandName == "")
             return;
 
-        if (levelUpCommand)
-        {
-            Debug.Log("Chose command");
-            LevelUpCommand(commandName);
-            ResetCommandField();
+        if (HandleLevelUp(commandName))
             return;
-        }
         HandleStringInput(commandName);
         ResetCommandField();
+    }
+
+    private bool HandleLevelUp(string commandName)
+    {
+        if (!levelUpCommand)
+            return false;
+        LevelUpCommand(commandName);
+        ResetCommandField();
+        return true;
     }
 
     public void DisplayLevelUp()
@@ -205,14 +209,18 @@ public class IOTerminal : MonoBehaviour
     {
         ParsedCommand parsedCommand = new ParsedCommand(commandName);
         commandHistory.Add(parsedCommand);
-        if (!Player.GetCommand(out Command command, parsedCommand.name))
+        if (!Player.GetCommand(out Command command, parsedCommand.name, false))
         {
             HandleNoSuchCommand(parsedCommand.name);
             return;
         }
+        if (!command.isAvailable)
+        {
+            HandleCommandNotAvailable(parsedCommand.name);
+            return;
+        }
         HandleCommand(command, parsedCommand);
     }
-
     private void HandleCommand(Command command, ParsedCommand parsedCommand)
     {
         AppendDefaultCommandText();
@@ -243,6 +251,13 @@ public class IOTerminal : MonoBehaviour
         AppendDefaultCommandText();
         TerminalTimePast(commandName.Length);
         AppendTextLine("No such command");
+    }
+
+    private void HandleCommandNotAvailable(string commandName)
+    {
+        AppendDefaultCommandText();
+        TerminalTimePast(commandName.Length);
+        AppendTextLine($"The command {commandName} is not yet installed");
     }
 
     private void AppendDefaultCommandText()

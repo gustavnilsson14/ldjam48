@@ -29,7 +29,12 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
         entityBody = GetComponent<Entity>();
     }
     public virtual void OnInput(IComponentIO source, string input) {
-        Debug.Log($"OnInput: {source} {input} {entityBody}");
+        entityBody = GetComponent<Entity>();
+        if (entityBody == null)
+        {
+            Debug.Log($"OnInput: {source} {input} {entityBody}");
+            return;
+        }
         parsedInput = new ParsedPath(entityBody.currentDirectory, input);
         if (!HandleInputError(source, parsedInput.error))
             return;

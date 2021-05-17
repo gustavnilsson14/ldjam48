@@ -12,7 +12,7 @@ public class FindCommand : Command
         result = "Find results;\n";
         string search = parsedCommand.arguments[0];
         List<GameObject> results = new List<GameObject>();
-        foreach (IDiscoverable discoverable in HostHandler.I.currentHost.GetComponentsInChildren<ComponentWithIP>())
+        foreach (IDiscoverable discoverable in HostHandler.I.currentHost.GetComponentsInChildren<IDiscoverable>())
         {
             if (!discoverable.GetName().Contains(search))
                 continue;

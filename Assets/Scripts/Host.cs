@@ -42,6 +42,7 @@ public class Host : MonoBehaviour, IDamageSource
         PublicKey newKey = gameObject.AddComponent(key.objectType) as PublicKey;
         if (!ReflectionUtil.ApplyStoredObject(key, newKey))
             return;
+        newKey.isAvailable = true;
         keys.Add(newKey);
     }
     public bool GetDirectoryByPath(string path, out Directory directory)

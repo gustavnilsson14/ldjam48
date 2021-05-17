@@ -8,7 +8,6 @@ using UnityEngine;
 public class ArmorComponent : EntityComponent
 {
     public List<IDamageable> protectedComponents = new List<IDamageable>();
-    public List<IDamageable> protects;
     public bool protectAllComponents = false;
 
     public override void StartRegister()
@@ -22,11 +21,13 @@ public class ArmorComponent : EntityComponent
 
     public bool IsProtecting(IDamageable target, IDamageSource source)
     {
+        if (source is DirectoryModifier)
+            return false;
         if (target == this)
             return false;
-        if (!protects.Contains(target))
-            return false;
-        if (source is DirectoryModifier)
+        if (protectAllComponents)
+            return true;
+        if (!protectedComponents.Contains(target))
             return false;
         return true;
     }

@@ -124,4 +124,6 @@ public class AutoCommand : Command
         RunAutoCommand();
     }
 
+    public override float GetRarity() => 5;
+
 }

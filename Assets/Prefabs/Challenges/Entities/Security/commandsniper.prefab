@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c1d6e58f67d2c438cf8eefa6ab15f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
-  speed: 4
+  speed: 15
   isRealTime: 0
   lootValue: 5
   generatesInLeafDirectory: 0
@@ -46,10 +42,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd14b59fd3931f4fa514a59e27eaa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 12
   isRealTime: 0
   lootValue: 5
@@ -110,10 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d725ac5b19b2e4e9976139478f0672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 3
   isRealTime: 0
   lifeTime: 8
@@ -157,6 +145,12 @@ PrefabInstance:
       propertyPath: rarity
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: worldObjectPrefab
+      value: 
+      objectReference: {fileID: 5105838333210016435, guid: 6cae890c841806b4e9ebd11e51f8cd39,
+        type: 3}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_LocalPosition.x

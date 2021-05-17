@@ -37,17 +37,16 @@ public class HostHandler : Handler
         hosts.AddRange(GetComponentsInChildren<Host>());
         currentHost = GetNextHost(HostType.TUTORIAL);
         Player.I.MoveTo(currentHost.GetRootDirectory());
-        currentHost.Init(3);
+        currentHost.Init(exploredHosts.Count + 1);
     }
 
     public void OnSsh(SshKey sshKey)
     {
-        Debug.Log(sshKey);
         exploredHosts.Add(currentHost);
         Player.I.MoveTo(sshKey.GetHost().GetRootDirectory());
         currentHost = sshKey.GetHost();
         currentHost.SetUser(sshKey.GetUser());
-        currentHost.Init(3);
+        currentHost.Init(exploredHosts.Count + 1);
         onSsh.Invoke(sshKey);
     }
     public List<Host> GetHosts(bool onlyAvailable = true)

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Command : MonoBehaviour, IAutoCompleteObject
+public class Command : MonoBehaviour, IAutoCompleteObject, IPickup, IGeneratedHostInhabitant
 {
     public bool isAvailable = false;
     [TextArea(2, 10)]
@@ -16,12 +16,18 @@ public class Command : MonoBehaviour, IAutoCompleteObject
     public int level = 1;
 
     public GameObject effectPrefab;
+    private float lootValue = 1;
+
+    [Header("GeneratedHostInhabitant")]
+    public bool generatesInLeafDirectory = false;
+    public bool generatesInBranchDirectory = false;
+    public bool generatesInPriorityDirectory = true;
 
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         bool validation = ValidateParsedCommand(out result, parsedCommand);
         if (validation)
-            RenderEffect();
+            RenderEffect(parsedCommand, WorldPositionHandler.I.transform);
         return validation;
     }
     public virtual bool AutoComplete(out string correction, ParsedCommand parsedCommand) {
@@ -39,11 +45,12 @@ public class Command : MonoBehaviour, IAutoCompleteObject
         correction = parsedCommand.GetCommandString();
         return true;
     }
-    private void RenderEffect() {
+    protected virtual void RenderEffect(ParsedCommand parsedCommand, Transform parent) {
 
         if (effectPrefab == null)
             return;
-        GameObject newEffect = Instantiate(effectPrefab, EntityWorldHandler.I.commandEffectTransform);
+        
+        GameObject newEffect = Instantiate(effectPrefab, parent);
         Destroy(newEffect, 10);
     }
     public virtual void LevelUp()
@@ -159,6 +166,36 @@ public class Command : MonoBehaviour, IAutoCompleteObject
     {
         return name;
     }
+
+    public void InitPickup()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnBodyDeath()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Dictionary<string, string> GetComponentId()
+    {
+        return new Dictionary<string, string>(){
+            {"name", GetComponentTypeName()},
+            {"pickupType", "command"}
+        };
+    }
+
+    public string GetComponentTypeName() => $"{GetType().ToString().ToLower().Replace("command","")}";
+
+    public float GetLootValue() => lootValue;
+
+    public string GetShortDescription() => helpText;
+
+    public PickupType GetPickupType() => PickupType.COMMAND;
+    public bool GeneratesInLeafDirectory() => generatesInLeafDirectory;
+    public bool GeneratesInBranchDirectory() => generatesInBranchDirectory;
+    public bool GeneratesInPriorityDirectory() => generatesInPriorityDirectory;
+    public virtual float GetRarity() => 3;
 }
 public class ParsedCommand
 {

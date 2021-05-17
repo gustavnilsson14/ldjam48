@@ -206,7 +206,7 @@ public class Player : Entity
     {
         if (base.IsAllowedInDirectory(directory))
             return true;
-        if (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && key.GetName() == directory.GetFullPath()))
+        if (HostHandler.I.currentHost.keys.Find(key => key.isAvailable && (key as DirectoryKey).path == directory.GetFullPath()))
             return true;
         return false;
     }

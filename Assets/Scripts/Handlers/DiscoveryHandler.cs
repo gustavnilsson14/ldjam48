@@ -9,7 +9,8 @@ public class DiscoveryHandler : Handler
 {
     public static DiscoveryHandler I { get; private set; }
     public List<IDiscoverable> discovered = new List<IDiscoverable>();
-
+    public DiscoveryEvent onAnyDiscovery = new DiscoveryEvent();
+    public DiscoveryEvent onAnyForget = new DiscoveryEvent();
     private void Awake()
     {
         DiscoveryHandler.I = this;
@@ -34,8 +35,11 @@ public class DiscoveryHandler : Handler
             return false;
         if (discovered.Contains(discoverable))
             return false;
+        if (discoverable.currentDirectory != Player.I.currentDirectory)
+            return false;
         discoverable.discovered = true;
         discoverable.onDiscover.Invoke(discoverable, false);
+        onAnyDiscovery.Invoke(discoverable, false);
         discovered.Add(discoverable);
         return true;
     }
@@ -45,6 +49,7 @@ public class DiscoveryHandler : Handler
             return;
         discoverable.discovered = false;
         discoverable.onForget.Invoke(discoverable, false);
+        onAnyForget.Invoke(discoverable, false);
     }
     public string GetCatDescription(IDiscoverable discoverable) {
 

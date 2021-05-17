@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PublicKey : MonoBehaviour, IPickup
 {
-    public KeyEntity publicKeyEntityPrefab;
     public bool isAvailable = false;
     protected void Start() {
         StartRegister();

@@ -7,7 +7,6 @@ public class DdosCommand : Command, IDamageSource
 {
     public int damageBase = 1;
     private int currentTotalDamage;
-
     public override bool Run(out string result, ParsedCommand parsedCommand)
     {
         if (!base.Run(out result, parsedCommand))
@@ -25,7 +24,14 @@ public class DdosCommand : Command, IDamageSource
             IOTerminal.I.destroyedEntities.Add(target.GetName());
         return GetOutput(isVerbose, isDead, target, armorDamageTaken, bodyDamageTaken);
     }
-
+    protected override void RenderEffect(ParsedCommand parsedCommand, Transform parent)
+    {
+        IDamageable target = GetTarget(parsedCommand);
+        if (target is IWorldPositionObject)
+            if ((target as IWorldPositionObject).instance != null)
+                parent = (target as IWorldPositionObject).instance.transform;
+        base.RenderEffect(parsedCommand, parent);
+    }
     private string GetOutput(bool isVerbose, bool isDead, IDamageable target, int armorDamageTaken, int bodyDamageTaken)
     {
         string result = $"{target.GetName()} recieved a force of {StringUtil.ColorWrap($"{currentTotalDamage} IP damage", Palette.RED)}";

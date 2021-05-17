@@ -11,7 +11,6 @@ public class Actor : MonoBehaviour, IDamageable
     protected float currentMomentum = 0;
 
     public ActorRunEvent onRun = new ActorRunEvent();
-    private Directory currentDirectory;
     private int maxIP;
 
     private void Start()
@@ -64,6 +63,9 @@ public class Actor : MonoBehaviour, IDamageable
     public int GetMaxIP() => maxIP;
 
     public GameObject GetGameObject() => gameObject;
+
+    public bool IsBaseComponent() => false;
+
     public bool alive { get; set; }
     public int currentIP { get; set; }
     public TakeHitEvent onTakeHit { get; set; }

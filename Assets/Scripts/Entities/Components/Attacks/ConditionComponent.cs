@@ -6,8 +6,9 @@ public class ConditionComponent : AttackComponent, IConditionOrigin
 {
     public List<StoredObject> onHitConditions = new List<StoredObject>();
     public Transform onHitConditionsRoot;
-    protected void Start()
+    public override void StartRegister()
     {
+        base.StartRegister();
         if (onHitConditionsRoot == null)
             return;
         foreach (Condition onHitCondition in onHitConditionsRoot.GetComponents<Condition>())
