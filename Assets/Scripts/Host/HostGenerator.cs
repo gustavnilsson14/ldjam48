@@ -121,6 +121,8 @@ public class HostGenerator : MonoBehaviour
             iterations--;
             int diff = allDirectories.Count - currentMax;
             Directory directory = allDirectories.Find(d => d.GetComponentsInChildren<Directory>().Length <= diff);
+            if (directory == null)
+                break;
             directory.GetComponentsInChildren<Directory>().ToList().ForEach(d => allDirectories.Remove(d));
             Destroy(directory.gameObject);
         }
