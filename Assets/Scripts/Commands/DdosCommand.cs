@@ -55,11 +55,12 @@ public class DdosCommand : Command, IDamageSource
         return result;
     }
     private IDamageable GetTarget(ParsedCommand parsedCommand) {
-        List<Entity> entities = Player.I.currentDirectory.GetEntities();
-        IDamageable targetEntity = entities.Find(entity => entity.name == parsedCommand.arguments[0]);
+        /*List<Entity> entities = Player.I.currentDirectory.GetEntities();
+        IDamageable targetEntity = entities.Find(entity => entity.name == parsedCommand.arguments[0]);*/
+        ArgumentIsEntity(parsedCommand.arguments[0], out Entity targetEntity);
         if (parsedCommand.arguments.Count == 1)
             return targetEntity;
-        ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity as Entity, out EntityComponent targetComponent);
+        ArgumentIsEntityComponent(parsedCommand.arguments[1], targetEntity, out EntityComponent targetComponent);
         return targetComponent;
     }
     protected override bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand)

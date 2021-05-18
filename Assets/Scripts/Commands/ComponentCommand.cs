@@ -6,6 +6,7 @@ using System;
 
 public class ComponentCommand : Command, IComponentIO
 {
+    public int hackedTime { get; set; }
     public enum OperationType { 
         NONE, MANUAL, BINDING, CLEAR
     }

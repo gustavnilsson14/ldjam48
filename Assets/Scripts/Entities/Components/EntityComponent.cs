@@ -23,12 +23,16 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
 
     public IOEvent onOutput = new IOEvent();
 
+    public int hackedTime { get; set; }
+
     public override void StartRegister()
     {
         base.StartRegister();
         entityBody = GetComponent<Entity>();
     }
     public virtual void OnInput(IComponentIO source, string input) {
+        if (hackedTime > 0)
+            return;
         entityBody = GetComponent<Entity>();
         if (entityBody == null)
         {
@@ -129,4 +133,5 @@ public class IOEvent : UnityEvent<IComponentIO, string> { }
 public interface IComponentIO {
     IOEvent GetOnOutputEvent();
     void OnInput(IComponentIO source, string input);
+    int hackedTime { get; set; }
 }

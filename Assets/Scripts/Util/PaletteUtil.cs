@@ -39,6 +39,6 @@ public class PaletteUtil
             UnityEngine.Random.Range(0.5f, 1f),
             UnityEngine.Random.Range(0.5f, 1f)
         );
-        return ColorUtility.ToHtmlStringRGB(color);
+        return $"#{ColorUtility.ToHtmlStringRGB(color)}";
     }
 }

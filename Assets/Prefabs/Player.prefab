@@ -51,6 +51,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &1640299682
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,6 +105,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &942649355022545245
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +158,62 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+--- !u!1 &1854087078778290341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4000824244409302844}
+  - component: {fileID: 4134721759338019305}
+  m_Layer: 0
+  m_Name: hack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000824244409302844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854087078778290341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5937073494569921511}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4134721759338019305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854087078778290341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf427e87a7ab0c499bad8830a6c3ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAvailable: 1
+  helpText: Use to hack other entities components
+  extendedHelpText: 
+  speed: 2
+  maxFlags: 1
+  level: 1
+  effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &2499074726644818333
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +264,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &2760016571857677258
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +317,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &2828140064733115421
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +372,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &3078258250215848715
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +425,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &3078258251084227984
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +478,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &3884295862818155547
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,6 +531,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &4253127692062917263
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +584,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &4362890913501350040
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +638,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5020344813303867038
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +691,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073493945512670
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +744,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
   help: 'Welcome to ldhaxxor 1.0
 
     You have an IP of {0}, when it runs out, you
@@ -731,6 +823,9 @@ MonoBehaviour:
   level: 1
   effectPrefab: {fileID: 5077173545692415162, guid: 8c5d9aeaedfa1ac4c86a94a7a02cc374,
     type: 3}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
   damageBase: 1
 --- !u!1 &5937073494237625831
 GameObject:
@@ -783,7 +878,9 @@ MonoBehaviour:
   level: 1
   effectPrefab: {fileID: 5077173545692415162, guid: f569e967d4116354ea8fbf2ffefc0a8d,
     type: 3}
-  currentEntity: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073494407856944
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +931,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073494556071295
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +984,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073494569921496
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +1039,7 @@ Transform:
   - {fileID: 9122250100816415981}
   - {fileID: 1640299683}
   - {fileID: 1353498188193279113}
+  - {fileID: 4000824244409302844}
   m_Father: {fileID: 5937073495786676435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -989,6 +1093,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073495430283140
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1146,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073495649779897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,6 +1199,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5937073495786676437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,16 +1248,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f6d5740fe80fb468b329cd34376ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
+  challengeRating: 1
+  generatesInLeafDirectory: 1
+  generatesInBranchDirectory: 1
+  generatesInPriorityDirectory: 1
+  rarity: 1
   description: A hacker, an unwanted alien in a harsh system.
+  worldObjectPrefab: {fileID: 0}
   maxIP: 25
-  alive: 1
   uniqueId: 
   faction: 1
   directoryHistory: []
-  challengeRating: 1
-  isDiscovered: 0
-  die: 0
   currentCharacters: 500
   maxCharacters: 500
   currentSeconds: 0
@@ -1164,13 +1278,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da112c6be27c1d44b17034560f7920e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 4
   isRealTime: 0
   lootValue: 0
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -1191,13 +1305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
+  rarity: 1
   parsedInput:
     pathSegments: []
     directories: []
@@ -1256,6 +1370,9 @@ MonoBehaviour:
   level: 1
   effectPrefab: {fileID: 5077173545692415162, guid: bec8f554d791e53499e43d1414db94b8,
     type: 3}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &5941905146592493981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1423,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &6417341225498952712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1356,6 +1476,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &7264951361995103887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1529,9 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
 --- !u!1 &9141930940835917260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1456,3 +1582,6 @@ MonoBehaviour:
   maxFlags: 1
   level: 1
   effectPrefab: {fileID: 0}
+  generatesInLeafDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInPriorityDirectory: 1
