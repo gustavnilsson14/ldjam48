@@ -27,6 +27,7 @@ public class DamageHandler : Handler
     public bool TakeHit(IDamageable target, IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken) {
         target.onTakeHit.Invoke(source);
         bool result = TakeDamage(target, source, out armorDamageTaken, out bodyDamageTaken);
+        Debug.Log($"public bool TakeHit(IDamageable {target.GetName()}, IDamageSource {source}, out int armorDamageTaken, out int bodyDamageTaken)");
         target.onHitTaken.Invoke(source, result, armorDamageTaken, bodyDamageTaken);
         return result;
     }
@@ -110,10 +111,9 @@ public class DamageHandler : Handler
         target.onDeath.Invoke(target);
         onAnyDeath.Invoke(target);
         if (target is IWorldPositionObject) {
-            Destroy((target as IWorldPositionObject).instance, 1f);
+            Destroy((target as IWorldPositionObject).instance, 2f);
             WorldPositionHandler.I.PlayAnimation((target as IWorldPositionObject),"Die");
         }
-            
         if (target is ILootDropper)
             (target as ILootDropper).onLootDrop.Invoke((target as ILootDropper));
         if (!target.IsBaseComponent())

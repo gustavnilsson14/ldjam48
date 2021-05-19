@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HackCommand : Command, IComponentIO
+public class InjectCommand : Command, IComponentIO
 {
     public int hackedTime { get; set; }
 

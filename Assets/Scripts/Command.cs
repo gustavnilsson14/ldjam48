@@ -27,7 +27,7 @@ public class Command : MonoBehaviour, IAutoCompleteObject, IPickup, IGeneratedHo
     {
         bool validation = ValidateParsedCommand(out result, parsedCommand);
         if (validation)
-            RenderEffect(parsedCommand, WorldPositionHandler.I.transform);
+            RenderEffect(parsedCommand, Vector3.zero);
         return validation;
     }
     public virtual bool AutoComplete(out string correction, ParsedCommand parsedCommand) {
@@ -45,12 +45,13 @@ public class Command : MonoBehaviour, IAutoCompleteObject, IPickup, IGeneratedHo
         correction = parsedCommand.GetCommandString();
         return true;
     }
-    protected virtual void RenderEffect(ParsedCommand parsedCommand, Transform parent) {
+    protected virtual void RenderEffect(ParsedCommand parsedCommand, Vector3 position) {
 
         if (effectPrefab == null)
             return;
         
-        GameObject newEffect = Instantiate(effectPrefab, parent);
+        GameObject newEffect = Instantiate(effectPrefab, WorldPositionHandler.I.transform);
+        newEffect.transform.position = position;
         Destroy(newEffect, 10);
     }
     public virtual void LevelUp()

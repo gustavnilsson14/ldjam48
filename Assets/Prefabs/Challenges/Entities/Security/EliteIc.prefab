@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7f0178c6a7e5d4aa7c8c029e8ed609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: 
   lootValue: 1
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -30,10 +31,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef60d642db4020429c05e5118655d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 15
-  alive: 1
   speed: 4
   isRealTime: 0
   lootValue: 5
@@ -48,7 +45,6 @@ MonoBehaviour:
     error: 
     validPath: 
     isAbsolute: 0
-  protectedComponents: []
   protectAllComponents: 1
 --- !u!114 &2660154453294497325
 MonoBehaviour:
@@ -62,46 +58,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3cfb470bcc79f46adbaa0bd08ef53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: 
   lootValue: 1
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
   generatesInPriorityDirectory: 1
   rarity: 1
   extraCharacters: 500
---- !u!114 &4481243971869727764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4644405270696995961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35c1d6e58f67d2c438cf8eefa6ab15f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
-  speed: 60
-  isRealTime: 0
-  lootValue: 5
-  generatesInLeafDirectory: 0
-  generatesInBranchDirectory: 0
-  generatesInPriorityDirectory: 1
-  rarity: 1
-  parsedInput:
-    pathSegments: []
-    directories: []
-    entity: {fileID: 0}
-    error: 
-    validPath: 
-    isAbsolute: 0
-  damageBase: 0
-  range: 1
-  onHitConditions: []
-  onHitConditionsRoot: {fileID: 411310513900912590}
 --- !u!114 &4484580725670582555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,10 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd14b59fd3931f4fa514a59e27eaa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 12
   isRealTime: 0
   lootValue: 5
@@ -147,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2b076c0fb6a644aa06f95ea923c281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: 
   lootValue: 1
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -165,10 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6925e6d256acc443a5cdbc5ca8b6f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 24
   isRealTime: 0
   lootValue: 5
@@ -195,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b183d2647ec8443b6eb0bf29a538ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  description: 
   lootValue: 1
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -213,10 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8fb473c754eab4c8805fd248b2f448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 0
-  alive: 1
   speed: 15
   isRealTime: 0
   lootValue: 5
@@ -276,10 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71d725ac5b19b2e4e9976139478f0672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDirectory: {fileID: 0}
-  description: 
-  maxIP: 3
-  alive: 1
   speed: 3
   isRealTime: 0
   lifeTime: 8
@@ -322,6 +271,12 @@ PrefabInstance:
       propertyPath: rarity
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1417322987447050636, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
+        type: 3}
+      propertyPath: worldObjectPrefab
+      value: 
+      objectReference: {fileID: 5105838333210016435, guid: 60c24b4c0ae028f4b96068cbf78307f9,
+        type: 3}
     - target: {fileID: 1506259033347830992, guid: 9c430a8bb6fbe8a4e90b487a50c655c4,
         type: 3}
       propertyPath: m_LocalPosition.x

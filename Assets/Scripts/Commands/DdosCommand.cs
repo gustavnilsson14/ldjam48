@@ -24,13 +24,13 @@ public class DdosCommand : Command, IDamageSource
             IOTerminal.I.destroyedEntities.Add(target.GetName());
         return GetOutput(isVerbose, isDead, target, armorDamageTaken, bodyDamageTaken);
     }
-    protected override void RenderEffect(ParsedCommand parsedCommand, Transform parent)
+    protected override void RenderEffect(ParsedCommand parsedCommand, Vector3 position)
     {
         IDamageable target = GetTarget(parsedCommand);
         if (target is IWorldPositionObject)
             if ((target as IWorldPositionObject).instance != null)
-                parent = (target as IWorldPositionObject).instance.transform;
-        base.RenderEffect(parsedCommand, parent);
+                position = (target as IWorldPositionObject).instance.transform.position;
+        base.RenderEffect(parsedCommand, position);
     }
     private string GetOutput(bool isVerbose, bool isDead, IDamageable target, int armorDamageTaken, int bodyDamageTaken)
     {

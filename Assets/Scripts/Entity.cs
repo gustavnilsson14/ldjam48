@@ -86,7 +86,7 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
 
     protected void OnDeath(IDamageable target)
     {
-        Destroy(instance, 1f);
+        Destroy(instance, 2f);
         WorldPositionHandler.I.PlayAnimation(this, "Die");
         PickupHandler.I.DropLoot(this);
     }

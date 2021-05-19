@@ -109,6 +109,8 @@ public class HostGenerator : MonoBehaviour
             randomDirToLock.bannedFactions.Add(EntityFaction.HACKER);
         }
         sshLocations = RandomUtil.Shuffle<Directory>(sshLocations);
+        if (sshLocations.Count == 0)
+            sshLocations.Add(leafDirectories[0]);
         PickupEntity sshKey = PickupHandler.I.CreatePickup(sshLocations[0].transform, this.sshKey, true);
     }
     private void TrimFolders() {

@@ -15,9 +15,7 @@ public class Directory : MonoBehaviour, IAutoCompleteObject
 
     public List<Directory> GetChildren()
     {
-        if (children == null)
-            children = transform.GetComponentsInDirectChildren<Directory>().ToList();
-        return children;
+        return transform.GetComponentsInDirectChildren<Directory>().ToList();
     }
     public void DestroyChild(Directory child)
     {

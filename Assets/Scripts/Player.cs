@@ -36,6 +36,10 @@ public class Player : Entity
     {
         Player.I = this;
     }
+    private void Update()
+    {
+        ReduceRealTime();
+    }
     public override void StartRegister()
     {
         base.StartRegister();
@@ -49,7 +53,6 @@ public class Player : Entity
         base.InitDamageable();
         onArmorDamage.AddListener(OnArmorDamage);
         onBodyDamage.AddListener(OnBodyDamage);
-        onHitTaken.AddListener(OnHitTaken);
     }
     protected override void RegisterEventListeners()
     {
@@ -64,7 +67,6 @@ public class Player : Entity
             Camera.main.GetComponent<CameraShake>().Shake(CameraShakeType.HIT);
         if (bodyDamage > 0)
             Camera.main.GetComponent<CameraShake>().Shake();
-        
     }
 
     private void OnArmorDamage(ArmorComponent armorComponent, bool survived, int damage)
@@ -126,7 +128,7 @@ public class Player : Entity
         overTime = 0;
         int damage = HostHandler.I.currentHost.GetTotalDamage();
         DamageHandler.I.TakeDirectDamage(this, HostHandler.I.currentHost);
-        takeDamageMessage.Add($"Your time on this server is up, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
+        takeDamageMessage.Add($"Your time is up, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
         CommitTakeDamageMessage();
     }
     public void ModifyCharacters(string command)
@@ -136,7 +138,7 @@ public class Player : Entity
             return;
         int damage = HostHandler.I.currentHost.GetTotalDamage();
         DamageHandler.I.TakeDirectDamage(this, HostHandler.I.currentHost);
-        takeDamageMessage.Add($"Your input characters are depleted on this server, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
+        takeDamageMessage.Add($"Your characters are depleted, the system {StringUtil.ColorWrap($"damages your IP by {damage}", Palette.RED)}");
         CommitTakeDamageMessage();
     }
 
@@ -149,6 +151,7 @@ public class Player : Entity
 
     private void CommitTakeDamageMessage()
     {
+        Debug.Log($"takeDamageMessage | {string.Join("--", takeDamageMessage)} | {takeDamageMessage.Count}");
         IOTerminal.I.AppendTextLine(string.Join("\n", takeDamageMessage));
         takeDamageMessage.Clear();
     }

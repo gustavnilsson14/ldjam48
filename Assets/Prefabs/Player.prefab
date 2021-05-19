@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4000824244409302844}
   - component: {fileID: 4134721759338019305}
   m_Layer: 0
-  m_Name: hack
+  m_Name: inject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
