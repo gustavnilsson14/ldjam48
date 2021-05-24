@@ -26,9 +26,11 @@ public class Command : MonoBehaviour, IAutoCompleteObject, IPickup, IGeneratedHo
     public virtual bool Run(out string result, ParsedCommand parsedCommand)
     {
         bool validation = ValidateParsedCommand(out result, parsedCommand);
-        if (validation)
-            RenderEffect(parsedCommand, Vector3.zero);
-        return validation;
+        if (!validation)
+            return false;
+        RenderEffect(parsedCommand, Vector3.zero);
+        Player.I.SpendFP(parsedCommand.flags.Count);
+        return true;
     }
     public virtual bool AutoComplete(out string correction, ParsedCommand parsedCommand) {
         correction = "";
@@ -62,22 +64,26 @@ public class Command : MonoBehaviour, IAutoCompleteObject, IPickup, IGeneratedHo
     }
     protected virtual bool ValidateParsedCommand(out string result, ParsedCommand parsedCommand) {
         result = "";
-        bool validationResult = true;
         List<ICommandDisabler> disablers = Player.I.GetActiveICommandDisablers();
         foreach (ICommandDisabler disabler in disablers)
         {
             if (disabler.GetCommand() != this)
                 continue;
             result += result = $"{disabler.GetSource()} deactivates {name}\n";
-            validationResult = false;
+            return false;
         }
-        return validationResult;
+        if (Player.I.currentFP < parsedCommand.flags.Count)
+        {
+            result = $"You cannot afford to use {parsedCommand.flags.Count} flags, you only have {Player.I.currentFP} FP left";
+            return false;
+        }
+        return true;
     }
     public bool GetHelpText(out string helpText) {
         helpText = "";
         if (this.helpText == "")
             return false;
-        helpText = name + " - " + this.helpText;
+        helpText = $"{name} - {this.helpText} - {speed}";
         return true;
     }
     public virtual string GetExtendedHelpText()

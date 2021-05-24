@@ -12,11 +12,12 @@ using UnityEngine.SceneManagement;
 public class IOTerminal : MonoBehaviour
 {
     public static IOTerminal I;
-    public TextMeshProUGUI outputField;
+    public TMP_InputField outputField;
     public TextMeshProUGUI userDirField;
     public TMP_InputField commandField;
     public Transform inputFieldsContainer;
     public bool levelUpCommand = false;
+    public Scrollbar outputScroll;
 
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
@@ -263,19 +264,30 @@ public class IOTerminal : MonoBehaviour
     private void AppendDefaultCommandText()
     {
         AppendTextLine(userDirField.text);
-        AppendTextLine("$ " + commandField.text);
+        AppendTextLine($"$ {commandField.text}");
     }
 
     public void AppendTextLine(string newText, bool clear = false)
     {
         if (clear)
             ClearOutput();
-        outputField.text += "\n" + newText;
+        outputField.text += $"{(clear ? "" : "\n")}{newText}";
+        ReformatOutputField();
+    }
+
+    private void ReformatOutputField()
+    {
+        RectTransform outputRect = outputField.gameObject.GetComponent<RectTransform>();
+        outputField.textComponent.enableWordWrapping = true;
+        
+        outputRect.sizeDelta = new Vector2(1063, outputField.preferredHeight);
+        outputScroll.value = 0;
     }
 
     public void ClearOutput()
     {
         outputField.text = "";
+        ReformatOutputField();
     }
     private IEnumerator DisplayEpiloge(List<string> commandStrings)
     {

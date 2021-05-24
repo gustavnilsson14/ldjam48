@@ -11,7 +11,7 @@ public class Actor : MonoBehaviour, IDamageable
     protected float currentMomentum = 0;
 
     public ActorRunEvent onRun = new ActorRunEvent();
-    private int maxIP;
+    public int maxIP;
 
     private void Start()
     {

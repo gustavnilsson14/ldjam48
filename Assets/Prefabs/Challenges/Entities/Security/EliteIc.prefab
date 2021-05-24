@@ -33,6 +33,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   isRealTime: 0
+  maxIP: 10
   lootValue: 5
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   isRealTime: 0
+  maxIP: 0
   lootValue: 5
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -127,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 24
   isRealTime: 0
+  maxIP: 0
   lootValue: 5
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -172,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   isRealTime: 0
+  maxIP: 10
   lootValue: 5
   generatesInLeafDirectory: 0
   generatesInBranchDirectory: 0
@@ -231,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   isRealTime: 0
+  maxIP: 0
   lifeTime: 8
   commandName: ddos
   command: {fileID: 0}

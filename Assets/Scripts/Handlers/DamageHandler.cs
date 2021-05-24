@@ -27,7 +27,6 @@ public class DamageHandler : Handler
     public bool TakeHit(IDamageable target, IDamageSource source, out int armorDamageTaken, out int bodyDamageTaken) {
         target.onTakeHit.Invoke(source);
         bool result = TakeDamage(target, source, out armorDamageTaken, out bodyDamageTaken);
-        Debug.Log($"public bool TakeHit(IDamageable {target.GetName()}, IDamageSource {source}, out int armorDamageTaken, out int bodyDamageTaken)");
         target.onHitTaken.Invoke(source, result, armorDamageTaken, bodyDamageTaken);
         return result;
     }

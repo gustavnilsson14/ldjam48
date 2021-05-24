@@ -27,6 +27,9 @@ public class Player : Entity
     public bool test = false;
     private float overTime;
 
+    public int maxFP = 5;
+    public int currentFP = 5;
+
     public List<Command> GetCommands()
     {
         return commands;
@@ -151,7 +154,6 @@ public class Player : Entity
 
     private void CommitTakeDamageMessage()
     {
-        Debug.Log($"takeDamageMessage | {string.Join("--", takeDamageMessage)} | {takeDamageMessage.Count}");
         IOTerminal.I.AppendTextLine(string.Join("\n", takeDamageMessage));
         takeDamageMessage.Clear();
     }
@@ -183,6 +185,7 @@ public class Player : Entity
     {
         directoryHistory.Clear();
         currentIP = maxIP;
+        currentFP = maxFP;
         currentCharacters = maxCharacters;
         currentSeconds = maxSeconds;
     }
@@ -279,6 +282,13 @@ public class Player : Entity
         if (previousModifiers.Count > currentModifiers.Count)
             feelings = "The chmod feels more <color=#088>flexible</color> in this directory";
         IOTerminal.I.AppendTextLine(feelings);
+    }
+
+    public bool SpendFP(int amount) {
+        if (currentFP < amount)
+            return false;
+        currentFP -= amount;
+        return true;
     }
 }
 public class MoveEvent : UnityEvent<Directory, Directory> { }

@@ -27,16 +27,20 @@ public class DiscoveryHandler : Handler
         discoverable.onDiscover = new DiscoveryEvent();
         discoverable.onForget = new DiscoveryEvent();
         discoverable.onCat = new CatEvent();
+        discoverable.currentDirectory = discoverable.GetGameObject().GetComponentInParent<Directory>();
     }
 
     public bool Discover(IDiscoverable discoverable)
     {
         if (discoverable == Player.I)
             return false;
+        Debug.Log($"1 --- {discoverable}");
         if (discovered.Contains(discoverable))
             return false;
-        if (discoverable.currentDirectory != Player.I.currentDirectory)
+        Debug.Log($"2 --- {discoverable}");
+        if (discoverable.currentDirectory != Player.I.currentDirectory && !(discoverable is ImageEntity))
             return false;
+        Debug.Log($"3 --- {discoverable}");
         discoverable.discovered = true;
         discoverable.onDiscover.Invoke(discoverable, false);
         onAnyDiscovery.Invoke(discoverable, false);
