@@ -20,6 +20,7 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
     [Header("EntityComponent")]
     public ParsedPath parsedInput;
     protected Entity entityBody;
+    public string description;
 
     public IOEvent onOutput = new IOEvent();
 
@@ -84,48 +85,22 @@ public class EntityComponent : Actor, IPickup, IComponentIO, IGeneratedHostInhab
         PickupHandler.I.CreatePickup(GetBody().currentDirectory.transform, this);
     }
 
-    public Entity GetBody() {
-        return entityBody;
-    }
+    public Entity GetBody() => entityBody;
 
-    public float GetLootValue()
-    {
-        return lootValue;
-    }
+    public float GetLootValue() => lootValue;
 
-    public IOEvent GetOnOutputEvent()
-    {
-        return onOutput;
-    }
-    public bool GeneratesInLeafDirectory()
-    {
-        return generatesInLeafDirectory;
-    }
+    public IOEvent GetOnOutputEvent() => onOutput;
+    public bool GeneratesInLeafDirectory() => generatesInLeafDirectory;
 
-    public bool GeneratesInBranchDirectory()
-    {
-        return generatesInBranchDirectory;
-    }
+    public bool GeneratesInBranchDirectory() => generatesInBranchDirectory;
 
-    public bool GeneratesInPriorityDirectory()
-    {
-        return generatesInPriorityDirectory;
-    }
+    public bool GeneratesInPriorityDirectory() => generatesInPriorityDirectory;
 
-    public float GetRarity()
-    {
-        return rarity;
-    }
+    public float GetRarity() => rarity;
 
-    public void InitPickup()
-    {
-        PickupHandler.I.InitPickup(this);
-    }
+    public void InitPickup() => PickupHandler.I.InitPickup(this);
 
-    public string GetShortDescription()
-    {
-        return "";
-    }
+    public string GetShortDescription() => description;
 
     public PickupType GetPickupType() => PickupType.COMPONENT;
 }

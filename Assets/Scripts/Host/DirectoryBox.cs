@@ -38,9 +38,13 @@ public class DirectoryBox : Handler
 
     private void OnPlayerDamage(bool arg0, int arg1)
     {
-        animator.Play("OnPlayerDamage");
+        StartCoroutine(OnPlayerDamage());
     }
 
+    private IEnumerator OnPlayerDamage() {
+        yield return new WaitForSeconds(0.3f);
+        animator.Play("OnPlayerDamage");
+    }
     private void OnPlayerMove(Directory currentDirectory, Directory previousDirectory)
     {
         string direction = currentDirectory.GetDepth() > previousDirectory.GetDepth() ? "Up" : "Down";

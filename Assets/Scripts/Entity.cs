@@ -38,6 +38,7 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
     public string uniqueId;
     public EntityFaction faction;
     public List<Directory> directoryHistory = new List<Directory>();
+    public bool staticName = false;
 
     [Header("Events")]
     public DirectoryMoveEvent onEntityEnterMyDirectory = new DirectoryMoveEvent();
@@ -109,6 +110,8 @@ public class Entity : MonoBehaviour, IDamageable, ILootDropper, IAutoCompleteObj
     protected virtual void RegisterName()
     {
         name = name.Replace("(Clone)", "").Trim();
+        if (staticName)
+            return;
         name = NameUtil.I.GetEntityName(name);
     }
 

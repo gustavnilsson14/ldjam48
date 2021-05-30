@@ -19,6 +19,9 @@ public class IOTerminal : MonoBehaviour
     public bool levelUpCommand = false;
     public Scrollbar outputScroll;
 
+    public TMP_InputField tailField;
+    public Scrollbar tailScroll;
+
     [Header("Events")]
     public CommandEvent onCommand = new CommandEvent();
 
@@ -96,6 +99,31 @@ public class IOTerminal : MonoBehaviour
             onEnter.Invoke();
         if (Input.GetKeyDown(KeyCode.Tab))
             AutoComplete();
+        ForceFocusOnType();
+    }
+
+    private void ForceFocusOnType()
+    {
+        if (commandField.isFocused)
+            return;
+        string result = Input.inputString;
+        if (Input.inputString == "" && !CheckPaste(out result))
+            return;
+        commandField.Select();
+        
+        commandField.text += result;
+        commandField.caretPosition = commandField.text.Length;
+    }
+
+    private bool CheckPaste(out string result)
+    {
+        result = Input.inputString;
+        if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
+            return false;
+        if (!Input.GetKeyDown(KeyCode.V))
+            return false;
+        result = GUIUtility.systemCopyBuffer;
+        return true;
     }
 
     private void AutoComplete()
@@ -275,13 +303,30 @@ public class IOTerminal : MonoBehaviour
         ReformatOutputField();
     }
 
+    public void AppendTailTextLine(string newText)
+    {
+        if (newText == "")
+            return;
+        tailField.text += $"\n{newText}";
+        ReformatTailField();
+    }
+
     private void ReformatOutputField()
     {
         RectTransform outputRect = outputField.gameObject.GetComponent<RectTransform>();
         outputField.textComponent.enableWordWrapping = true;
-        
+
         outputRect.sizeDelta = new Vector2(1063, outputField.preferredHeight);
         outputScroll.value = 0;
+    }
+
+    private void ReformatTailField()
+    {
+        RectTransform rect = tailField.gameObject.GetComponent<RectTransform>();
+        tailField.textComponent.enableWordWrapping = true;
+
+        rect.sizeDelta = new Vector2(1063, tailField.preferredHeight);
+        tailScroll.value = 0;
     }
 
     public void ClearOutput()
@@ -357,6 +402,7 @@ public class IOTerminal : MonoBehaviour
         AppendTextLine(epilog, true);
         onEnter.AddListener(Restart);
     }
+
 }
 public class CommandEvent : UnityEvent<Command, ParsedCommand> { }
 public class TerminalTimeEvent : UnityEvent<int> { }

@@ -32,15 +32,12 @@ public class DiscoveryHandler : Handler
 
     public bool Discover(IDiscoverable discoverable)
     {
-        if (discoverable == Player.I)
+        if (discoverable == (Player.I as IDiscoverable))
             return false;
-        Debug.Log($"1 --- {discoverable}");
         if (discovered.Contains(discoverable))
             return false;
-        Debug.Log($"2 --- {discoverable}");
         if (discoverable.currentDirectory != Player.I.currentDirectory && !(discoverable is ImageEntity))
             return false;
-        Debug.Log($"3 --- {discoverable}");
         discoverable.discovered = true;
         discoverable.onDiscover.Invoke(discoverable, false);
         onAnyDiscovery.Invoke(discoverable, false);

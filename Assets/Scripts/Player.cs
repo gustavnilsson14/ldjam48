@@ -56,20 +56,31 @@ public class Player : Entity
         base.InitDamageable();
         onArmorDamage.AddListener(OnArmorDamage);
         onBodyDamage.AddListener(OnBodyDamage);
+        onTakeHit.AddListener(OnTakeHit);
     }
+
     protected override void RegisterEventListeners()
     {
         onHitTaken.AddListener(OnHitTaken);
         onDeath.AddListener(OnDeath);
     }
 
-    private void OnHitTaken(IDamageSource source, bool survived, int armorDamage, int bodyDamage)
+    private void OnHitTaken(IDamageSource source, bool survived, int armorDamage, int bodyDamage) {
+        StartCoroutine(OnHitTaken(armorDamage, bodyDamage));
+    }
+    private IEnumerator OnHitTaken(int armorDamage, int bodyDamage)
     {
+        yield return new WaitForSeconds(0.3f);
         CommitTakeDamageMessage();
         if (armorDamage > 0 && bodyDamage == 0)
             Camera.main.GetComponent<CameraShake>().Shake(CameraShakeType.HIT);
         if (bodyDamage > 0)
             Camera.main.GetComponent<CameraShake>().Shake();
+    }
+
+    private void OnTakeHit(IDamageSource source)
+    {
+        takeDamageMessage.Add($"{source.GetDamageSourceName()} disrupts you by {source.GetTotalDamage()} IP");
     }
 
     private void OnArmorDamage(ArmorComponent armorComponent, bool survived, int damage)
@@ -154,7 +165,7 @@ public class Player : Entity
 
     private void CommitTakeDamageMessage()
     {
-        IOTerminal.I.AppendTextLine(string.Join("\n", takeDamageMessage));
+        IOTerminal.I.AppendTailTextLine(string.Join("\n", takeDamageMessage));
         takeDamageMessage.Clear();
     }
     public float GetCharacterCostMultiplier()
@@ -225,7 +236,7 @@ public class Player : Entity
         base.OnEntityEnterMyDirectory(from, current, entity);
         if (entity == this)
             return;
-        IOTerminal.I.AppendTextLine($"Something just entered this directory from {from.name}");
+        IOTerminal.I.AppendTailTextLine($"Something just entered this directory from {from.name}");
     }
     protected override void OnEntityExitMyDirectory(Directory current, Directory to, Entity entity)
     {
@@ -233,7 +244,7 @@ public class Player : Entity
         if (entity == this)
             return;
         string entityName = (!entity.discovered) ? "Something" : entity.name;
-        IOTerminal.I.AppendTextLine($"{entityName} just left this directory into {to.name}");
+        IOTerminal.I.AppendTailTextLine($"{entityName} just left this directory into {to.name}");
     }
     public List<EntityComponent> GetInstalledComponents()
     {

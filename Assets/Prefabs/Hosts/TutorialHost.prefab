@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &799666371577427907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7195060244690606344}
+  - component: {fileID: 3055450225905665514}
+  m_Layer: 0
+  m_Name: EntitySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7195060244690606344
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799666371577427907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 370236453002942479}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3055450225905665514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799666371577427907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0549341b6134d954984158747f33ee0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldObjectPrefab: {fileID: 0}
+  spawnPrefabs:
+  - {fileID: 4644405270696995961, guid: 0569cd0dc1fd70a4683ad676dc2be773, type: 3}
+  maxIP: 5
+  rarity: 0
+  generatesInPriorityDirectory: 0
+  generatesInBranchDirectory: 0
+  generatesInLeafDirectory: 0
+  description: 
+  spawnFrequency: 10
+  maxOffspring: 1
 --- !u!1 &1001018032087801150
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +304,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bannedFactions: 
-  entryMessage: 
+  entryMessage: "There is a hostile firewall in this directory, which will prevent
+    your movement, but also deal IP damage over time to you as you issue commands
+    in this directory. To destroy it you should first use the look command to discover
+    it, then use the ddos command, repeatedly, until it is destroyed.\n\nExample
+    commands; \nlook\nddos tutorial-firewall\n"
+--- !u!1 &3075472540796293516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370236453002942479}
+  - component: {fileID: 8105654065434379039}
+  m_Layer: 0
+  m_Name: spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &370236453002942479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075472540796293516}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7195060244690606344}
+  m_Father: {fileID: 4992936191566412179}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8105654065434379039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075472540796293516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04cd5a52ac69cc048920ffefc67e7a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bannedFactions: 
+  entryMessage: "There is an entity spawner in this directory. It will spawn ic entities
+    on a regular basis. Spawners are most commanly dealt with by destroying them,
+    but can also be hacked by using the usermod command if it is available.\n\nExample
+    commands; \nlook\nddos tutorial-firewall\n"
 --- !u!1 &3318856190215249918
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +391,7 @@ Transform:
   - {fileID: 6629773585199026390}
   - {fileID: 115638818252203927}
   - {fileID: 3922157660083707502}
+  - {fileID: 370236453002942479}
   m_Father: {fileID: 7980059970206061910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -397,7 +505,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bannedFactions: 
-  entryMessage: 
+  entryMessage: "Pickups are small one time use redeemable codes which you can use
+    to topup your IP, smite your foes with righteous ddos, or any other of many different
+    uses.\nTo handle pickups, you use the cat command, to store them in your database,
+    and then the sql command to view, and redeem them later on.\n\nExample commands;
+    \nls\ncat\ncat ip.topup\nsql\nsql --list\nsql topup ip\nmove\n"
 --- !u!1 &4324199396575662787
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,7 +749,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bannedFactions: 
-  entryMessage: 
+  entryMessage: "Some directories have modifiers, which affect you with beneficial,
+    or adverse effects. There are two directories in this folder, both with adverse
+    effects.\nWalking into a directory with low IP and without taking precautions
+    might terminate your connection quickly.\n\nExample commands; \nmods\nmods timeMultiplier\nmods
+    damageOverTime\nmove"
 --- !u!1 &5219132175455303062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,15 +1180,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53eafa7d48c3a70418de9cd5705cead2, type: 3}
---- !u!4 &3739210628776532868 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7696173194744467325, guid: 53eafa7d48c3a70418de9cd5705cead2,
-    type: 3}
-  m_PrefabInstance: {fileID: 6424970907843269881}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1251670136723326052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5221017377322061981, guid: 53eafa7d48c3a70418de9cd5705cead2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6424970907843269881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3739210628776532868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7696173194744467325, guid: 53eafa7d48c3a70418de9cd5705cead2,
     type: 3}
   m_PrefabInstance: {fileID: 6424970907843269881}
   m_PrefabAsset: {fileID: 0}
@@ -1086,7 +1202,12 @@ PrefabInstance:
     - target: {fileID: 4644405270696995961, guid: b41c27387f2b90a46bada3843653bd1c,
         type: 3}
       propertyPath: m_Name
-      value: firewall
+      value: tutorial-firewall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5867715903369445128, guid: b41c27387f2b90a46bada3843653bd1c,
+        type: 3}
+      propertyPath: maxIP
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6206604213239392852, guid: b41c27387f2b90a46bada3843653bd1c,
         type: 3}
